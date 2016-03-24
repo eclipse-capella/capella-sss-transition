@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -26,6 +26,7 @@ import org.polarsys.capella.core.data.pa.PhysicalArchitecture;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.context.TransitionContext;
+import org.polarsys.capella.transition.system2subsystem.crossphases.handlers.attachment.CrossPhasesAttachmentHelper;
 
 public class MultiphasesContext extends TransitionContext {
 
@@ -40,9 +41,9 @@ public class MultiphasesContext extends TransitionContext {
     private final String mapping_id;
     private final EClass blockArchitecture;
 
-    Mapping(String mapping_id_p, EClass blockArchitecture_p) {
-      mapping_id = mapping_id_p;
-      blockArchitecture = blockArchitecture_p;
+    Mapping(String mapping, EClass blockArchitecture) {
+      this.mapping_id = mapping;
+      this.blockArchitecture = blockArchitecture;
     }
 
     public String getMappingId() {
@@ -53,8 +54,8 @@ public class MultiphasesContext extends TransitionContext {
       return blockArchitecture;
     }
 
-    private BlockArchitecture getTempBlockArchitecture(MultiphasesContext context_p) {
-      SystemEngineering eng = context_p.getTempSystemEngineering();
+    private BlockArchitecture getTempBlockArchitecture(MultiphasesContext context) {
+      SystemEngineering eng = context.getTempSystemEngineering();
       for (ModellingArchitecture ma : eng.getOwnedArchitectures()) {
         if (blockArchitecture.isInstance(ma)) {
           return (BlockArchitecture) ma;
@@ -63,8 +64,8 @@ public class MultiphasesContext extends TransitionContext {
       throw new IllegalStateException("No blockarchitecture of type '" + blockArchitecture.eClass().getName() + "' in temp system engineering! ");
     }
 
-    private EObject getTempRootComponent(MultiphasesContext context_p) {
-      BlockArchitecture ba = getTempBlockArchitecture(context_p);
+    private EObject getTempRootComponent(MultiphasesContext context) {
+      BlockArchitecture ba = getTempBlockArchitecture(context);
       if (ba instanceof SystemAnalysis) {
         return ((SystemAnalysis) ba).getOwnedSystem();
       }
@@ -78,32 +79,47 @@ public class MultiphasesContext extends TransitionContext {
     }
   }
 
-  public MultiphasesContext(Collection<?> selection_p) {
-    put(ITransitionConstants.TRANSPOSER_SELECTION, selection_p);
+  public MultiphasesContext(Collection<?> selection) {
+    put(ITransitionConstants.TRANSPOSER_SELECTION, selection);
     put(ITransitionConstants.SAVE_REQUIRED, Boolean.TRUE);
   }
 
   /**
    * @return the selected physical node components.
    */
-  public Collection<? extends PhysicalComponent> getSelectedPhysicalComponents() {
+  @SuppressWarnings("unchecked")
+public Collection<? extends PhysicalComponent> getSelectedPhysicalComponents() {
     return (Collection<? extends PhysicalComponent>) get(ITransitionConstants.TRANSITION_SOURCES);
   }
 
-  @Override
+  @SuppressWarnings("rawtypes")
+@Override
   /**
-   * FIXME This is overriden to do nothing to avoid handler disposal after each architecture phase. 
-   * FIXME This workaround might be causing some leakage though.
    * {@inheritDoc}
    */
   public void reset() {
+	  	Collection incompleteElementsCollection = (Collection) this.get(ITransitionConstants.INCOMPLETE_ELEMENTS);
+		 if (incompleteElementsCollection!=null) {
+		 	incompleteElementsCollection.clear();
+		 }
+		 
+		 Collection transformedElementsCollection = (Collection) this.get(ITransitionConstants.TRANSFORMED_ELEMENTS);
+		 if (transformedElementsCollection!=null) {
+			 transformedElementsCollection.clear();
+		 }
+		 
+		 CrossPhasesAttachmentHelper.getInstance(this).clear(this);
+	  }
+
+  public void fullReset() {
+	  super.reset();
   }
 
   /**
    * Not to be called by clients
    */
-  public void setMapping(Mapping mapping_p) {
-    mapping = mapping_p;
+  public void setMapping(Mapping mapping) {
+    this.mapping = mapping;
   }
 
   /**

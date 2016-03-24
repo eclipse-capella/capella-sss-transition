@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -59,7 +59,7 @@ public class LogicalComponentRule extends Component2SARule {
     LogicalComponent element = (LogicalComponent) element_p;
 
     for (Partition partition : element.getRepresentingPartitions()) {
-      needed_p.addAll(createDefaultPrecedencePremices((Collection) ComponentExt.getPartAncestors((Part) partition), "part"));
+      needed_p.addAll(createDefaultPrecedencePremices((Collection) ComponentExt.getPartAncestors((Part) partition, true), "part"));
     }
   }
 
@@ -86,7 +86,8 @@ public class LogicalComponentRule extends Component2SARule {
     }
   }
 
-  @Override
+  @SuppressWarnings("unchecked")
+@Override
   public IStatus transformRequired(EObject source_p, IContext context_p) {
     LogicalComponent element = (LogicalComponent) source_p;
 
