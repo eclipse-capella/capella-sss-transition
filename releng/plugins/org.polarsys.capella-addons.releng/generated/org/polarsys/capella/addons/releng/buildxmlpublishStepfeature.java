@@ -1,19 +1,15 @@
-//Generated with EGF 1.3.0.v20150507-0831
+//Generated with EGF 1.2.0.v20150211-1405
 package org.polarsys.capella.addons.releng;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.eclipse.egf.model.pattern.Node;
-import org.eclipse.egf.model.pattern.PatternContext;
-import org.eclipse.egf.pattern.execution.InternalPatternContext;
-import org.eclipse.egf.pattern.execution.OutputManager;
-import org.eclipse.egf.pattern.execution.QueryHelper;
-import org.eclipse.egf.pattern.execution.SuperOrchestrationContext;
-import org.eclipse.egf.pattern.query.IQuery;
-import org.eclipse.egf.portfolio.eclipse.build.GenerationHelper;
-import org.eclipse.egf.portfolio.eclipse.build.buildstep.BuildStep;
+import org.eclipse.egf.common.helper.*;
+import java.util.*;
+import org.eclipse.emf.ecore.*;
+import org.eclipse.egf.model.pattern.*;
+import org.eclipse.egf.pattern.execution.*;
+import org.eclipse.egf.pattern.query.*;
+import org.eclipse.egf.portfolio.eclipse.build.*;
+import org.eclipse.egf.portfolio.eclipse.build.buildcore.*;
+import org.eclipse.egf.portfolio.eclipse.build.buildstep.*;
 
 public class buildxmlpublishStepfeature
 		extends
