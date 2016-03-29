@@ -1,3 +1,0 @@
-<%
-elementPath = CapellaServices.getElementPath(element);
-%>

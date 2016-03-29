@@ -1,7 +1,0 @@
-<%
-
-element = parameter;
-String elementName = EscapeChars.forHTML(LabelProviderHelper.getText(element));
-	String elementType = EscapeChars.forHTML(element.eClass().getName());
-title = "Capella - " + DocGenHtmlUtil.getModelName(element) + " - " + elementType + " " + elementName;
-%>

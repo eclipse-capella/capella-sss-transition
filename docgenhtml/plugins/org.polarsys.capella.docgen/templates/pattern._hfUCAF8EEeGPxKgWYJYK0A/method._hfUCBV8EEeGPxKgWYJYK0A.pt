@@ -1,3 +1,0 @@
-<%
-	fileNameService = org.polarsys.capella.docgen.util.DocGenHtmlCapellaUtil.SERVICE;
-%>

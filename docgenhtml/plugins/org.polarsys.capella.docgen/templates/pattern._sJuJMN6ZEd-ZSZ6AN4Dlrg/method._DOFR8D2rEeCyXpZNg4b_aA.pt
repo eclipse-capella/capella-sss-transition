@@ -1,5 +1,0 @@
-<%
-if(DocGenHtmlCapellaUtil.hasChildren(parameter)) {
-	super.method_startSidebarSubElement(new StringBuffer(), ctx);
-%>
-<%}%>
