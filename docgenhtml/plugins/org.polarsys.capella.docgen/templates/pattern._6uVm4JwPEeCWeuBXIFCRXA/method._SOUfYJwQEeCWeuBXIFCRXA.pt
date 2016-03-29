@@ -1,4 +1,0 @@
-<%
-super.method_content(new StringBuffer(), ctx); 
-%>
-<%@ egf:patternCall patternId="platform:/plugin/org.polarsys.capella.docgen/egf/HTMLDocGenCapella.fcore#LogicalName=org.polarsys.capella.docgen.content.EntityContentDocGen" args="element:element"%>
