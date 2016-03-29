@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -58,41 +58,37 @@ public class HeadlessMultiphasesLauncher {
   private final Collection<GenericParameter<?>> headlessParameters;
   private final Logger logger;
 
-  public HeadlessMultiphasesLauncher(IOptionsHandler optionsHandler_p, Collection<GenericParameter<?>> headlessParameters_p, boolean merge_p) {
-    optionsHandler = optionsHandler_p;
-    headlessParameters = headlessParameters_p;
-    merge = merge_p;
-    logger = ReportManagerRegistry.getInstance().subscribe(IReportManagerDefaultComponents.DEFAULT);
+  public HeadlessMultiphasesLauncher(IOptionsHandler optionsHandler, Collection<GenericParameter<?>> headlessParameters, boolean merge) {
+    this.optionsHandler = optionsHandler;
+    this.headlessParameters = headlessParameters;
+    this.merge = merge;
+    this.logger = ReportManagerRegistry.getInstance().subscribe(IReportManagerDefaultComponents.DEFAULT);
   }
 
-  public HeadlessMultiphasesLauncher(Collection<GenericParameter<?>> headlessParameters_p, boolean merge_p) {
-    this(new DefaultOptionsHandler(), headlessParameters_p, merge_p);
+  public HeadlessMultiphasesLauncher(Collection<GenericParameter<?>> headlessParameters, boolean merge) {
+    this(new DefaultOptionsHandler(), headlessParameters, merge);
   }
 
   public HeadlessMultiphasesLauncher(Collection<GenericParameter<?>> headlessParameters) {
     this(headlessParameters, true);
   }
 
-  public void launch(Collection<Object> selection_p, IProgressMonitor monitor_p) {
+  public void launch(Collection<Object> selection, IProgressMonitor monitor) {
 
-    final MultiphasesContext context = new MultiphasesContext(selection_p);
+    final MultiphasesContext context = new MultiphasesContext(selection);
     IStatus result = initializeMultiphasesTransition(context, optionsHandler);
 
     if (result.isOK()) {
       try {
 
         context.put(CrossPhasesAttachmentHelper.CROSS_PHASES_ATTACHMENT_HELPER, new SAAttachmentHelper());
-        CrossPhasesAttachmentHelper.getInstance(context).clear(context);
-
-        new SA_Launcher(context).run(selection_p, true, monitor_p);
+        new SA_Launcher(context).run(selection, true, monitor);
 
         context.put(CrossPhasesAttachmentHelper.CROSS_PHASES_ATTACHMENT_HELPER, new LAAttachmentHelper());
-        CrossPhasesAttachmentHelper.getInstance(context).clear(context);
-        new LA_Launcher(context).run(selection_p, true, monitor_p);
+        new LA_Launcher(context).run(selection, true, monitor);
 
         context.put(CrossPhasesAttachmentHelper.CROSS_PHASES_ATTACHMENT_HELPER, new PAAttachmentHelper());
-        CrossPhasesAttachmentHelper.getInstance(context).clear(context);
-        new PA_Launcher(context).run(selection_p, true, monitor_p);
+        new PA_Launcher(context).run(selection, true, monitor);
 
         new LostAndFoundPass().attachLostAndFound(context);
         new RealizationLinkPass().createRealizationLinks(context.getTempSystemEngineering(), context);
@@ -111,9 +107,13 @@ public class HeadlessMultiphasesLauncher {
         }
         new FinalizeTransitionActivity().run(params);
       } finally {
-        ActivityParameters params = new ActivityParameters();
-        params.addParameter(new GenericParameter<IContext>(ITransposerWorkflow.TRANSPOSER_CONTEXT, context, null));
-        new FinalizeSubsystemTransitionActivity().run(params);
+    	  try {
+    		  ActivityParameters params = new ActivityParameters();
+    		  params.addParameter(new GenericParameter<IContext>(ITransposerWorkflow.TRANSPOSER_CONTEXT, context, null));
+    		  new FinalizeSubsystemTransitionActivity().run(params);
+    	  } finally {
+    		  context.fullReset();
+    	  }
       }
     } else {
       if (result == Status.CANCEL_STATUS) {
@@ -140,20 +140,20 @@ public class HeadlessMultiphasesLauncher {
     }
   }
 
-  protected ActivityParameters createPostTransformationParameters(MultiphasesContext context_p) {
+  protected ActivityParameters createPostTransformationParameters(MultiphasesContext context) {
     ActivityParameters params = new ActivityParameters();
-    params.addParameter(new GenericParameter<IContext>(ITransposerWorkflow.TRANSPOSER_CONTEXT, context_p, null));
+    params.addParameter(new GenericParameter<IContext>(ITransposerWorkflow.TRANSPOSER_CONTEXT, context, null));
     for (GenericParameter<?> paramHeadless : headlessParameters) {
       params.addParameter(paramHeadless);
     }
     return params;
   }
 
-  protected ActivityParameters createPreTransformationParameters(MultiphasesContext context_p, IOptionsHandler optionsHandler_p) {
+  protected ActivityParameters createPreTransformationParameters(MultiphasesContext context, IOptionsHandler optionsHandler) {
     ActivityParameters parameter = new ActivityParameters();
-    parameter.addParameter(new GenericParameter<IContext>(ITransposerWorkflow.TRANSPOSER_CONTEXT, context_p, null));
+    parameter.addParameter(new GenericParameter<IContext>(ITransposerWorkflow.TRANSPOSER_CONTEXT, context, null));
     parameter.addParameter(new GenericParameter<IRulesHandler>(InitializeTransitionActivity.PARAMETER_RULE_HANDLER, null, null));
-    parameter.addParameter(new GenericParameter<IHandler>(ITransitionConstants.OPTIONS_HANDLER, optionsHandler_p, "Transposer Options handler"));
+    parameter.addParameter(new GenericParameter<IHandler>(ITransitionConstants.OPTIONS_HANDLER, optionsHandler, "Transposer Options handler"));
     for (GenericParameter<?> paramHeadless : headlessParameters) {
       parameter.addParameter(paramHeadless);
     }
@@ -162,13 +162,13 @@ public class HeadlessMultiphasesLauncher {
 
   // here we fake a cadence invocation to initialize the transition.
   // TODO refactor to allow to be called outside cadence without the use of generic parameters..
-  private IStatus initializeMultiphasesTransition(MultiphasesContext context_p, IOptionsHandler optionsHandler_p) {
+  private IStatus initializeMultiphasesTransition(MultiphasesContext context, IOptionsHandler optionsHandler) {
 
     if (!merge) {
-      context_p.put(ITransitionConstants.DIFFMERGE_DISABLE, Boolean.TRUE);
+      context.put(ITransitionConstants.DIFFMERGE_DISABLE, Boolean.TRUE);
     }
 
-    ActivityParameters params = createPreTransformationParameters(context_p, optionsHandler_p);
+    ActivityParameters params = createPreTransformationParameters(context, optionsHandler);
 
     // this just fills the context with lots of stuff
     IStatus status = new InitializeMultiphasesTransitionActivity().run(params);
@@ -181,7 +181,7 @@ public class HeadlessMultiphasesLauncher {
       // this initializes the scope with rules from SA.
       try {
         IRulesHandler handler = new ExtendedRulesHandler("org.polarsys.capella.core.transition", MultiphasesContext.Mapping.SA.getMappingId());
-        context_p.put(ITransitionConstants.RULES_HANDLER, handler);
+        context.put(ITransitionConstants.RULES_HANDLER, handler);
       } catch (NonExistingPurposeException e) {
         throw new IllegalStateException(e);
       }
@@ -198,15 +198,14 @@ public class HeadlessMultiphasesLauncher {
   }
 
   protected class LA_Launcher extends AbstractHeadlessMultiphasesLauncher {
-    public LA_Launcher(MultiphasesContext context_p) {
-      super(context_p, MultiphasesContext.Mapping.LA, merge, headlessParameters);
+    public LA_Launcher(MultiphasesContext context) {
+      super(context, MultiphasesContext.Mapping.LA, merge, headlessParameters);
     }
   }
 
   protected class PA_Launcher extends AbstractHeadlessMultiphasesLauncher {
-    public PA_Launcher(MultiphasesContext context_p) {
-      super(context_p, MultiphasesContext.Mapping.PA, merge, headlessParameters);
+    public PA_Launcher(MultiphasesContext context) {
+      super(context, MultiphasesContext.Mapping.PA, merge, headlessParameters);
     }
   }
-
 }

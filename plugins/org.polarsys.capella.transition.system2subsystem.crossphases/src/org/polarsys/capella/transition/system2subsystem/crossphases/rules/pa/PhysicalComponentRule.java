@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -31,6 +31,7 @@ import org.polarsys.capella.core.transition.common.constants.Messages;
 import org.polarsys.capella.core.transition.common.handlers.contextscope.ContextScopeHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.log.LogHelper;
 import org.polarsys.capella.transition.system2subsystem.crossphases.handlers.attachment.CrossPhasesAttachmentHelper;
+import org.polarsys.kitalpha.transposer.rules.handler.business.premises.ContainmentPremise;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IPremise;
 
@@ -42,30 +43,50 @@ public class PhysicalComponentRule extends Component2SARule {
     return PaPackage.Literals.PHYSICAL_COMPONENT;
   }
 
+protected void premicesContainement(EObject element, ArrayList<IPremise> needed) {
+	  
+	  ContainmentPremise<EObject> defaultPremise = createDefaultContainementPremice(element);
+	  if (defaultPremise != null) {
+		  needed.add(defaultPremise);
+
+		  IContext context = getCurrentContext();
+		  EObject bestContainer = CrossPhasesAttachmentHelper.getInstance(context).getRelatedComponent((Component) element, context);
+		  if (!bestContainer.equals(element) && !defaultPremise.getFirstElement().equals(bestContainer)) {
+			  IPremise currentPremise = createContainmentPremice(bestContainer);
+			  if (currentPremise != null) {
+				  needed.add(currentPremise);
+			  }
+		  }
+	  }
+  }
+
+
   /**
    * {@inheritDoc}
    */
-  @Override
-  protected void premicesRelated(EObject element_p, ArrayList<IPremise> needed_p) {
-    super.premicesRelated(element_p, needed_p);
-    AbstractPhysicalComponent element = (AbstractPhysicalComponent) element_p;
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+@Override
+  protected void premicesRelated(EObject element, ArrayList<IPremise> needed) {
+    super.premicesRelated(element, needed);
+    AbstractPhysicalComponent physicalElement = (AbstractPhysicalComponent) element;
 
-    for (Partition partition : element.getRepresentingPartitions()) {
-      Collection es = ComponentExt.getPartAncestors((Part) partition);
-      needed_p.addAll(createDefaultPrecedencePremices(es, "part"));
+    for (Partition partition : physicalElement.getRepresentingPartitions()) {
+      Collection es = ComponentExt.getPartAncestors((Part) partition, true);
+      needed.addAll(createDefaultPrecedencePremices(es, "part"));
     }
-    needed_p.addAll(createDefaultPrecedencePremices(element_p, CsPackage.Literals.COMPONENT__ALLOCATING_COMPONENTS));
+    needed.addAll(createDefaultPrecedencePremices(element, CsPackage.Literals.COMPONENT__ALLOCATING_COMPONENTS));
   }
 
+  @SuppressWarnings("unchecked")
   @Override
-  public IStatus transformRequired(EObject source_p, IContext context_p) {
+  public IStatus transformRequired(EObject source, IContext context) {
 
-    AbstractPhysicalComponent element = (AbstractPhysicalComponent) source_p;
+    AbstractPhysicalComponent element = (AbstractPhysicalComponent) source;
 
     /*
      * Is it in selection?
      */
-    Collection<EObject> transfoSources = (Collection<EObject>) context_p.get(ITransitionConstants.TRANSITION_SOURCES);
+	Collection<EObject> transfoSources = (Collection<EObject>) context.get(ITransitionConstants.TRANSITION_SOURCES);
     if (transfoSources.contains(element)) {
       return Status.OK_STATUS;
     }
@@ -73,30 +94,29 @@ public class PhysicalComponentRule extends Component2SARule {
     /*
      * Is it going to be merged into a parent?
      */
-    Component src = CrossPhasesAttachmentHelper.getInstance(context_p).getRelatedComponent(element, context_p);
+    Component src = CrossPhasesAttachmentHelper.getInstance(context).getRelatedComponent(element, context);
     if (src != element) {
       return new Status(IStatus.WARNING, Messages.Activity_Transformation, NLS.bind("Component ''{0}'' will be merged into ''{1}''", LogHelper.getInstance()
           .getText(element), LogHelper.getInstance().getText(src)));
     }
 
-    return super.transformRequired(source_p, context_p);
+    return super.transformRequired(source, context);
   }
 
   @Override
-  protected void retrieveGoDeep(EObject source_p, List<EObject> result_p, IContext context_p) {
-    super.retrieveGoDeep(source_p, result_p, context_p);
+  protected void retrieveGoDeep(EObject source, List<EObject> result, IContext context) {
+    super.retrieveGoDeep(source, result, context);
 
-    if (ContextScopeHandlerHelper.getInstance(context_p).contains(ITransitionConstants.SOURCE_SCOPE, source_p, context_p)) {
-      if (source_p instanceof Component) {
-        Component element = (Component) source_p;
+    if (ContextScopeHandlerHelper.getInstance(context).contains(ITransitionConstants.SOURCE_SCOPE, source, context)) {
+      if (source instanceof Component) {
+        Component element = (Component) source;
         for (Partition part : element.getOwnedPartitions()) {
           if (part instanceof Part) {
-            result_p.add(part);
-            ContextScopeHandlerHelper.getInstance(context_p).add(ITransitionConstants.SOURCE_SCOPE, part, context_p);
+            result.add(part);
+            ContextScopeHandlerHelper.getInstance(context).add(ITransitionConstants.SOURCE_SCOPE, part, context);
           }
         }
       }
     }
   }
-
 }

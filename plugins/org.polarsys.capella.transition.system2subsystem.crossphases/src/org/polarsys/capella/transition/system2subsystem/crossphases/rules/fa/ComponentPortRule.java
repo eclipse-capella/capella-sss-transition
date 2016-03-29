@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -29,27 +29,27 @@ import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 public class ComponentPortRule extends org.polarsys.capella.core.transition.system.rules.fa.ComponentPortRule {
 
   @Override
-  public IStatus transformRequired(EObject source_p, IContext context_p) {
+  public IStatus transformRequired(EObject source, IContext context) {
 
-    ComponentPort cp = (ComponentPort) source_p;
+    ComponentPort cp = (ComponentPort) source;
 
     if (cp.getComponentExchanges().isEmpty()) {
       //we transform not connected ports
-      return super.transformRequired(source_p, context_p);
+      return super.transformRequired(source, context);
     }
 
     for (ComponentExchange exchange : cp.getComponentExchanges()) {
 
       Component sourceComponent = ComponentExchangeExt.getSourceComponent(exchange);
       boolean sourceComponentIncluded =
-          ContextScopeHandlerHelper.getInstance(context_p).contains(ITransitionConstants.SOURCE_SCOPE, sourceComponent, context_p);
+          ContextScopeHandlerHelper.getInstance(context).contains(ITransitionConstants.SOURCE_SCOPE, sourceComponent, context);
 
       Component targetComponent = ComponentExchangeExt.getTargetComponent(exchange);
       boolean targetComponentIncluded =
-          ContextScopeHandlerHelper.getInstance(context_p).contains(ITransitionConstants.SOURCE_SCOPE, targetComponent, context_p);
+          ContextScopeHandlerHelper.getInstance(context).contains(ITransitionConstants.SOURCE_SCOPE, targetComponent, context);
 
       if (targetComponentIncluded ^ sourceComponentIncluded) {
-        return super.transformRequired(source_p, context_p);
+        return super.transformRequired(source, context);
       }
     }
 
@@ -58,13 +58,15 @@ public class ComponentPortRule extends org.polarsys.capella.core.transition.syst
   }
 
   @Override
-  protected EObject getSourceContainer(EObject element_p, EObject result_p, IContext context_p) {
-    EObject bestContainer = CrossPhasesAttachmentHelper.getInstance(context_p).getRelatedComponent((Component) element_p.eContainer(), context_p);
+  protected EObject getSourceContainer(EObject element, EObject result, IContext context) {
+    EObject bestContainer = CrossPhasesAttachmentHelper.getInstance(context).getRelatedComponent((Component) element.eContainer(), context);
     return bestContainer;
   }
+  
+	  
 
   @Override
-  protected void updateElement(EObject element_p, EObject result_p, IContext context_p) {
-    super.updateElement(element_p, result_p, context_p);
+  protected void updateElement(EObject element, EObject result, IContext context) {
+    super.updateElement(element, result, context);
   }
 }
