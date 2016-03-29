@@ -1,2 +1,0 @@
-<% super.method_content(new StringBuffer(), ctx); %>
-

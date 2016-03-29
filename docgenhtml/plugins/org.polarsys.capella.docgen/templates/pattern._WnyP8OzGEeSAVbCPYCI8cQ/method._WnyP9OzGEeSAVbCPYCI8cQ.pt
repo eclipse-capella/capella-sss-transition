@@ -1,1 +1,0 @@
-return ( parameter instanceof org.polarsys.capella.core.data.information.DataPkg);
