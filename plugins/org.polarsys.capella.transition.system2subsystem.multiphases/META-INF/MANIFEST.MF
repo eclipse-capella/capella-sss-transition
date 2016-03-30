@@ -15,7 +15,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.polarsys.capella.core.platform.sirius.ui.project,
  org.eclipse.emf.diffmerge.ui,
  org.polarsys.capella.core.compare
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: org.polarsys.capella.transition.system2subsystem.multiphases,
  org.polarsys.capella.transition.system2subsystem.multiphases.activities,
