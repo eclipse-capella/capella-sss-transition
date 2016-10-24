@@ -1,6 +1,5 @@
 Manifest-Version: 1.0
-Export-Package: org.polarsys.capella.transition.system2subsystem.ui,
- org.polarsys.capella.transition.system2subsystem.ui.handlers
+Export-Package: org.polarsys.capella.transition.system2subsystem.ui
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.sirius.diagram,
@@ -10,10 +9,10 @@ Require-Bundle: org.eclipse.ui,
  org.polarsys.capella.core.transition.system.ui;visibility:=reexport
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 0.8.0.qualifier
+Bundle-Version: 1.1.0.qualifier
 Bundle-Localization: plugin
 Bundle-Name: %pluginName
 Bundle-Activator: org.polarsys.capella.transition.system2subsystem.ui.Activator
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.polarsys.capella.transition.system2subsystem.ui;singleton:=true
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

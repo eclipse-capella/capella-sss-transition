@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,45 +10,38 @@
  *******************************************************************************/
 package org.polarsys.capella.transition.system2subsystem.multiphases.commands;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-
-import org.polarsys.capella.transition.system2subsystem.commands.SubSystemCommand;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.polarsys.capella.core.data.cs.Part;
+import org.polarsys.capella.core.transition.common.commands.DefaultCommand;
+import org.polarsys.capella.transition.system2subsystem.constants.Messages;
 import org.polarsys.capella.transition.system2subsystem.multiphases.launcher.HeadlessMultiphasesLauncher;
-import org.polarsys.kitalpha.cadence.core.api.parameter.GenericParameter;
 
-public class HeadlessMultiphasesCommand extends SubSystemCommand {
+public class HeadlessMultiphasesCommand extends DefaultCommand {
 
-  private final Collection<GenericParameter<?>> headlessParameters;
-  private final boolean merge;
-  
-  /**
-   * @param _rootElement_p
-   * @param progressMonitor_p
-   */
-  public HeadlessMultiphasesCommand(Collection<?> selection_p, Collection<GenericParameter<?>> headlessParameters_p, IProgressMonitor progressMonitor_p) {
-    this(selection_p, headlessParameters_p, progressMonitor_p, true);
+  public HeadlessMultiphasesCommand(Collection<?> selection_p) {
+    super(selection_p, new NullProgressMonitor());
   }
-  
-  /**
-   * @param _rootElement_p
-   * @param progressMonitor_p
-   */
-  public HeadlessMultiphasesCommand(Collection<?> selection_p, Collection<GenericParameter<?>> headlessParameters_p, IProgressMonitor progressMonitor_p, boolean merge_p) {
-    //FIXME use wildcard in superclass constructors
-	  super(new ArrayList<Object>(selection_p), progressMonitor_p);
-    headlessParameters = headlessParameters_p;
-    merge = merge_p;
-  }
-  
-  
 
   @Override
-  protected void performTransformation(Collection<Object> elements_p) {
-    new HeadlessMultiphasesLauncher(headlessParameters, merge).launch(elements_p, getProgressMonitor());
+  protected Collection<Object> retrieveRelatedElements(Object rootElement_p) {
+    Object rootElement = rootElement_p;
+    if (rootElement instanceof Part) {
+      rootElement = ((Part) rootElement).getAbstractType();
+    }
+    return Collections.singleton(rootElement);
+  }
+  
+  @Override
+  public String getName() {
+    return Messages.SubSystemLauncher_Title;
+  }
+  
+  @Override
+  protected void performTransformation(Collection<?> elements_p) {
+    new HeadlessMultiphasesLauncher(getParameters()).launch(elements_p, getProgressMonitor());
   }
 
-  
 }

@@ -18,7 +18,7 @@ import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 public class MultiphasesDifferencesComputingActivity extends DifferencesComputingActivity {
 
-	public static final String ID = "org.polarsys.capella.transition.system2subsystem.multiphases.activities.MultiphasesDifferencesComputingActivity";
+	public static final String ID = "org.polarsys.capella.transition.system2subsystem.multiphases.activities.MultiphasesDifferencesComputingActivity"; //$NON-NLS-1$
 	
 	@Override
 	protected IMatchPolicy createMatchPolicy(IContext context_p) {

@@ -15,7 +15,7 @@ import org.osgi.framework.BundleContext;
 
 public class MultiphasesActivator implements BundleActivator {
 
-	public static final String PLUGIN_ID = "org.polarsys.capella.transition.system2subsystem.multiphases";
+	public static final String PLUGIN_ID = "org.polarsys.capella.transition.system2subsystem.multiphases"; //$NON-NLS-1$
 	private static BundleContext context;
 
 	static BundleContext getContext() {

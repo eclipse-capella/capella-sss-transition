@@ -1,5 +1,5 @@
 <!--
-  Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+  Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
   All rights reserved. This program and the accompanying materials
   are made available under the terms of the Eclipse Public License v1.0
   which accompanies this distribution, and is available at
@@ -31,7 +31,7 @@ Transitions are possible from one or several logical, physical components or one
 
 # Open the source Melody Advance project model
 # Select one or several components (in the Project Explorer or in a diagram).
-# From the contextual menu (right click), select “System To SubSystem Transition” and then, the kind of Transition to be performed.
+# From the contextual menu (right click), select "System To SubSystem Transition" and then, the kind of Transition to be performed.
  
 [[Image:Images/Transfo_Cmd.png|509px]]
  
@@ -45,25 +45,14 @@ A configuration dialog opens and allows, among others, to choose the target mode
  
 == Gap analysis with previous iteration of the transition ==
  
-Once the target project selected, a dialog displaying the differences and the actions planned by the transition is displayed.
+Once the target project selected, a Diff/Merge dialog displays the the differences between the transformation result shown in the center and the target model shown on the right.
  
-In the window, elements are sorted out by types
+It is now possible to either selectively merge changes, or to merge all planned changes by pressing the "Apply" button. 
  
-* The column &quot;Type&quot; indicates whether the difference concerns the presence of an element &ldquo;Element&rdquo; or the modification of a reference on an element &quot;Reference&quot;.
-* The column &quot;Scope&quot; indicates whether the difference was found on the &ldquo;Source&rdquo; or &ldquo;Target&rdquo; model
-* The column &quot;Differences&quot; indicates the title of the difference.
-* The column &quot;Action&quot; indicates the type of action planned by the transition:
-** &quot;Merge into target&quot;: application of the merge of the difference in the output model
-** &quot;No predefined Action&quot;: the difference is not taken into account
-* The column &quot;Detail&quot; gives the complete detail of the difference to investigative purposes very thin.
+[[Image:Images/Diff_Display.png|814px]]
  
-[[Image:Images/Diff_Display.png|835px]]
- 
-The effective application of the transition is performed by clicking on the button &quot;Apply Transition &quot;. The &quot;Save has CSV&quot; button allows to export the differences in a CSV file for a further analysis of the deviations.
- 
-It is possible to choose the type of elements that should be displayed in the difference window. To do so, choose Window / Preferences and then Capella / Transition Log Preferences.
- 
-[[Image:Images/Transition_Preferences.png|627px]]
+Further information about the Diff/Merge tool can also be found in the [[../help/topic/org.polarsys.capella.diffmerge.doc/html/21.%20Model%20DiffMerge/21.1.%20Model%20DiffMerge.html?cp=5_0_8_2#Configuration_and_Features_of_the_Diff.2FMerge_Tool|Diff/Merge documentation]]
+
  
 == Transition Log ==
 

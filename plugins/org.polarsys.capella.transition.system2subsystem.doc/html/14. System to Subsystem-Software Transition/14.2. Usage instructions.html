@@ -2,8 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-		<link rel="stylesheet" type="text/css"
-	href="PLUGINS_ROOT/org.polarsys.capella.doc/html/styles.css" media="all" />
 	</head>
 	<body>
 		<table border="1">
@@ -31,7 +29,7 @@
 		<ol>
 			<li>Open the source Melody Advance project model</li>
 			<li>Select one or several components (in the Project Explorer or in a diagram).</li>
-			<li>From the contextual menu (right click), select “System To SubSystem Transition” and then, the kind of Transition to be performed.</li>
+			<li>From the contextual menu (right click), select �System To SubSystem Transition� and then, the kind of Transition to be performed.</li>
 		</ol>
 		<p>
 			<img width="509" border="0" src="Images/Transfo_Cmd.png"/>
@@ -45,27 +43,13 @@
 			<br/>
 		</p>
 		<h2 id="Gap_analysis_with_previous_iteration_of_the_transition">Gap analysis with previous iteration of the transition</h2>
-		<p>Once the target project selected, a dialog displaying the differences and the actions planned by the transition is displayed.</p>
-		<p>In the window, elements are sorted out by types</p>
-		<ul>
-			<li>The column &quot;Type&quot; indicates whether the difference concerns the presence of an element &ldquo;Element&rdquo; or the modification of a reference on an element &quot;Reference&quot;.</li>
-			<li>The column &quot;Scope&quot; indicates whether the difference was found on the &ldquo;Source&rdquo; or &ldquo;Target&rdquo; model</li>
-			<li>The column &quot;Differences&quot; indicates the title of the difference.</li>
-			<li>The column &quot;Action&quot; indicates the type of action planned by the transition:
-				<ul>
-					<li>&quot;Merge into target&quot;: application of the merge of the difference in the output model</li>
-					<li>&quot;No predefined Action&quot;: the difference is not taken into account</li>
-				</ul>
-			</li>
-			<li>The column &quot;Detail&quot; gives the complete detail of the difference to investigative purposes very thin.</li>
-		</ul>
+		<p>Once the target project selected, a Diff/Merge dialog displays the the differences between the transformation result shown in the center and the target model shown on the right.</p>
+		<p>It is now possible to either selectively merge changes, or to merge all planned changes by pressing the "Apply" button. </p>
 		<p>
-			<img width="835" border="0" src="Images/Diff_Display.png"/>
+			<img width="814" border="0" src="Images/Diff_Display.png"/>
 		</p>
-		<p>The effective application of the transition is performed by clicking on the button &quot;Apply Transition &quot;. The &quot;Save has CSV&quot; button allows to export the differences in a CSV file for a further analysis of the deviations.</p>
-		<p>It is possible to choose the type of elements that should be displayed in the difference window. To do so, choose Window / Preferences and then Capella / Transition Log Preferences.</p>
-		<p>
-			<img width="627" border="0" src="Images/Transition_Preferences.png"/>
+		<p>Further information about the Diff/Merge tool can also be found in the 
+			<a href="/wiki/../help/topic/org.polarsys.capella.diffmerge.doc/html/21.%20Model%20DiffMerge/21.1.%20Model%20DiffMerge.html?cp=5_0_8_2#Configuration_and_Features_of_the_Diff.2FMerge_Tool" title="../help/topic/org.polarsys.capella.diffmerge.doc/html/21.%20Model%20DiffMerge/21.1.%20Model%20DiffMerge.html?cp=5_0_8_2#Configuration_and_Features_of_the_Diff.2FMerge_Tool">Diff/Merge documentation</a>
 		</p>
 		<h2 id="Transition_Log">Transition Log</h2>
 		<p>Once the transition performed, the Information view contains the listing of the actions performed. By right clicking on an action, the source and target object can be accessed:</p>

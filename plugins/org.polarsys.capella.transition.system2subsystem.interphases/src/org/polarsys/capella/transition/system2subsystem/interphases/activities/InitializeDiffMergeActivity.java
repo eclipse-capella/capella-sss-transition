@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -32,7 +32,7 @@ import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 /**
  *
  */
-public class InitializeDiffMergeActivity extends org.polarsys.capella.core.transition.system.activities.InitializeDiffMergeActivity {
+public class InitializeDiffMergeActivity extends org.polarsys.capella.transition.system2subsystem.activities.InitializeDiffMergeActivity {
 
   public static final String ID = "org.polarsys.capella.transition.system2subsystem.interphases.activities.InitializeDiffMergeActivity"; //$NON-NLS-1$
 
@@ -52,7 +52,7 @@ public class InitializeDiffMergeActivity extends org.polarsys.capella.core.trans
   protected IModelScopeFilter getTargetFilter(final IContext context_p) {
     return new IModelScopeFilter() {
       public boolean accepts(EObject element_p) {
-        Collection<EObject> scope = (Collection) context_p.get(ITransitionConstants.TRANSITION_SOURCES);
+        Collection<EObject> scope = (Collection<EObject>) context_p.get(ITransitionConstants.TRANSITION_SOURCES);
         EObject source = scope.iterator().next();
 
         // In interphases, we filter the target according to the source architecture eClass.

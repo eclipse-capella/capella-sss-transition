@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,28 +8,24 @@
  * Contributors:
  *    Thales - initial API and implementation
  *******************************************************************************/
-package org.polarsys.capella.transition.system2subsystem.multiphases.ui.commands;
+package org.polarsys.capella.transition.system2subsystem.interphases.commands;
 
 import java.util.Collection;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.polarsys.capella.core.transition.common.launcher.DefaultLauncher;
 import org.polarsys.capella.transition.system2subsystem.commands.SubSystemCommand;
-import org.polarsys.capella.transition.system2subsystem.multiphases.ui.launcher.MultiphasesLauncher;
+import org.polarsys.capella.transition.system2subsystem.interphases.launcher.HeadlessInterPhasesLauncher;
 
 
-public class MultiPhasesCommand extends SubSystemCommand {
+public class InterPhasesCommand extends SubSystemCommand {
 
-  /**
-   * @param _rootElement_p
-   * @param progressMonitor_p
-   */
-  public MultiPhasesCommand(Collection<Object> selection_p, IProgressMonitor progressMonitor_p) {
-    super(selection_p, progressMonitor_p);
+  public InterPhasesCommand(Collection<?> selection, IProgressMonitor progressMonitor) {
+    super(selection, progressMonitor);
   }
 
   @Override
-  protected void performTransformation(Collection<Object> elements_p) {
-    new MultiphasesLauncher().launch(elements_p, getProgressMonitor());    
+  protected DefaultLauncher createLauncher() {
+    return new HeadlessInterPhasesLauncher();
   }
-
 }

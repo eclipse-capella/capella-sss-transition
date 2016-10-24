@@ -25,10 +25,8 @@ import org.polarsys.capella.core.transition.common.activities.InitializeScopeAct
 import org.polarsys.capella.core.transition.common.activities.InitializeTransitionActivity;
 import org.polarsys.capella.core.transition.common.activities.PostTransformationActivity;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
-import org.polarsys.capella.core.transition.common.handlers.IHandler;
-import org.polarsys.capella.core.transition.common.handlers.options.DefaultOptionsHandler;
-import org.polarsys.capella.core.transition.common.handlers.options.IOptionsHandler;
 import org.polarsys.capella.core.transition.common.transposer.ExtendedRulesHandler;
+import org.polarsys.capella.core.transition.common.transposer.SharedWorkflowActivityParameter;
 import org.polarsys.capella.transition.system2subsystem.activities.FinalizeSubsystemTransitionActivity;
 import org.polarsys.capella.transition.system2subsystem.crossphases.handlers.attachment.CrossPhasesAttachmentHelper;
 import org.polarsys.capella.transition.system2subsystem.multiphases.MultiphasesContext;
@@ -37,7 +35,6 @@ import org.polarsys.capella.transition.system2subsystem.multiphases.activities.I
 import org.polarsys.capella.transition.system2subsystem.multiphases.activities.InitializeMultiphasesTransitionActivity;
 import org.polarsys.capella.transition.system2subsystem.multiphases.activities.JustificationLinkPass;
 import org.polarsys.capella.transition.system2subsystem.multiphases.activities.MultiphasesDifferencesComputingActivity;
-import org.polarsys.capella.transition.system2subsystem.multiphases.activities.MultiphasesDifferencesFilteringActivity;
 import org.polarsys.capella.transition.system2subsystem.multiphases.activities.RealizationLinkPass;
 import org.polarsys.capella.transition.system2subsystem.multiphases.activities.RootComponentNameUpdater;
 import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.attachment.LAAttachmentHelper;
@@ -52,31 +49,19 @@ import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 public class HeadlessMultiphasesLauncher {
 
-  private final IOptionsHandler optionsHandler;
-
-  private final boolean merge;
-  private final Collection<GenericParameter<?>> headlessParameters;
+  private final SharedWorkflowActivityParameter headlessParameters;
   private final Logger logger;
 
-  public HeadlessMultiphasesLauncher(IOptionsHandler optionsHandler, Collection<GenericParameter<?>> headlessParameters, boolean merge) {
-    this.optionsHandler = optionsHandler;
-    this.headlessParameters = headlessParameters;
-    this.merge = merge;
+  public HeadlessMultiphasesLauncher(SharedWorkflowActivityParameter parameters) {
+    this.headlessParameters = parameters;
     this.logger = ReportManagerRegistry.getInstance().subscribe(IReportManagerDefaultComponents.DEFAULT);
   }
 
-  public HeadlessMultiphasesLauncher(Collection<GenericParameter<?>> headlessParameters, boolean merge) {
-    this(new DefaultOptionsHandler(), headlessParameters, merge);
-  }
 
-  public HeadlessMultiphasesLauncher(Collection<GenericParameter<?>> headlessParameters) {
-    this(headlessParameters, true);
-  }
-
-  public void launch(Collection<Object> selection, IProgressMonitor monitor) {
+  public void launch(Collection<?> selection, IProgressMonitor monitor) {
 
     final MultiphasesContext context = new MultiphasesContext(selection);
-    IStatus result = initializeMultiphasesTransition(context, optionsHandler);
+    IStatus result = initializeMultiphasesTransition(context);
 
     if (result.isOK()) {
       try {
@@ -92,20 +77,14 @@ public class HeadlessMultiphasesLauncher {
 
         new LostAndFoundPass().attachLostAndFound(context);
         new RealizationLinkPass().createRealizationLinks(context.getTempSystemEngineering(), context);
-
-        ActivityParameters params = createPostTransformationParameters(context);
-        new PostTransformationActivity().run(params);
-
+        new PostTransformationActivity().run(createActivityParameters(PostTransformationActivity.ID, context));
         new JustificationLinkPass().createJustificationLinks(context.getTempSystemEngineering(), context.getSelectedPhysicalComponents());
         new RootComponentNameUpdater().updateRootComponentNames(context.getTempSystemEngineering(), context.getSelectedPhysicalComponents());
 
-        if (merge) {
-          new InitializeMultiphasesDiffMergeActivity().run(params);
-          new MultiphasesDifferencesComputingActivity().run(params);
-          new MultiphasesDifferencesFilteringActivity().run(params);
-          new DifferencesMergingActivity().run(params);
-        }
-        new FinalizeTransitionActivity().run(params);
+        new InitializeMultiphasesDiffMergeActivity().run(createActivityParameters(InitializeMultiphasesDiffMergeActivity.ID, context));
+        new MultiphasesDifferencesComputingActivity().run(createActivityParameters(MultiphasesDifferencesComputingActivity.ID, context));
+        new DifferencesMergingActivity().run(createActivityParameters(DifferencesMergingActivity.ID, context));
+        new FinalizeTransitionActivity().run(createActivityParameters(FinalizeTransitionActivity.ID, context));
       } finally {
     	  try {
     		  ActivityParameters params = new ActivityParameters();
@@ -140,52 +119,32 @@ public class HeadlessMultiphasesLauncher {
     }
   }
 
-  protected ActivityParameters createPostTransformationParameters(MultiphasesContext context) {
-    ActivityParameters params = new ActivityParameters();
-    params.addParameter(new GenericParameter<IContext>(ITransposerWorkflow.TRANSPOSER_CONTEXT, context, null));
-    for (GenericParameter<?> paramHeadless : headlessParameters) {
-      params.addParameter(paramHeadless);
-    }
-    return params;
-  }
-
-  protected ActivityParameters createPreTransformationParameters(MultiphasesContext context, IOptionsHandler optionsHandler) {
-    ActivityParameters parameter = new ActivityParameters();
+  private ActivityParameters createActivityParameters(String activityID, MultiphasesContext context) {
+    ActivityParameters parameter = headlessParameters.getActivityParameters(activityID);
     parameter.addParameter(new GenericParameter<IContext>(ITransposerWorkflow.TRANSPOSER_CONTEXT, context, null));
     parameter.addParameter(new GenericParameter<IRulesHandler>(InitializeTransitionActivity.PARAMETER_RULE_HANDLER, null, null));
-    parameter.addParameter(new GenericParameter<IHandler>(ITransitionConstants.OPTIONS_HANDLER, optionsHandler, "Transposer Options handler"));
-    for (GenericParameter<?> paramHeadless : headlessParameters) {
-      parameter.addParameter(paramHeadless);
-    }
     return parameter;
   }
 
   // here we fake a cadence invocation to initialize the transition.
   // TODO refactor to allow to be called outside cadence without the use of generic parameters..
-  private IStatus initializeMultiphasesTransition(MultiphasesContext context, IOptionsHandler optionsHandler) {
+  private IStatus initializeMultiphasesTransition(MultiphasesContext context) {
 
-    if (!merge) {
-      context.put(ITransitionConstants.DIFFMERGE_DISABLE, Boolean.TRUE);
-    }
-
-    ActivityParameters params = createPreTransformationParameters(context, optionsHandler);
-
-    // this just fills the context with lots of stuff
-    IStatus status = new InitializeMultiphasesTransitionActivity().run(params);
+    IStatus status = new InitializeMultiphasesTransitionActivity().run(createActivityParameters(InitializeMultiphasesTransitionActivity.ID, context));
 
     if (status.isOK()) {
-      status = new InitializeMultiphasesTransformationActivity().run(params);
+      status = new InitializeMultiphasesTransformationActivity().run(createActivityParameters(InitializeMultiphasesTransformationActivity.ID, context));
     }
 
     if (status.isOK()) {
       // this initializes the scope with rules from SA.
       try {
-        IRulesHandler handler = new ExtendedRulesHandler("org.polarsys.capella.core.transition", MultiphasesContext.Mapping.SA.getMappingId());
+        IRulesHandler handler = new ExtendedRulesHandler("org.polarsys.capella.core.transition", MultiphasesContext.Mapping.SA.getMappingId()); //$NON-NLS-1$
         context.put(ITransitionConstants.RULES_HANDLER, handler);
       } catch (NonExistingPurposeException e) {
         throw new IllegalStateException(e);
       }
-      status = new InitializeScopeActivity().run(params);
+      status = new InitializeScopeActivity().run(createActivityParameters(InitializeScopeActivity.ID, context));
     }
 
     return status;
@@ -193,19 +152,19 @@ public class HeadlessMultiphasesLauncher {
 
   protected class SA_Launcher extends AbstractHeadlessMultiphasesLauncher {
     public SA_Launcher(MultiphasesContext context) {
-      super(context, MultiphasesContext.Mapping.SA, merge, headlessParameters);
+      super(context, MultiphasesContext.Mapping.SA);
     }
   }
 
   protected class LA_Launcher extends AbstractHeadlessMultiphasesLauncher {
     public LA_Launcher(MultiphasesContext context) {
-      super(context, MultiphasesContext.Mapping.LA, merge, headlessParameters);
+      super(context, MultiphasesContext.Mapping.LA);
     }
   }
 
   protected class PA_Launcher extends AbstractHeadlessMultiphasesLauncher {
     public PA_Launcher(MultiphasesContext context) {
-      super(context, MultiphasesContext.Mapping.PA, merge, headlessParameters);
+      super(context, MultiphasesContext.Mapping.PA);
     }
   }
 }

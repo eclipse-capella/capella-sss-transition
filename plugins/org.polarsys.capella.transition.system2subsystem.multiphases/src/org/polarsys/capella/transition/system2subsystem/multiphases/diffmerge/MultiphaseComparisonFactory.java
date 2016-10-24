@@ -18,7 +18,7 @@ public class MultiphaseComparisonFactory extends CapellaComparisonMethodFactory 
 
 	@Override
 	public String getLabel() {
-		return "Multiphase Capella Comparison";
+		return "Multiphase Capella Comparison"; //$NON-NLS-1$
 	}
 
 	/**

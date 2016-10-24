@@ -34,9 +34,9 @@ public class MultiphasesContext extends TransitionContext {
 
   public enum Mapping {
 
-    SA("org.polarsys.capella.transition.system2subsystem.multiphases.sa", CtxPackage.Literals.SYSTEM_ANALYSIS), LA(
-        "org.polarsys.capella.transition.system2subsystem.multiphases.la", LaPackage.Literals.LOGICAL_ARCHITECTURE), PA(
-        "org.polarsys.capella.transition.system2subsystem.multiphases.pa", PaPackage.Literals.PHYSICAL_ARCHITECTURE);
+    SA("org.polarsys.capella.transition.system2subsystem.multiphases.sa", CtxPackage.Literals.SYSTEM_ANALYSIS), LA( //$NON-NLS-1$
+        "org.polarsys.capella.transition.system2subsystem.multiphases.la", LaPackage.Literals.LOGICAL_ARCHITECTURE), PA( //$NON-NLS-1$
+        "org.polarsys.capella.transition.system2subsystem.multiphases.pa", PaPackage.Literals.PHYSICAL_ARCHITECTURE); //$NON-NLS-1$
 
     private final String mapping_id;
     private final EClass blockArchitecture;
@@ -61,7 +61,7 @@ public class MultiphasesContext extends TransitionContext {
           return (BlockArchitecture) ma;
         }
       }
-      throw new IllegalStateException("No blockarchitecture of type '" + blockArchitecture.eClass().getName() + "' in temp system engineering! ");
+      throw new IllegalStateException("No blockarchitecture of type '" + blockArchitecture.eClass().getName() + "' in temp system engineering! "); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     private EObject getTempRootComponent(MultiphasesContext context) {
@@ -75,7 +75,7 @@ public class MultiphasesContext extends TransitionContext {
       if (ba instanceof PhysicalArchitecture) {
         return ((PhysicalArchitecture) ba).getOwnedPhysicalComponent();
       }
-      throw new IllegalStateException("No root component for " + blockArchitecture.eClass().getName());
+      throw new IllegalStateException("No root component for " + blockArchitecture.eClass().getName()); //$NON-NLS-1$
     }
   }
 

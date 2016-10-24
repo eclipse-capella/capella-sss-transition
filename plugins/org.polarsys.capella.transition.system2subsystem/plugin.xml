@@ -530,18 +530,18 @@
    <extension
          point="org.polarsys.kitalpha.cadence.core.activity.declaration">
       <ActivityDeclaration
-            ActivityClass="org.polarsys.capella.transition.system2subsystem.activities.DifferencesFilteringActivity"
-            Identifier="org.polarsys.capella.transition.system2subsystem.activities.DifferencesFilteringActivity"
+            ActivityClass="org.polarsys.capella.transition.system2subsystem.activities.InitializeDiffMergeActivity"
+            Identifier="org.polarsys.capella.transition.system2subsystem.activities.InitializeDiffMergeActivity"
             Multiple="false"
-            Name="Selection of differences"
+            Name="Initialize diffmerge"
             WorkflowElementIdentifier="org.polarsys.kitalpha.transposer.after.rule.execution"
             WorkflowIdentifier="org.polarsys.kitalpha.transposer.workflow">
          <Description>
-            This activity initialize Transposer for Capella Transformation execution.
+            This activity initialize diffmerge
          </Description>
       </ActivityDeclaration>
    </extension>
-   
+
    <extension
          point="org.polarsys.kitalpha.cadence.core.activity.declaration">
       <ActivityDeclaration

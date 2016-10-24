@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -23,7 +23,6 @@ import org.polarsys.capella.core.transition.common.transposer.ExtendedTransposer
 import org.polarsys.capella.transition.system2subsystem.launcher.SubSystemLauncher;
 import org.polarsys.capella.transition.system2subsystem.multiphases.MultiphasesContext;
 import org.polarsys.capella.transition.system2subsystem.transposer.SubsystemRuleHandler;
-import org.polarsys.kitalpha.cadence.core.api.parameter.GenericParameter;
 import org.polarsys.kitalpha.cadence.core.api.parameter.WorkflowActivityParameter;
 import org.polarsys.kitalpha.transposer.TransposerCorePlugin;
 import org.polarsys.kitalpha.transposer.api.ITransposerWorkflow;
@@ -33,15 +32,10 @@ class AbstractHeadlessMultiphasesLauncher extends SubSystemLauncher {
 
   private final MultiphasesContext context;
   private final MultiphasesContext.Mapping mapping;
-  private final boolean isMerge;
-  private final Collection<GenericParameter<?>> headlessParameters;
 
-  public AbstractHeadlessMultiphasesLauncher(MultiphasesContext context_p, MultiphasesContext.Mapping mapping_p, boolean isMerge_p,
-      Collection<? extends GenericParameter<?>> headlessParameters_p) {
+  public AbstractHeadlessMultiphasesLauncher(MultiphasesContext context_p, MultiphasesContext.Mapping mapping_p) {
     context = context_p;
     mapping = mapping_p;
-    isMerge = isMerge_p;
-    headlessParameters = new ArrayList<GenericParameter<?>>(headlessParameters_p);
   }
 
   @Override
@@ -50,14 +44,14 @@ class AbstractHeadlessMultiphasesLauncher extends SubSystemLauncher {
   }
 
   @Override
-  public final void run(Collection<Object> selection_p, boolean save, IProgressMonitor monitor_p) {
+  public final void run(Collection<?> selection_p, boolean save, IProgressMonitor monitor_p) {
     context.setMapping(mapping);
     super.run(selection_p, save, monitor_p);
   }
 
   @Override
   // overridden to update rules handler in context
-  public final void launch(Collection<Object> selection_p, String purpose_p, String mappingId_p, IProgressMonitor monitor_p) {
+  public final void launch(Collection<?> selection_p, String purpose_p, String mappingId_p, IProgressMonitor monitor_p) {
     try {
       initializeLogHandler();
       _transposer = createTransposer(purpose_p, mappingId_p);
@@ -65,6 +59,12 @@ class AbstractHeadlessMultiphasesLauncher extends SubSystemLauncher {
       context.put(ITransitionConstants.TRANSPOSER_SELECTION, selection_p);
       context.put(ITransposerWorkflow.TRANSPOSER_ANALYSIS_SOURCES, new ArrayList<Object>());
       context.put(ITransitionConstants.RULES_HANDLER, _transposer.getRulesHandler());
+      context.put(ITransitionConstants.TRANSPOSER_PURPOSE, purpose_p);
+      context.put(ITransitionConstants.COMMAND_NAME, getName());
+      context.put(ITransitionConstants.TRANSPOSER_MAPPING, mappingId_p);
+      context.put(ITransposerWorkflow.TRANSPOSER_ANALYSIS_SOURCES, new ArrayList<Object>());
+
+      initializeParameters();
       triggerActivities(selection_p, getWorkflow(), monitor_p);
 
     } catch (OperationCanceledException e) {
@@ -87,6 +87,11 @@ class AbstractHeadlessMultiphasesLauncher extends SubSystemLauncher {
   }
 
   @Override
+  /**
+   * Initialization is performed only once in the HeadlessMultiphasesLauncher,
+   * so this must be overridden to prevent re-initialisation when a new phase
+   * transition starts.
+   */
   protected final WorkflowActivityParameter buildInitializationActivities() {
     return new WorkflowActivityParameter();
   }
@@ -116,11 +121,11 @@ class AbstractHeadlessMultiphasesLauncher extends SubSystemLauncher {
   }
 
   @Override
-  protected final Collection<GenericParameter<?>> getHeadlessParameters() {
-    return headlessParameters;
-  }
-
-  @Override
+  /**
+   * Diffmerge is invoked manually after all phases transitions have been completed, so this
+   * must be overridden to prevent the launch of diffmerge after a phase transistion
+   * ends.
+   */
   protected final WorkflowActivityParameter buildDiffMergeActivities() {
     return new WorkflowActivityParameter();
   }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,17 +15,17 @@ import java.util.Collections;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.polarsys.capella.core.data.cs.Part;
-import org.polarsys.capella.core.transition.common.commands.TransitionCommand;
+import org.polarsys.capella.core.transition.common.commands.LauncherCommand;
 import org.polarsys.capella.transition.system2subsystem.constants.Messages;
 
 
-public abstract class SubSystemCommand extends TransitionCommand {
+public abstract class SubSystemCommand extends LauncherCommand {
 
   /**
    * @param _rootElement_p
    * @param progressMonitor_p
    */
-  public SubSystemCommand(Collection<Object> selection_p, IProgressMonitor progressMonitor_p) {
+  public SubSystemCommand(Collection<?> selection_p, IProgressMonitor progressMonitor_p) {
     super(selection_p, progressMonitor_p);
   }
 
