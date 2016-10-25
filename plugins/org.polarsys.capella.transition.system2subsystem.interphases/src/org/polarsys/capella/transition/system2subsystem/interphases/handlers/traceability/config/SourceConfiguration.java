@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.polarsys.capella.transition.system2subsystem.interphases.handlers.traceability.config;
 
-import org.polarsys.capella.core.transition.system.handlers.traceability.config.MergeSourceConfiguration;
+import org.polarsys.capella.transition.system2subsystem.handlers.traceability.config.MergeSourceConfiguration;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 /**
