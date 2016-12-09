@@ -6,7 +6,7 @@
     <properties xmi:id="_TWr84KZMEeShout9m4suYQ" key="hudsonJob" value="https://hudson.polarsys.org/capella/job/capella-v0.8.x/218/"/>
     <properties xmi:id="_pxmU4MzGEeSgCsr7bvb4KA" key="site_Kitalpha" value="https://hudson.polarsys.org/kitalpha/job/Kitalpha_Nightly-v0.5.x/lastSuccessfulBuild/artifact/result/publish/kitalpha/site.p2/"/>
     <properties xmi:id="_KlR7cMzJEeSgCsr7bvb4KA" key="site_EGF" value="https://hudson.eclipse.org/egf/job/buckminster-egf-juno/lastSuccessfulBuild/artifact/result/publish/org.eclipse.egf.sdk/site.p2/"/>
-    <properties xmi:id="_XZtKIB5gEeWbWP_PEm1_wA" key="CapellaVersion" value="0.8.3"/>
+    <properties xmi:id="_XZtKIB5gEeWbWP_PEm1_wA" key="CapellaVersion" value="0.8.7"/>
   </propertyPackages>
   <jobs href="Job_TransitionSystem2SubSystem.egfbuild#_gPxtENokEeGTBMJ29vOuKA"/>
 </buildcore:Chain>
