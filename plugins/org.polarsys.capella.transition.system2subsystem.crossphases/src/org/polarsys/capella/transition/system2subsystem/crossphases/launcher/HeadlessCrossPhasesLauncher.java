@@ -16,9 +16,8 @@ import org.polarsys.capella.core.transition.common.activities.FinalizeTransition
 import org.polarsys.capella.core.transition.common.activities.InitializeScopeActivity;
 import org.polarsys.capella.core.transition.common.activities.PostDiffMergeActivity;
 import org.polarsys.capella.core.transition.common.activities.PostTransformationActivity;
-import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
-import org.polarsys.capella.core.transition.system.activities.InitializeTransformationActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.FinalizeSubsystemTransitionActivity;
+import org.polarsys.capella.transition.system2subsystem.activities.InitializeTransformationActivity;
 import org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeDiffMergeActivity;
 import org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeTransitionActivity;
 import org.polarsys.capella.transition.system2subsystem.launcher.SubSystemLauncher;
