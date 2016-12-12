@@ -39,6 +39,8 @@ import org.polarsys.capella.transition.system2subsystem.handlers.attachment.Scen
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.ExternalFunctionsScopeRetriever;
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.PropertyValuesScopeFilter;
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.PropertyValuesScopeRetriever;
+import org.polarsys.capella.transition.system2subsystem.handlers.scope.RequirementsScopeFilter;
+import org.polarsys.capella.transition.system2subsystem.handlers.scope.RequirementsScopeRetriever;
 import org.polarsys.capella.transition.system2subsystem.handlers.session.SubSystemSessionHandler;
 import org.polarsys.kitalpha.cadence.core.api.parameter.ActivityParameters;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
@@ -59,6 +61,9 @@ public class InitializeTransitionActivity extends org.polarsys.capella.core.tran
   @Override
   protected IStatus initializeScopeFilterHandlers(IContext context, CompoundScopeFilter handler, ActivityParameters activityParams) {
     IScopeFilter filter = PropertyValuesScopeFilter.getInstance(context);
+    handler.addScopeFilter(filter, context);
+
+    filter = RequirementsScopeFilter.getInstance(context);
     handler.addScopeFilter(filter, context);
 
     return super.initializeScopeFilterHandlers(context, handler, activityParams);
@@ -85,6 +90,9 @@ public class InitializeTransitionActivity extends org.polarsys.capella.core.tran
   @Override
   protected IStatus initializeScopeRetrieverHandlers(IContext context, CompoundScopeRetriever handler, ActivityParameters activityParams) {
     IScopeRetriever retriever = new PropertyValuesScopeRetriever();
+    handler.addScopeRetriever(retriever, context);
+    
+    retriever = new RequirementsScopeRetriever();
     handler.addScopeRetriever(retriever, context);
     
     handler.addScopeRetriever(new ExternalFunctionsScopeRetriever(), context);

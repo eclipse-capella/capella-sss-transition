@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -50,5 +50,8 @@ public class IOptionsConstants {
 
   public static final String PROPERTY_VALUES_ELEMENTS = "propertyValuesExport";
   public static final Collection<EObject> PROPERTY_VALUES_ELEMENTS_DEFAULT_VALUE = Collections.emptyList();
+  
+  public static final String REQUIREMENTS_ELEMENTS = "requirementsExport";
+  public static final Collection<EObject> REQUIREMENTS_ELEMENTS_DEFAULT_VALUE = Collections.emptyList();
 
 }
