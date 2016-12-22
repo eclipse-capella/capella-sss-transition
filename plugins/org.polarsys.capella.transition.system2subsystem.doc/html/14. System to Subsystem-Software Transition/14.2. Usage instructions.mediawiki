@@ -37,10 +37,17 @@ Transitions are possible from one or several logical, physical components or one
  
 == Configuration of the transition ==
  
-A configuration dialog opens and allows, among others, to choose the target model.
+A configuration dialog opens with two tabs.
+
+The "Main" tab allows, among others parameters, to choose the target model.
  
-[[Image:Images/Config_Transition.png|682px]]
- 
+[[Image:Images/Config_Transition_main.png|682px]]
+
+The "Extensions" tab allows to add elements to take in the transition:
+* Property Values: the list of Property Values to take in the transition along with their referencing objects,
+* Requirement Packages: the list of Requirement Packages where to look for Requirements to take in the transition along with their referencing objects.
+
+[[Image:Images/Config_Transition_extensions.png|400px]]
 <br>
  
 == Gap analysis with previous iteration of the transition ==
