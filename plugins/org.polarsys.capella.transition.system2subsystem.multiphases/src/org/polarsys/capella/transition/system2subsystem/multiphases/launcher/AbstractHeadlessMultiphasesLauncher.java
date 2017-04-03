@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2017 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -54,11 +54,11 @@ class AbstractHeadlessMultiphasesLauncher extends SubSystemLauncher {
   public final void launch(Collection<?> selection_p, String purpose_p, String mappingId_p, IProgressMonitor monitor_p) {
     try {
       initializeLogHandler();
-      _transposer = createTransposer(purpose_p, mappingId_p);
-      context.put(ITransitionConstants.TRANSPOSER_INSTANCE, _transposer);
+      transposer = createTransposer(purpose_p, mappingId_p);
+      context.put(ITransitionConstants.TRANSPOSER_INSTANCE, transposer);
       context.put(ITransitionConstants.TRANSPOSER_SELECTION, selection_p);
       context.put(ITransposerWorkflow.TRANSPOSER_ANALYSIS_SOURCES, new ArrayList<Object>());
-      context.put(ITransitionConstants.RULES_HANDLER, _transposer.getRulesHandler());
+      context.put(ITransitionConstants.RULES_HANDLER, transposer.getRulesHandler());
       context.put(ITransitionConstants.TRANSPOSER_PURPOSE, purpose_p);
       context.put(ITransitionConstants.COMMAND_NAME, getName());
       context.put(ITransitionConstants.TRANSPOSER_MAPPING, mappingId_p);
@@ -104,7 +104,7 @@ class AbstractHeadlessMultiphasesLauncher extends SubSystemLauncher {
     return new ExtendedTransposer(purpose_p, mappingId_p) {
       @Override
       public void initCadence() {
-        cadenceLauncher = _cadenceLauncher;
+        cadenceLauncher = AbstractHeadlessMultiphasesLauncher.this.cadenceLauncher;
       }
 
       @Override

@@ -15,12 +15,11 @@ Export-Package: org.polarsys.capella.transition.system2subsystem.crossphases,
  org.polarsys.capella.transition.system2subsystem.crossphases.rules.la,
  org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa
 Require-Bundle: org.eclipse.core.runtime,
- org.polarsys.capella.core.transition.common;visibility:=reexport,
  org.polarsys.capella.transition.system2subsystem;visibility:=reexport,
  org.polarsys.capella.core.transition.system.topdown
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 1.1.0.qualifier
+Bundle-Version: 1.2.0.qualifier
 Bundle-Localization: plugin
 Bundle-Name: %pluginName
 Bundle-Activator: org.polarsys.capella.transition.system2subsystem.crossphases.Activator
