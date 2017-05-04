@@ -19,6 +19,11 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-ActivationPolicy: lazy
 Export-Package: org.polarsys.capella.transition.system2subsystem.tests,
  org.polarsys.capella.transition.system2subsystem.tests.crossphases,
- org.polarsys.capella.transition.system2subsystem.tests.multiphases
+ org.polarsys.capella.transition.system2subsystem.tests.interphases,
+ org.polarsys.capella.transition.system2subsystem.tests.mixed,
+ org.polarsys.capella.transition.system2subsystem.tests.multiphases,
+ org.polarsys.capella.transition.system2subsystem.tests.multiphases.validation,
+ org.polarsys.capella.transition.system2subsystem.tests.util
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-Vendor: %providerName
+Bundle-Localization: plugin

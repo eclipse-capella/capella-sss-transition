@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (c) 2017 THALES GLOBAL SERVICES.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Public License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/legal/epl-v10.html
+
+  Contributors:
+       Thales - initial API and implementation
+-->
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.polarsys</groupId>
+	<artifactId>org.polarsys.capella.transition.system2subsystem.bundles</artifactId>
+	<version>1.2.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<parent>
+		<groupId>org.polarsys</groupId>
+		<artifactId>org.polarsys.capella.addon.transition.system2subsystem</artifactId>
+		<version>1.2.0-SNAPSHOT</version>
+		<relativePath>../</relativePath>
+	</parent>
+
+	<modules>
+		<module>org.polarsys.capella.transition.system2subsystem</module>
+		<module>org.polarsys.capella.transition.system2subsystem.crossphases</module>
+		<module>org.polarsys.capella.transition.system2subsystem.crossphases.ui</module>
+		<module>org.polarsys.capella.transition.system2subsystem.doc</module>
+		<module>org.polarsys.capella.transition.system2subsystem.interphases</module>
+		<module>org.polarsys.capella.transition.system2subsystem.interphases.ui</module>
+		<module>org.polarsys.capella.transition.system2subsystem.multiphases</module>
+		<module>org.polarsys.capella.transition.system2subsystem.multiphases.ui</module>
+		<module>org.polarsys.capella.transition.system2subsystem.tests.ju</module>
+		<module>org.polarsys.capella.transition.system2subsystem.ui</module>
+	</modules>
+</project>
