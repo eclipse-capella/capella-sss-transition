@@ -37,7 +37,8 @@
     <tycho.testArgLine>-Xms256m -Xmx1024m</tycho.testArgLine>
 
 	<!-- for packaging -->
-	<eclipse-repo.url>http://download.eclipse.org/releases/neon</eclipse-repo.url>
+	<platform-name>neon</platform-name>
+	<eclipse-repo.url>http://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
 	<packagedAddonName>SubsystemTransition</packagedAddonName>
 
 	<!-- for sonar -->
@@ -212,7 +213,7 @@
 					<configuration>
 						<repositories>
 							<repository>
-								<id>eclipse-repo</id>
+								<id>eclipse-releases-${platform-name}</id>
 								<layout>p2</layout>
 								<url>${eclipse-repo.url}</url>
 							</repository>
