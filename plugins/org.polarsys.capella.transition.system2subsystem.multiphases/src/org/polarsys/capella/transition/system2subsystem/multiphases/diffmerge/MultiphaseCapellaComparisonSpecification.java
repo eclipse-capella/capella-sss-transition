@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2017 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,20 +11,19 @@
 package org.polarsys.capella.transition.system2subsystem.multiphases.diffmerge;
 
 import org.eclipse.emf.diffmerge.api.IMatchPolicy;
+import org.eclipse.emf.diffmerge.ui.specification.IComparisonMethodFactory;
 import org.eclipse.emf.diffmerge.ui.specification.IModelScopeDefinition;
 import org.polarsys.capella.core.compare.CapellaComparisonMethod;
 
 public class MultiphaseCapellaComparisonSpecification extends
 		CapellaComparisonMethod {
 
-	public MultiphaseCapellaComparisonSpecification(
-			IModelScopeDefinition leftScopeSpec_p,
-			IModelScopeDefinition rightScopeSpec_p,
-			IModelScopeDefinition ancestorScopeSpec_p) {
-		super(leftScopeSpec_p, rightScopeSpec_p, ancestorScopeSpec_p);
-	}
+	public MultiphaseCapellaComparisonSpecification(IModelScopeDefinition leftScopeDef,
+      IModelScopeDefinition rightScopeDef, IModelScopeDefinition ancestorScopeDef, IComparisonMethodFactory factory) {
+    super(leftScopeDef, rightScopeDef, ancestorScopeDef, factory);
+  }
 
-	@Override
+  @Override
 	protected IMatchPolicy createMatchPolicy() {
 		return new MultiphasesMatchPolicy();
 	}

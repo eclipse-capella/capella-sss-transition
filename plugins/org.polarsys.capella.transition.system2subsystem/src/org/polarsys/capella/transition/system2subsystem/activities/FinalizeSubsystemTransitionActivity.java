@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2017 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -22,10 +22,11 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.ui.statushandlers.StatusManager;
 import org.polarsys.capella.core.model.handler.helpers.HoldingResourceHelper;
 import org.polarsys.capella.core.transition.common.activities.AbstractActivity;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
+import org.polarsys.capella.core.transition.common.constants.Messages;
+import org.polarsys.capella.core.transition.common.handlers.log.LogHelper;
 import org.polarsys.capella.transition.system2subsystem.SubsystemPreferences;
 import org.polarsys.kitalpha.cadence.core.api.parameter.ActivityParameters;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
@@ -80,8 +81,7 @@ public class FinalizeSubsystemTransitionActivity extends AbstractActivity {
           try {
             transformationResource.save(Collections.emptyMap());
           } catch (IOException exception_p) {
-            StatusManager.getManager().handle(
-                new Status(IStatus.ERROR, org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID, exception_p.getMessage(), exception_p));
+            LogHelper.getInstance().log(exception_p.getMessage(), new Status(IStatus.ERROR, org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID, exception_p.getMessage(), exception_p), Messages.Activity_Transformation);
           }
         }
 
@@ -109,7 +109,7 @@ public class FinalizeSubsystemTransitionActivity extends AbstractActivity {
         try {
           toDelete.delete(true, new NullProgressMonitor());
         } catch (CoreException exception_p) {
-          StatusManager.getManager().handle(exception_p, org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID);
+          LogHelper.getInstance().log(exception_p.getMessage(), new Status(IStatus.ERROR, org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID, exception_p.getMessage(), exception_p), Messages.Activity_Transformation);
         }
       }
     }
