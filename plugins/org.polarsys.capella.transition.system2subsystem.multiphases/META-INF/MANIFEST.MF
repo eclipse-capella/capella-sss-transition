@@ -16,7 +16,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.polarsys.capella.core.model.skeleton,
  org.polarsys.capella.core.platform.sirius.ui.project,
  org.polarsys.capella.core.compare,
- org.polarsys.capella.core.transition.system.topdown
+ org.polarsys.capella.core.transition.system.topdown,
+ org.polarsys.capella.common.libraries
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: org.polarsys.capella.transition.system2subsystem.multiphases,

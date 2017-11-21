@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--Capella_Version_1.1.0-->
+<!--Capella_Version_1.2.0-->
 <org.polarsys.capella.core.data.capellamodeller:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:libraries="http://www.polarsys.org/capella/common/libraries/1.1.0"
-    xmlns:org.polarsys.capella.core.data.capellacommon="http://www.polarsys.org/capella/core/common/1.1.0"
-    xmlns:org.polarsys.capella.core.data.capellacore="http://www.polarsys.org/capella/core/core/1.1.0"
-    xmlns:org.polarsys.capella.core.data.capellamodeller="http://www.polarsys.org/capella/core/modeller/1.1.0"
-    xmlns:org.polarsys.capella.core.data.cs="http://www.polarsys.org/capella/core/cs/1.1.0"
-    xmlns:org.polarsys.capella.core.data.ctx="http://www.polarsys.org/capella/core/ctx/1.1.0"
-    xmlns:org.polarsys.capella.core.data.epbs="http://www.polarsys.org/capella/core/epbs/1.1.0"
-    xmlns:org.polarsys.capella.core.data.fa="http://www.polarsys.org/capella/core/fa/1.1.0"
-    xmlns:org.polarsys.capella.core.data.information="http://www.polarsys.org/capella/core/information/1.1.0"
-    xmlns:org.polarsys.capella.core.data.information.datatype="http://www.polarsys.org/capella/core/information/datatype/1.1.0"
-    xmlns:org.polarsys.capella.core.data.information.datavalue="http://www.polarsys.org/capella/core/information/datavalue/1.1.0"
-    xmlns:org.polarsys.capella.core.data.la="http://www.polarsys.org/capella/core/la/1.1.0"
-    xmlns:org.polarsys.capella.core.data.oa="http://www.polarsys.org/capella/core/oa/1.1.0"
-    xmlns:org.polarsys.capella.core.data.pa="http://www.polarsys.org/capella/core/pa/1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:libraries="http://www.polarsys.org/capella/common/libraries/1.2.0"
+    xmlns:org.polarsys.capella.core.data.capellacommon="http://www.polarsys.org/capella/core/common/1.2.0"
+    xmlns:org.polarsys.capella.core.data.capellacore="http://www.polarsys.org/capella/core/core/1.2.0"
+    xmlns:org.polarsys.capella.core.data.capellamodeller="http://www.polarsys.org/capella/core/modeller/1.2.0"
+    xmlns:org.polarsys.capella.core.data.cs="http://www.polarsys.org/capella/core/cs/1.2.0"
+    xmlns:org.polarsys.capella.core.data.ctx="http://www.polarsys.org/capella/core/ctx/1.2.0"
+    xmlns:org.polarsys.capella.core.data.epbs="http://www.polarsys.org/capella/core/epbs/1.2.0"
+    xmlns:org.polarsys.capella.core.data.fa="http://www.polarsys.org/capella/core/fa/1.2.0"
+    xmlns:org.polarsys.capella.core.data.information="http://www.polarsys.org/capella/core/information/1.2.0"
+    xmlns:org.polarsys.capella.core.data.information.datatype="http://www.polarsys.org/capella/core/information/datatype/1.2.0"
+    xmlns:org.polarsys.capella.core.data.information.datavalue="http://www.polarsys.org/capella/core/information/datavalue/1.2.0"
+    xmlns:org.polarsys.capella.core.data.la="http://www.polarsys.org/capella/core/la/1.2.0"
+    xmlns:org.polarsys.capella.core.data.oa="http://www.polarsys.org/capella/core/oa/1.2.0"
+    xmlns:org.polarsys.capella.core.data.pa="http://www.polarsys.org/capella/core/pa/1.2.0"
     id="[Project]::PC1PC2" name="PC1PC2">
   <ownedExtensions xsi:type="libraries:ModelInformation" id="[ModelInformation]::PC1PC2::"/>
   <ownedEnumerationPropertyTypes xsi:type="org.polarsys.capella.core.data.capellacore:EnumerationPropertyType"
@@ -83,46 +83,37 @@
               sid="c9e06ab2-57d2-4c84-a844-983d93a74bcd" name="FunctionalChain 1">
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F10"
-                sid="41c5242e-3030-4709-b369-dfdedd53e003" involver="#[FunctionalChain]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1"
-                involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F10"/>
+                sid="41c5242e-3030-4709-b369-dfdedd53e003" involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F10"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F14"
-                sid="e362f641-d1ae-4c04-9200-a98300ab7428" involver="#[FunctionalChain]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1"
-                involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F14"
+                sid="e362f641-d1ae-4c04-9200-a98300ab7428" involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F14"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F14_F15"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F14_F15"
-                sid="91f70338-0ff8-4630-80d2-fbee7cfe6c1c" involver="#[FunctionalChain]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1"
-                involved="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F14_F15"
+                sid="91f70338-0ff8-4630-80d2-fbee7cfe6c1c" involved="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F14_F15"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F15"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F15"
-                sid="98f8580d-e5af-4dfd-915b-04cd02a3f4b4" involver="#[FunctionalChain]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1"
-                involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F15"/>
+                sid="98f8580d-e5af-4dfd-915b-04cd02a3f4b4" involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F15"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F3"
-                sid="9a1fefae-d8f3-4708-ae54-875fbe97ed4c" involver="#[FunctionalChain]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1"
-                involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F3"
+                sid="9a1fefae-d8f3-4708-ae54-875fbe97ed4c" involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F3"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F3_F10"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F3_F10"
-                sid="95d64f7f-c430-4dd4-bff6-9e774edd691d" involver="#[FunctionalChain]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1"
-                involved="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F3_F10"
+                sid="95d64f7f-c430-4dd4-bff6-9e774edd691d" involved="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F3_F10"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F10"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F6"
-                sid="2a53b8b6-b599-4940-8429-7cc9333263a6" involver="#[FunctionalChain]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1"
-                involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F6"
+                sid="2a53b8b6-b599-4940-8429-7cc9333263a6" involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F6"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F6_F15 #[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F6_F3"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F6_F15"
-                sid="bffb0ce9-6f08-4c1b-8822-2b6862fb15ff" involver="#[FunctionalChain]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1"
-                involved="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F6_F15"
+                sid="bffb0ce9-6f08-4c1b-8822-2b6862fb15ff" involved="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F6_F15"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F15"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F6_F3"
-                sid="5e0681ff-a39a-4336-a61d-4e4c21bd2402" involver="#[FunctionalChain]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1"
-                involved="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F6_F3"
+                sid="5e0681ff-a39a-4336-a61d-4e4c21bd2402" involved="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F6_F3"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain1::*to*F3"/>
           </ownedFunctionalChains>
           <ownedFunctionalChains xsi:type="org.polarsys.capella.core.data.fa:FunctionalChain"
@@ -130,37 +121,30 @@
               sid="4a1447c5-3e51-476d-8f04-7d728ba4f6fc" name="FunctionalChain 2">
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2::*to*F1"
-                sid="bdca530a-fe3a-422b-aafb-b03400203c41" involver="#[FunctionalChain]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2"
-                involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F1"
+                sid="bdca530a-fe3a-422b-aafb-b03400203c41" involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F1"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2::*to*F1_F4"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2::*to*F13"
-                sid="96055fd6-eb51-4d0d-b105-5a0ab71a0ce7" involver="#[FunctionalChain]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2"
-                involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F13"/>
+                sid="96055fd6-eb51-4d0d-b105-5a0ab71a0ce7" involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F13"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2::*to*F1_F4"
-                sid="424c28d2-087a-4a8f-b9ea-184f521642a4" involver="#[FunctionalChain]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2"
-                involved="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F1_F4"
+                sid="424c28d2-087a-4a8f-b9ea-184f521642a4" involved="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F1_F4"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2::*to*F4"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2::*to*F4"
-                sid="a4b3ecaf-daed-424a-9fce-3a9d4c68b727" involver="#[FunctionalChain]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2"
-                involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F4"
+                sid="a4b3ecaf-daed-424a-9fce-3a9d4c68b727" involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F4"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2::*to*F4_F13"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2::*to*F4_F13"
-                sid="44d2845a-1c64-4665-9796-535522c14b92" involver="#[FunctionalChain]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2"
-                involved="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F4_F13"
+                sid="44d2845a-1c64-4665-9796-535522c14b92" involved="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F4_F13"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2::*to*F13"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2::*to*F7"
-                sid="fd23af82-3244-442f-a8e5-c88508cfec7a" involver="#[FunctionalChain]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2"
-                involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F7"
+                sid="fd23af82-3244-442f-a8e5-c88508cfec7a" involved="#[SystemFunction]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F7"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2::*to*F7_F1"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2::*to*F7_F1"
-                sid="38470f67-e169-44e4-a1f5-2278043d0ba1" involver="#[FunctionalChain]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2"
-                involved="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F7_F1"
+                sid="38470f67-e169-44e4-a1f5-2278043d0ba1" involved="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F7_F1"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::FunctionalChain2::*to*F1"/>
           </ownedFunctionalChains>
           <ownedFunctions xsi:type="org.polarsys.capella.core.data.ctx:SystemFunction"
@@ -300,8 +284,7 @@
           <ownedFunctionalExchanges xsi:type="org.polarsys.capella.core.data.fa:FunctionalExchange"
               id="[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F14_F5"
               sid="c927b8f2-e469-4a7b-bc35-97c27e926fa5" name="F14_F5" target="#[FunctionInputPort]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F5::F5_FIP2"
-              source="#[FunctionOutputPort]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F14::F14_FOP2"
-              categories="#[ExchangeCategory]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::ExchangeCategory1"/>
+              source="#[FunctionOutputPort]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F14::F14_FOP2"/>
           <ownedFunctionalExchanges xsi:type="org.polarsys.capella.core.data.fa:FunctionalExchange"
               id="[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F1_F4"
               sid="8254a806-1e75-4bb9-ad0a-f232d155c49c" name="F1_F4" target="#[FunctionInputPort]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F4::F4_FIP1"
@@ -325,8 +308,7 @@
           <ownedFunctionalExchanges xsi:type="org.polarsys.capella.core.data.fa:FunctionalExchange"
               id="[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F4_F13"
               sid="8f34374f-1b72-4bb2-88b2-669ae950a82b" name="F4_F13" target="#[FunctionInputPort]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F13::F13_FIP1"
-              source="#[FunctionOutputPort]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F4::F4_FOP2"
-              categories="#[ExchangeCategory]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::ExchangeCategory1"/>
+              source="#[FunctionOutputPort]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F4::F4_FOP2"/>
           <ownedFunctionalExchanges xsi:type="org.polarsys.capella.core.data.fa:FunctionalExchange"
               id="[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F4_F5"
               sid="31513aa7-c0cd-424d-b062-82d1f31957c9" name="F4_F5" target="#[FunctionInputPort]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F5::F5_FIP1"
@@ -338,8 +320,7 @@
           <ownedFunctionalExchanges xsi:type="org.polarsys.capella.core.data.fa:FunctionalExchange"
               id="[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F6_F15"
               sid="8b577193-6573-4a61-b7ce-d32faf034cdd" name="F6_F15" target="#[FunctionInputPort]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F15::F15_FIP2"
-              source="#[FunctionOutputPort]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F6::F6_FOP2"
-              categories="#[ExchangeCategory]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::ExchangeCategory1"/>
+              source="#[FunctionOutputPort]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F6::F6_FOP2"/>
           <ownedFunctionalExchanges xsi:type="org.polarsys.capella.core.data.fa:FunctionalExchange"
               id="[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F6_F3"
               sid="ef3c63a3-924a-4197-8667-f68cbd0ccb00" name="F6_F3" target="#[FunctionInputPort]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F3::F3_FIP1"
@@ -604,7 +585,7 @@
             id="[ComponentExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::C3"
             sid="ffcfbd01-e354-4771-9b8a-df171253d29c" name="C 3" source="#[ComponentPort]::PC1PC2::PC1PC2::SystemAnalysis::Actors::PA2::PC10_C1"
             target="#[ComponentPort]::PC1PC2::PC1PC2::SystemAnalysis::System::BC2_2_C1"
-            kind="FLOW" categories="#[ComponentExchangeCategory]::PC1PC2::PC1PC2::SystemAnalysis::System::ComponentExchangeCategory1">
+            kind="FLOW">
           <ownedComponentExchangeFunctionalExchangeAllocations xsi:type="org.polarsys.capella.core.data.fa:ComponentExchangeFunctionalExchangeAllocation"
               id="[ComponentExchangeFunctionalExchangeAllocation]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::C3::*trace*C3*to*F14_F5"
               sid="b7975b66-6fce-497a-9fce-670830178ca9" targetElement="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F14_F5"
@@ -614,7 +595,7 @@
             id="[ComponentExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::C4"
             sid="15cced67-b55a-47b2-85d4-a2944f5c330a" name="C 4" source="#[ComponentPort]::PC1PC2::PC1PC2::SystemAnalysis::System::BC2_2_C2"
             target="#[ComponentPort]::PC1PC2::PC1PC2::SystemAnalysis::Actors::PA2::PC10_C2"
-            kind="FLOW" categories="#[ComponentExchangeCategory]::PC1PC2::PC1PC2::SystemAnalysis::System::ComponentExchangeCategory1">
+            kind="FLOW">
           <ownedComponentExchangeFunctionalExchangeAllocations xsi:type="org.polarsys.capella.core.data.fa:ComponentExchangeFunctionalExchangeAllocation"
               id="[ComponentExchangeFunctionalExchangeAllocation]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::C4::*trace*C4*to*F6_F15"
               sid="e534cfbf-d7bb-4df9-837a-dc0de1147596" targetElement="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F6_F15"
@@ -642,8 +623,7 @@
             name="System" abstractType="#[System]::PC1PC2::PC1PC2::SystemAnalysis::System"/>
         <ownedPhysicalLinks xsi:type="org.polarsys.capella.core.data.cs:PhysicalLink"
             id="[PhysicalLink]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::PL1"
-            sid="60726f80-49f7-4b8a-8d41-04f5f93cd755" name="PL 1" linkEnds="#[PhysicalPort]::PC1PC2::PC1PC2::SystemAnalysis::System::PC1_PL1 #[PhysicalPort]::PC1PC2::PC1PC2::SystemAnalysis::Actors::PC3::PC3_PL1"
-            categories="#[PhysicalLinkCategory]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalLinkCategory1">
+            sid="60726f80-49f7-4b8a-8d41-04f5f93cd755" name="PL 1" linkEnds="#[PhysicalPort]::PC1PC2::PC1PC2::SystemAnalysis::System::PC1_PL1 #[PhysicalPort]::PC1PC2::PC1PC2::SystemAnalysis::Actors::PC3::PC3_PL1">
           <ownedComponentExchangeAllocations xsi:type="org.polarsys.capella.core.data.fa:ComponentExchangeAllocation"
               id="[ComponentExchangeAllocation]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::PL1::*trace*PL1*to*C10"
               sid="92eb07c4-6905-4c9f-adff-81587659ef3f" targetElement="#[ComponentExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::C10"
@@ -655,8 +635,7 @@
         </ownedPhysicalLinks>
         <ownedPhysicalLinks xsi:type="org.polarsys.capella.core.data.cs:PhysicalLink"
             id="[PhysicalLink]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::PL2"
-            sid="533c5bd6-9b0b-431e-8916-2d3a5f7b5a02" name="PL 2" linkEnds="#[PhysicalPort]::PC1PC2::PC1PC2::SystemAnalysis::Actors::PA1::PA1_PL2 #[PhysicalPort]::PC1PC2::PC1PC2::SystemAnalysis::System::PC1_PL2"
-            categories="#[PhysicalLinkCategory]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalLinkCategory1">
+            sid="533c5bd6-9b0b-431e-8916-2d3a5f7b5a02" name="PL 2" linkEnds="#[PhysicalPort]::PC1PC2::PC1PC2::SystemAnalysis::Actors::PA1::PA1_PL2 #[PhysicalPort]::PC1PC2::PC1PC2::SystemAnalysis::System::PC1_PL2">
           <ownedComponentExchangeAllocations xsi:type="org.polarsys.capella.core.data.fa:ComponentExchangeAllocation"
               id="[ComponentExchangeAllocation]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::PL2::*trace*PL2*to*C11"
               sid="5bc3b9f9-9380-41fe-a948-143e64ec65d2" targetElement="#[ComponentExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::C11"
@@ -794,16 +773,14 @@
             sid="736ab025-af7b-40ea-b587-c192e17f3f2a" name="PhysicalPath 1">
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalPath1::*to*"
-              sid="526c179a-53ea-4ca7-b3f3-839addaead1b" involver="#[PhysicalPath]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalPath1"/>
+              sid="526c179a-53ea-4ca7-b3f3-839addaead1b"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalPath1::*to*PA1"
-              sid="574aa437-d03b-4b72-a042-cc4d1d69bf27" involver="#[PhysicalPath]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalPath1"
-              involved="#[Part]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::PA1"
+              sid="574aa437-d03b-4b72-a042-cc4d1d69bf27" involved="#[Part]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::PA1"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalPath1::*to*PL2"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalPath1::*to*PL2"
-              sid="b24ecc86-9dbb-4c67-9176-b1f516089d09" involver="#[PhysicalPath]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalPath1"
-              involved="#[PhysicalLink]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::PL2"
+              sid="b24ecc86-9dbb-4c67-9176-b1f516089d09" involved="#[PhysicalLink]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::PL2"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalPath1::*to*"/>
         </ownedPhysicalPath>
         <ownedPhysicalPath xsi:type="org.polarsys.capella.core.data.cs:PhysicalPath"
@@ -811,16 +788,14 @@
             sid="681e59a6-b10e-4e6f-9cfa-4a601a548052" name="PhysicalPath 2">
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalPath2::*to*"
-              sid="a6628573-0b14-4361-9605-817adba46273" involver="#[PhysicalPath]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalPath2"/>
+              sid="a6628573-0b14-4361-9605-817adba46273"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalPath2::*to*PC3"
-              sid="5ccc573e-96e9-40bd-9cc2-2277404dd264" involver="#[PhysicalPath]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalPath2"
-              involved="#[Part]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::PC3"
+              sid="5ccc573e-96e9-40bd-9cc2-2277404dd264" involved="#[Part]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::PC3"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalPath2::*to*PL1"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalPath2::*to*PL1"
-              sid="c64d7f91-c1cc-4a96-844a-45dcc4c7e184" involver="#[PhysicalPath]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalPath2"
-              involved="#[PhysicalLink]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::PL1"
+              sid="c64d7f91-c1cc-4a96-844a-45dcc4c7e184" involved="#[PhysicalLink]::PC1PC2::PC1PC2::SystemAnalysis::SystemContext::PL1"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::SystemAnalysis::System::PhysicalPath2::*to*"/>
         </ownedPhysicalPath>
         <ownedPhysicalLinkCategories xsi:type="org.polarsys.capella.core.data.cs:PhysicalLinkCategory"
@@ -1031,46 +1006,37 @@
               sid="c9e06ab2-57d2-4c84-a844-983d93a74bcd" name="FunctionalChain 1">
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F10"
-                sid="41c5242e-3030-4709-b369-dfdedd53e003" involver="#[FunctionalChain]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1"
-                involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F10"/>
+                sid="41c5242e-3030-4709-b369-dfdedd53e003" involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F10"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F14"
-                sid="e362f641-d1ae-4c04-9200-a98300ab7428" involver="#[FunctionalChain]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1"
-                involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F14"
+                sid="e362f641-d1ae-4c04-9200-a98300ab7428" involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F14"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F14_F15"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F14_F15"
-                sid="91f70338-0ff8-4630-80d2-fbee7cfe6c1c" involver="#[FunctionalChain]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1"
-                involved="#[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F14_F15"
+                sid="91f70338-0ff8-4630-80d2-fbee7cfe6c1c" involved="#[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F14_F15"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F15"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F15"
-                sid="98f8580d-e5af-4dfd-915b-04cd02a3f4b4" involver="#[FunctionalChain]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1"
-                involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F15"/>
+                sid="98f8580d-e5af-4dfd-915b-04cd02a3f4b4" involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F15"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F3"
-                sid="9a1fefae-d8f3-4708-ae54-875fbe97ed4c" involver="#[FunctionalChain]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1"
-                involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F3"
+                sid="9a1fefae-d8f3-4708-ae54-875fbe97ed4c" involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F3"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F3_F10"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F3_F10"
-                sid="95d64f7f-c430-4dd4-bff6-9e774edd691d" involver="#[FunctionalChain]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1"
-                involved="#[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F3_F10"
+                sid="95d64f7f-c430-4dd4-bff6-9e774edd691d" involved="#[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F3_F10"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F10"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F6"
-                sid="2a53b8b6-b599-4940-8429-7cc9333263a6" involver="#[FunctionalChain]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1"
-                involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F6"
+                sid="2a53b8b6-b599-4940-8429-7cc9333263a6" involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F6"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F6_F15 #[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F6_F3"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F6_F15"
-                sid="bffb0ce9-6f08-4c1b-8822-2b6862fb15ff" involver="#[FunctionalChain]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1"
-                involved="#[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F6_F15"
+                sid="bffb0ce9-6f08-4c1b-8822-2b6862fb15ff" involved="#[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F6_F15"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F15"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F6_F3"
-                sid="5e0681ff-a39a-4336-a61d-4e4c21bd2402" involver="#[FunctionalChain]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1"
-                involved="#[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F6_F3"
+                sid="5e0681ff-a39a-4336-a61d-4e4c21bd2402" involved="#[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F6_F3"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*to*F3"/>
             <ownedFunctionalChainRealizations xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainRealization"
                 id="[FunctionalChainRealization]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain1::*trace*FunctionalChain1*to*FunctionalChain1"
@@ -1082,37 +1048,30 @@
               sid="4a1447c5-3e51-476d-8f04-7d728ba4f6fc" name="FunctionalChain 2">
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2::*to*F1"
-                sid="bdca530a-fe3a-422b-aafb-b03400203c41" involver="#[FunctionalChain]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2"
-                involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F1"
+                sid="bdca530a-fe3a-422b-aafb-b03400203c41" involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F1"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2::*to*F1_F4"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2::*to*F13"
-                sid="96055fd6-eb51-4d0d-b105-5a0ab71a0ce7" involver="#[FunctionalChain]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2"
-                involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F13"/>
+                sid="96055fd6-eb51-4d0d-b105-5a0ab71a0ce7" involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F13"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2::*to*F1_F4"
-                sid="424c28d2-087a-4a8f-b9ea-184f521642a4" involver="#[FunctionalChain]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2"
-                involved="#[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F1_F4"
+                sid="424c28d2-087a-4a8f-b9ea-184f521642a4" involved="#[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F1_F4"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2::*to*F4"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2::*to*F4"
-                sid="a4b3ecaf-daed-424a-9fce-3a9d4c68b727" involver="#[FunctionalChain]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2"
-                involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F4"
+                sid="a4b3ecaf-daed-424a-9fce-3a9d4c68b727" involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F4"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2::*to*F4_F13"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2::*to*F4_F13"
-                sid="44d2845a-1c64-4665-9796-535522c14b92" involver="#[FunctionalChain]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2"
-                involved="#[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F4_F13"
+                sid="44d2845a-1c64-4665-9796-535522c14b92" involved="#[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F4_F13"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2::*to*F13"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2::*to*F7"
-                sid="fd23af82-3244-442f-a8e5-c88508cfec7a" involver="#[FunctionalChain]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2"
-                involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F7"
+                sid="fd23af82-3244-442f-a8e5-c88508cfec7a" involved="#[LogicalFunction]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F7"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2::*to*F7_F1"/>
             <ownedFunctionalChainInvolvements xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainInvolvement"
                 id="[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2::*to*F7_F1"
-                sid="38470f67-e169-44e4-a1f5-2278043d0ba1" involver="#[FunctionalChain]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2"
-                involved="#[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F7_F1"
+                sid="38470f67-e169-44e4-a1f5-2278043d0ba1" involved="#[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F7_F1"
                 nextFunctionalChainInvolvements="#[FunctionalChainInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2::*to*F1"/>
             <ownedFunctionalChainRealizations xsi:type="org.polarsys.capella.core.data.fa:FunctionalChainRealization"
                 id="[FunctionalChainRealization]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::FunctionalChain2::*trace*FunctionalChain2*to*FunctionalChain2"
@@ -1439,8 +1398,7 @@
           <ownedFunctionalExchanges xsi:type="org.polarsys.capella.core.data.fa:FunctionalExchange"
               id="[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F14_F5"
               sid="c927b8f2-e469-4a7b-bc35-97c27e926fa5" name="F14_F5" target="#[FunctionInputPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F5::F5_FIP2"
-              source="#[FunctionOutputPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F14::F14_FOP2"
-              categories="#[ExchangeCategory]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::ExchangeCategory1">
+              source="#[FunctionOutputPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F14::F14_FOP2">
             <ownedFunctionalExchangeRealizations xsi:type="org.polarsys.capella.core.data.fa:FunctionalExchangeRealization"
                 id="[FunctionalExchangeRealization]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F14_F5::*trace*F14_F5*to*F14_F5"
                 targetElement="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F14_F5"
@@ -1494,8 +1452,7 @@
           <ownedFunctionalExchanges xsi:type="org.polarsys.capella.core.data.fa:FunctionalExchange"
               id="[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F4_F13"
               sid="8f34374f-1b72-4bb2-88b2-669ae950a82b" name="F4_F13" target="#[FunctionInputPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F13::F13_FIP1"
-              source="#[FunctionOutputPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F4::F4_FOP2"
-              categories="#[ExchangeCategory]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::ExchangeCategory1">
+              source="#[FunctionOutputPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F4::F4_FOP2">
             <ownedFunctionalExchangeRealizations xsi:type="org.polarsys.capella.core.data.fa:FunctionalExchangeRealization"
                 id="[FunctionalExchangeRealization]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F4_F13::*trace*F4_F13*to*F4_F13"
                 targetElement="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F4_F13"
@@ -1522,8 +1479,7 @@
           <ownedFunctionalExchanges xsi:type="org.polarsys.capella.core.data.fa:FunctionalExchange"
               id="[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F6_F15"
               sid="8b577193-6573-4a61-b7ce-d32faf034cdd" name="F6_F15" target="#[FunctionInputPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F15::F15_FIP2"
-              source="#[FunctionOutputPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F6::F6_FOP2"
-              categories="#[ExchangeCategory]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::ExchangeCategory1">
+              source="#[FunctionOutputPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F6::F6_FOP2">
             <ownedFunctionalExchangeRealizations xsi:type="org.polarsys.capella.core.data.fa:FunctionalExchangeRealization"
                 id="[FunctionalExchangeRealization]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F6_F15::*trace*F6_F15*to*F6_F15"
                 targetElement="#[FunctionalExchange]::PC1PC2::PC1PC2::SystemAnalysis::SystemFunctions::RootSystemFunction::F6_F15"
@@ -1710,7 +1666,7 @@
             id="[ComponentExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::C3"
             sid="ffcfbd01-e354-4771-9b8a-df171253d29c" name="C 3" source="#[ComponentPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalActors::PA2::PC10_C1"
             target="#[ComponentPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::BC2_2::BC2_2_C1"
-            kind="FLOW" categories="#[ComponentExchangeCategory]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::ComponentExchangeCategory1">
+            kind="FLOW">
           <ownedComponentExchangeFunctionalExchangeAllocations xsi:type="org.polarsys.capella.core.data.fa:ComponentExchangeFunctionalExchangeAllocation"
               id="[ComponentExchangeFunctionalExchangeAllocation]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::C3::*trace*C3*to*F14_F5"
               sid="b7975b66-6fce-497a-9fce-670830178ca9" targetElement="#[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F14_F5"
@@ -1724,7 +1680,7 @@
             id="[ComponentExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::C4"
             sid="15cced67-b55a-47b2-85d4-a2944f5c330a" name="C 4" source="#[ComponentPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::BC2_2::BC2_2_C2"
             target="#[ComponentPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalActors::PA2::PC10_C2"
-            kind="FLOW" categories="#[ComponentExchangeCategory]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::ComponentExchangeCategory1">
+            kind="FLOW">
           <ownedComponentExchangeFunctionalExchangeAllocations xsi:type="org.polarsys.capella.core.data.fa:ComponentExchangeFunctionalExchangeAllocation"
               id="[ComponentExchangeFunctionalExchangeAllocation]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::C4::*trace*C4*to*F6_F15"
               sid="e534cfbf-d7bb-4df9-837a-dc0de1147596" targetElement="#[FunctionalExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalFunctions::RootLogicalFunction::F6_F15"
@@ -1799,8 +1755,7 @@
             sid="dca47029-8958-4c15-a8a8-257a644ef180" name="PC 4" abstractType="#[LogicalActor]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalActors::PC4"/>
         <ownedPhysicalLinks xsi:type="org.polarsys.capella.core.data.cs:PhysicalLink"
             id="[PhysicalLink]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::PL1"
-            sid="60726f80-49f7-4b8a-8d41-04f5f93cd755" name="PL 1" linkEnds="#[PhysicalPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PC1_PL1 #[PhysicalPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalActors::PC3::PC3_PL1"
-            categories="#[PhysicalLinkCategory]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalLinkCategory1">
+            sid="60726f80-49f7-4b8a-8d41-04f5f93cd755" name="PL 1" linkEnds="#[PhysicalPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PC1_PL1 #[PhysicalPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalActors::PC3::PC3_PL1">
           <ownedComponentExchangeAllocations xsi:type="org.polarsys.capella.core.data.fa:ComponentExchangeAllocation"
               id="[ComponentExchangeAllocation]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::PL1::*trace*PL1*to*C10"
               sid="92eb07c4-6905-4c9f-adff-81587659ef3f" targetElement="#[ComponentExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::C10"
@@ -1816,8 +1771,7 @@
         </ownedPhysicalLinks>
         <ownedPhysicalLinks xsi:type="org.polarsys.capella.core.data.cs:PhysicalLink"
             id="[PhysicalLink]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::PL2"
-            sid="533c5bd6-9b0b-431e-8916-2d3a5f7b5a02" name="PL 2" linkEnds="#[PhysicalPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalActors::PA1::PA1_PL2 #[PhysicalPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PC1_PL2"
-            categories="#[PhysicalLinkCategory]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalLinkCategory1">
+            sid="533c5bd6-9b0b-431e-8916-2d3a5f7b5a02" name="PL 2" linkEnds="#[PhysicalPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalActors::PA1::PA1_PL2 #[PhysicalPort]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PC1_PL2">
           <ownedComponentExchangeAllocations xsi:type="org.polarsys.capella.core.data.fa:ComponentExchangeAllocation"
               id="[ComponentExchangeAllocation]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::PL2::*trace*PL2*to*C11"
               sid="5bc3b9f9-9380-41fe-a948-143e64ec65d2" targetElement="#[ComponentExchange]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::C11"
@@ -1951,16 +1905,14 @@
             sid="736ab025-af7b-40ea-b587-c192e17f3f2a" name="PhysicalPath 1">
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath1::*to*"
-              sid="526c179a-53ea-4ca7-b3f3-839addaead1b" involver="#[PhysicalPath]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath1"/>
+              sid="526c179a-53ea-4ca7-b3f3-839addaead1b"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath1::*to*PA1"
-              sid="574aa437-d03b-4b72-a042-cc4d1d69bf27" involver="#[PhysicalPath]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath1"
-              involved="#[Part]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::PA1"
+              sid="574aa437-d03b-4b72-a042-cc4d1d69bf27" involved="#[Part]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::PA1"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath1::*to*PL2"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath1::*to*PL2"
-              sid="b24ecc86-9dbb-4c67-9176-b1f516089d09" involver="#[PhysicalPath]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath1"
-              involved="#[PhysicalLink]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::PL2"
+              sid="b24ecc86-9dbb-4c67-9176-b1f516089d09" involved="#[PhysicalLink]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::PL2"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath1::*to*"/>
           <ownedPhysicalPathRealizations xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathRealization"
               id="[PhysicalPathRealization]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath1::*trace*PhysicalPath1*to*PhysicalPath1"
@@ -1972,16 +1924,14 @@
             sid="681e59a6-b10e-4e6f-9cfa-4a601a548052" name="PhysicalPath 2">
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath2::*to*"
-              sid="a6628573-0b14-4361-9605-817adba46273" involver="#[PhysicalPath]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath2"/>
+              sid="a6628573-0b14-4361-9605-817adba46273"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath2::*to*PC3"
-              sid="5ccc573e-96e9-40bd-9cc2-2277404dd264" involver="#[PhysicalPath]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath2"
-              involved="#[Part]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::PC3"
+              sid="5ccc573e-96e9-40bd-9cc2-2277404dd264" involved="#[Part]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::PC3"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath2::*to*PL1"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath2::*to*PL1"
-              sid="c64d7f91-c1cc-4a96-844a-45dcc4c7e184" involver="#[PhysicalPath]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath2"
-              involved="#[PhysicalLink]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::PL1"
+              sid="c64d7f91-c1cc-4a96-844a-45dcc4c7e184" involved="#[PhysicalLink]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::PL1"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath2::*to*"/>
           <ownedPhysicalPathRealizations xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathRealization"
               id="[PhysicalPathRealization]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalSystem::PhysicalPath2::*trace*PhysicalPath2*to*PhysicalPath2"
@@ -2565,8 +2515,7 @@
             name="Physical System" abstractType="#[PhysicalComponent]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem"/>
         <ownedPhysicalLinks xsi:type="org.polarsys.capella.core.data.cs:PhysicalLink"
             id="[PhysicalLink]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PL1"
-            sid="60726f80-49f7-4b8a-8d41-04f5f93cd755" name="PL 1" linkEnds="#[PhysicalPort]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PC1::PC1_PL1 #[PhysicalPort]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalActors::PC3::PC3_PL1"
-            categories="#[PhysicalLinkCategory]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalLinkCategory1">
+            sid="60726f80-49f7-4b8a-8d41-04f5f93cd755" name="PL 1" linkEnds="#[PhysicalPort]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PC1::PC1_PL1 #[PhysicalPort]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalActors::PC3::PC3_PL1">
           <ownedPhysicalLinkRealizations xsi:type="org.polarsys.capella.core.data.cs:PhysicalLinkRealization"
               id="[PhysicalLinkRealization]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PL1::*trace*PL1*to*PL1"
               targetElement="#[PhysicalLink]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::PL1"
@@ -2574,8 +2523,7 @@
         </ownedPhysicalLinks>
         <ownedPhysicalLinks xsi:type="org.polarsys.capella.core.data.cs:PhysicalLink"
             id="[PhysicalLink]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PL2"
-            sid="533c5bd6-9b0b-431e-8916-2d3a5f7b5a02" name="PL 2" linkEnds="#[PhysicalPort]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalActors::PA1::PA1_PL2 #[PhysicalPort]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PC1::PC1_PL2"
-            categories="#[PhysicalLinkCategory]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalLinkCategory1">
+            sid="533c5bd6-9b0b-431e-8916-2d3a5f7b5a02" name="PL 2" linkEnds="#[PhysicalPort]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalActors::PA1::PA1_PL2 #[PhysicalPort]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PC1::PC1_PL2">
           <ownedPhysicalLinkRealizations xsi:type="org.polarsys.capella.core.data.cs:PhysicalLinkRealization"
               id="[PhysicalLinkRealization]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PL2::*trace*PL2*to*PL2"
               targetElement="#[PhysicalLink]::PC1PC2::PC1PC2::LogicalArchitecture::LogicalContext::PL2"
@@ -2656,37 +2604,30 @@
             sid="736ab025-af7b-40ea-b587-c192e17f3f2a" name="PhysicalPath 1">
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1::*to*PA1"
-              sid="574aa437-d03b-4b72-a042-cc4d1d69bf27" involver="#[PhysicalPath]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1"
-              involved="#[Part]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PA1"
+              sid="574aa437-d03b-4b72-a042-cc4d1d69bf27" involved="#[Part]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PA1"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1::*to*PL2"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1::*to*PA2"
-              sid="d5312853-2918-4c14-9656-0eaa73afb289" involver="#[PhysicalPath]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1"
-              involved="#[Part]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PA2"/>
+              sid="d5312853-2918-4c14-9656-0eaa73afb289" involved="#[Part]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PA2"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1::*to*PC1"
-              sid="526c179a-53ea-4ca7-b3f3-839addaead1b" involver="#[PhysicalPath]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1"
-              involved="#[Part]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PC1"
+              sid="526c179a-53ea-4ca7-b3f3-839addaead1b" involved="#[Part]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PC1"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1::*to*PL3"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1::*to*PC2"
-              sid="5939e363-105e-4603-a1b8-a69db4bded0f" involver="#[PhysicalPath]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1"
-              involved="#[Part]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PC2"
+              sid="5939e363-105e-4603-a1b8-a69db4bded0f" involved="#[Part]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PC2"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1::*to*PL5"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1::*to*PL2"
-              sid="b24ecc86-9dbb-4c67-9176-b1f516089d09" involver="#[PhysicalPath]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1"
-              involved="#[PhysicalLink]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PL2"
+              sid="b24ecc86-9dbb-4c67-9176-b1f516089d09" involved="#[PhysicalLink]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PL2"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1::*to*PC1"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1::*to*PL3"
-              sid="df0657a2-ab53-4410-b1ee-f81e33a2df13" involver="#[PhysicalPath]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1"
-              involved="#[PhysicalLink]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PL3"
+              sid="df0657a2-ab53-4410-b1ee-f81e33a2df13" involved="#[PhysicalLink]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PL3"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1::*to*PC2"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1::*to*PL5"
-              sid="6e800391-c3ed-45ba-993b-6db107de5c1b" involver="#[PhysicalPath]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1"
-              involved="#[PhysicalLink]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PL5"
+              sid="6e800391-c3ed-45ba-993b-6db107de5c1b" involved="#[PhysicalLink]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PL5"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1::*to*PA2"/>
           <ownedPhysicalPathRealizations xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathRealization"
               id="[PhysicalPathRealization]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath1::*trace*PhysicalPath1*to*PhysicalPath1"
@@ -2698,37 +2639,30 @@
             sid="681e59a6-b10e-4e6f-9cfa-4a601a548052" name="PhysicalPath 2">
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2::*to*PC1"
-              sid="a6628573-0b14-4361-9605-817adba46273" involver="#[PhysicalPath]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2"
-              involved="#[Part]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PC1"
+              sid="a6628573-0b14-4361-9605-817adba46273" involved="#[Part]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PC1"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2::*to*PL3"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2::*to*PC2"
-              sid="06f2b5a9-8c73-4860-8419-a84e93ec6355" involver="#[PhysicalPath]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2"
-              involved="#[Part]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PC2"
+              sid="06f2b5a9-8c73-4860-8419-a84e93ec6355" involved="#[Part]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PC2"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2::*to*PL4"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2::*to*PC3"
-              sid="5ccc573e-96e9-40bd-9cc2-2277404dd264" involver="#[PhysicalPath]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2"
-              involved="#[Part]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PC3"
+              sid="5ccc573e-96e9-40bd-9cc2-2277404dd264" involved="#[Part]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PC3"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2::*to*PL1"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2::*to*PC4"
-              sid="bd8c4147-1d1a-4431-b82e-431cb0341b1a" involver="#[PhysicalPath]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2"
-              involved="#[Part]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PC4"/>
+              sid="bd8c4147-1d1a-4431-b82e-431cb0341b1a" involved="#[Part]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PC4"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2::*to*PL1"
-              sid="c64d7f91-c1cc-4a96-844a-45dcc4c7e184" involver="#[PhysicalPath]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2"
-              involved="#[PhysicalLink]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PL1"
+              sid="c64d7f91-c1cc-4a96-844a-45dcc4c7e184" involved="#[PhysicalLink]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PL1"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2::*to*PC1"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2::*to*PL3"
-              sid="64fab4dd-9f46-4fc9-ae2d-5623c919e12f" involver="#[PhysicalPath]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2"
-              involved="#[PhysicalLink]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PL3"
+              sid="64fab4dd-9f46-4fc9-ae2d-5623c919e12f" involved="#[PhysicalLink]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PL3"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2::*to*PC2"/>
           <ownedPhysicalPathInvolvements xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathInvolvement"
               id="[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2::*to*PL4"
-              sid="86e9a773-0acb-4b2b-9fe7-8f58bfa1d544" involver="#[PhysicalPath]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2"
-              involved="#[PhysicalLink]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PL4"
+              sid="86e9a773-0acb-4b2b-9fe7-8f58bfa1d544" involved="#[PhysicalLink]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalContext::PL4"
               nextInvolvements="#[PhysicalPathInvolvement]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2::*to*PC4"/>
           <ownedPhysicalPathRealizations xsi:type="org.polarsys.capella.core.data.cs:PhysicalPathRealization"
               id="[PhysicalPathRealization]::PC1PC2::PC1PC2::PhysicalArchitecture::PhysicalSystem::PhysicalPath2::*trace*PhysicalPath2*to*PhysicalPath2"

@@ -104,7 +104,7 @@ class AbstractHeadlessMultiphasesLauncher extends SubSystemLauncher {
     return new ExtendedTransposer(purpose_p, mappingId_p) {
       @Override
       public void initCadence() {
-        cadenceLauncher = AbstractHeadlessMultiphasesLauncher.this.cadenceLauncher;
+        extendedCadenceLauncher = AbstractHeadlessMultiphasesLauncher.this.cadenceLauncher;
       }
 
       @Override

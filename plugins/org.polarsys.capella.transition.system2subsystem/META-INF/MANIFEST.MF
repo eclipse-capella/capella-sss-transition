@@ -26,7 +26,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.polarsys.capella.core.data.gen,
  org.polarsys.capella.core.model.helpers,
  org.polarsys.capella.core.transition.system;visibility:=reexport,
- org.polarsys.capella.core.transition.system.topdown
+ org.polarsys.capella.core.transition.system.topdown,
+ org.polarsys.capella.core.model.handler
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-Version: 1.2.0.qualifier
