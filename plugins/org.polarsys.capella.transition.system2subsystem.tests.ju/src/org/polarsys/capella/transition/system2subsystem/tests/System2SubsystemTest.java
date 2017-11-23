@@ -112,12 +112,17 @@ public abstract class System2SubsystemTest extends AbstractSystem2SubsystemTest 
     this.kind = kind;
   }
 
+  @Override
+  public void setUp() throws Exception {
+    super.setUp();
+    getProject();
+  }
+
   /**
    * Implement a create and execute projection operation.
    */
   @Override
   public void test() throws Exception {
-    getProject();
     executeTransition();
     traceability = initTraceability(modelResource, getOutputModelResource());
     verify();
