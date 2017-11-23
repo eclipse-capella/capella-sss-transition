@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 THALES GLOBAL SERVICES.
+ * Copyright (c) 2016, 2017 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -90,7 +90,7 @@ public abstract class System2SubsystemTest extends AbstractSystem2SubsystemTest 
   protected Kind kind;
 
   public String getName() {
-    return super.getName() + "[" + kind + "]"; //$NON-NLS-1$//$NON-NLS-2$
+    return super.getName() + " [" + kind + "]"; //$NON-NLS-1$//$NON-NLS-2$
   }
 
   // test() is overwritten so performTest should never be used
@@ -110,6 +110,12 @@ public abstract class System2SubsystemTest extends AbstractSystem2SubsystemTest 
    */
   public void setKind(Kind kind) {
     this.kind = kind;
+  }
+
+  @Override
+  public void setUp() throws Exception {
+    super.setUp();
+    getProject();
   }
 
   /**
