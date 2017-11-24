@@ -82,7 +82,10 @@ public class AbstractFunctionRule extends org.polarsys.capella.core.transition.s
 
   @Override
   protected void retrieveContainer(EObject element_p, List<EObject> result_p, IContext context_p) {
-    // According to preference, behaviour is different
+    // Always add root function in order to map it to the corresponding target function
+    result_p.add(BlockArchitectureExt.getRootFunction(BlockArchitectureExt.getRootBlockArchitecture(element_p)));
+    
+    // According to preference, behavior is different
     String value =
         OptionsHandlerHelper.getInstance(context_p).getStringValue(context_p, IOptionsConstants.SYSTEM2SUBSYSTEM_PREFERENCES,
             IOptionsConstants.HIERARCHICAL_EXPORT, IOptionsConstants.HIERARCHICAL_EXPORT_DEFAULT_VALUE);

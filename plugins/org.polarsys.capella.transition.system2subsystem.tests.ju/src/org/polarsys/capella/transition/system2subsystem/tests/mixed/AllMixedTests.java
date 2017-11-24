@@ -17,7 +17,6 @@ import java.util.List;
 
 import org.polarsys.capella.test.framework.api.BasicTestArtefact;
 import org.polarsys.capella.test.framework.api.BasicTestSuite;
-import org.polarsys.capella.transition.system2subsystem.tests.crossphases.InternalExchangesTest;
 
 import junit.framework.Test;
 
