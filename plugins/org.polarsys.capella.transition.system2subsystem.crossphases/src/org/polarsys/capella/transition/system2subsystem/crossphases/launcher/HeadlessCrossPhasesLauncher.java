@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,9 +12,7 @@ package org.polarsys.capella.transition.system2subsystem.crossphases.launcher;
 
 import org.polarsys.capella.core.transition.common.activities.DifferencesComputingActivity;
 import org.polarsys.capella.core.transition.common.activities.DifferencesMergingActivity;
-import org.polarsys.capella.core.transition.common.activities.FinalizeTransitionActivity;
 import org.polarsys.capella.core.transition.common.activities.InitializeScopeActivity;
-import org.polarsys.capella.core.transition.common.activities.PostDiffMergeActivity;
 import org.polarsys.capella.core.transition.common.activities.PostTransformationActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.FinalizeSubsystemTransitionActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.InitializeTransformationActivity;
@@ -70,7 +68,7 @@ public class HeadlessCrossPhasesLauncher extends SubSystemLauncher {
    * @return the associated workflow element
    */
   @Override
-  protected WorkflowActivityParameter buildPostExecutionActivities() {
+  protected WorkflowActivityParameter buildDiffMergeActivities() {
     WorkflowActivityParameter parameter = new WorkflowActivityParameter();
 
     if (getTransposer() != null) {
@@ -86,12 +84,6 @@ public class HeadlessCrossPhasesLauncher extends SubSystemLauncher {
 
       // DifferencesMergingActivity
       parameter.addActivity(DifferencesMergingActivity.ID);
-
-      // PostDiffMergeActivity
-      parameter.addActivity(PostDiffMergeActivity.ID);
-
-      // PostDiffMergeActivity
-      parameter.addActivity(FinalizeTransitionActivity.ID);
 
     }
 
