@@ -10,7 +10,7 @@
  *******************************************************************************/
 target "CapellaSubsystemTransition"
 
-include "http://git.polarsys.org/c/capella/capella.git/plain/releng/plugins/org.polarsys.capella.targets/full/capella.target-definition.targetplatform?h=master"
+include "http://git.polarsys.org/c/capella/capella.git/plain/releng/plugins/org.polarsys.capella.targets/full/capella.target-definition.targetplatform?h=v1.2.x"
 
 with source, requirements
 
