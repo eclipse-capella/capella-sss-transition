@@ -3,10 +3,11 @@
   <propertyPackages xmi:id="_fpDlcGOuEeGSqYRIJfl_UQ" name="Misc">
     <properties xmi:id="_KgmDIGErEeGOvKnARBvzFg" key="site.pack200" value="false"/>
     <properties xmi:id="_JAvf4G3iEeGehoHCqtPcvA" key="qualifier.replacement.*" value="${timestamp}"/>
-    <properties xmi:id="_VPrWUFZGEeGR2_cB4MDfaQ" key="CapellaVersion" value="1.1.0"/>
-    <properties xmi:id="_TWr84KZMEeShout9m4suYQ" key="hudsonJob" value="https://hudson.polarsys.org/capella/job/capella-${env.GIT_BRANCH}/lastSuccessfulBuild"/>
-    <properties xmi:id="_pxmU4MzGEeSgCsr7bvb4KA" key="site_Kitalpha" value="https://hudson.polarsys.org/kitalpha/job/Kitalpha_Nightly/lastSuccessfulBuild/artifact/result/publish/kitalpha/site.p2/"/>
-    <properties xmi:id="_KlR7cMzJEeSgCsr7bvb4KA" key="site_EGF" value="https://hudson.eclipse.org/egf/job/buckminster-egf-juno/lastSuccessfulBuild/artifact/result/publish/org.eclipse.egf.sdk/site.p2/"/>
+    <properties xmi:id="_lcg2YE32EeiUHqyfbLa5Jg" key="BUILD_TIMESTAMP" value="providedByJenkins"/>
+    <properties xmi:id="_7gdPsE3rEeiUHqyfbLa5Jg" key="CapellaUrl" value="http://download.polarsys.org/capella/core/products/releases/1.1.4-R20180320-151001/capella-1.1.4.20180320151001-linux-gtk-x86_64-mars.tar.gz"/>
+    <properties xmi:id="_TWr84KZMEeShout9m4suYQ" key="hudsonJob" value="https://ci.polarsys.org/capella/job/capella-v1.1.x/lastSuccessfulBuild"/>
+    <properties xmi:id="_pxmU4MzGEeSgCsr7bvb4KA" key="site_Kitalpha" value="https://ci.polarsys.org/kitalpha/job/Kitalpha_Nightly/lastSuccessfulBuild/artifact/result/publish/kitalpha/site.p2/"/>
+    <properties xmi:id="_KlR7cMzJEeSgCsr7bvb4KA" key="site_EGF" value="https://hudson.eclipse.org/egf/job/buckminster-egf-juno/92/artifact/result/publish/org.eclipse.egf.sdk/site.p2/"/>
   </propertyPackages>
   <jobs href="Job_SubsystemTransition.egfbuild#_gPxtENokEeGTBMJ29vOuKA"/>
 </buildcore:Chain>
