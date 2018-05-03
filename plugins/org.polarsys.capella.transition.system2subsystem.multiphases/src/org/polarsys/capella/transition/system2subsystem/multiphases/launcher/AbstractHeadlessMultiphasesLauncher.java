@@ -129,4 +129,14 @@ class AbstractHeadlessMultiphasesLauncher extends SubSystemLauncher {
   protected final WorkflowActivityParameter buildDiffMergeActivities() {
     return new WorkflowActivityParameter();
   }
+  
+  /**
+   * Finalization is invoked manually after all phases transitions have been completed, so this
+   * must be overridden to prevent the launch of finalization after a phase transistion
+   * ends.
+   */
+  @Override
+  protected WorkflowActivityParameter buildFinalizationActivities() {
+    return new WorkflowActivityParameter();
+  }
 }
