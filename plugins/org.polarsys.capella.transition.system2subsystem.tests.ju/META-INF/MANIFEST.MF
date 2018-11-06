@@ -14,8 +14,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.polarsys.capella.test.validation.rules.ju,
  org.polarsys.capella.test.framework,
  org.eclipse.emf.transaction,
- org.eclipse.jgit,
- org.polarsys.capella.core.data.gen
+ org.polarsys.capella.core.data.gen,
+ org.eclipse.emf.diffmerge.ui
 Bundle-ActivationPolicy: lazy
 Export-Package: org.polarsys.capella.transition.system2subsystem.tests,
  org.polarsys.capella.transition.system2subsystem.tests.crossphases,

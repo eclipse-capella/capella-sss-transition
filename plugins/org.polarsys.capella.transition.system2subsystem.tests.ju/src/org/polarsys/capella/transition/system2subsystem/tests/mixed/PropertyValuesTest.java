@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 THALES GLOBAL SERVICES.
+ * Copyright (c) 2016, 2018 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -280,6 +280,13 @@ public class PropertyValuesTest {
 
   /**
    * PropertyValues transition: Test that property values are correctly imported (according to scope)
+   * 
+   * This test doesn't cover a usecase doable directly by the user since only PropertyValuePkg from SystemEngineering and
+   * current architecture are selectable. (but it may be covering the usecase where an extension of the addon is
+   * contributing another property values to the scope)
+   * 
+   * To be able to choice OA/SA/LA pv in UI, in org.polarsys.capella.transition.system2subsystem.preferences.getChoiceValues, add also a visit on
+   * SystemEnginerring.ownedArchitectures to be able to test it manually.
    */
   public static class Test2 extends System2SubsystemTest implements Interphase, Crossphase {
 
@@ -290,9 +297,9 @@ public class PropertyValuesTest {
       super.setUp();
       Collection<EObject> collection = new ArrayList<EObject>();
       collection.add(getObject(RPVP));
-      collection.add(getObject(OA__OPVP));// "087c57b8-39cd-483d-92d4-cd4fc0b4768f";
-      collection.add(getObject(SA__SPVP));// "21272212-a655-4a48-bf94-0310f39c2bd9";
-      collection.add(getObject(LA__LPVP));// "5cd769b9-0495-4963-9950-71d93d39eded";
+      collection.add(getObject(OA__OPVP));
+      collection.add(getObject(SA__SPVP));
+      collection.add(getObject(LA__LPVP));
 
       getHeadlessParameters().addSharedParameter(new GenericParameter<Collection<EObject>>(
           IOptionsConstants.PROPERTY_VALUES_ELEMENTS, collection, IOptionsConstants.PROPERTY_VALUES_ELEMENTS));
@@ -309,34 +316,46 @@ public class PropertyValuesTest {
       mustBeTransitioned(_id_pc11);
 
       // All properties not included into selected elements should not be transitioned
-      shouldNotBeTransitioned(COPY_OF_RPVP);
-      // shouldNotBeTransitioned(OA__OPVP2);
-      shouldNotBeTransitioned(SA__SPVP2);
-      shouldNotBeTransitioned(LA__LPVP2);
+      // All properties included into selected elements must be transitioned
 
-      shouldNotBeTransitioned(COPY_OF_RPVP__BPV1);
-      // shouldNotBeTransitioned(OA__OPVP2__BPV1);
-      shouldNotBeTransitioned(SA__SPVP2__BPV1);
-      shouldNotBeTransitioned(LA__LPVP2__BPV1);
-
-      // All properties included into selected elements should not be transitioned
+      // SystemEngineering elements
       mustBeTransitioned(RPVP);
-      // mustBeTransitioned(OA__OPVP);
-      mustBeTransitioned(SA__SPVP);
-      mustBeTransitioned(LA__LPVP);
-
       mustBeTransitioned(RPVP__BPV1);
-      // mustBeTransitioned(OA__OPVP__BPV1);
+      shouldNotBeTransitioned(COPY_OF_RPVP);
+      shouldNotBeTransitioned(COPY_OF_RPVP__BPV1);
+      mustBeTransitionedAndLinkedTo(LA__INTERFACES__E1, RPVP__BPV1,
+          CapellacorePackage.Literals.CAPELLA_ELEMENT__APPLIED_PROPERTY_VALUES);
+
+      // OA elements
+      // Operational Property values propagation works on Interphases.
+      // It doens't work on CrossPhases since TraceabilityHandler (TargetConfiguration) is matching only SA, not OA
+      if (kind == Kind.INTER_PHASES) {
+        mustBeTransitioned(OA__OPVP);
+        mustBeTransitioned(OA__OPVP__BPV1);
+        mustBeTransitionedAndLinkedTo(LA__INTERFACES__E1, OA__OPVP__BPV1,
+            CapellacorePackage.Literals.CAPELLA_ELEMENT__APPLIED_PROPERTY_VALUES);
+
+      } else if (kind == Kind.CROSS_PHASES) {
+        shouldNotBeTransitioned(OA__OPVP);
+        shouldNotBeTransitioned(OA__OPVP__BPV1);
+      }
+      shouldNotBeTransitioned(OA__OPVP2);
+      shouldNotBeTransitioned(OA__OPVP2__BPV1);
+
+      // SA elements
+      mustBeTransitioned(SA__SPVP);
       mustBeTransitioned(SA__SPVP__BPV1);
+      shouldNotBeTransitioned(SA__SPVP2);
+      shouldNotBeTransitioned(SA__SPVP2__BPV1);
+
+      // LA elements
+      mustBeTransitioned(LA__LPVP);
       mustBeTransitioned(LA__LPVP__BPV1);
+      shouldNotBeTransitioned(LA__LPVP2);
+      shouldNotBeTransitioned(LA__LPVP2__BPV1);
 
       // Package is selected
       mustBeTransitioned(LA__INTERFACES__E1);
-
-      mustBeTransitionedAndLinkedTo(LA__INTERFACES__E1, RPVP__BPV1,
-          CapellacorePackage.Literals.CAPELLA_ELEMENT__APPLIED_PROPERTY_VALUES);
-      // mustBeTransitionedAndLinkedTo(LA__INTERFACES__E1, OA__OPVP__BPV1,
-      // CapellacorePackage.Literals.CAPELLA_ELEMENT__APPLIED_PROPERTY_VALUES);
       mustBeTransitionedAndLinkedTo(LA__INTERFACES__E1, SA__SPVP__BPV1,
           CapellacorePackage.Literals.CAPELLA_ELEMENT__APPLIED_PROPERTY_VALUES);
       mustBeTransitionedAndLinkedTo(LA__INTERFACES__E1, LA__LPVP__BPV1,
