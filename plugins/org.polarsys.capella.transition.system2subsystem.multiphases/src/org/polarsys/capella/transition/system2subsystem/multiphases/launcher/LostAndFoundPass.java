@@ -34,7 +34,7 @@ import org.polarsys.kitalpha.emde.model.ElementExtension;
  */
 public class LostAndFoundPass {
 
-  private static final String PACKAGE_NAME = "Lost+Found"; //$NON-NLS-1$
+  public static final String PACKAGE_NAME = "Lost+Found"; //$NON-NLS-1$
   
   /**
    * @param lostAndFoundPackage_p

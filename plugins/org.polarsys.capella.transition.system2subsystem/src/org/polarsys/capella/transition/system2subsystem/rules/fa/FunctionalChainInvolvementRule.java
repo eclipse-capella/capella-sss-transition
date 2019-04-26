@@ -268,7 +268,7 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
     }
 
     if (res == null) {
-      res = FaFactory.eINSTANCE.createFunctionalChainInvolvement();
+      res = FaFactory.eINSTANCE.createFunctionalChainInvolvementLink();
       res.setSid(id);
     }
 

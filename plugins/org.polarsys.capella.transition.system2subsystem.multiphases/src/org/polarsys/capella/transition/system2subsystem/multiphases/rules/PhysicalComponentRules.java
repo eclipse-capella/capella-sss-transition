@@ -59,7 +59,8 @@ public class PhysicalComponentRules {
         return TransformationHandlerHelper.getInstance(context_p).getBestTracedElement(sourceContainer, context_p, sContext);
       }
 
-      SystemEngineering eng = (SystemEngineering) context_p.get(ITransitionConstants.TRANSFORMATION_TARGET_ROOT);
+      MultiphasesContext context = (MultiphasesContext) context_p;
+      SystemEngineering eng = context.getTempSystemEngineering();
       LogicalArchitecture la = eng.getContainedLogicalArchitectures().get(0);
       return BlockArchitectureExt.getFirstComponent(la);
     }

@@ -31,6 +31,7 @@ import org.polarsys.capella.core.transition.common.handlers.scope.CompoundScopeF
 import org.polarsys.capella.core.transition.common.handlers.scope.CompoundScopeRetriever;
 import org.polarsys.capella.core.transition.common.handlers.scope.IScopeFilter;
 import org.polarsys.capella.core.transition.common.handlers.scope.IScopeRetriever;
+import org.polarsys.capella.core.transition.common.handlers.traceability.CompoundTraceabilityHandler;
 import org.polarsys.capella.core.transition.system.handlers.attachment.CapellaDefaultAttachmentHandler;
 import org.polarsys.capella.transition.system2subsystem.constants.ISubSystemConstants;
 import org.polarsys.capella.transition.system2subsystem.handlers.attachment.FunctionalChainAttachmentHelper;
@@ -42,6 +43,8 @@ import org.polarsys.capella.transition.system2subsystem.handlers.scope.PropertyV
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.RequirementsScopeFilter;
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.RequirementsScopeRetriever;
 import org.polarsys.capella.transition.system2subsystem.handlers.session.SubSystemSessionHandler;
+import org.polarsys.capella.transition.system2subsystem.handlers.traceability.config.MergeSourceConfiguration;
+import org.polarsys.capella.transition.system2subsystem.handlers.traceability.config.TransformationConfiguration;
 import org.polarsys.kitalpha.cadence.core.api.parameter.ActivityParameters;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
@@ -70,15 +73,15 @@ public class InitializeTransitionActivity extends org.polarsys.capella.core.tran
   }
 
   @Override
-  protected Collection<Object> adaptSelection(Collection<Object> selection) {
-    Collection<Object> superCollection = super.adaptSelection(selection);
-    Collection<Object> result = new ArrayList<Object>();
+  protected Collection<EObject> adaptSelection(Collection<Object> selection) {
+    Collection<EObject> superCollection = super.adaptSelection(selection);
+    Collection<EObject> result = new ArrayList<EObject>();
     for (Object item : superCollection) {
       if (item instanceof EObject) {
         if (item instanceof Part) {
           item = ((Part) item).getAbstractType();
         }
-        result.add(item);
+        result.add((EObject)item);
       }
     }
     return result;
@@ -134,9 +137,7 @@ public class InitializeTransitionActivity extends org.polarsys.capella.core.tran
 
     outputResource = targetDomain.getResourceSet().getResource(fileUri, true);
     context.put(ITransitionConstants.TRANSITION_TARGET_RESOURCE, outputResource);
-
-    Project project = (Project) outputResource.getContents().get(0);
-    context.put(ITransitionConstants.TRANSITION_TARGET_ROOT, getEngineering(project, project.getName()));
+    context.put(ITransitionConstants.TRANSITION_TARGET_ROOT, outputResource.getContents().get(0));
 
     return Status.OK_STATUS;
   }
@@ -165,6 +166,11 @@ public class InitializeTransitionActivity extends org.polarsys.capella.core.tran
     	  return super.attachElementByReference(sourceAttaching, targetAttaching, sourceAttached, targetAttached, sourceFeature, targetFeature);
       }
     };
+  }
+
+  @Override
+  protected IHandler createDefaultTraceabilityTargetHandler() {
+    return new CompoundTraceabilityHandler(new TransformationConfiguration());
   }
   
 }

@@ -14,9 +14,13 @@ import org.eclipse.core.runtime.IStatus;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.fa.FaPackage;
 import org.polarsys.capella.core.data.interaction.InteractionPackage;
+import org.polarsys.capella.core.transition.common.handlers.IHandler;
 import org.polarsys.capella.core.transition.common.handlers.merge.IMergeHandler;
+import org.polarsys.capella.core.transition.common.handlers.traceability.CompoundTraceabilityHandler;
 import org.polarsys.capella.core.transition.system.topdown.handlers.merge.RealizationLinkCategoryFilter;
 import org.polarsys.capella.transition.system2subsystem.handlers.filter.UpdateOfCategoryFilter;
+import org.polarsys.capella.transition.system2subsystem.handlers.traceability.config.MergeSourceConfiguration;
+import org.polarsys.capella.transition.system2subsystem.handlers.traceability.config.MergeTargetConfiguration;
 import org.polarsys.kitalpha.cadence.core.api.parameter.ActivityParameters;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
@@ -35,6 +39,16 @@ public class InitializeDiffMergeActivity extends org.polarsys.capella.core.trans
     handler.addCategory(new UpdateOfCategoryFilter(InteractionPackage.Literals.SCENARIO, context), context);
 
     return super.initializeCategoriesHandlers(context, handler, activityParams);
+  }
+
+  @Override
+  protected IHandler createDefaultTraceabilitySourceHandler(IContext context) {
+    return new CompoundTraceabilityHandler(new MergeSourceConfiguration());
+  }
+
+  @Override
+  protected IHandler createDefaultTraceabilityTargetHandler(IContext context) {
+    return new CompoundTraceabilityHandler(new MergeTargetConfiguration());
   }
 
 }

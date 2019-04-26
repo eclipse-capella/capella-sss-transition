@@ -25,6 +25,7 @@ import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.traceability.ITraceabilityHandler;
 import org.polarsys.capella.core.transition.system.handlers.traceability.ReconciliationTraceabilityHandler;
+import org.polarsys.capella.core.transition.system.helpers.ContextHelper;
 import org.polarsys.capella.transition.system2subsystem.handlers.traceability.config.MergeTargetConfiguration;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
@@ -84,9 +85,8 @@ public class MultiphasesTargetConfiguration extends MergeTargetConfiguration {
     @Override
     protected void initializeRootMappings(IContext context_p) {
       super.initializeRootMappings(context_p);
-      EObject source = (EObject) context_p.get(ITransitionConstants.TRANSITION_SOURCE_ROOT);
-      EObject target = (EObject) context_p.get(ITransitionConstants.TRANSITION_TARGET_ROOT);
-      addMappings(source, target, context_p);
+      addMappings(ContextHelper.getSourceProject(context_p), ContextHelper.getTargetProject(context_p), context_p);
+      addMappings(ContextHelper.getSourceEngineering(context_p), getTargetEngineering(context_p), context_p);
     }
   }
 

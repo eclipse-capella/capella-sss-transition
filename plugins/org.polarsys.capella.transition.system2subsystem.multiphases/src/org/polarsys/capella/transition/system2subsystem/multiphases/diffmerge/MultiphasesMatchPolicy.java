@@ -142,7 +142,7 @@ public class MultiphasesMatchPolicy implements IMatchPolicy {
   public MultiphasesMatchPolicy() {
 
     Collection<ENamedElement> uniqueKeys =
-        Arrays.asList(CapellamodellerPackage.Literals.PROJECT, LaPackage.Literals.LOGICAL_ARCHITECTURE, PaPackage.Literals.PHYSICAL_ARCHITECTURE,
+        Arrays.asList(CapellamodellerPackage.Literals.PROJECT, CapellamodellerPackage.Literals.SYSTEM_ENGINEERING, LaPackage.Literals.LOGICAL_ARCHITECTURE, PaPackage.Literals.PHYSICAL_ARCHITECTURE,
             CtxPackage.Literals.SYSTEM_ANALYSIS, OaPackage.Literals.OPERATIONAL_ANALYSIS, EpbsPackage.Literals.EPBS_ARCHITECTURE,
             OaPackage.Literals.OPERATIONAL_ANALYSIS__OWNED_CONCEPT_PKG, OaPackage.Literals.OPERATIONAL_ANALYSIS__OWNED_ENTITY_PKG,
             OaPackage.Literals.OPERATIONAL_ANALYSIS__OWNED_OPERATIONAL_CONTEXT, OaPackage.Literals.OPERATIONAL_ANALYSIS__OWNED_ROLE_PKG,
@@ -162,6 +162,7 @@ public class MultiphasesMatchPolicy implements IMatchPolicy {
       matchIDs.put(o, EcoreUtil.getURI(o).toString());
     }
 
+    
     Collection<EClass> allBlockArchitectures =
         Arrays.asList(OaPackage.Literals.OPERATIONAL_ANALYSIS, CtxPackage.Literals.SYSTEM_ANALYSIS, LaPackage.Literals.LOGICAL_ARCHITECTURE,
             PaPackage.Literals.PHYSICAL_ARCHITECTURE, EpbsPackage.Literals.EPBS_ARCHITECTURE);

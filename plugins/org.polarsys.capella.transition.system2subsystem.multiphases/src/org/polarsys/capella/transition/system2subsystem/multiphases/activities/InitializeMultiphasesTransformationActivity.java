@@ -34,11 +34,13 @@ import org.polarsys.capella.core.model.handler.command.CapellaResourceHelper;
 import org.polarsys.capella.core.model.helpers.CapellaElementExt;
 import org.polarsys.capella.core.platform.sirius.ui.project.operations.ProjectSessionCreationHelper;
 import org.polarsys.capella.core.sirius.ui.helper.SessionHelper;
+import org.polarsys.capella.core.transition.common.constants.ISchemaConstants;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.IHandler;
 import org.polarsys.capella.core.transition.common.handlers.traceability.ITraceabilityHandler;
+import org.polarsys.capella.core.transition.common.handlers.traceability.config.ExtendedTraceabilityConfiguration;
 import org.polarsys.capella.core.transition.system.activities.InitializeTransformationActivity;
-import org.polarsys.capella.core.transition.system.handlers.traceability.config.TransformationConfiguration;
+import org.polarsys.capella.core.transition.system.handlers.traceability.ReconciliationTraceabilityHandler;
 import org.polarsys.capella.transition.system2subsystem.activities.FinalizeSubsystemTransitionActivity;
 import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.traceability.config.RecTraceabilityHandler;
 import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.traceability.config.SIDTraceabilityHandler;
@@ -50,8 +52,13 @@ public final class InitializeMultiphasesTransformationActivity extends Initializ
   @Override
   protected IHandler createDefaultTraceabilityTransformationHandler() {
 
-    TransformationConfiguration configuration = new TransformationConfiguration() {
+    ExtendedTraceabilityConfiguration configuration = new ExtendedTraceabilityConfiguration() {
 
+      @Override
+      protected String getExtensionIdentifier(IContext context) {
+        return ISchemaConstants.TRANSFORMATION_TRACEABILITY_CONFIGURATION;
+      }
+      
       @Override
       protected void initHandlers(IContext fContext_p) {
         addHandler(fContext_p, new SIDTraceabilityHandler(getIdentifier(fContext_p)));
@@ -80,7 +87,7 @@ public final class InitializeMultiphasesTransformationActivity extends Initializ
     if (context_p.get(ITransitionConstants.DIFFMERGE_DISABLE) == Boolean.TRUE) {
       // elements are created directly in the target model
       Project project = (Project) CapellaElementExt.getRoot((CapellaElement) targetResource_p.getContents().get(0));
-      result = project.getOwnedModelRoots().get(0);
+      result = project;
     } else {
 
       // Create a temporary project and reload its model through the target editing domain
@@ -91,10 +98,9 @@ public final class InitializeMultiphasesTransformationActivity extends Initializ
             new ProjectSessionCreationHelper(true, true).createFullProject(temporaryProjectName, null, Collections.<IProject> emptyList(),
                 ViewpointSelection.getViewpoints(CapellaResourceHelper.CAPELLA_MODEL_FILE_EXTENSION), new NullProgressMonitor());
         Project project = SessionHelper.getCapellaProject(session);
-        SystemEngineering engineering = (SystemEngineering) project.getOwnedModelRoots().get(0);
         session.close(new NullProgressMonitor());
         result =
-            ((EditingDomain) context_p.get(ITransitionConstants.TRANSITION_TARGET_EDITING_DOMAIN)).getResourceSet().getEObject(EcoreUtil.getURI(engineering),
+            ((EditingDomain) context_p.get(ITransitionConstants.TRANSITION_TARGET_EDITING_DOMAIN)).getResourceSet().getEObject(EcoreUtil.getURI(project),
                 true);
         context_p.put(FinalizeSubsystemTransitionActivity.PARAM__DELETE_PROJECT, ResourcesPlugin.getWorkspace().getRoot().getProject(temporaryProjectName));
       } catch (InvocationTargetException exception_p) {

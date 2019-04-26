@@ -12,6 +12,8 @@ package org.polarsys.capella.transition.system2subsystem.multiphases.handlers.tr
 
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
+import org.polarsys.capella.core.transition.system.helpers.ContextHelper;
+import org.polarsys.capella.transition.system2subsystem.multiphases.MultiphasesContext;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 public class SIDTraceabilityHandler extends org.polarsys.capella.transition.system2subsystem.handlers.traceability.SIDTraceabilityHandler {
@@ -26,9 +28,8 @@ public class SIDTraceabilityHandler extends org.polarsys.capella.transition.syst
   @Override
   protected void initializeRootMappings(IContext context_p) {
     super.initializeRootMappings(context_p);
-    EObject source = (EObject) context_p.get(ITransitionConstants.TRANSFORMATION_SOURCE_ROOT);
-    EObject target = (EObject) context_p.get(ITransitionConstants.TRANSFORMATION_TARGET_ROOT);
-    initializeMappings(source, target, context_p);
+    addMappings(ContextHelper.getSourceProject(context_p), ContextHelper.getTransformedProject(context_p), context_p);
+    addMappings(ContextHelper.getSourceEngineering(context_p), ((MultiphasesContext)context_p).getTempSystemEngineering(), context_p);
   }
 
 }

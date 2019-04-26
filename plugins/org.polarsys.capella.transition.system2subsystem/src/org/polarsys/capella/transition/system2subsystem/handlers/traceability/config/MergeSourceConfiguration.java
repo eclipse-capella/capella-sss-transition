@@ -10,17 +10,23 @@
  *******************************************************************************/
 package org.polarsys.capella.transition.system2subsystem.handlers.traceability.config;
 
+import java.util.Collection;
+
 import org.eclipse.emf.ecore.EObject;
+import org.polarsys.capella.core.data.capellacore.CapellaElement;
+import org.polarsys.capella.core.data.capellamodeller.Project;
 import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
+import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
 import org.polarsys.capella.core.transition.common.constants.ISchemaConstants;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.traceability.ITraceabilityHandler;
 import org.polarsys.capella.core.transition.common.handlers.traceability.config.ExtendedTraceabilityConfiguration;
 import org.polarsys.capella.core.transition.system.handlers.traceability.RealizationLinkTraceabilityHandler;
 import org.polarsys.capella.core.transition.system.handlers.traceability.ReconciliationTraceabilityHandler;
+import org.polarsys.capella.core.transition.system.helpers.ContextHelper;
 import org.polarsys.capella.transition.system2subsystem.handlers.traceability.SIDTraceabilityHandler;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
@@ -61,9 +67,8 @@ public class MergeSourceConfiguration extends ExtendedTraceabilityConfiguration 
     @Override
     protected void initializeRootMappings(IContext context_p) {
       super.initializeRootMappings(context_p);
-      EObject source = (EObject) context_p.get(ITransitionConstants.TRANSFORMATION_SOURCE_ROOT);
-      EObject target = (EObject) context_p.get(ITransitionConstants.TRANSFORMATION_TARGET_ROOT);
-      addMappings(source, target, context_p);
+      addMappings(ContextHelper.getSourceProject(context_p), ContextHelper.getTransformedProject(context_p), context_p);
+      addMappings(ContextHelper.getSourceEngineering(context_p), ContextHelper.getTransformedEngineering(context_p), context_p);
     }
 
   }
@@ -82,9 +87,7 @@ public class MergeSourceConfiguration extends ExtendedTraceabilityConfiguration 
     @Override
     protected void initializeRootMappings(IContext context_p) {
       super.initializeRootMappings(context_p);
-      EObject source = (EObject) context_p.get(ITransitionConstants.TRANSFORMATION_SOURCE_ROOT);
-      EObject target = (EObject) context_p.get(ITransitionConstants.TRANSFORMATION_TARGET_ROOT);
-      initializeMappings(source, target, context_p);
+      initializeMappings(ContextHelper.getSourceProject(context_p), ContextHelper.getTransformedProject(context_p), context_p);
     }
     
   }
@@ -96,7 +99,7 @@ public class MergeSourceConfiguration extends ExtendedTraceabilityConfiguration 
   protected String getExtensionIdentifier(IContext context_p) {
     return ISchemaConstants.SOURCE_TRACEABILITY_CONFIGURATION;
   }
-
+  
   @Override
   protected void initHandlers(IContext fContext_p) {
     addHandler(fContext_p, new SourceReconciliationTraceabilityHandler(getIdentifier(fContext_p)));
