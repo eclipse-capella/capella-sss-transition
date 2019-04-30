@@ -10,23 +10,19 @@
  *******************************************************************************/
 package org.polarsys.capella.transition.system2subsystem.handlers.traceability.config;
 
-import java.util.Collection;
-
 import org.eclipse.emf.ecore.EObject;
-import org.polarsys.capella.core.data.capellacore.CapellaElement;
-import org.polarsys.capella.core.data.capellamodeller.Project;
+import org.polarsys.capella.common.libraries.ModelInformation;
 import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
-import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
 import org.polarsys.capella.core.transition.common.constants.ISchemaConstants;
-import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.traceability.ITraceabilityHandler;
 import org.polarsys.capella.core.transition.common.handlers.traceability.config.ExtendedTraceabilityConfiguration;
 import org.polarsys.capella.core.transition.system.handlers.traceability.RealizationLinkTraceabilityHandler;
 import org.polarsys.capella.core.transition.system.handlers.traceability.ReconciliationTraceabilityHandler;
 import org.polarsys.capella.core.transition.system.helpers.ContextHelper;
+import org.polarsys.capella.transition.system2subsystem.context.SubSystemContextHelper;
 import org.polarsys.capella.transition.system2subsystem.handlers.traceability.SIDTraceabilityHandler;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
@@ -38,25 +34,25 @@ public class MergeSourceConfiguration extends ExtendedTraceabilityConfiguration 
   protected class SourceReconciliationTraceabilityHandler extends ReconciliationTraceabilityHandler {
 
     /**
-     * @param identifier_p
+     * @param identifier
      */
-    public SourceReconciliationTraceabilityHandler(String identifier_p) {
-      super(identifier_p);
+    public SourceReconciliationTraceabilityHandler(String identifier) {
+      super(identifier);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void initializeBlockArchitecture(BlockArchitecture source_p, BlockArchitecture target_p, IContext context_p, LevelMappingTraceability map_p) {
-      super.initializeBlockArchitecture(source_p, target_p, context_p, map_p);
+    protected void initializeBlockArchitecture(BlockArchitecture source, BlockArchitecture target, IContext context, LevelMappingTraceability map) {
+      super.initializeBlockArchitecture(source, target, context, map);
 
       //We add a mapping between both root components
-      Component sourceComponent = BlockArchitectureExt.getFirstComponent(source_p);
-      Component targetComponent = BlockArchitectureExt.getFirstComponent(target_p);
+      Component sourceComponent = BlockArchitectureExt.getFirstComponent(source);
+      Component targetComponent = BlockArchitectureExt.getFirstComponent(target);
       if ((sourceComponent != null) && (targetComponent != null)) {
-        if ((!map_p.contains(sourceComponent)) && (!map_p.contains(targetComponent))) {
-          addMapping(map_p, sourceComponent, targetComponent, context_p);
+        if ((!map.contains(sourceComponent)) && (!map.contains(targetComponent))) {
+          addMapping(map, sourceComponent, targetComponent, context);
         }
       }
     }
@@ -65,45 +61,50 @@ public class MergeSourceConfiguration extends ExtendedTraceabilityConfiguration 
      * {@inheritDoc}
      */
     @Override
-    protected void initializeRootMappings(IContext context_p) {
-      super.initializeRootMappings(context_p);
-      addMappings(ContextHelper.getSourceProject(context_p), ContextHelper.getTransformedProject(context_p), context_p);
-      addMappings(ContextHelper.getSourceEngineering(context_p), ContextHelper.getTransformedEngineering(context_p), context_p);
+    protected void initializeRootMappings(IContext context) {
+      super.initializeRootMappings(context);
+      addMappings(ContextHelper.getSourceProject(context), ContextHelper.getTransformedProject(context), context);
+      addMappings(ContextHelper.getSourceEngineering(context), ContextHelper.getTransformedEngineering(context), context);
+      ModelInformation srcInfo = SubSystemContextHelper.getSourceModelInformation(context);
+      if(srcInfo != null) {
+        ModelInformation transformedInfo = SubSystemContextHelper.getTransformedModelInformation(context);
+        if(transformedInfo != null) {
+          addMappings(srcInfo, transformedInfo, context);
+        }
+      }
     }
-
   }
 
   protected class SourceSIDTraceabilityHandler extends SIDTraceabilityHandler {
     /**
-     * @param identifier_p
+     * @param identifier
      */
-    public SourceSIDTraceabilityHandler(String identifier_p) {
-      super(identifier_p);
+    public SourceSIDTraceabilityHandler(String identifier) {
+      super(identifier);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void initializeRootMappings(IContext context_p) {
-      super.initializeRootMappings(context_p);
-      initializeMappings(ContextHelper.getSourceProject(context_p), ContextHelper.getTransformedProject(context_p), context_p);
+    protected void initializeRootMappings(IContext context) {
+      super.initializeRootMappings(context);
+      initializeMappings(ContextHelper.getSourceProject(context), ContextHelper.getTransformedProject(context), context);
     }
-    
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected String getExtensionIdentifier(IContext context_p) {
+  protected String getExtensionIdentifier(IContext context) {
     return ISchemaConstants.SOURCE_TRACEABILITY_CONFIGURATION;
   }
   
   @Override
-  protected void initHandlers(IContext fContext_p) {
-    addHandler(fContext_p, new SourceReconciliationTraceabilityHandler(getIdentifier(fContext_p)));
-    addHandler(fContext_p, new SourceSIDTraceabilityHandler(getIdentifier(fContext_p)));
+  protected void initHandlers(IContext context) {
+    addHandler(context, new SourceReconciliationTraceabilityHandler(getIdentifier(context)));
+    addHandler(context, new SourceSIDTraceabilityHandler(getIdentifier(context)));
   }
 
   /**

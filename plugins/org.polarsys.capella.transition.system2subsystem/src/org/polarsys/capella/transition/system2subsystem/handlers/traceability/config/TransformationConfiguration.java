@@ -14,10 +14,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
-import org.polarsys.capella.core.data.capellamodeller.Library;
-import org.polarsys.capella.core.data.capellamodeller.Project;
 import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
@@ -25,6 +22,7 @@ import org.polarsys.capella.core.transition.common.constants.ISchemaConstants;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.traceability.ITraceabilityHandler;
 import org.polarsys.capella.core.transition.common.handlers.traceability.config.ExtendedTraceabilityConfiguration;
+import org.polarsys.capella.core.transition.system.handlers.traceability.LibraryTraceabilityHandler;
 import org.polarsys.capella.core.transition.system.handlers.traceability.ReconciliationTraceabilityHandler;
 import org.polarsys.capella.core.transition.system.helpers.ContextHelper;
 import org.polarsys.capella.transition.system2subsystem.handlers.traceability.SIDTraceabilityHandler;
@@ -83,6 +81,8 @@ public class TransformationConfiguration extends ExtendedTraceabilityConfigurati
      	}
 
     });
+    
+    addHandler(fContext_p, new LibraryTraceabilityHandler());
 
   }
   
@@ -94,6 +94,22 @@ public class TransformationConfiguration extends ExtendedTraceabilityConfigurati
     }
     return null;
   }
+  
+  @Override
+  public boolean useHandlerForSourceElements(EObject source, ITraceabilityHandler handler, IContext context) {
+    if (LibraryTraceabilityHandler.isLibraryElement(source, context)) {
+      return handler instanceof LibraryTraceabilityHandler;
+    }
+    return super.useHandlerForSourceElements(source, handler, context);
+  }
+  
+  @Override
+  public boolean useHandlerForTracedElements(EObject source, ITraceabilityHandler handler, IContext context) {
+    if (LibraryTraceabilityHandler.isLibraryElement(source, context)) {
+      return handler instanceof LibraryTraceabilityHandler;
+    }
+    return super.useHandlerForTracedElements(source, handler, context);
+  }
 
 
   /**
@@ -101,6 +117,9 @@ public class TransformationConfiguration extends ExtendedTraceabilityConfigurati
    */
   @Override
   public boolean useHandlerForAttachment(EObject source_p, EObject target_p, ITraceabilityHandler handler_p, IContext context_p) {
+    if (LibraryTraceabilityHandler.isLibraryElement(source_p, context_p)) {
+      return handler_p instanceof LibraryTraceabilityHandler;
+    }
 
     boolean result = super.useHandlerForAttachment(source_p, target_p, handler_p, context_p);
     if (result) {

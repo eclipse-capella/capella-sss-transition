@@ -12,6 +12,7 @@ package org.polarsys.capella.transition.system2subsystem.activities;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -19,6 +20,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.polarsys.capella.core.data.capellamodeller.Project;
 import org.polarsys.capella.core.data.cs.Part;
@@ -34,6 +36,8 @@ import org.polarsys.capella.core.transition.common.handlers.scope.IScopeRetrieve
 import org.polarsys.capella.core.transition.common.handlers.traceability.CompoundTraceabilityHandler;
 import org.polarsys.capella.core.transition.system.handlers.attachment.CapellaDefaultAttachmentHandler;
 import org.polarsys.capella.transition.system2subsystem.constants.ISubSystemConstants;
+import org.polarsys.capella.transition.system2subsystem.constants.ITransitionConstants2;
+import org.polarsys.capella.transition.system2subsystem.context.SubSystemContextHelper;
 import org.polarsys.capella.transition.system2subsystem.handlers.attachment.FunctionalChainAttachmentHelper;
 import org.polarsys.capella.transition.system2subsystem.handlers.attachment.PhysicalPathAttachmentHelper;
 import org.polarsys.capella.transition.system2subsystem.handlers.attachment.ScenarioAttachmentHelper;
@@ -43,7 +47,6 @@ import org.polarsys.capella.transition.system2subsystem.handlers.scope.PropertyV
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.RequirementsScopeFilter;
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.RequirementsScopeRetriever;
 import org.polarsys.capella.transition.system2subsystem.handlers.session.SubSystemSessionHandler;
-import org.polarsys.capella.transition.system2subsystem.handlers.traceability.config.MergeSourceConfiguration;
 import org.polarsys.capella.transition.system2subsystem.handlers.traceability.config.TransformationConfiguration;
 import org.polarsys.kitalpha.cadence.core.api.parameter.ActivityParameters;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
@@ -122,23 +125,57 @@ public class InitializeTransitionActivity extends org.polarsys.capella.core.tran
   }
 
   @Override
+  protected IStatus initializeSource(IContext context, ActivityParameters activityParams) {
+    super.initializeSource(context, activityParams);
+    
+    Object sourceProject = context.get(ITransitionConstants.TRANSITION_SOURCE_ROOT);
+    if (sourceProject instanceof Project) {
+      Set<Resource> libraryResources = SubSystemContextHelper.getLibraryResources((Project) sourceProject);
+      if (libraryResources != null && !libraryResources.isEmpty()) {
+        context.put(ITransitionConstants2.RESOURCES_FOR_LIBRARIES_OF_SOURCE_PROJECT, libraryResources);
+        context.put(ITransitionConstants2.ROOTS_FOR_LIBRARIES_OF_SOURCE_PROJECT,
+            SubSystemContextHelper.getLibraryRoots(libraryResources));
+      }
+    }
+    return Status.OK_STATUS;
+  }
+  
+  @Override
   protected IStatus initializeTarget(IContext context, ActivityParameters activityParams) {
 
-    String outputproject =
+    String outputModelUriString =
         OptionsHandlerHelper.getInstance(context).getStringValue(context, IOptionsConstants.TRANSITION_PREFERENCES, IOptionsConstants.OUTPUT_PROJECT,
             IOptionsConstants.OUTPUT_PROJECT_DEFAULT_VALUE);
-    Resource outputResource = null;
 
-    URI fileUri = URI.createPlatformResourceURI(outputproject, true);
+    URI outputModelUri = URI.createPlatformResourceURI(outputModelUriString, true);
 
     // we must use a single editing domain throughout the entire operation
     EditingDomain targetDomain = (EditingDomain) context.get(ITransitionConstants.TRANSITION_SOURCE_EDITING_DOMAIN);
     context.put(ITransitionConstants.TRANSITION_TARGET_EDITING_DOMAIN, targetDomain);
 
-    outputResource = targetDomain.getResourceSet().getResource(fileUri, true);
+    
+    ResourceSet resourceSet = targetDomain.getResourceSet();
+    Resource outputResource = resourceSet.getResource(outputModelUri, true);
     context.put(ITransitionConstants.TRANSITION_TARGET_RESOURCE, outputResource);
-    context.put(ITransitionConstants.TRANSITION_TARGET_ROOT, outputResource.getContents().get(0));
-
+    EObject outputProject = outputResource.getContents().get(0);
+    if (outputProject instanceof Project) {
+      context.put(ITransitionConstants.TRANSITION_TARGET_ROOT, outputProject);
+      Set<Resource> libraryResources = SubSystemContextHelper.getLibraryResources((Project) outputProject);
+      if (libraryResources != null && !libraryResources.isEmpty()) {
+        context.put(ITransitionConstants2.RESOURCES_FOR_LIBRARIES_OF_TARGET_PROJECT, libraryResources);
+        context.put(ITransitionConstants2.ROOTS_FOR_LIBRARIES_OF_TARGET_PROJECT,
+            SubSystemContextHelper.getLibraryRoots(libraryResources));
+      } else {
+        Object sourceProject = context.get(ITransitionConstants.TRANSITION_SOURCE_ROOT);
+        if (sourceProject instanceof Project) {
+          libraryResources = SubSystemContextHelper.getLibraryResources((Project) sourceProject);
+          context.put(ITransitionConstants2.RESOURCES_FOR_LIBRARIES_OF_TARGET_PROJECT, libraryResources);
+          context.put(ITransitionConstants2.ROOTS_FOR_LIBRARIES_OF_TARGET_PROJECT,
+              SubSystemContextHelper.getLibraryRoots(libraryResources));
+        }
+      }
+    }
+    
     return Status.OK_STATUS;
   }
 

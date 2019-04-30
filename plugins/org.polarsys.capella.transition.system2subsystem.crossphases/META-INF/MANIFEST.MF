@@ -15,6 +15,7 @@ Export-Package: org.polarsys.capella.transition.system2subsystem.crossphases,
  org.polarsys.capella.transition.system2subsystem.crossphases.rules.la,
  org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa
 Require-Bundle: org.eclipse.core.runtime,
+ org.polarsys.capella.common.libraries;visibility:=reexport,
  org.polarsys.capella.transition.system2subsystem;visibility:=reexport,
  org.polarsys.capella.core.transition.system.topdown
 Bundle-Vendor: %providerName
@@ -25,5 +26,5 @@ Bundle-Name: %pluginName
 Bundle-Activator: org.polarsys.capella.transition.system2subsystem.crossphases.Activator
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.polarsys.capella.transition.system2subsystem.crossphases;singleton:=true
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 

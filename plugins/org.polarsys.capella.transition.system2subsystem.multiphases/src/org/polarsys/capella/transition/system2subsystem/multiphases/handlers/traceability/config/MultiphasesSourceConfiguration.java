@@ -13,6 +13,7 @@ package org.polarsys.capella.transition.system2subsystem.multiphases.handlers.tr
 import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
+import org.polarsys.capella.common.libraries.ModelInformation;
 import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.epbs.EPBSArchitecture;
@@ -52,12 +53,11 @@ public class MultiphasesSourceConfiguration extends MergeSourceConfiguration {
      * {@inheritDoc}
      */
     @Override
-    protected void initializeRootMappings(IContext context_p) {
-      super.initializeRootMappings(context_p);
-      addMappings(ContextHelper.getSourceProject(context_p), ContextHelper.getTransformedProject(context_p), context_p);
-      addMappings(ContextHelper.getSourceEngineering(context_p), ((MultiphasesContext)context_p).getTempSystemEngineering(), context_p);
+    protected void initializeRootMappings(IContext context) {
+      super.initializeRootMappings(context);
+      addMappings(ContextHelper.getSourceProject(context), ContextHelper.getTransformedProject(context), context);
+      addMappings(ContextHelper.getSourceEngineering(context), ((MultiphasesContext)context).getTempSystemEngineering(), context);
     }
-
   }
 
   protected BlockArchitecture getSourceArchitecture(SystemEngineering source_p, IContext context_p) {
@@ -79,5 +79,4 @@ public class MultiphasesSourceConfiguration extends MergeSourceConfiguration {
     addHandler(fContext_p, new MultiPhasesSourceReconciliationTraceabilityHandler(getIdentifier(fContext_p)));
     addHandler(fContext_p, new SourceSIDTraceabilityHandler(getIdentifier(fContext_p)));
   }
-
 }

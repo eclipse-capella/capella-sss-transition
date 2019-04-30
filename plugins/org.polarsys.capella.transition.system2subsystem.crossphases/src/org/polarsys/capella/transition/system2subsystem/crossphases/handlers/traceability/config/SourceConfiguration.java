@@ -13,6 +13,7 @@ package org.polarsys.capella.transition.system2subsystem.crossphases.handlers.tr
 import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
+import org.polarsys.capella.common.libraries.ModelInformation;
 import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.epbs.EPBSArchitecture;
@@ -21,6 +22,7 @@ import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.system.handlers.traceability.ReconciliationTraceabilityHandler;
 import org.polarsys.capella.core.transition.system.helpers.ContextHelper;
+import org.polarsys.capella.transition.system2subsystem.context.SubSystemContextHelper;
 import org.polarsys.capella.transition.system2subsystem.handlers.traceability.config.MergeSourceConfiguration;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
@@ -54,8 +56,14 @@ public class SourceConfiguration extends MergeSourceConfiguration {
       super.initializeRootMappings(context);
       addMappings(ContextHelper.getSourceProject(context), ContextHelper.getTransformedProject(context), context);
       addMappings(ContextHelper.getSourceEngineering(context), ContextHelper.getTransformedEngineering(context), context);
+      ModelInformation srcInfo = SubSystemContextHelper.getSourceModelInformation(context);
+      if(srcInfo != null) {
+        ModelInformation transformedInfo = SubSystemContextHelper.getTransformedModelInformation(context);
+        if(transformedInfo != null) {
+          addMappings(srcInfo, transformedInfo, context);
+        }
+      }
     }
-
   }
 
   protected BlockArchitecture getSourceArchitecture(SystemEngineering source_p, IContext context_p) {

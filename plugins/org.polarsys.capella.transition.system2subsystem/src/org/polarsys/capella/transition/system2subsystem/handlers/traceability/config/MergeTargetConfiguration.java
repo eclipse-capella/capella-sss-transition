@@ -10,13 +10,8 @@
  *******************************************************************************/
 package org.polarsys.capella.transition.system2subsystem.handlers.traceability.config;
 
-import java.util.Collection;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.polarsys.capella.core.data.capellacore.CapellaElement;
-import org.polarsys.capella.core.data.capellamodeller.Library;
-import org.polarsys.capella.core.data.capellamodeller.Project;
+import org.polarsys.capella.common.libraries.ModelInformation;
 import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.Component;
@@ -30,6 +25,7 @@ import org.polarsys.capella.core.transition.common.handlers.traceability.config.
 import org.polarsys.capella.core.transition.system.handlers.traceability.RealizationLinkTraceabilityHandler;
 import org.polarsys.capella.core.transition.system.handlers.traceability.ReconciliationTraceabilityHandler;
 import org.polarsys.capella.core.transition.system.helpers.ContextHelper;
+import org.polarsys.capella.transition.system2subsystem.context.SubSystemContextHelper;
 import org.polarsys.capella.transition.system2subsystem.handlers.traceability.SIDTraceabilityHandler;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
@@ -72,20 +68,27 @@ public class MergeTargetConfiguration extends ExtendedTraceabilityConfiguration 
      * {@inheritDoc}
      */
     @Override
-    protected void initializeRootMappings(IContext context_p) {
-      super.initializeRootMappings(context_p);
-      addMappings(ContextHelper.getSourceProject(context_p), ContextHelper.getTargetProject(context_p), context_p);
-      addMappings(ContextHelper.getSourceEngineering(context_p), getTargetEngineering(context_p), context_p);
+    protected void initializeRootMappings(IContext context) {
+      super.initializeRootMappings(context);
+      addMappings(ContextHelper.getSourceProject(context), ContextHelper.getTargetProject(context), context);
+      addMappings(ContextHelper.getSourceEngineering(context), getTargetEngineering(context), context);
+      ModelInformation srcInfo = SubSystemContextHelper.getSourceModelInformation(context);
+      if(srcInfo != null) {
+        ModelInformation targetInfo = SubSystemContextHelper.getTargetModelInformation(context);
+        if(targetInfo != null) {
+          addMappings(srcInfo, targetInfo, context);
+        }
+      }
     }
   }
 
   protected class TargetSIDTraceabilityHandler extends SIDTraceabilityHandler {
 
     /**
-     * @param identifier_p
+     * @param identifier
      */
-    public TargetSIDTraceabilityHandler(String identifier_p) {
-      super(identifier_p);
+    public TargetSIDTraceabilityHandler(String identifier) {
+      super(identifier);
     }
 
     /**

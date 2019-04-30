@@ -11,7 +11,7 @@ Bundle-Name: %pluginName
 Bundle-Activator: org.polarsys.capella.transition.system2subsystem.crossphases.ui.Activator
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.polarsys.capella.transition.system2subsystem.crossphases.ui;singleton:=true
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.polarsys.capella.transition.system2subsystem.crossphases.ui,
  org.polarsys.capella.transition.system2subsystem.crossphases.ui.actions.tester,
  org.polarsys.capella.transition.system2subsystem.crossphases.ui.handlers

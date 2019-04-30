@@ -24,6 +24,6 @@ Export-Package: org.polarsys.capella.transition.system2subsystem.tests,
  org.polarsys.capella.transition.system2subsystem.tests.multiphases,
  org.polarsys.capella.transition.system2subsystem.tests.multiphases.validation,
  org.polarsys.capella.transition.system2subsystem.tests.util
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
