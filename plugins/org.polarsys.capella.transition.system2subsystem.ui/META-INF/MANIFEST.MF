@@ -9,7 +9,7 @@ Require-Bundle: org.eclipse.ui,
  org.polarsys.capella.core.transition.system.ui;visibility:=reexport
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 1.3.0.qualifier
+Bundle-Version: 1.3.1.qualifier
 Bundle-Localization: plugin
 Bundle-Name: %pluginName
 Bundle-Activator: org.polarsys.capella.transition.system2subsystem.ui.Activator
