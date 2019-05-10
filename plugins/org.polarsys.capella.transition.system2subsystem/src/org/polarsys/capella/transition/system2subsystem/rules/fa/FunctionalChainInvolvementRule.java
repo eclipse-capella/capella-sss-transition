@@ -31,6 +31,8 @@ import org.polarsys.capella.core.data.fa.FunctionOutputPort;
 import org.polarsys.capella.core.data.fa.FunctionPort;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.fa.FunctionalChainInvolvement;
+import org.polarsys.capella.core.data.fa.FunctionalChainInvolvementFunction;
+import org.polarsys.capella.core.data.fa.FunctionalChainInvolvementLink;
 import org.polarsys.capella.core.data.fa.FunctionalChainReference;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.transition.common.constants.Messages;
@@ -127,18 +129,14 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
   }
 
   @Override
-  protected void attachRelated(EObject src, EObject trg, IContext context_p) {
-    super.attachRelated(src, trg, context_p);
-    FunctionalChainAttachmentHelper helper = FunctionalChainAttachmentHelper.getInstance(context_p);
-
+  protected void attachRelated(EObject src, EObject trg, IContext context) {
+    super.attachRelated(src, trg, context);
+    FunctionalChainAttachmentHelper helper = FunctionalChainAttachmentHelper.getInstance(context);
     FunctionalChainInvolvement fSrc = (FunctionalChainInvolvement) src;
     FunctionalChainInvolvement fTrg = (FunctionalChainInvolvement) trg;
-
-    fTrg.getNextFunctionalChainInvolvements().clear();
-
-    if (fSrc.getNextFunctionalChainInvolvements().isEmpty() == false) {
-      for (FunctionalChainInvolvement nextSrcValid : helper.getNextValid(fSrc, context_p)) {
-        if (nextSrcValid.getInvolved() instanceof FunctionalExchange) {
+    if (!fSrc.getNextFunctionalChainInvolvements().isEmpty()) {
+      for (FunctionalChainInvolvement nextSrcValid : helper.getNextValid(fSrc, context)) {
+        if (nextSrcValid instanceof FunctionalChainInvolvementLink) {
           boolean isDirectJump = false;
           for (FunctionalChainInvolvement fci : nextSrcValid.getPreviousFunctionalChainInvolvements()) {
             if (fSrc.getInvolved().equals(fci.getInvolved())) {
@@ -146,45 +144,46 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
               break;
             }
           }
-
           // If jump and if try to link through a FE => redirection to FE's target.
-          if (!isDirectJump && (fSrc.getNextFunctionalChainInvolvements().contains(nextSrcValid) == false)) {
+          if (!isDirectJump && !fSrc.getNextFunctionalChainInvolvements().contains(nextSrcValid)) {
             nextSrcValid = nextSrcValid.getNextFunctionalChainInvolvements().get(0);
           }
         }
-
-        Collection<EObject> nextTrgs = retrieveTracedElements(nextSrcValid, context_p);
-
-        if ((nextTrgs != null) && (nextTrgs.isEmpty() == false)) {
+        Collection<EObject> nextTrgs = retrieveTracedElements(nextSrcValid, context);
+        if (nextTrgs != null && !nextTrgs.isEmpty()) {
           FunctionalChainInvolvement nextTrgValid = (FunctionalChainInvolvement) nextTrgs.iterator().next();
-
-          // If not jump to next
-          // or
-          // If next's involved is a FE => no problem
-          if (fSrc.getNextFunctionalChainInvolvements().contains(nextSrcValid) || (nextSrcValid.getInvolved() instanceof FunctionalExchange)) {
-            fTrg.getNextFunctionalChainInvolvements().add(nextTrgValid);
+          // If it's a direct jump, it's OK to link the target FCIF to the target FCIL
+          if (fSrc.getNextFunctionalChainInvolvements().contains(nextSrcValid)) {
+            if (fSrc instanceof FunctionalChainInvolvementFunction
+                && nextSrcValid instanceof FunctionalChainInvolvementLink)
+              ((FunctionalChainInvolvementLink) nextTrgValid).setSource((FunctionalChainInvolvementFunction) fTrg);
+            else if (fSrc instanceof FunctionalChainInvolvementLink
+                && nextSrcValid instanceof FunctionalChainInvolvementFunction)
+              ((FunctionalChainInvolvementLink) fTrg).setTarget((FunctionalChainInvolvementFunction) nextTrgValid);
+          }
+          // If next valid FCI is a FCIL, it's OK to link the target FCIF to the target FCIL
+          else if (nextSrcValid instanceof FunctionalChainInvolvementLink
+              && fSrc instanceof FunctionalChainInvolvementFunction) {
+            ((FunctionalChainInvolvementLink) nextTrgValid).setSource((FunctionalChainInvolvementFunction) fTrg);
           }
           // If there is a jump to next and that this jump concern two Functions => creation of a fake FE
           else {
             Collection<InvolvedElement> involvedElements = listInvolvedElements(fSrc, nextSrcValid);
             String description = buildDescription(involvedElements);
-
             // Creation of a fake FE
-            Iterator<EObject> it = retrieveTracedElements(nextSrcValid.getInvolved(), context_p).iterator();
+            Iterator<EObject> it = retrieveTracedElements(nextSrcValid.getInvolved(), context).iterator();
             EObject next = it.next();
             AbstractFunction nextTrgFct = (AbstractFunction) next;
-
             String idDiff = nextTrgFct.getClass().getSimpleName().replaceAll("Function", "");
             idDiff = idDiff.replaceAll("Impl", "");
-
-            Collection<FunctionalExchange> fakeFEs = createFakeFE(fTrg, nextTrgValid, nextTrgFct, context_p, description, idDiff);
-
-            if (fakeFEs.isEmpty() == false) {
-              FunctionalChainInvolvement fakeFCI = createFakeFunctionalChainInvolvement(fTrg, nextTrgValid, fakeFEs.iterator().next(), context_p, idDiff);
-
-              fTrg.getNextFunctionalChainInvolvements().add(fakeFCI);
-
-              fakeFCI.getNextFunctionalChainInvolvements().add(nextTrgValid);
+            Collection<FunctionalExchange> fakeFEs = createFakeFE(fTrg, nextTrgValid, nextTrgFct, context, description,
+                idDiff);
+            if (!fakeFEs.isEmpty() && fTrg instanceof FunctionalChainInvolvementFunction
+                && nextTrgValid instanceof FunctionalChainInvolvementFunction) {
+              FunctionalChainInvolvementLink fakeFCIL = createFakeFunctionalChainInvolvementLink(fTrg, nextTrgValid,
+                  fakeFEs.iterator().next(), context, idDiff);
+              fakeFCIL.setSource((FunctionalChainInvolvementFunction) fTrg);
+              fakeFCIL.setTarget((FunctionalChainInvolvementFunction) nextTrgValid);
             }
           }
         }
@@ -247,22 +246,22 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
 
   }
 
-  private FunctionalChainInvolvement createFakeFunctionalChainInvolvement(FunctionalChainInvolvement src, FunctionalChainInvolvement trg,
+  private FunctionalChainInvolvementLink createFakeFunctionalChainInvolvementLink(FunctionalChainInvolvement src, FunctionalChainInvolvement trg,
       FunctionalExchange fe, IContext context_p, String idPrefix) {
     String id = String.format("ID_FakeFunctionalChainInvolvement_%s_%s_%s", idPrefix, src.getSid(), trg.getSid());
 
     FunctionalChain parent = (FunctionalChain) src.eContainer();
-    FunctionalChainInvolvement res = null;
+    FunctionalChainInvolvementLink res = null;
 
     for (FunctionalChainInvolvement fci : src.getNextFunctionalChainInvolvements()) {
-      if (fci.getSid().equals(id)) {
-        res = fci;
+      if (fci instanceof FunctionalChainInvolvementLink && fci.getSid().equals(id)) {
+        res = (FunctionalChainInvolvementLink) fci;
         break;
       }
     }
     for (FunctionalChainInvolvement fci : trg.getPreviousFunctionalChainInvolvements()) {
-      if (fci.getSid().equals(id)) {
-        res = fci;
+      if (fci instanceof FunctionalChainInvolvementLink && fci.getSid().equals(id)) {
+        res = (FunctionalChainInvolvementLink) fci;
         break;
       }
     }
