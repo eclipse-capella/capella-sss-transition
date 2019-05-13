@@ -178,7 +178,7 @@ public Collection<? extends PhysicalComponent> getSelectedPhysicalComponents() {
    * @return the SystemEngineering of the source model
    */
   public SystemEngineering getSourceSystemEngineering() {
-    return SystemEngineeringExt.getSystemEngineering((Project) get(ITransitionConstants.TRANSFORMATION_SOURCE_ROOT));
+    return ContextHelper.getSourceEngineering(this);
   }
 
   /**
