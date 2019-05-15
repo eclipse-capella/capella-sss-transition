@@ -14,14 +14,20 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.fa.FaPackage;
 import org.polarsys.capella.core.data.interaction.InteractionPackage;
+import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.IHandler;
 import org.polarsys.capella.core.transition.common.handlers.merge.IMergeHandler;
 import org.polarsys.capella.core.transition.common.handlers.traceability.CompoundTraceabilityHandler;
+import org.polarsys.capella.core.transition.common.handlers.transformation.TransformationHandlerHelper;
+import org.polarsys.capella.core.transition.common.merge.scope.IModelScopeFilter;
 import org.polarsys.capella.core.transition.common.merge.scope.ReferenceModelScope;
 import org.polarsys.capella.core.transition.common.merge.scope.TargetModelScope;
 import org.polarsys.capella.core.transition.system.topdown.handlers.merge.RealizationLinkCategoryFilter;
@@ -90,5 +96,26 @@ public class InitializeDiffMergeActivity extends org.polarsys.capella.core.trans
 
     return Status.OK_STATUS;
   }
+  
+  @Override
+  protected IModelScopeFilter getTargetFilter(final IContext context) {
+    return new IModelScopeFilter() {
+      public boolean accepts(EObject element) {
+        // With a transformation, we filter the target model according to the transformed architecture.
+        BlockArchitecture architecture = BlockArchitectureExt.getRootBlockArchitecture(element);
+        if (architecture == null) {
+          return true;
+        }
+        EClass targetArchitecture = TransformationHandlerHelper.getInstance(context).getTargetType(architecture,
+            context);
+        if ((targetArchitecture != null) && (architecture.eClass() == targetArchitecture)) {
+          return true;
+        }
 
+        Set<EObject> libraries = (Set<EObject>) context
+            .get(ITransitionConstants2.ROOTS_FOR_LIBRARIES_OF_TARGET_PROJECT);
+        return libraries.stream().anyMatch(lib -> EcoreUtil.isAncestor(lib, element));
+      }
+    };
+  }
 }
