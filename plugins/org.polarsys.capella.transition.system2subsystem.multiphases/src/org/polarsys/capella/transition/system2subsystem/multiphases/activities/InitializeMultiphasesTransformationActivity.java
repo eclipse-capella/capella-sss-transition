@@ -27,9 +27,9 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.ui.business.api.viewpoint.ViewpointSelection;
 import org.eclipse.ui.statushandlers.StatusManager;
+import org.polarsys.capella.common.libraries.ModelInformation;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.capellamodeller.Project;
-import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
 import org.polarsys.capella.core.model.handler.command.CapellaResourceHelper;
 import org.polarsys.capella.core.model.helpers.CapellaElementExt;
 import org.polarsys.capella.core.platform.sirius.ui.project.operations.ProjectSessionCreationHelper;
@@ -39,13 +39,14 @@ import org.polarsys.capella.core.transition.common.constants.ITransitionConstant
 import org.polarsys.capella.core.transition.common.handlers.IHandler;
 import org.polarsys.capella.core.transition.common.handlers.traceability.ITraceabilityHandler;
 import org.polarsys.capella.core.transition.common.handlers.traceability.config.ExtendedTraceabilityConfiguration;
-import org.polarsys.capella.core.transition.system.activities.InitializeTransformationActivity;
-import org.polarsys.capella.core.transition.system.handlers.traceability.ReconciliationTraceabilityHandler;
+import org.polarsys.capella.core.transition.system.handlers.traceability.LibraryTraceabilityHandler;
+import org.polarsys.capella.core.transition.system.helpers.ContextHelper;
 import org.polarsys.capella.transition.system2subsystem.activities.FinalizeSubsystemTransitionActivity;
+import org.polarsys.capella.transition.system2subsystem.activities.InitializeTransformationActivity;
 import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.traceability.config.RecTraceabilityHandler;
 import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.traceability.config.SIDTraceabilityHandler;
+import org.polarsys.kitalpha.emde.model.ElementExtension;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
-
 
 public final class InitializeMultiphasesTransformationActivity extends InitializeTransformationActivity {
 
@@ -58,63 +59,95 @@ public final class InitializeMultiphasesTransformationActivity extends Initializ
       protected String getExtensionIdentifier(IContext context) {
         return ISchemaConstants.TRANSFORMATION_TRACEABILITY_CONFIGURATION;
       }
-      
+
       @Override
       protected void initHandlers(IContext fContext_p) {
         addHandler(fContext_p, new SIDTraceabilityHandler(getIdentifier(fContext_p)));
         addHandler(fContext_p, new RecTraceabilityHandler());
+        addHandler(fContext_p, new LibraryTraceabilityHandler());
       }
 
       @Override
-      public boolean useHandlerForAttachment(EObject source_p, EObject target_p, ITraceabilityHandler handler_p, IContext context_p) {
+      public boolean useHandlerForAttachment(EObject source_p, EObject target_p, ITraceabilityHandler handler_p,
+          IContext context_p) {
+        if (LibraryTraceabilityHandler.isLibraryElement(source_p, context_p)) {
+          return handler_p instanceof LibraryTraceabilityHandler;
+        }
+
         if (handler_p instanceof RecTraceabilityHandler) {
           return false;
         }
         return super.useHandlerForAttachment(source_p, target_p, handler_p, context_p);
       }
+
+      @Override
+      public boolean useHandlerForSourceElements(EObject source, ITraceabilityHandler handler, IContext context) {
+        if (LibraryTraceabilityHandler.isLibraryElement(source, context)) {
+          return handler instanceof LibraryTraceabilityHandler;
+        }
+        return super.useHandlerForSourceElements(source, handler, context);
+      }
+
+      @Override
+      public boolean useHandlerForTracedElements(EObject source, ITraceabilityHandler handler, IContext context) {
+        if (LibraryTraceabilityHandler.isLibraryElement(source, context)) {
+          return handler instanceof LibraryTraceabilityHandler;
+        }
+        return super.useHandlerForTracedElements(source, handler, context);
+      }
+
     };
     return new MultiphaseTraceabilityHandler(configuration);
   }
 
-  /**
-  * Overridden to create a temporary transformation project 
-  * rather than attaching a new SystemEngineering into the target model.
-  */
   @Override
-  protected EObject createTargetTransformationContainer(Resource targetResource_p, IContext context_p) {
-    EObject result = null;
-
-    if (context_p.get(ITransitionConstants.DIFFMERGE_DISABLE) == Boolean.TRUE) {
+  protected EObject createTargetTransformationContainer(Resource source, IContext context) {
+    Project targetProject = null;
+    if (context.get(ITransitionConstants.DIFFMERGE_DISABLE) == Boolean.TRUE) {
       // elements are created directly in the target model
-      Project project = (Project) CapellaElementExt.getRoot((CapellaElement) targetResource_p.getContents().get(0));
-      result = project;
+      Project project = (Project) CapellaElementExt.getRoot((CapellaElement) source.getContents().get(0));
+      targetProject = project;
     } else {
 
       // Create a temporary project and reload its model through the target editing domain
       // The temporary project is removed later in FinalizeSubsystemTransitionActivity
       try {
-        String temporaryProjectName = getTemporaryProjectName(context_p);
-        Session session =
-            new ProjectSessionCreationHelper(true, true).createFullProject(temporaryProjectName, null, Collections.<IProject> emptyList(),
-                ViewpointSelection.getViewpoints(CapellaResourceHelper.CAPELLA_MODEL_FILE_EXTENSION), new NullProgressMonitor());
+        String temporaryProjectName = getTemporaryProjectName();
+        Session session = new ProjectSessionCreationHelper(true, true).createFullProject(temporaryProjectName, null,
+            Collections.<IProject> emptyList(),
+            ViewpointSelection.getViewpoints(CapellaResourceHelper.CAPELLA_MODEL_FILE_EXTENSION),
+            new NullProgressMonitor());
         Project project = SessionHelper.getCapellaProject(session);
         session.close(new NullProgressMonitor());
-        result =
-            ((EditingDomain) context_p.get(ITransitionConstants.TRANSITION_TARGET_EDITING_DOMAIN)).getResourceSet().getEObject(EcoreUtil.getURI(project),
-                true);
-        context_p.put(FinalizeSubsystemTransitionActivity.PARAM__DELETE_PROJECT, ResourcesPlugin.getWorkspace().getRoot().getProject(temporaryProjectName));
+        targetProject = (Project) ((EditingDomain) context.get(ITransitionConstants.TRANSITION_TARGET_EDITING_DOMAIN))
+            .getResourceSet().getEObject(EcoreUtil.getURI(project), true);
+        context.put(FinalizeSubsystemTransitionActivity.PARAM__DELETE_PROJECT,
+            ResourcesPlugin.getWorkspace().getRoot().getProject(temporaryProjectName));
+        
+        
+        Project sourceProject = ContextHelper.getSourceProject(context);
+
+        // Copy Library information from source project to target project if any
+        for (ElementExtension extension : sourceProject.getOwnedExtensions()) {
+          if (extension instanceof ModelInformation) {
+            ElementExtension copy = EcoreUtil.copy(extension);
+            targetProject.getOwnedExtensions().add(copy);
+          }
+        }
       } catch (InvocationTargetException exception_p) {
-        StatusManager.getManager().handle(
-            new Status(IStatus.ERROR, org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID, exception_p.getMessage(), exception_p));
+        StatusManager.getManager()
+            .handle(new Status(IStatus.ERROR, org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID,
+                exception_p.getMessage(), exception_p));
       } catch (InterruptedException exception_p) {
-        StatusManager.getManager().handle(
-            new Status(IStatus.ERROR, org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID, exception_p.getMessage(), exception_p));
+        StatusManager.getManager()
+            .handle(new Status(IStatus.ERROR, org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID,
+                exception_p.getMessage(), exception_p));
       }
     }
-    return result;
+    return targetProject;
   }
 
-  private String getTemporaryProjectName(IContext context_p) {
+  private String getTemporaryProjectName() {
     return "MultiphaseTransformation_" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); //$NON-NLS-1$ //$NON-NLS-2$
   }
 
