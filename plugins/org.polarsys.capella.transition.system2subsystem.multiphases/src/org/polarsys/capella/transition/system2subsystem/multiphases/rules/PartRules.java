@@ -24,6 +24,17 @@ public class PartRules {
 
   public static class ToSA extends PartRule {
 
+    @Override
+    protected EObject transformDirectElement(EObject element_p, IContext context_p) {
+      ISelectionContext sContext =
+          SelectionContextHandlerHelper.getHandler(context_p).getSelectionContext(context_p, ITransitionConstants.SELECTION_CONTEXT__TRANSFORMATION);
+      EObject target = TransformationHandlerHelper.getInstance(context_p).getBestTracedElement(((Part) element_p).getAbstractType(), context_p, sContext);
+      Component tComponent = (Component) target;
+      if ((tComponent != null) && (tComponent.getRepresentingParts() != null) && (tComponent.getRepresentingParts().size() > 0)) {
+        return tComponent.getRepresentingParts().get(0);
+      }
+      return super.transformDirectElement(element_p, context_p);
+    }
   }
 
   public static class ToLA extends PartRule {
@@ -34,8 +45,8 @@ public class PartRules {
           SelectionContextHandlerHelper.getHandler(context_p).getSelectionContext(context_p, ITransitionConstants.SELECTION_CONTEXT__TRANSFORMATION);
       EObject target = TransformationHandlerHelper.getInstance(context_p).getBestTracedElement(((Part) element_p).getAbstractType(), context_p, sContext);
       Component tComponent = (Component) target;
-      if ((tComponent != null) && (tComponent.getRepresentingPartitions() != null) && (tComponent.getRepresentingPartitions().size() > 0)) {
-        return tComponent.getRepresentingPartitions().get(0);
+      if ((tComponent != null) && (tComponent.getRepresentingParts() != null) && (tComponent.getRepresentingParts().size() > 0)) {
+        return tComponent.getRepresentingParts().get(0);
       }
       return super.transformDirectElement(element_p, context_p);
     }
@@ -50,8 +61,8 @@ public class PartRules {
           SelectionContextHandlerHelper.getHandler(context_p).getSelectionContext(context_p, ITransitionConstants.SELECTION_CONTEXT__TRANSFORMATION);
       EObject target = TransformationHandlerHelper.getInstance(context_p).getBestTracedElement(((Part) element_p).getAbstractType(), context_p, sContext);
       Component tComponent = (Component) target;
-      if ((tComponent != null) && (tComponent.getRepresentingPartitions() != null) && (tComponent.getRepresentingPartitions().size() > 0)) {
-        return tComponent.getRepresentingPartitions().get(0);
+      if ((tComponent != null) && (tComponent.getRepresentingParts() != null) && (tComponent.getRepresentingParts().size() > 0)) {
+        return tComponent.getRepresentingParts().get(0);
       }
       return super.transformDirectElement(element_p, context_p);
     }

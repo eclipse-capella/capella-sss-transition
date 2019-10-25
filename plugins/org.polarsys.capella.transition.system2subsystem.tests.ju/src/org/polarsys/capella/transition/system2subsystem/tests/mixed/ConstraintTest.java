@@ -14,7 +14,6 @@ import static org.polarsys.capella.transition.system2subsystem.tests.System2Subs
 
 import java.util.Collection;
 
-import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Crossphase;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Interphase;
@@ -40,7 +39,7 @@ public class ConstraintTest extends System2SubsystemTest implements Crossphase, 
       shouldNotBeTransitioned(_id_PHYSICAL_SYSTEM);
     }
     mustBeTransitioned(_id_CONSTRAINT);
-    mustBeTransitionedOutside(_id_CONSTRAINT, CsPackage.Literals.ABSTRACT_ACTOR);
+    mustBeTransitionedOutside(_id_CONSTRAINT, ComponentType.ACTOR);
   }
 
 }

@@ -17,10 +17,10 @@ import org.polarsys.capella.common.libraries.ModelInformation;
 import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.ctx.CtxPackage;
 import org.polarsys.capella.core.data.epbs.EPBSArchitecture;
 import org.polarsys.capella.core.data.information.DataPkg;
-import org.polarsys.capella.core.data.information.Partition;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
@@ -65,18 +65,18 @@ public class TargetConfiguration extends MergeTargetConfiguration {
       }
 
       Component sourceComponent = getSourceComponent(source_p, context_p);
-      Component targetComponent = BlockArchitectureExt.getFirstComponent(target_p);
+      Component targetComponent = BlockArchitectureExt.getOrCreateSystem(target_p);
       if ((sourceComponent != null) && (targetComponent != null)) {
         if ((!map_p.contains(sourceComponent)) && (!map_p.contains(targetComponent))) {
           addMapping(map_p, sourceComponent, targetComponent, context_p);
         }
       }
 
-      if ((sourceComponent != null) && (sourceComponent.getRepresentingPartitions().size() == 1)) {
-        if ((targetComponent != null) && (targetComponent.getRepresentingPartitions().size() == 1)) {
-          Partition sourcePartition = sourceComponent.getRepresentingPartitions().get(0);
-          Partition targetPartition = targetComponent.getRepresentingPartitions().get(0);
-          addMapping(map_p, sourcePartition, targetPartition, context_p);
+      if ((sourceComponent != null) && (sourceComponent.getRepresentingParts().size() == 1)) {
+        if ((targetComponent != null) && (targetComponent.getRepresentingParts().size() == 1)) {
+          Part sourcePart = sourceComponent.getRepresentingParts().get(0);
+          Part targetPart = targetComponent.getRepresentingParts().get(0);
+          addMapping(map_p, sourcePart, targetPart, context_p);
         }
       }
 
@@ -138,7 +138,7 @@ public class TargetConfiguration extends MergeTargetConfiguration {
   }
 
   protected Component getSourceComponent(BlockArchitecture architecture, IContext context_p) {
-    Component component = BlockArchitectureExt.getFirstComponent(architecture);
+    Component component = BlockArchitectureExt.getOrCreateSystem(architecture);
 
     Collection<EObject> selection = (Collection<EObject>) context_p.get(ITransitionConstants.TRANSITION_SOURCES);
     if (selection.size() > 0) {

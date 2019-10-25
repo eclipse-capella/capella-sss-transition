@@ -12,9 +12,6 @@ package org.polarsys.capella.transition.system2subsystem.tests.multiphases;
 
 import java.util.Collection;
 
-import org.polarsys.capella.core.data.ctx.CtxPackage;
-import org.polarsys.capella.core.data.la.LaPackage;
-import org.polarsys.capella.core.data.pa.PaPackage;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.transition.system2subsystem.tests.TraceabilityArchitectureSID;
 
@@ -55,13 +52,13 @@ public class SimpleComponents extends MultiPhasesTest {
     // mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC1__PC11, CtxPackage.Literals.SYSTEM); //no sid?
     // mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PC1__PART_PC11__PC11, CtxPackage.Literals.SYSTEM_CONTEXT); //no
     // sid?
-    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC1, CtxPackage.Literals.ACTOR);
-    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC2, CtxPackage.Literals.ACTOR);
-    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC1__PC12, CtxPackage.Literals.ACTOR);
+    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC1, ComponentType.ACTOR);
+    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC2, ComponentType.ACTOR);
+    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC1__PC12, ComponentType.ACTOR);
 
-    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PART_PC1__PC1, CtxPackage.Literals.SYSTEM_CONTEXT);
-    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PART_PC2__PC2, CtxPackage.Literals.SYSTEM_CONTEXT);
-    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PC1__PART_PC12__PC12, CtxPackage.Literals.SYSTEM_CONTEXT);
+    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PART_PC1__PC1, ComponentType.SYSTEM_STRUCTURE);
+    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PART_PC2__PC2, ComponentType.SYSTEM_STRUCTURE);
+    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PC1__PART_PC12__PC12, ComponentType.SYSTEM_STRUCTURE);
 
     shouldNotBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC6);
     shouldNotBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC3);
@@ -80,16 +77,16 @@ public class SimpleComponents extends MultiPhasesTest {
     // mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC1__PC11, CtxPackage.Literals.SYSTEM); //no sid?
     // mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PC1__PART_PC11__PC11, CtxPackage.Literals.SYSTEM_CONTEXT); //no
     // sid?
-    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC1__PC12, LaPackage.Literals.LOGICAL_ACTOR);
-    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC1, LaPackage.Literals.LOGICAL_ACTOR);
-    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC2, LaPackage.Literals.LOGICAL_ACTOR);
+    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC1__PC12, ComponentType.LOGICAL_ACTOR);
+    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC1, ComponentType.LOGICAL_ACTOR);
+    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC2, ComponentType.LOGICAL_ACTOR);
 
-    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PART_PC1__PC1, LaPackage.Literals.LOGICAL_CONTEXT);
-    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PART_PC2__PC2, LaPackage.Literals.LOGICAL_CONTEXT);
-    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PC1__PART_PC12__PC12, LaPackage.Literals.LOGICAL_CONTEXT);
+    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PART_PC1__PC1, ComponentType.LOGICAL_STRUCTURE);
+    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PART_PC2__PC2, ComponentType.LOGICAL_STRUCTURE);
+    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PC1__PART_PC12__PC12, ComponentType.LOGICAL_STRUCTURE);
 
     shouldNotBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC6);
-    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC3, LaPackage.Literals.LOGICAL_COMPONENT);
+    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC3, ComponentType.LOGICAL_COMPONENT);
     mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PART_PC3__PC3);
 
     shouldNotBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC4);
@@ -104,14 +101,14 @@ public class SimpleComponents extends MultiPhasesTest {
     ((TraceabilityArchitectureSID) traceability).setArchitecture(BlockArchitectureExt.Type.PA);
 
     // mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC1__PC11, CtxPackage.Literals.SYSTEM); //no sid?
-    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC1__PC12, PaPackage.Literals.PHYSICAL_ACTOR);
-    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC1, PaPackage.Literals.PHYSICAL_ACTOR);
-    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC2, PaPackage.Literals.PHYSICAL_ACTOR);
+    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC1__PC12, ComponentType.PHYSICAL_ACTOR);
+    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC1, ComponentType.PHYSICAL_ACTOR);
+    mustBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC2, ComponentType.PHYSICAL_ACTOR);
     // mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PC1__PART_PC11__PC11, CtxPackage.Literals.SYSTEM_CONTEXT); //no
     // sid?
-    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PC1__PART_PC12__PC12, PaPackage.Literals.PHYSICAL_CONTEXT);
-    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PART_PC1__PC1, PaPackage.Literals.PHYSICAL_CONTEXT);
-    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PART_PC2__PC2, PaPackage.Literals.PHYSICAL_CONTEXT);
+    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PC1__PART_PC12__PC12, ComponentType.PHYSICAL_STRUCTURE);
+    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PART_PC1__PC1, ComponentType.PHYSICAL_STRUCTURE);
+    mustBeTransitionedInto(MP_SIMPLECOMPONENTS__PA__PART_PC2__PC2, ComponentType.PHYSICAL_STRUCTURE);
 
     shouldNotBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC6);
     shouldNotBeTransitioned(MP_SIMPLECOMPONENTS__PA__PC3);

@@ -48,8 +48,9 @@ public class RealizationLinkPass {
             BlockArchitecture previousOne = BlockArchitectureExt.getRootBlockArchitecture(previous);
             BlockArchitecture currentOne = BlockArchitectureExt.getRootBlockArchitecture(element);
 
-            //If SA2LA or LA2PA, we create a link
-            if (previousOne.getAllocatingArchitectures().contains(currentOne)) {
+            // If SA2LA or LA2PA, we create a link
+            // No need to create a realization link for System since it has been created in the temporary model
+            if (previousOne.getAllocatingArchitectures().contains(currentOne) && currentOne.getSystem() != element) {
               handler.attachTraceability(previous, element, context_p);
             }
           }

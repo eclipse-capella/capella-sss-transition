@@ -21,12 +21,12 @@
   <name>Capella Subsystem Transition</name>
   <groupId>org.polarsys</groupId>
   <artifactId>org.polarsys.capella.addon.transition.system2subsystem</artifactId>
-  <version>1.3.1-SNAPSHOT</version>
+  <version>1.4.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <properties>
-    <tycho-version>0.26.0</tycho-version>
-    <tycho-extras-version>0.26.0</tycho-extras-version>
+    <tycho-version>1.4.0</tycho-version>
+	<tycho-extras-version>1.4.0</tycho-extras-version>
     <tycho.scmUrl>scm:git:http://git.polarsys.org/c/capella/capella-sss-transition.git</tycho.scmUrl>
 	<antrun-version>1.7</antrun-version>
 	<sonar-version>3.0.2</sonar-version>
@@ -90,21 +90,11 @@
 				<artifact>
 					<groupId>org.polarsys</groupId>
 					<artifactId>org.polarsys.capella.addon.transition.system2subsystem</artifactId>
-					<version>1.3.1-SNAPSHOT</version>
+					<version>1.4.0-SNAPSHOT</version>
 					<classifier>releng/org.polarsys.capella.transition.system2subsystem.target/tp/capella.target-definition</classifier>
 				</artifact>
 			</target>
           <environments>
-            <environment>
-              <os>linux</os>
-              <ws>gtk</ws>
-              <arch>x86</arch>
-            </environment>
-            <environment>
-              <os>win32</os>
-              <ws>win32</ws>
-              <arch>x86</arch>
-            </environment>
             <environment>
               <os>win32</os>
               <ws>win32</ws>
@@ -236,6 +226,7 @@
 								<type>eclipse-plugin</type>
 							</dependency>
 						</dependencies>
+						<executionEnvironment>JavaSE-1.8</executionEnvironment>
 					</configuration>
 					<executions>
 						<execution>
@@ -246,6 +237,7 @@
 							</goals>
 							<configuration>
 								<appArgLine>-application org.eclipse.equinox.p2.repository.repo2runnable -source file:${project.build.directory}/repository -destination ${project.build.directory}/${packagedAddonName}/eclipse</appArgLine>
+								<executionEnvironment>JavaSE-1.8</executionEnvironment>
 							</configuration>
 						</execution>
 					</executions>
@@ -273,10 +265,12 @@
 											dir="${project.build.directory}/${packagedAddonName}/eclipse/features"
 											includes="**/META-INF/**" />
 									</delete>
+									
 									<zip
 										destfile="${project.build.directory}/${packagedAddonName}-dropins-${unqualifiedVersion}.${buildQualifier}.zip">
 										<fileset dir="${project.build.directory}">
 											<include name="${packagedAddonName}/**" />
+											<exclude name="**/org.polarsys.capella.transition.system2subsystem.tests*/**" />
 										</fileset>
 									</zip>
 								</target>

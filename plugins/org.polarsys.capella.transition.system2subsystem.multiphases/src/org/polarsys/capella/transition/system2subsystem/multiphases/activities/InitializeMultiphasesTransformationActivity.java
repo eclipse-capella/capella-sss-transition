@@ -28,10 +28,9 @@ import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.ui.business.api.viewpoint.ViewpointSelection;
 import org.eclipse.ui.statushandlers.StatusManager;
 import org.polarsys.capella.common.libraries.ModelInformation;
-import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.capellamodeller.Project;
 import org.polarsys.capella.core.model.handler.command.CapellaResourceHelper;
-import org.polarsys.capella.core.model.helpers.CapellaElementExt;
+import org.polarsys.capella.core.model.helpers.ProjectExt;
 import org.polarsys.capella.core.platform.sirius.ui.project.operations.ProjectSessionCreationHelper;
 import org.polarsys.capella.core.sirius.ui.helper.SessionHelper;
 import org.polarsys.capella.core.transition.common.constants.ISchemaConstants;
@@ -105,7 +104,7 @@ public final class InitializeMultiphasesTransformationActivity extends Initializ
     Project targetProject = null;
     if (context.get(ITransitionConstants.DIFFMERGE_DISABLE) == Boolean.TRUE) {
       // elements are created directly in the target model
-      Project project = (Project) CapellaElementExt.getRoot((CapellaElement) source.getContents().get(0));
+      Project project = ProjectExt.getProject(source);
       targetProject = project;
     } else {
 

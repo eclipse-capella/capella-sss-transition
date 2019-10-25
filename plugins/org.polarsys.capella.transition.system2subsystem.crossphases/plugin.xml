@@ -334,17 +334,6 @@
                </defaultMappingPossibility>
             </mappingElement>
             <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.la.LogicalActor"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalActorRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalActorRule"
-                     enabled="true"
-                     name="LogicalActor">
-               </defaultMappingPossibility>
-            </mappingElement>
-            <mappingElement
                   domainMetaClass="org.polarsys.capella.core.data.la.LogicalFunctionPkg"
                   reuseExtendedElementDefaultPossibility="true"
                   reuseExtendedElementPossibilities="true">
@@ -391,17 +380,6 @@
                      incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalFunctionRule"
                      enabled="true"
                      name="PhysicalFunction">
-               </defaultMappingPossibility>
-            </mappingElement>
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.pa.PhysicalActor"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalActorRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalActorRule"
-                     enabled="true"
-                     name="PhysicalActor">
                </defaultMappingPossibility>
             </mappingElement>
             <mappingElement

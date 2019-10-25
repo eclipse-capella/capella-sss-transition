@@ -22,9 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.Part;
-import org.polarsys.capella.core.data.information.Partition;
-import org.polarsys.capella.core.data.information.PartitionableElement;
-import org.polarsys.capella.core.data.pa.AbstractPhysicalComponent;
+import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.core.model.helpers.ComponentExt;
 import org.polarsys.capella.core.transition.common.capellaHelpers.HashMapSet;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
@@ -59,8 +57,8 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
       // if element is an ancestor of transfoSources, we don't merge them into another component
       if (shouldMerge) {
         shouldMerge(element, context_p);
-        for (Partition partition : element.getRepresentingPartitions()) {
-          if (sourceAndAncestors.contains(partition)) {
+        for (Part part : element.getRepresentingParts()) {
+          if (sourceAndAncestors.contains(part)) {
             shouldMerge = false;
           }
         }
@@ -68,11 +66,11 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
 
       // if element is a brother of an ancestor of transfoSources, we don't merge them into another component
       if (shouldMerge) {
-        for (Partition partition : element.getRepresentingPartitions()) {
+        for (Part part : element.getRepresentingParts()) {
           if (shouldMerge) {
-            for (Partition source : sourceAndAncestors) {
+            for (Part source : sourceAndAncestors) {
               if (shouldMerge) {
-                if (ComponentExt.isBrothers((Part) partition, (Part) source)) {
+                if (ComponentExt.isBrothers(part, source)) {
                   shouldMerge = false;
                 }
               }
@@ -85,11 +83,11 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
       if (shouldMerge) {
 
         boolean componentFound = false;
-        for (Partition partition : element.getRepresentingPartitions()) {
+        for (Part partElement : element.getRepresentingParts()) {
           if (!componentFound) {
-            for (Part part : ComponentExt.getBestPartAncestors((Part) partition)) {
+            for (Part part : ComponentExt.getBestPartAncestors(partElement)) {
               if (!componentFound) {
-                if ((part.getAbstractType() != null) && (part.getAbstractType() instanceof Component)) {
+                if (part.getAbstractType() instanceof Component) {
                   Component type = (Component) part.getAbstractType();
                   Component cache2 = getRelatedComponent(type, context_p);
                   if (cache2 != null) {
@@ -118,7 +116,7 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
    * @return
    */
   protected boolean shouldMerge(Component element_p, IContext context_p) {
-    return (element_p instanceof AbstractPhysicalComponent)
+    return (element_p instanceof PhysicalComponent)
            || OptionsHandlerHelper.getInstance(context_p).getBooleanValue(context_p, IOptionsConstants.SYSTEM2SUBSYSTEM_CROSSPHASES_PREFERENCES,
                IOptionsConstants.COMPONENT_MERGE, IOptionsConstants.COMPONENT_MERGE__DEFAULT_VALUE);
   }
@@ -136,11 +134,9 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
         sources.addAll(ComponentExt.getPartAncestors((Part) eObject));
 
       } else if (eObject instanceof Component) {
-        for (Partition partition : ((Component) eObject).getRepresentingPartitions()) {
-          if (partition instanceof Part) {
-            sources.add((Part) partition);
-            sources.addAll(ComponentExt.getPartAncestors((Part) partition));
-          }
+        for (Part part : ((Component) eObject).getRepresentingParts()) {
+          sources.add(part);
+          sources.addAll(ComponentExt.getPartAncestors(part));
         }
       }
     }
@@ -162,23 +158,17 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
         sources.add((Part) eObject);
 
       } else if (eObject instanceof Component) {
-        for (Partition partition : ((Component) eObject).getRepresentingPartitions()) {
-          if (partition instanceof Part) {
-            sources.add((Part) partition);
-          }
+        for (Part part : ((Component) eObject).getRepresentingParts()) {
+          sources.add(part);
         }
       }
     }
 
-    for (Partition partition : element_p.getRepresentingPartitions()) {
-      if (partition instanceof Part) {
-
-        for (Part source : sources) {
-          if (ComponentExt.isBrothers((Part) partition, source)) {
-            return true;
-          }
+    for (Part part : element_p.getRepresentingParts()) {
+      for (Part source : sources) {
+        if (ComponentExt.isBrothers(part, source)) {
+          return true;
         }
-
       }
     }
 
@@ -198,10 +188,10 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
             return true;
           }
         }
-      } else if (source instanceof PartitionableElement) {
-        for (Partition partition : ((PartitionableElement) source).getRepresentingPartitions()) {
-          if (partition instanceof Part) {
-            for (Part part : ComponentExt.getPartAncestors((Part) partition)) {
+      } else if (source instanceof Component) {
+        for (Part partSource : ((Component) source).getRepresentingParts()) {
+          if (partSource instanceof Part) {
+            for (Part part : ComponentExt.getPartAncestors(partSource)) {
               if (element_p.equals(part.getAbstractType())) {
                 return true;
               }

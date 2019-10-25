@@ -48,8 +48,8 @@ public class MergeSourceConfiguration extends ExtendedTraceabilityConfiguration 
       super.initializeBlockArchitecture(source, target, context, map);
 
       //We add a mapping between both root components
-      Component sourceComponent = BlockArchitectureExt.getFirstComponent(source);
-      Component targetComponent = BlockArchitectureExt.getFirstComponent(target);
+      Component sourceComponent = BlockArchitectureExt.getOrCreateSystem(source);
+      Component targetComponent = BlockArchitectureExt.getOrCreateSystem(target);
       if ((sourceComponent != null) && (targetComponent != null)) {
         if ((!map.contains(sourceComponent)) && (!map.contains(targetComponent))) {
           addMapping(map, sourceComponent, targetComponent, context);

@@ -17,21 +17,15 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.polarsys.capella.common.helpers.EObjectExt;
+import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.cs.Part;
-import org.polarsys.capella.core.data.ctx.ActorPkg;
-import org.polarsys.capella.core.data.ctx.CtxPackage;
-import org.polarsys.capella.core.data.ctx.SystemAnalysis;
-import org.polarsys.capella.core.data.information.Partition;
 import org.polarsys.capella.core.data.interaction.InteractionPackage;
 import org.polarsys.capella.core.data.la.LaPackage;
-import org.polarsys.capella.core.data.la.LogicalActorPkg;
-import org.polarsys.capella.core.data.la.LogicalArchitecture;
 import org.polarsys.capella.core.data.la.LogicalComponent;
 import org.polarsys.capella.core.data.la.LogicalComponentPkg;
 import org.polarsys.capella.core.data.pa.PaPackage;
-import org.polarsys.capella.core.data.pa.PhysicalActorPkg;
-import org.polarsys.capella.core.data.pa.PhysicalArchitecture;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.core.data.pa.PhysicalComponentPkg;
 import org.polarsys.capella.core.model.helpers.ComponentExt;
@@ -45,95 +39,73 @@ import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 public class ComponentRule extends org.polarsys.capella.core.transition.system.rules.cs.ComponentRule {
 
   @Override
-  protected void retrieveComponentGoDeep(EObject source_p, List<EObject> result_p, IContext context_p) {
+  protected void retrieveComponentGoDeep(EObject source, List<EObject> result, IContext context) {
 
-    Component element = (Component) source_p;
-    super.retrieveComponentGoDeep(source_p, result_p, context_p);
+    Component element = (Component) source;
+    super.retrieveComponentGoDeep(source, result, context);
 
-    result_p.addAll(element.getRepresentingPartitions());
-    result_p.addAll(element.getFunctionalAllocations());
-    result_p.addAll(element.getUsedInterfaceLinks());
-    result_p.addAll(element.getImplementedInterfaceLinks());
+    result.addAll(element.getRepresentingParts());
+    result.addAll(element.getFunctionalAllocations());
+    result.addAll(element.getUsedInterfaceLinks());
+    result.addAll(element.getImplementedInterfaceLinks());
 
-    IContextScopeHandler handler = ContextScopeHandlerHelper.getInstance(context_p);
+    IContextScopeHandler handler = ContextScopeHandlerHelper.getInstance(context);
 
-    if (handler.contains(ITransitionConstants.SOURCE_SCOPE, element, context_p)) {
+    if (handler.contains(ITransitionConstants.SOURCE_SCOPE, element, context)) {
 
       // Retrieve state machines of reference components
       String value =
-          OptionsHandlerHelper.getInstance(context_p).getStringValue(context_p, IOptionsConstants.SYSTEM2SUBSYSTEM_PREFERENCES,
+          OptionsHandlerHelper.getInstance(context).getStringValue(context, IOptionsConstants.SYSTEM2SUBSYSTEM_PREFERENCES,
               IOptionsConstants.STATE_MODES_EXPORT, IOptionsConstants.STATE_MODES_DEFAULT_VALUE);
 
       if (IOptionsConstants.STATE_MODES_ONLY_REFERENCES_VALUE.equals(value)) {
-        result_p.addAll(element.getOwnedStateMachines());
-        handler.addAll(ITransitionConstants.SOURCE_SCOPE, element.getOwnedStateMachines(), context_p);
+        result.addAll(element.getOwnedStateMachines());
+        handler.addAll(ITransitionConstants.SOURCE_SCOPE, element.getOwnedStateMachines(), context);
 
       } else if (IOptionsConstants.STATE_MODES_HIERARCHICAL_VALUE.equals(value)) {
-        result_p.addAll(element.getOwnedStateMachines());
-        handler.addAll(ITransitionConstants.SOURCE_SCOPE, element.getOwnedStateMachines(), context_p);
+        result.addAll(element.getOwnedStateMachines());
+        handler.addAll(ITransitionConstants.SOURCE_SCOPE, element.getOwnedStateMachines(), context);
 
         for (Component ancestor : getComponentAncestors(element)) {
-          result_p.addAll(ancestor.getOwnedStateMachines());
-          handler.addAll(ITransitionConstants.SOURCE_SCOPE, ancestor.getOwnedStateMachines(), context_p);
+          result.addAll(ancestor.getOwnedStateMachines());
+          handler.addAll(ITransitionConstants.SOURCE_SCOPE, ancestor.getOwnedStateMachines(), context);
         }
       }
 
       // Add all instance roles
-      if (OptionsHandlerHelper.getInstance(context_p).getBooleanValue(context_p, IOptionsConstants.SYSTEM2SUBSYSTEM_PREFERENCES,
+      if (OptionsHandlerHelper.getInstance(context).getBooleanValue(context, IOptionsConstants.SYSTEM2SUBSYSTEM_PREFERENCES,
           IOptionsConstants.SCENARIO_EXPORT, IOptionsConstants.SCENARIO_EXPORT_DEFAULT_VALUE)) {
-        result_p.addAll(EObjectExt.getReferencers(element, InteractionPackage.Literals.INSTANCE_ROLE__REPRESENTED_INSTANCE));
+        result.addAll(EObjectExt.getReferencers(element, InteractionPackage.Literals.INSTANCE_ROLE__REPRESENTED_INSTANCE));
       }
     }
 
   }
 
   @Override
-  protected EStructuralFeature getTargetContainementFeature(EObject element_p, EObject result_p, EObject container_p, IContext context_p) {
-
-    if (container_p instanceof SystemAnalysis) {
-      return CtxPackage.Literals.SYSTEM_ANALYSIS__OWNED_SYSTEM;
-
-    } else if (container_p instanceof LogicalArchitecture) {
-      return LaPackage.Literals.LOGICAL_ARCHITECTURE__OWNED_LOGICAL_COMPONENT;
-
-    } else if (container_p instanceof PhysicalArchitecture) {
-      return PaPackage.Literals.PHYSICAL_ARCHITECTURE__OWNED_PHYSICAL_COMPONENT;
-
-    } else if (container_p instanceof ActorPkg) {
-      return CtxPackage.Literals.ACTOR_PKG__OWNED_ACTORS;
-
-    } else if (container_p instanceof LogicalActorPkg) {
-      return LaPackage.Literals.LOGICAL_ACTOR_PKG__OWNED_LOGICAL_ACTORS;
-
-    } else if (container_p instanceof PhysicalActorPkg) {
-      return PaPackage.Literals.PHYSICAL_ACTOR_PKG__OWNED_PHYSICAL_ACTORS;
-
-    } else if (container_p instanceof LogicalComponent) {
+  protected EStructuralFeature getTargetContainementFeature(EObject element, EObject result, EObject container, IContext context) {
+    if (container instanceof LogicalComponent) {
       return LaPackage.Literals.LOGICAL_COMPONENT__OWNED_LOGICAL_COMPONENTS;
 
-    } else if (container_p instanceof PhysicalComponent) {
+    } else if (container instanceof PhysicalComponent) {
       return PaPackage.Literals.PHYSICAL_COMPONENT__OWNED_PHYSICAL_COMPONENTS;
 
-    } else if (container_p instanceof LogicalComponentPkg) {
+    } else if (container instanceof LogicalComponentPkg) {
       return LaPackage.Literals.LOGICAL_COMPONENT_PKG__OWNED_LOGICAL_COMPONENTS;
 
-    } else if (container_p instanceof PhysicalComponentPkg) {
-      return PaPackage.Literals.PHYSICAL_COMPONENT_PKG__OWNED_COMPONENTS;
+    } else if (container instanceof PhysicalComponentPkg) {
+      return PaPackage.Literals.PHYSICAL_COMPONENT_PKG__OWNED_PHYSICAL_COMPONENTS;
     }
 
-    return super.getTargetContainementFeature(element_p, result_p, container_p, context_p);
+    return super.getTargetContainementFeature(element, result, container, context);
   }
 
-  private Collection<Component> getComponentAncestors(Component component_p) {
-    Collection<Component> result = new HashSet<Component>();
+  private Collection<Component> getComponentAncestors(Component component) {
+    Collection<Component> result = new HashSet<>();
 
-    for (Partition partition : component_p.getRepresentingPartitions()) {
-      if (partition instanceof Part) {
-        for (Part componentAncestor : ComponentExt.getPartAncestors((Part) partition)) {
-
-          if ((componentAncestor.getAbstractType() != null) && (componentAncestor.getAbstractType() instanceof Component)) {
-            result.add((Component) componentAncestor.getAbstractType());
-          }
+    for (Part part : component.getRepresentingParts()) {
+      for (Part componentAncestor : ComponentExt.getPartAncestors(part)) {
+        if (componentAncestor.getAbstractType() instanceof Component) {
+          result.add((Component) componentAncestor.getAbstractType());
         }
       }
     }

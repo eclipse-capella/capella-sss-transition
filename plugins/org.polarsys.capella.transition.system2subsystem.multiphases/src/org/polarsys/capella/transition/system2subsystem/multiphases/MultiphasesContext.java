@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.core.data.capellacore.ModellingArchitecture;
 import org.polarsys.capella.core.data.capellamodeller.ModelRoot;
-import org.polarsys.capella.core.data.capellamodeller.Project;
 import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.ctx.CtxPackage;
@@ -27,7 +26,6 @@ import org.polarsys.capella.core.data.pa.PaPackage;
 import org.polarsys.capella.core.data.pa.PhysicalArchitecture;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.core.data.sharedmodel.SharedPkg;
-import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.context.TransitionContext;
 import org.polarsys.capella.core.transition.system.helpers.ContextHelper;
@@ -71,15 +69,10 @@ public class MultiphasesContext extends TransitionContext {
 
     private EObject getTempRootComponent(MultiphasesContext context) {
       BlockArchitecture ba = getTempBlockArchitecture(context);
-      if (ba instanceof SystemAnalysis) {
-        return ((SystemAnalysis) ba).getOwnedSystem();
+      if (ba.getSystem() != null) {
+        return ba.getSystem();
       }
-      if (ba instanceof LogicalArchitecture) {
-        return ((LogicalArchitecture) ba).getOwnedLogicalComponent();
-      }
-      if (ba instanceof PhysicalArchitecture) {
-        return ((PhysicalArchitecture) ba).getOwnedPhysicalComponent();
-      }
+
       throw new IllegalStateException("No root component for " + blockArchitecture.eClass().getName()); //$NON-NLS-1$
     }
   }

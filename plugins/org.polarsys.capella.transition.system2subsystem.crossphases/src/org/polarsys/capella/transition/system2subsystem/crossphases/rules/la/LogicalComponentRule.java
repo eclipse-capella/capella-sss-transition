@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.osgi.util.NLS;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.Part;
-import org.polarsys.capella.core.data.information.Partition;
 import org.polarsys.capella.core.data.la.LaPackage;
 import org.polarsys.capella.core.data.la.LogicalComponent;
 import org.polarsys.capella.core.model.helpers.ComponentExt;
@@ -48,24 +47,24 @@ public class LogicalComponentRule extends Component2SARule {
    * {@inheritDoc}
    */
   @Override
-  protected void premicesRelated(EObject element_p, ArrayList<IPremise> needed_p) {
-    super.premicesRelated(element_p, needed_p);
+  protected void premicesRelated(EObject element, ArrayList<IPremise> needed) {
+    super.premicesRelated(element, needed);
 
     // Disable merge of components if option is disabled
     if (!OptionsHandlerHelper.getInstance(getCurrentContext()).getBooleanValue(getCurrentContext(),
         IOptionsConstants.SYSTEM2SUBSYSTEM_CROSSPHASES_PREFERENCES, IOptionsConstants.COMPONENT_MERGE, IOptionsConstants.COMPONENT_MERGE__DEFAULT_VALUE)) {
       return;
     }
-    LogicalComponent element = (LogicalComponent) element_p;
+    LogicalComponent component = (LogicalComponent) element;
 
-    for (Partition partition : element.getRepresentingPartitions()) {
-      needed_p.addAll(createDefaultPrecedencePremices((Collection) ComponentExt.getPartAncestors((Part) partition, true), "part"));
+    for (Part part : component.getRepresentingParts()) {
+      needed.addAll(createDefaultPrecedencePremices((Collection) ComponentExt.getPartAncestors(part, true), "part"));
     }
   }
 
   @Override
-  protected void retrieveGoDeep(EObject source_p, List<EObject> result_p, IContext context_p) {
-    super.retrieveGoDeep(source_p, result_p, context_p);
+  protected void retrieveGoDeep(EObject source, List<EObject> result, IContext context) {
+    super.retrieveGoDeep(source, result, context);
 
     // Disable merge of components if option is disabled
     if (!OptionsHandlerHelper.getInstance(getCurrentContext()).getBooleanValue(getCurrentContext(),
@@ -73,14 +72,12 @@ public class LogicalComponentRule extends Component2SARule {
       return;
     }
 
-    if (ContextScopeHandlerHelper.getInstance(context_p).contains(ITransitionConstants.SOURCE_SCOPE, source_p, context_p)) {
-      if (source_p instanceof LogicalComponent) {
-        LogicalComponent element = (LogicalComponent) source_p;
-        for (Partition part : element.getOwnedPartitions()) {
-          if (part instanceof Part) {
-            result_p.add(part);
-            ContextScopeHandlerHelper.getInstance(context_p).add(ITransitionConstants.SOURCE_SCOPE, part, context_p);
-          }
+    if (ContextScopeHandlerHelper.getInstance(context).contains(ITransitionConstants.SOURCE_SCOPE, source, context)) {
+      if (source instanceof LogicalComponent) {
+        LogicalComponent element = (LogicalComponent) source;
+        for (Part part : element.getContainedParts()) {
+          result.add(part);
+          ContextScopeHandlerHelper.getInstance(context).add(ITransitionConstants.SOURCE_SCOPE, part, context);
         }
       }
     }
@@ -88,26 +85,26 @@ public class LogicalComponentRule extends Component2SARule {
 
   @SuppressWarnings("unchecked")
   @Override
-  public IStatus transformRequired(EObject source_p, IContext context_p) {
-    LogicalComponent element = (LogicalComponent) source_p;
+  public IStatus transformRequired(EObject source, IContext context) {
+    LogicalComponent element = (LogicalComponent) source;
 
     // Disable merge of components if option is disabled
-    if (!OptionsHandlerHelper.getInstance(getCurrentContext()).getBooleanValue(context_p, IOptionsConstants.SYSTEM2SUBSYSTEM_CROSSPHASES_PREFERENCES,
+    if (!OptionsHandlerHelper.getInstance(getCurrentContext()).getBooleanValue(context, IOptionsConstants.SYSTEM2SUBSYSTEM_CROSSPHASES_PREFERENCES,
         IOptionsConstants.COMPONENT_MERGE, IOptionsConstants.COMPONENT_MERGE__DEFAULT_VALUE)) {
-      return super.transformRequired(source_p, context_p);
+      return super.transformRequired(source, context);
     }
 
-    Collection<EObject> transfoSources = (Collection<EObject>) context_p.get(ITransitionConstants.TRANSITION_SOURCES);
+    Collection<EObject> transfoSources = (Collection<EObject>) context.get(ITransitionConstants.TRANSITION_SOURCES);
     if (transfoSources.contains(element)) {
       return Status.OK_STATUS;
     }
 
-    Component src = CrossPhasesAttachmentHelper.getInstance(context_p).getRelatedComponent(element, context_p);
+    Component src = CrossPhasesAttachmentHelper.getInstance(context).getRelatedComponent(element, context);
     if (src != element) {
       return new Status(IStatus.WARNING, Messages.Activity_Transformation, NLS.bind("Component ''{0}'' will be merged into ''{1}''", LogHelper.getInstance()
           .getText(element), LogHelper.getInstance().getText(src)));
     }
 
-    return super.transformRequired(source_p, context_p);
+    return super.transformRequired(source, context);
   }
 }

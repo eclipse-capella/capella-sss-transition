@@ -28,6 +28,7 @@ import org.polarsys.capella.common.helpers.EObjectExt;
 import org.polarsys.capella.common.helpers.EObjectLabelProviderHelper;
 import org.polarsys.capella.common.helpers.EcoreUtil2;
 import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.cs.ExchangeItemAllocation;
 import org.polarsys.capella.core.data.cs.Interface;
 import org.polarsys.capella.core.data.cs.Part;
@@ -40,8 +41,6 @@ import org.polarsys.capella.core.data.helpers.interaction.services.SequenceMessa
 import org.polarsys.capella.core.data.information.AbstractEventOperation;
 import org.polarsys.capella.core.data.information.AbstractInstance;
 import org.polarsys.capella.core.data.information.InformationPackage;
-import org.polarsys.capella.core.data.information.Partition;
-import org.polarsys.capella.core.data.information.PartitionableElement;
 import org.polarsys.capella.core.data.information.Port;
 import org.polarsys.capella.core.data.interaction.AbstractEnd;
 import org.polarsys.capella.core.data.interaction.Event;
@@ -204,20 +203,18 @@ public class ScenarioAttachmentHelper extends AbstractScenarioHelper implements 
    * @param role_p
    * @return
    */
-  protected Collection<AbstractInstance> getRelatedTracedInstances(AbstractInstance instance_p, IContext context_p) {
-    List<AbstractInstance> partBounds = new ArrayList<AbstractInstance>();
+  protected Collection<AbstractInstance> getRelatedTracedInstances(AbstractInstance instance, IContext context) {
+    List<AbstractInstance> partBounds = new ArrayList<>();
 
-    partBounds.addAll((Collection) TraceabilityHandlerHelper.getInstance(context_p).retrieveTracedElements(instance_p, context_p,
+    partBounds.addAll((Collection) TraceabilityHandlerHelper.getInstance(context).retrieveTracedElements(instance, context,
         InformationPackage.Literals.ABSTRACT_INSTANCE));
 
-    if (partBounds.size() == 0) {
-      if (instance_p instanceof Part) {
-        AbstractType type = instance_p.getAbstractType();
-        for (EObject element : TraceabilityHandlerHelper.getInstance(context_p).retrieveTracedElements(type, context_p,
-            InformationPackage.Literals.PARTITIONABLE_ELEMENT)) {
-          if (element instanceof PartitionableElement) {
-            partBounds.addAll(((PartitionableElement) element).getRepresentingPartitions());
-          }
+    if (partBounds.isEmpty() && instance instanceof Part) {
+      AbstractType type = instance.getAbstractType();
+      for (EObject element : TraceabilityHandlerHelper.getInstance(context).retrieveTracedElements(type, context,
+          CsPackage.Literals.COMPONENT)) {
+        if (element instanceof Component) {
+          partBounds.addAll(((Component) element).getRepresentingParts());
         }
       }
     }
@@ -272,7 +269,7 @@ public class ScenarioAttachmentHelper extends AbstractScenarioHelper implements 
                           EObjectLabelProviderHelper.getMetaclassLabel(operation_p, true) });
 
     EObject context = (isSource ? message.getSendingEnd() : message.getReceivingEnd());
-    return (Partition) resolver.resolve(operation_p, (List) partBounds, "TITLE", messageTxt, false, transfo_p, new EObject[] { message, operation_p, context })
+    return (Part) resolver.resolve(operation_p, (List) partBounds, "TITLE", messageTxt, false, transfo_p, new EObject[] { message, operation_p, context })
         .get(0);
   }
 
@@ -370,7 +367,7 @@ public class ScenarioAttachmentHelper extends AbstractScenarioHelper implements 
         }
 
         for (Component component : components) {
-          partBounds.addAll(component.getRepresentingPartitions());
+          partBounds.addAll(component.getRepresentingParts());
         }
 
       } else if (operation instanceof ComponentExchange) {
@@ -386,7 +383,7 @@ public class ScenarioAttachmentHelper extends AbstractScenarioHelper implements 
           if (partBound != null) {
             partBounds.add(partBound);
           } else if (typeBound != null) {
-            partBounds.addAll(typeBound.getRepresentingPartitions());
+            partBounds.addAll(typeBound.getRepresentingParts());
           }
         }
 
@@ -398,7 +395,7 @@ public class ScenarioAttachmentHelper extends AbstractScenarioHelper implements 
           if (partBound != null) {
             partBounds.add(partBound);
           } else if (typeBound != null) {
-            partBounds.addAll(typeBound.getRepresentingPartitions());
+            partBounds.addAll(typeBound.getRepresentingParts());
           }
         }
 
@@ -423,8 +420,8 @@ public class ScenarioAttachmentHelper extends AbstractScenarioHelper implements 
         if (function != null) {
           if (shouldRetrieveAllocating) {
             for (ComponentFunctionalAllocation allocation : function.getComponentFunctionalAllocations()) {
-              if ((allocation.getBlock() != null) && (allocation.getBlock() instanceof PartitionableElement)) {
-                partBounds.addAll(((PartitionableElement) allocation.getBlock()).getRepresentingPartitions());
+              if (allocation.getBlock() instanceof Component) {
+                partBounds.addAll(((Component) allocation.getBlock()).getRepresentingParts());
               }
             }
 
@@ -434,7 +431,7 @@ public class ScenarioAttachmentHelper extends AbstractScenarioHelper implements 
                 if (allocatingRole != null) {
                   for (RoleAllocation roleAllocation : allocatingRole.getRoleAllocations()) {
                     if (roleAllocation.getEntity() != null) {
-                      partBounds.addAll(((PartitionableElement) roleAllocation.getEntity()).getRepresentingPartitions());
+                      partBounds.addAll(roleAllocation.getEntity().getRepresentingParts());
                     }
                   }
                 }

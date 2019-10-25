@@ -13,7 +13,6 @@ package org.polarsys.capella.transition.system2subsystem.tests.crossphases;
 import java.util.Collection;
 
 import org.polarsys.capella.common.data.modellingcore.ModellingcorePackage;
-import org.polarsys.capella.core.data.ctx.CtxPackage;
 
 public class PhysicalToSystemComponent {
 
@@ -35,10 +34,10 @@ public class PhysicalToSystemComponent {
     protected void verify() {
 
       retrieveReferenceElement(PC11);
-      testInstanceOf(retrieveTargetElement(PC11), CtxPackage.Literals.SYSTEM);
+      testInstanceOf(retrieveTargetElement(PC11), ComponentType.SYSTEM);
 
       retrieveReferenceElement(PC2);
-      testInstanceOf(retrieveTargetElement(PC2), CtxPackage.Literals.ACTOR);
+      testInstanceOf(retrieveTargetElement(PC2), ComponentType.ACTOR);
     }
   }
 

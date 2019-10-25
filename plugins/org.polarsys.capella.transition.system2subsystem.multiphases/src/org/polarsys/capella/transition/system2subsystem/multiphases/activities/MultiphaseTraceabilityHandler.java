@@ -15,24 +15,15 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.polarsys.capella.common.data.modellingcore.AbstractType;
 import org.polarsys.capella.common.helpers.EcoreUtil2;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.cs.InterfacePkg;
-import org.polarsys.capella.core.data.cs.Part;
-import org.polarsys.capella.core.data.ctx.CtxPackage;
-import org.polarsys.capella.core.data.ctx.SystemAnalysis;
-import org.polarsys.capella.core.data.epbs.EpbsPackage;
 import org.polarsys.capella.core.data.information.DataPkg;
 import org.polarsys.capella.core.data.information.InformationPackage;
-import org.polarsys.capella.core.data.la.LaPackage;
-import org.polarsys.capella.core.data.la.LogicalArchitecture;
-import org.polarsys.capella.core.data.pa.PaPackage;
-import org.polarsys.capella.core.data.pa.PhysicalArchitecture;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.core.data.pa.PhysicalComponentNature;
+import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.transition.common.handlers.traceability.CompoundTraceabilityHandler;
 import org.polarsys.capella.core.transition.common.handlers.traceability.config.ITraceabilityConfiguration;
 import org.polarsys.capella.transition.system2subsystem.multiphases.MultiphasesContext;
@@ -87,15 +78,10 @@ public class MultiphaseTraceabilityHandler extends CompoundTraceabilityHandler {
 		/*
 		 * Root components are mapped to the root component of the currently active phase
 		 */
-		if (isRootComponent(source_p)){
+		BlockArchitecture rootBlockArchitecture = BlockArchitectureExt.getRootBlockArchitecture(source_p); 
+		if (rootBlockArchitecture != null && rootBlockArchitecture.getSystem() == source_p){
 			BlockArchitecture ba = ((MultiphasesContext) context_p).getTempBlockArchitecture();
-			if (ba instanceof SystemAnalysis){
-				return Collections.<EObject>singleton(((SystemAnalysis) ba).getOwnedSystem());
-			} else if (ba instanceof LogicalArchitecture){
-				return Collections.<EObject>singleton(((LogicalArchitecture) ba).getOwnedLogicalComponent());
-			} else if (ba instanceof PhysicalArchitecture){
-				return Collections.<EObject>singleton(((PhysicalArchitecture) ba).getOwnedPhysicalComponent());
-			}
+		  return Collections.<EObject>singleton(ba.getSystem());
 		}
 		
 		// data and interface package content is always traced into the SA
@@ -129,29 +115,7 @@ public class MultiphaseTraceabilityHandler extends CompoundTraceabilityHandler {
 		if (targetElement_p instanceof BlockArchitecture){
 			return;
 		} 
-		else if (targetElement_p instanceof Part){
-			AbstractType type = ((Part) targetElement_p).getAbstractType();
-			if (type != null && isRootComponent(type)){
-				return;
-			}
-	}
-		if (isRootComponent(targetElement_p)){
-			return;
-		}
-		
-		super.attachTraceability(sourceElement_p, targetElement_p, context_p);
-	}
 
-	private boolean isRootComponent(EObject element_p){
-		EStructuralFeature feature = element_p.eContainingFeature();
-		if (feature == CtxPackage.Literals.SYSTEM_ANALYSIS__OWNED_SYSTEM 
-				|| feature == LaPackage.Literals.LOGICAL_ARCHITECTURE__OWNED_LOGICAL_COMPONENT
-				|| feature == PaPackage.Literals.PHYSICAL_ARCHITECTURE__OWNED_PHYSICAL_COMPONENT
-				|| feature == EpbsPackage.Literals.EPBS_ARCHITECTURE__OWNED_CONFIGURATION_ITEM){
-			return true;
-		}
-		return false;
+    super.attachTraceability(sourceElement_p, targetElement_p, context_p);
 	}
-	
-	
 }

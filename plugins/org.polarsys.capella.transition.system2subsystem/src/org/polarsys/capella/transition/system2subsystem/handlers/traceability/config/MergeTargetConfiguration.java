@@ -15,7 +15,7 @@ import org.polarsys.capella.common.libraries.ModelInformation;
 import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.Component;
-import org.polarsys.capella.core.data.information.Partition;
+import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
 import org.polarsys.capella.core.transition.common.constants.ISchemaConstants;
@@ -47,19 +47,19 @@ public class MergeTargetConfiguration extends ExtendedTraceabilityConfiguration 
     protected void initializeBlockArchitecture(BlockArchitecture source_p, BlockArchitecture target_p, IContext context_p, LevelMappingTraceability map_p) {
       super.initializeBlockArchitecture(source_p, target_p, context_p, map_p);
 
-      Component sourceComponent = BlockArchitectureExt.getFirstComponent(source_p);
-      Component targetComponent = BlockArchitectureExt.getFirstComponent(target_p);
+      Component sourceComponent = BlockArchitectureExt.getOrCreateSystem(source_p);
+      Component targetComponent = BlockArchitectureExt.getOrCreateSystem(target_p);
       if ((sourceComponent != null) && (targetComponent != null)) {
         if ((!map_p.contains(sourceComponent)) && (!map_p.contains(targetComponent))) {
           addMapping(map_p, sourceComponent, targetComponent, context_p);
         }
       }
 
-      if ((sourceComponent != null) && (sourceComponent.getRepresentingPartitions().size() == 1)) {
-        if ((targetComponent != null) && (targetComponent.getRepresentingPartitions().size() == 1)) {
-          Partition sourcePartition = sourceComponent.getRepresentingPartitions().get(0);
-          Partition targetPartition = targetComponent.getRepresentingPartitions().get(0);
-          addMapping(map_p, sourcePartition, targetPartition, context_p);
+      if ((sourceComponent != null) && (sourceComponent.getRepresentingParts().size() == 1)) {
+        if ((targetComponent != null) && (targetComponent.getRepresentingParts().size() == 1)) {
+          Part sourcePart = sourceComponent.getRepresentingParts().get(0);
+          Part targetPart = targetComponent.getRepresentingParts().get(0);
+          addMapping(map_p, sourcePart, targetPart, context_p);
         }
       }
     }

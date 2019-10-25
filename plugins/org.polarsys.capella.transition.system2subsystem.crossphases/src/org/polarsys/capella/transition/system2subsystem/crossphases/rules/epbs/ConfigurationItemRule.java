@@ -15,10 +15,12 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
+import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.epbs.ConfigurationItem;
 import org.polarsys.capella.core.data.epbs.EpbsPackage;
 import org.polarsys.capella.core.data.pa.PhysicalArchitecture;
+import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.contextscope.ContextScopeHandlerHelper;
@@ -57,24 +59,27 @@ public class ConfigurationItemRule extends Component2SARule {
    * {@inheritDoc}
    */
   @Override
-  protected EObject getDefaultContainer(EObject element_p, EObject result_p, IContext context_p) {
-    EObject root = TransformationHandlerHelper.getInstance(context_p).getLevelElement(element_p, context_p);
+  protected EObject getDefaultContainer(EObject element, EObject result, IContext context) {
+    EObject root = TransformationHandlerHelper.getInstance(context).getLevelElement(element, context);
     BlockArchitecture epbsArchitecture = (BlockArchitecture) root;
-    PhysicalArchitecture architecture = SystemEngineeringExt.getPhysicalArchitecture(epbsArchitecture);
-    BlockArchitecture target =
-        (BlockArchitecture) TransformationHandlerHelper.getInstance(context_p).getBestTracedElement(architecture, context_p,
-            CsPackage.Literals.BLOCK_ARCHITECTURE, element_p, result_p);
-    return target;
+    // Jump to PA to find the default container
+    PhysicalArchitecture pa = SystemEngineeringExt.getPhysicalArchitecture(epbsArchitecture);
+    BlockArchitecture target = (BlockArchitecture) TransformationHandlerHelper.getInstance(context)
+        .getBestTracedElement(pa, context, CsPackage.Literals.BLOCK_ARCHITECTURE, element, result);
+    if (result instanceof Component) {
+      return BlockArchitectureExt.getComponentPkg(target, true);
+    }
+    return BlockArchitectureExt.getFirstComponent(target, true);
   }
 
   @Override
   protected void retrieveComponentGoDeep(EObject source_p, List<EObject> result_p, IContext context_p) {
     ConfigurationItem element = (ConfigurationItem) source_p;
-    result_p.addAll(element.getAllocatedComponents());
+    result_p.addAll(element.getAllocatedPhysicalArtifacts());
     result_p.addAll(element.getAllocatedInterfaces());
     result_p.addAll(element.getAllocatedFunctions());
 
-    ContextScopeHandlerHelper.getInstance(context_p).addAll(ITransitionConstants.SOURCE_SCOPE, element.getAllocatedComponents(), context_p);
+    ContextScopeHandlerHelper.getInstance(context_p).addAll(ITransitionConstants.SOURCE_SCOPE, element.getAllocatedPhysicalArtifacts(), context_p);
     ContextScopeHandlerHelper.getInstance(context_p).addAll(ITransitionConstants.SOURCE_SCOPE, element.getAllocatedInterfaces(), context_p);
     ContextScopeHandlerHelper.getInstance(context_p).addAll(ITransitionConstants.SOURCE_SCOPE, element.getAllocatedFunctions(), context_p);
   }

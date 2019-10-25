@@ -201,17 +201,6 @@
                 </defaultMappingPossibility>
              </mappingElement>
              <mappingElement
-             domainMetaClass="org.polarsys.capella.core.data.pa.PhysicalActor"
-          	        reuseExtendedElementDefaultPossibility="true"
-                   reuseExtendedElementPossibilities="true">
-                <defaultMappingPossibility
-                      completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PhysicalActorRules$ToSA"
-                      incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PhysicalActorRules$ToSA"
-                      enabled="true"
-                      name="PhysicalActor">
-                </defaultMappingPossibility>
-             </mappingElement>
-             <mappingElement
              domainMetaClass="org.polarsys.capella.core.data.capellacore.Constraint"
           	        reuseExtendedElementDefaultPossibility="true"
                    reuseExtendedElementPossibilities="true">
@@ -447,17 +436,6 @@
                       incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.AbstractCapabilityPkgRules$ToLA"
                       enabled="true"
                       name="AbstractCapabilityPkg">
-                </defaultMappingPossibility>
-             </mappingElement>
-              <mappingElement
-             domainMetaClass="org.polarsys.capella.core.data.pa.PhysicalActor"
-          	        reuseExtendedElementDefaultPossibility="true"
-                   reuseExtendedElementPossibilities="true">
-                <defaultMappingPossibility
-                      completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PhysicalActorRules$ToLA"
-                      incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PhysicalActorRules$ToLA"
-                      enabled="true"
-                      name="PhysicalActor">
                 </defaultMappingPossibility>
              </mappingElement>
              <mappingElement
@@ -723,17 +701,6 @@
                       name="AbstractCapabilityPkg">
                 </defaultMappingPossibility>
              </mappingElement>
-              <mappingElement
-             domainMetaClass="org.polarsys.capella.core.data.pa.PhysicalActor"
-                    reuseExtendedElementDefaultPossibility="true"
-                   reuseExtendedElementPossibilities="true">
-                <defaultMappingPossibility
-                      completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PhysicalActorRules$ToPA"
-                      incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PhysicalActorRules$ToPA"
-                      enabled="true"
-                      name="PhysicalActor">
-                </defaultMappingPossibility>
-             </mappingElement>
              <mappingElement
              domainMetaClass="org.polarsys.capella.core.data.capellacore.Constraint"
                     reuseExtendedElementDefaultPossibility="true"
@@ -901,13 +868,13 @@
             cache="true"
             mode="Batch">
          <package
-               namespaceUri="http://www.polarsys.org/capella/core/la/1.3.0">
+               namespaceUri="http://www.polarsys.org/capella/core/la/1.4.0">
          </package>
           <package
-               namespaceUri="http://www.polarsys.org/capella/core/pa/1.3.0">
+               namespaceUri="http://www.polarsys.org/capella/core/pa/1.4.0">
          </package>
          <package
-               namespaceUri="http://www.polarsys.org/capella/core/fa/1.3.0">
+               namespaceUri="http://www.polarsys.org/capella/core/fa/1.4.0">
          </package>
          <constraints
                categories="capella.category/transfo_sys2sub">

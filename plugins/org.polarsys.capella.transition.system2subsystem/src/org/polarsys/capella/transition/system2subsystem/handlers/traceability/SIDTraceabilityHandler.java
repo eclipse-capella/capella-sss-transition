@@ -12,16 +12,16 @@ package org.polarsys.capella.transition.system2subsystem.handlers.traceability;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
-
+import org.polarsys.capella.common.data.modellingcore.ModellingcorePackage;
 import org.polarsys.capella.common.mdsofa.common.constant.ICommonConstants;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.transition.common.handlers.session.SessionHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.traceability.LinkTraceabilityHandler;
-import org.polarsys.capella.common.data.modellingcore.ModellingcorePackage;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 /**
@@ -115,6 +115,22 @@ public class SIDTraceabilityHandler extends LinkTraceabilityHandler {
       }
     }
 
+    // Sort the sid string according to order of source elements
+    values.sort(new Comparator<String>() {
+      public int compare(String id1, String id2) {
+        EObject eObjectFromId1 = SessionHandlerHelper.getInstance(context_p).getEObjectFromId(id1, context_p);
+        EObject eObjectFromId2 = SessionHandlerHelper.getInstance(context_p).getEObjectFromId(id2, context_p);
+        if (eObjectFromId1.eContainer() != null && eObjectFromId2.eContainer() != null
+            && eObjectFromId1.eContainer() == eObjectFromId2.eContainer()) {
+          Object obj = eObjectFromId1.eContainer().eGet(eObjectFromId1.eContainmentFeature());
+          if (obj instanceof List) {
+            return ((List) obj).indexOf(eObjectFromId1) < ((List) obj).indexOf(eObjectFromId2) ? -1 : 1;
+          }
+        }
+        return 0;
+      }
+    });
+    
     String result = ICommonConstants.EMPTY_STRING;
     int i = 0;
     for (String value : values) {
@@ -128,5 +144,4 @@ public class SIDTraceabilityHandler extends LinkTraceabilityHandler {
     }
     targetElement_p.eSet(attribute, result);
   }
-
 }

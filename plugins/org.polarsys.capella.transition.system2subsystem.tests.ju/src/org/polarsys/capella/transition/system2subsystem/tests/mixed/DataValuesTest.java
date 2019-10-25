@@ -12,7 +12,6 @@ package org.polarsys.capella.transition.system2subsystem.tests.mixed;
 
 import java.util.Collection;
 
-import org.polarsys.capella.core.data.ctx.CtxPackage;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Crossphase;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Interphase;
@@ -257,7 +256,7 @@ public class DataValuesTest extends System2SubsystemTest implements Interphase, 
 
     @Override
     protected void verify() {
-      mustBeTransitionedInto(_id_hexadecimal, CtxPackage.Literals.SYSTEM_ANALYSIS);
+      mustBeTransitionedInto(_id_hexadecimal, ComponentType.SYSTEM_ANALYSIS);
     }
 
   }
@@ -278,7 +277,7 @@ public class DataValuesTest extends System2SubsystemTest implements Interphase, 
 
     @Override
     protected void verify() {
-      mustBeTransitionedInto(_id_hexadecimal, CtxPackage.Literals.SYSTEM_ANALYSIS);
+      mustBeTransitionedInto(_id_hexadecimal, ComponentType.SYSTEM_ANALYSIS);
     }
 
   }

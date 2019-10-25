@@ -21,6 +21,7 @@ import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.epbs.ConfigurationItem;
 import org.polarsys.capella.core.data.la.LogicalComponent;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
+import org.polarsys.capella.core.model.helpers.ComponentExt;
 
 public class CommandTester extends PropertyTester {
 
@@ -42,7 +43,8 @@ public class CommandTester extends PropertyTester {
             } else if (element instanceof Part) {
               type = ((Part) element).getAbstractType();
             }
-            return (type != null) && ((type instanceof LogicalComponent) || (type instanceof PhysicalComponent) || (type instanceof ConfigurationItem));
+            return (type != null) && ((type instanceof LogicalComponent) || (type instanceof PhysicalComponent)
+                || (type instanceof ConfigurationItem)) && !ComponentExt.isActor(type);
           }
 
         }

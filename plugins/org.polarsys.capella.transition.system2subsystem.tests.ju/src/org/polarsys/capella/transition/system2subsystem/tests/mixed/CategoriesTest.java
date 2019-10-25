@@ -13,9 +13,6 @@ package org.polarsys.capella.transition.system2subsystem.tests.mixed;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.polarsys.capella.core.data.ctx.CtxPackage;
-import org.polarsys.capella.core.data.la.LaPackage;
-import org.polarsys.capella.core.data.pa.PaPackage;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest;
 
 public abstract class CategoriesTest extends System2SubsystemTest {
@@ -71,34 +68,34 @@ public abstract class CategoriesTest extends System2SubsystemTest {
     protected void verify() {
 
       // SA
-      mustBeTransitionedInto(CATEGORIES__PA__PHYSICAL_CONTEXT__PLC4, CtxPackage.Literals.SYSTEM_ANALYSIS);
-      mustBeTransitionedInto(CATEGORIES__PA__CEC1, CtxPackage.Literals.SYSTEM_ANALYSIS);
-      mustBeTransitionedInto(CATEGORIES__PA__CEC3, CtxPackage.Literals.SYSTEM_ANALYSIS);
-      mustBeTransitionedInto(CATEGORIES__PA__PLC1, CtxPackage.Literals.SYSTEM_ANALYSIS);
-      shouldNotBeTransitionedInto(CATEGORIES__PA__PC_1__PLC3, CtxPackage.Literals.SYSTEM_ANALYSIS);
-      shouldNotBeTransitionedInto(CATEGORIES__PA__PLC2, CtxPackage.Literals.SYSTEM_ANALYSIS);
-      shouldNotBeTransitionedInto(CATEGORIES__PA__CEC2, CtxPackage.Literals.SYSTEM_ANALYSIS);
-      shouldNotBeTransitionedInto(CATEGORIES__PA__CEC4, CtxPackage.Literals.SYSTEM_ANALYSIS);
+      mustBeTransitionedInto(CATEGORIES__PA__PHYSICAL_CONTEXT__PLC4, ComponentType.SYSTEM_ANALYSIS);
+      mustBeTransitionedInto(CATEGORIES__PA__CEC1, ComponentType.SYSTEM_ANALYSIS);
+      mustBeTransitionedInto(CATEGORIES__PA__CEC3, ComponentType.SYSTEM_ANALYSIS);
+      mustBeTransitionedInto(CATEGORIES__PA__PLC1, ComponentType.SYSTEM_ANALYSIS);
+      shouldNotBeTransitionedInto(CATEGORIES__PA__PC_1__PLC3, ComponentType.SYSTEM_ANALYSIS);
+      shouldNotBeTransitionedInto(CATEGORIES__PA__PLC2, ComponentType.SYSTEM_ANALYSIS);
+      shouldNotBeTransitionedInto(CATEGORIES__PA__CEC2, ComponentType.SYSTEM_ANALYSIS);
+      shouldNotBeTransitionedInto(CATEGORIES__PA__CEC4, ComponentType.SYSTEM_ANALYSIS);
 
       // LA
-      mustBeTransitionedInto(CATEGORIES__PA__CEC2, LaPackage.Literals.LOGICAL_ARCHITECTURE); // Internal CEC
-      mustBeTransitionedInto(CATEGORIES__PA__PHYSICAL_CONTEXT__PLC4, LaPackage.Literals.LOGICAL_ARCHITECTURE);
-      mustBeTransitionedInto(CATEGORIES__PA__CEC1, LaPackage.Literals.LOGICAL_ARCHITECTURE);
-      mustBeTransitionedInto(CATEGORIES__PA__CEC3, LaPackage.Literals.LOGICAL_ARCHITECTURE);
-      mustBeTransitionedInto(CATEGORIES__PA__PLC1, LaPackage.Literals.LOGICAL_ARCHITECTURE);
-      shouldNotBeTransitionedInto(CATEGORIES__PA__PC_1__PLC3, LaPackage.Literals.LOGICAL_ARCHITECTURE);
-      shouldNotBeTransitionedInto(CATEGORIES__PA__PLC2, LaPackage.Literals.LOGICAL_ARCHITECTURE);
-      shouldNotBeTransitionedInto(CATEGORIES__PA__CEC4, LaPackage.Literals.LOGICAL_ARCHITECTURE);
+      mustBeTransitionedInto(CATEGORIES__PA__CEC2, ComponentType.LOGICAL_ARCHITECTURE); // Internal CEC
+      mustBeTransitionedInto(CATEGORIES__PA__PHYSICAL_CONTEXT__PLC4, ComponentType.LOGICAL_ARCHITECTURE);
+      mustBeTransitionedInto(CATEGORIES__PA__CEC1, ComponentType.LOGICAL_ARCHITECTURE);
+      mustBeTransitionedInto(CATEGORIES__PA__CEC3, ComponentType.LOGICAL_ARCHITECTURE);
+      mustBeTransitionedInto(CATEGORIES__PA__PLC1, ComponentType.LOGICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(CATEGORIES__PA__PC_1__PLC3, ComponentType.LOGICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(CATEGORIES__PA__PLC2, ComponentType.LOGICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(CATEGORIES__PA__CEC4, ComponentType.LOGICAL_ARCHITECTURE);
 
       // PA
-      mustBeTransitionedInto(CATEGORIES__PA__PC_1__PLC3, PaPackage.Literals.PHYSICAL_ARCHITECTURE); // Internal PLC
-      mustBeTransitionedInto(CATEGORIES__PA__PHYSICAL_CONTEXT__PLC4, PaPackage.Literals.PHYSICAL_ARCHITECTURE);
-      shouldNotBeTransitionedInto(CATEGORIES__PA__CEC1, PaPackage.Literals.PHYSICAL_ARCHITECTURE);
-      shouldNotBeTransitionedInto(CATEGORIES__PA__CEC3, PaPackage.Literals.PHYSICAL_ARCHITECTURE);
-      mustBeTransitionedInto(CATEGORIES__PA__PLC1, PaPackage.Literals.PHYSICAL_ARCHITECTURE);
-      shouldNotBeTransitionedInto(CATEGORIES__PA__CEC2, PaPackage.Literals.PHYSICAL_ARCHITECTURE);
-      shouldNotBeTransitionedInto(CATEGORIES__PA__PLC2, PaPackage.Literals.PHYSICAL_ARCHITECTURE);
-      shouldNotBeTransitionedInto(CATEGORIES__PA__CEC4, PaPackage.Literals.PHYSICAL_ARCHITECTURE);
+      mustBeTransitionedInto(CATEGORIES__PA__PC_1__PLC3, ComponentType.PHYSICAL_ARCHITECTURE); // Internal PLC
+      mustBeTransitionedInto(CATEGORIES__PA__PHYSICAL_CONTEXT__PLC4, ComponentType.PHYSICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(CATEGORIES__PA__CEC1, ComponentType.PHYSICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(CATEGORIES__PA__CEC3, ComponentType.PHYSICAL_ARCHITECTURE);
+      mustBeTransitionedInto(CATEGORIES__PA__PLC1, ComponentType.PHYSICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(CATEGORIES__PA__CEC2, ComponentType.PHYSICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(CATEGORIES__PA__PLC2, ComponentType.PHYSICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(CATEGORIES__PA__CEC4, ComponentType.PHYSICAL_ARCHITECTURE);
     }
 
   }

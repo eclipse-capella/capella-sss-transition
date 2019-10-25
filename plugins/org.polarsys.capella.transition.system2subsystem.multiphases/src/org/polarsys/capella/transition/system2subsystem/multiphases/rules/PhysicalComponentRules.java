@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.osgi.util.NLS;
 import org.polarsys.capella.common.data.modellingcore.AbstractNamedElement;
 import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
-import org.polarsys.capella.core.data.cs.AbstractActor;
 import org.polarsys.capella.core.data.la.LaPackage;
 import org.polarsys.capella.core.data.la.LogicalArchitecture;
 import org.polarsys.capella.core.data.pa.PaPackage;
@@ -46,23 +45,23 @@ public class PhysicalComponentRules {
   public static class ToLA extends PhysicalComponentRule {
 
     @Override
-    protected EObject getBestContainer(EObject element_p, EObject result_p, IContext context_p) {
-      if ((element_p instanceof PhysicalComponent) && (result_p instanceof AbstractActor)) {
+    protected EObject getBestContainer(EObject element, EObject result, IContext context) {
+      if (!ContextScopeHandlerHelper.getInstance(context).contains(ITransitionConstants.SOURCE_SCOPE, element, context)) {
         return null;
       }
 
-      if ((element_p instanceof PhysicalComponent) && ((PhysicalComponent) element_p).getDeployingPhysicalComponents().isEmpty()) {
-        EObject sourceContainer = element_p.eContainer();
+      if ((element instanceof PhysicalComponent) && ((PhysicalComponent) element).getDeployingPhysicalComponents().isEmpty()) {
+        EObject sourceContainer = element.eContainer();
         ISelectionContext sContext =
-            new EClassSelectionContext(SelectionContextHandlerHelper.getHandler(context_p).getSelectionContext(context_p,
-                ITransitionConstants.SELECTION_CONTEXT__TRANSFORMATION, element_p, result_p), LaPackage.Literals.LOGICAL_COMPONENT);
-        return TransformationHandlerHelper.getInstance(context_p).getBestTracedElement(sourceContainer, context_p, sContext);
+            new EClassSelectionContext(SelectionContextHandlerHelper.getHandler(context).getSelectionContext(context,
+                ITransitionConstants.SELECTION_CONTEXT__TRANSFORMATION, element, result), LaPackage.Literals.LOGICAL_COMPONENT);
+        return TransformationHandlerHelper.getInstance(context).getBestTracedElement(sourceContainer, context, sContext);
       }
 
-      MultiphasesContext context = (MultiphasesContext) context_p;
-      SystemEngineering eng = context.getTempSystemEngineering();
+      MultiphasesContext multiphasesContext = (MultiphasesContext) context;
+      SystemEngineering eng = multiphasesContext.getTempSystemEngineering();
       LogicalArchitecture la = eng.getContainedLogicalArchitectures().get(0);
-      return BlockArchitectureExt.getFirstComponent(la);
+      return BlockArchitectureExt.getOrCreateSystem(la);
     }
 
     @Override
@@ -89,11 +88,8 @@ public class PhysicalComponentRules {
     }
 
     @Override
-    public EClass getTargetType(EObject element_p, IContext context_p) {
-      if (ContextScopeHandlerHelper.getInstance(context_p).contains(ITransitionConstants.SOURCE_SCOPE, element_p, context_p)) {
-        return LaPackage.Literals.LOGICAL_COMPONENT;
-      }
-      return LaPackage.Literals.LOGICAL_ACTOR;
+    public EClass getTargetType(EObject element, IContext context) {
+      return LaPackage.Literals.LOGICAL_COMPONENT;
     }
 
     @Override
@@ -116,35 +112,32 @@ public class PhysicalComponentRules {
   public static class ToPA extends PhysicalComponentRule {
 
     /**
-     * @param element_p
-     * @param result_p
-     * @param context_p
+     * @param element
+     * @param result
+     * @param context
      * @return
      */
     @Override
-    protected EObject getBestContainer(EObject element_p, EObject result_p, IContext context_p) {
-      if ((element_p instanceof PhysicalComponent) && (result_p instanceof AbstractActor)) {
+    protected EObject getBestContainer(EObject element, EObject result, IContext context) {
+      if (!ContextScopeHandlerHelper.getInstance(context).contains(ITransitionConstants.SOURCE_SCOPE, element, context)) {
         return null;
       }
 
       EObject bestContainer = null;
-      EObject container = getSourceContainer(element_p, result_p, context_p);
+      EObject container = getSourceContainer(element, result, context);
 
       if (container != null) {
         ISelectionContext sContext =
-            new EClassSelectionContext(SelectionContextHandlerHelper.getHandler(context_p).getSelectionContext(context_p,
-                ITransitionConstants.SELECTION_CONTEXT__TRANSFORMATION, element_p, result_p), PaPackage.Literals.PHYSICAL_COMPONENT);
-        bestContainer = TransformationHandlerHelper.getInstance(context_p).getBestTracedElement(container, context_p, sContext);
+            new EClassSelectionContext(SelectionContextHandlerHelper.getHandler(context).getSelectionContext(context,
+                ITransitionConstants.SELECTION_CONTEXT__TRANSFORMATION, element, result), PaPackage.Literals.PHYSICAL_COMPONENT);
+        bestContainer = TransformationHandlerHelper.getInstance(context).getBestTracedElement(container, context, sContext);
       }
       return bestContainer;
     }
 
     @Override
-    public EClass getTargetType(EObject element_p, IContext context_p) {
-      if (ContextScopeHandlerHelper.getInstance(context_p).contains(ITransitionConstants.SOURCE_SCOPE, element_p, context_p)) {
-        return PaPackage.Literals.PHYSICAL_COMPONENT;
-      }
-      return PaPackage.Literals.PHYSICAL_ACTOR;
+    public EClass getTargetType(EObject element, IContext context) {
+      return PaPackage.Literals.PHYSICAL_COMPONENT;
     }
 
     @Override

@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.polarsys.capella.common.data.modellingcore.AbstractNamedElement;
 import org.polarsys.capella.core.data.capellacore.CapellacorePackage;
-import org.polarsys.capella.core.data.cs.AbstractActor;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
+import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.ctx.CtxPackage;
 import org.polarsys.capella.core.data.ctx.SystemAnalysis;
@@ -66,25 +66,23 @@ public class Component2SARule extends ComponentRule {
   }
 
   @Override
-  protected EObject transformDirectElement(EObject element_p, IContext context_p) {
-    EClass targetType = getTargetType(element_p, context_p);
-    if (CtxPackage.Literals.SYSTEM.isSuperTypeOf(targetType)) {
+  protected EObject transformDirectElement(EObject element, IContext context) {
+    if (ContextScopeHandlerHelper.getInstance(context).contains(ITransitionConstants.SOURCE_SCOPE, element, context)) {
       // Retrieve the existing architecture if any
-      EObject root = TransformationHandlerHelper.getInstance(context_p).getLevelElement(element_p, context_p);
+      EObject root = TransformationHandlerHelper.getInstance(context).getLevelElement(element, context);
 
-      BlockArchitecture target =
-          (BlockArchitecture) TransformationHandlerHelper.getInstance(context_p).getBestTracedElement(root, context_p, CsPackage.Literals.BLOCK_ARCHITECTURE);
+      BlockArchitecture target = (BlockArchitecture) TransformationHandlerHelper.getInstance(context).getBestTracedElement(root, context, CsPackage.Literals.BLOCK_ARCHITECTURE);
       if (target instanceof SystemAnalysis) {
         SystemAnalysis analysis = (SystemAnalysis) target;
-        if (analysis.getOwnedSystem() != null) {
-          return analysis.getOwnedSystem();
+        if (analysis.getSystem() != null) {
+          return analysis.getSystem();
         }
       }
     }
 
     // super.transformDirectElement is broken, we should not call it ! call super.super.transformDirectElement
     EObject result = null;
-    EClass clazz = getTargetType(element_p, context_p);
+    EClass clazz = getTargetType(element, context);
 
     if (clazz != null) {
       EPackage pkg = (EPackage) clazz.eContainer();
@@ -92,8 +90,8 @@ public class Component2SARule extends ComponentRule {
     }
 
     // Theorically, this should not be performed here, but log message requires a valid name
-    if ((element_p instanceof AbstractNamedElement) && (result instanceof AbstractNamedElement)) {
-      ((AbstractNamedElement) result).setName(((AbstractNamedElement) element_p).getName());
+    if ((element instanceof AbstractNamedElement) && (result instanceof AbstractNamedElement)) {
+      ((AbstractNamedElement) result).setName(((AbstractNamedElement) element).getName());
     }
 
     if (result instanceof PhysicalComponent) {
@@ -103,36 +101,27 @@ public class Component2SARule extends ComponentRule {
   }
 
   @Override
-  public EClass getTargetType(EObject element_p, IContext context_p) {
-
-    if (ContextScopeHandlerHelper.getInstance(context_p).contains(ITransitionConstants.SOURCE_SCOPE, element_p, context_p)) {
-      return CtxPackage.Literals.SYSTEM;
-    }
-
-    return CtxPackage.Literals.ACTOR;
+  public EClass getTargetType(EObject element, IContext context) {
+    return CtxPackage.Literals.SYSTEM_COMPONENT;
   }
-
+  
   @Override
-  protected EObject getDefaultContainer(EObject element_p, EObject result_p, IContext context_p) {
-
-    EObject root = TransformationHandlerHelper.getInstance(context_p).getLevelElement(element_p, context_p);
-    BlockArchitecture target =
-        (BlockArchitecture) TransformationHandlerHelper.getInstance(context_p).getBestTracedElement(root, context_p, CsPackage.Literals.BLOCK_ARCHITECTURE,
-            element_p, result_p);
-
-    if (root.equals(element_p.eContainer())) {
-      return target;
+  protected void updateElement(EObject element, EObject result, IContext context) {
+    super.updateElement(element, result, context);
+    if (result != null && !ContextScopeHandlerHelper.getInstance(context).contains(ITransitionConstants.SOURCE_SCOPE, element, context)) {
+      ((Component) result).setActor(true);
     }
-
-    EClass targetType = getTargetType(element_p, context_p);
-    if (CtxPackage.Literals.SYSTEM.isSuperTypeOf(targetType)) {
-      return target;
-    }
-
-    if (result_p instanceof AbstractActor) {
-      return BlockArchitectureExt.getActorPkg(target);
-    }
-    return BlockArchitectureExt.getFirstComponent(target);
   }
-
+  
+  @Override
+  protected EObject getDefaultContainer(EObject element, EObject result, IContext context) {
+    EObject root = TransformationHandlerHelper.getInstance(context).getLevelElement(element, context);
+    BlockArchitecture target =
+        (BlockArchitecture) TransformationHandlerHelper.getInstance(context).getBestTracedElement(root, context, CsPackage.Literals.BLOCK_ARCHITECTURE,
+            element, result);
+    if (result instanceof Component) {
+      return BlockArchitectureExt.getComponentPkg(target, true);
+    }
+    return BlockArchitectureExt.getFirstComponent(target, true);
+  }
 }

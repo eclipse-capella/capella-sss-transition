@@ -20,7 +20,6 @@ import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.ctx.CtxPackage;
 import org.polarsys.capella.core.data.interaction.AbstractCapability;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
-import org.polarsys.capella.core.transition.common.handlers.contextscope.ContextScopeHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.selection.ISelectionContext;
 import org.polarsys.capella.core.transition.common.handlers.selection.SelectionContextHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.transformation.TransformationHandlerHelper;
@@ -78,14 +77,7 @@ public class ActorCapabilityInvolvementRule extends org.polarsys.capella.transit
    */
   @Override
   public EClass getTargetType(EObject element_p, IContext context_p) {
-    Involvement involvment = (Involvement) element_p;
-    if (involvment.getInvolved() != null) {
-
-      if (ContextScopeHandlerHelper.getInstance(context_p).contains(ITransitionConstants.SOURCE_SCOPE, involvment.getInvolved(), context_p)) {
-        return CtxPackage.Literals.SYSTEM_CAPABILITY_INVOLVEMENT;
-      }
-    }
-    return CtxPackage.Literals.ACTOR_CAPABILITY_INVOLVEMENT;
+    return CtxPackage.Literals.CAPABILITY_INVOLVEMENT;
   }
 
 }

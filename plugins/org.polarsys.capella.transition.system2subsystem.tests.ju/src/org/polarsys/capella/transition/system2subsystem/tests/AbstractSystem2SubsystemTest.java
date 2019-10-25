@@ -16,20 +16,25 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.polarsys.capella.common.data.modellingcore.ModelElement;
 import org.polarsys.capella.common.ef.ExecutionManager;
-import org.polarsys.capella.common.ef.ExecutionManagerRegistry;
-import org.polarsys.capella.common.helpers.EcoreUtil2;
 import org.polarsys.capella.core.data.capellamodeller.Project;
 import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
-import org.polarsys.capella.core.data.ctx.System;
+import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.data.ctx.SystemAnalysis;
+import org.polarsys.capella.core.data.ctx.SystemComponentPkg;
+import org.polarsys.capella.core.data.la.LogicalArchitecture;
 import org.polarsys.capella.core.data.la.LogicalComponent;
+import org.polarsys.capella.core.data.la.LogicalComponentPkg;
+import org.polarsys.capella.core.data.pa.PhysicalArchitecture;
+import org.polarsys.capella.core.data.pa.PhysicalComponentPkg;
+import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
+import org.polarsys.capella.core.model.helpers.ComponentExt;
+import org.polarsys.capella.core.model.helpers.ComponentPkgExt;
 import org.polarsys.capella.core.model.helpers.ModelQueryHelper;
 import org.polarsys.capella.core.model.helpers.ProjectExt;
 import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
@@ -39,6 +44,67 @@ import org.polarsys.capella.test.framework.api.BasicCommandTestCase;
 import org.polarsys.kitalpha.cadence.core.api.parameter.GenericParameter;
 
 public abstract class AbstractSystem2SubsystemTest extends BasicCommandTestCase {
+
+  public enum ComponentType {
+
+    SYSTEM, ACTOR,
+
+    SYSTEM_ANALYSIS, SYSTEM_STRUCTURE,
+
+    LOGICAL_ARCHITECTURE, LOGICAL_STRUCTURE, LOGICAL_COMPONENT, LOGICAL_ACTOR,
+
+    PHYSICAL_ARCHITECTURE, PHYSICAL_STRUCTURE, PHYSICAL_ACTOR;
+
+    public boolean isInstanceOf(EObject source) {
+      switch (this) {
+      case ACTOR:
+        return ComponentExt.isActor(source);
+      case SYSTEM:
+        return source instanceof Component && BlockArchitectureExt.isRootComponent((Component) source);
+      case SYSTEM_ANALYSIS:
+        return source instanceof SystemAnalysis;
+      case SYSTEM_STRUCTURE:
+        return source instanceof SystemComponentPkg && ComponentPkgExt.isRootComponentPkg(source);
+      case LOGICAL_ARCHITECTURE:
+        return source instanceof LogicalArchitecture;
+      case LOGICAL_STRUCTURE:
+        return source instanceof LogicalComponentPkg && ComponentPkgExt.isRootComponentPkg(source);
+      case LOGICAL_COMPONENT:
+        return !ComponentExt.isActor(source)
+            && BlockArchitectureExt.getRootBlockArchitecture(source) instanceof LogicalArchitecture;
+      case LOGICAL_ACTOR:
+        return ComponentExt.isActor(source)
+            && BlockArchitectureExt.getRootBlockArchitecture(source) instanceof LogicalArchitecture;
+      case PHYSICAL_ARCHITECTURE:
+        return source instanceof PhysicalArchitecture;
+      case PHYSICAL_STRUCTURE:
+        return source instanceof PhysicalComponentPkg && ComponentPkgExt.isRootComponentPkg(source);
+      case PHYSICAL_ACTOR:
+        return ComponentExt.isActor(source)
+            && BlockArchitectureExt.getRootBlockArchitecture(source) instanceof PhysicalArchitecture;
+      default:
+        return false;
+      }
+    }
+  }
+
+  private Object getFirstContainer(EObject element, ComponentType type) {
+    EObject container = null;
+
+    if (element != null) {
+      container = element.eContainer();
+    }
+
+    if (container == null) {
+      return null;
+    }
+
+    if (type.isInstanceOf(container)) {
+      return container;
+    }
+
+    return getFirstContainer(container, type);
+  }
 
   protected TraceabilitySID traceability;
   private final SharedWorkflowActivityParameter parameters = new SharedWorkflowActivityParameter();
@@ -97,17 +163,17 @@ public abstract class AbstractSystem2SubsystemTest extends BasicCommandTestCase 
     return source;
   }
 
-  public EObject mustBeTransitioned(String id, EClass asType) {
+  public EObject mustBeTransitioned(String id, ComponentType asType) {
     EObject source = traceability.getTracedObject(id);
-    assertTrue((source != null) && asType.isInstance(source));
+    assertTrue((source != null) && asType.isInstanceOf(source));
     return source;
   }
 
-  public EObject mustBeTransitionedInto(String id, EClass container_p) {
+  public EObject mustBeTransitionedInto(String id, ComponentType container_p) {
     boolean is = false;
     for (EObject source : traceability.getTracedObjects(id)) {
       assertTrue(source != null);
-      if (EcoreUtil2.getFirstContainer(source, container_p) != null) {
+      if (getFirstContainer(source, container_p) != null) {
         is = true;
         break;
       }
@@ -116,10 +182,10 @@ public abstract class AbstractSystem2SubsystemTest extends BasicCommandTestCase 
     return null;
   }
 
-  public EObject shouldNotBeTransitionedInto(String id, EClass container_p) {
+  public EObject shouldNotBeTransitionedInto(String id, ComponentType container_p) {
     for (EObject source : traceability.getTracedObjects(id)) {
       assertTrue(source != null);
-      if (EcoreUtil2.getFirstContainer(source, container_p) != null) {
+      if (getFirstContainer(source, container_p) != null) {
         assertFalse(true);
         break;
       }
@@ -127,10 +193,10 @@ public abstract class AbstractSystem2SubsystemTest extends BasicCommandTestCase 
     return null;
   }
 
-  public EObject mustBeTransitionedOutside(String id, EClass container_p) {
+  public EObject mustBeTransitionedOutside(String id, ComponentType container) {
     EObject source = traceability.getTracedObject(id);
     assertTrue(source != null);
-    assertTrue(EcoreUtil2.getFirstContainer(source, container_p) == null);
+    assertTrue(getFirstContainer(source, container) == null);
     return source;
   }
 
@@ -146,11 +212,11 @@ public abstract class AbstractSystem2SubsystemTest extends BasicCommandTestCase 
     return source;
   }
 
-  public System retrieveTargetSystem() {
+  public Component retrieveTargetSystem() {
     ModelElement dummyTargetElement = (ModelElement) getOutputModelResource().getContents().get(0);
     Project targetProject = ProjectExt.getProject(dummyTargetElement);
     SystemEngineering targetSystemEngineering = SystemEngineeringExt.getSystemEngineering(targetProject);
-    System targetSystem = SystemEngineeringExt.getSystem(targetSystemEngineering);
+    Component targetSystem = SystemEngineeringExt.getSystem(targetSystemEngineering);
     assertTrue(targetSystem != null);
     return targetSystem;
   }
@@ -196,8 +262,8 @@ public abstract class AbstractSystem2SubsystemTest extends BasicCommandTestCase 
     assertTrue((sourceValue == targetValue) || ((sourceValue != null) && sourceValue.equals(targetValue)));
   }
 
-  public void testInstanceOf(EObject source, EClass clazz) {
-    assertTrue(clazz.isInstance(source));
+  public void testInstanceOf(EObject source, ComponentType clazz) {
+    assertTrue(clazz.isInstanceOf(source));
   }
 
   protected SharedWorkflowActivityParameter getHeadlessParameters() {

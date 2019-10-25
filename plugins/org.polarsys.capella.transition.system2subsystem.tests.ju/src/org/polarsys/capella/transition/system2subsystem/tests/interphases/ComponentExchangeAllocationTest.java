@@ -12,6 +12,9 @@ package org.polarsys.capella.transition.system2subsystem.tests.interphases;
 
 import java.util.Collection;
 
+import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest;
+import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Interphase;
+
 //@formatter:off
 /**
  * Component Exchange allocation transition: Test if Component Exchange allocation are correctly imported
@@ -120,7 +123,7 @@ import java.util.Collection;
  *     - Create 'PP 1' [PhysicalPort]
  */
 //@formatter:on
-public class ComponentExchangeAllocationTest extends InterPhasesTest {
+public class ComponentExchangeAllocationTest extends System2SubsystemTest implements Interphase {
 
   private String _id_c_1 = "dd42536a-d292-4187-8f21-29f7678e91b9"; //$NON-NLS-1$
   private String _id_ce1 = "8cd61262-4b3a-4ae6-9371-5dd123d3f5a0"; //$NON-NLS-1$

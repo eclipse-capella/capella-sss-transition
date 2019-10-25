@@ -16,8 +16,10 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.polarsys.capella.core.data.capellacore.Involvement;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
+import org.polarsys.capella.core.data.cs.ComponentPkg;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.cs.PhysicalLink;
 import org.polarsys.capella.core.data.cs.PhysicalPath;
@@ -26,11 +28,8 @@ import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.attachment.AttachmentHelper;
 import org.polarsys.capella.core.transition.common.handlers.contextscope.ContextScopeHandlerHelper;
-import org.polarsys.capella.core.transition.common.handlers.selection.ISelectionContext;
-import org.polarsys.capella.core.transition.common.handlers.selection.SelectionContextHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.transformation.TransformationHandlerHelper;
 import org.polarsys.capella.core.transition.system.rules.AbstractCapellaElementRule;
-import org.polarsys.capella.transition.system2subsystem.handlers.selection.ExceptEClassSelectionContext;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IPremise;
 
@@ -51,18 +50,13 @@ public class PhysicalLinkRule extends AbstractCapellaElementRule {
   }
 
   @Override
-  protected EObject getBestContainer(EObject element_p, EObject result_p, IContext context_p) {
-    EObject bestContainer = null;
-    EObject container = getSourceContainer(element_p, result_p, context_p);
-
-    if (container != null) {
-      ISelectionContext sContext =
-          SelectionContextHandlerHelper.getHandler(context_p).getSelectionContext(context_p, ITransitionConstants.SELECTION_CONTEXT__TRANSFORMATION, element_p,
-              result_p);
-      sContext = new ExceptEClassSelectionContext(sContext, CsPackage.Literals.ABSTRACT_ACTOR);
-      bestContainer = TransformationHandlerHelper.getInstance(context_p).getBestTracedElement(container, context_p, sContext);
+  protected EObject getBestContainer(EObject element, EObject result, IContext context) {
+    // If the PL is contained in the System, we cannot find its container just by traceability.
+    if (BlockArchitectureExt.getRootBlockArchitecture(element).getSystem() == element.eContainer()) {
+      return null;
     }
-    return bestContainer;
+
+    return super.getBestContainer(element, result, context);
   }
 
   @Override
@@ -122,5 +116,14 @@ public class PhysicalLinkRule extends AbstractCapellaElementRule {
     super.premicesRelated(element_p, needed_p);
     PhysicalLink element = (PhysicalLink) element_p;
     needed_p.addAll(createDefaultPrecedencePremices(element, CsPackage.Literals.PHYSICAL_LINK__LINK_ENDS));
+  }
+  
+  @Override
+  protected EStructuralFeature getTargetContainementFeature(EObject element, EObject result, EObject container, IContext context) {
+    if (container instanceof ComponentPkg) {
+      return CsPackage.Literals.COMPONENT_PKG__OWNED_PHYSICAL_LINKS;
+    }
+    
+    return element.eContainingFeature();
   }
 }

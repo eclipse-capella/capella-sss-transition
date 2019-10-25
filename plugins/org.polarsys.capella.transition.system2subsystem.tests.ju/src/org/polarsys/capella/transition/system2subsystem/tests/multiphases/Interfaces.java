@@ -14,10 +14,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
+import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.CsPackage;
-import org.polarsys.capella.core.data.ctx.CtxPackage;
-import org.polarsys.capella.core.data.ctx.System;
-import org.polarsys.capella.core.data.la.LaPackage;
 import org.polarsys.capella.core.data.la.LogicalComponent;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.transition.system2subsystem.tests.TraceabilityArchitectureSID;
@@ -87,8 +85,8 @@ public class Interfaces extends MultiPhasesTest {
     // mustBeTransitioned(MP_INTERFACES__PA__PC_7, CtxPackage.Literals.SYSTEM); //no sid for the system object?
     // mustBeTransitionedInto(MP_INTERFACES__PA__PC_7, CtxPackage.Literals.SYSTEM_CONTEXT); //no sid?
 
-    mustBeTransitioned(MP_INTERFACES__PA__PC_3, CtxPackage.Literals.ACTOR);
-    mustBeTransitioned(MP_INTERFACES__PA__PHYSICAL_ACTORS__PA_1, CtxPackage.Literals.ACTOR);
+    mustBeTransitioned(MP_INTERFACES__PA__PC_3, ComponentType.ACTOR);
+    mustBeTransitioned(MP_INTERFACES__PA__PHYSICAL_ACTORS__PA_1, ComponentType.ACTOR);
 
     shouldNotBeTransitioned(MP_INTERFACES__PA__INTERFACES__INTERFACE_1);
 
@@ -101,7 +99,7 @@ public class Interfaces extends MultiPhasesTest {
     mustBeTransitioned(MP_INTERFACES__PA__INTERFACES__INTERFACE_8);
 
     // Retrieve target elements to test Interfaces usage
-    System targetSystem = retrieveTargetSystem();
+    Component targetSystem = retrieveTargetSystem();
     EObject targetPC5inLA = retrieveTargetElement(MP_INTERFACES__PA__PC_5, BlockArchitectureExt.Type.LA);
     EObject targetPC4inLA = retrieveTargetElement(MP_INTERFACES__PA__PC_4, BlockArchitectureExt.Type.LA);
     EObject targetPC3inSA = retrieveTargetElement(MP_INTERFACES__PA__PC_3, BlockArchitectureExt.Type.SA);
@@ -213,13 +211,13 @@ public class Interfaces extends MultiPhasesTest {
     // mustBeTransitioned(MP_INTERFACES__PA__PC_2, CtxPackage.Literals.SYSTEM); //no sid for the system object?
     // mustBeTransitionedInto(MP_INTERFACES__PA__PC_2, CtxPackage.Literals.SYSTEM_CONTEXT); //no sid?
 
-    mustBeTransitioned(MP_INTERFACES__PA__PC_4, LaPackage.Literals.LOGICAL_COMPONENT);
-    mustBeTransitioned(MP_INTERFACES__PA__PC_5, LaPackage.Literals.LOGICAL_COMPONENT);
+    mustBeTransitioned(MP_INTERFACES__PA__PC_4, ComponentType.LOGICAL_COMPONENT);
+    mustBeTransitioned(MP_INTERFACES__PA__PC_5, ComponentType.LOGICAL_COMPONENT);
     shouldNotBeTransitioned(MP_INTERFACES__PA__PC_6);
-    mustBeTransitioned(MP_INTERFACES__PA__PC_7, LaPackage.Literals.LOGICAL_COMPONENT);
+    mustBeTransitioned(MP_INTERFACES__PA__PC_7, ComponentType.LOGICAL_COMPONENT);
 
-    mustBeTransitioned(MP_INTERFACES__PA__PC_3, LaPackage.Literals.LOGICAL_ACTOR);
-    mustBeTransitioned(MP_INTERFACES__PA__PHYSICAL_ACTORS__PA_1, LaPackage.Literals.LOGICAL_ACTOR);
+    mustBeTransitioned(MP_INTERFACES__PA__PC_3, ComponentType.LOGICAL_ACTOR);
+    mustBeTransitioned(MP_INTERFACES__PA__PHYSICAL_ACTORS__PA_1, ComponentType.LOGICAL_ACTOR);
 
     shouldNotBeTransitioned(MP_INTERFACES__PA__INTERFACES__INTERFACE_1);
     shouldNotBeTransitioned(MP_INTERFACES__PA__INTERFACES__INTERFACE_2);

@@ -18,6 +18,7 @@ import org.polarsys.capella.common.ui.actions.ModelAdaptation;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.core.data.pa.PhysicalComponentNature;
+import org.polarsys.capella.core.model.helpers.ComponentExt;
 
 public class MultiphasePropertyTester extends PropertyTester {
 
@@ -35,7 +36,7 @@ public class MultiphasePropertyTester extends PropertyTester {
             if (element instanceof Part) {
               element = ((Part) element).getType();
             }
-            if ((element instanceof PhysicalComponent) && (((PhysicalComponent) element).getNature() == PhysicalComponentNature.NODE)) {
+            if ((element instanceof PhysicalComponent) && (((PhysicalComponent) element).getNature() == PhysicalComponentNature.NODE) && !ComponentExt.isActor(element)) {
               return true;
             }
           }

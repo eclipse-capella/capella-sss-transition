@@ -24,12 +24,14 @@ import org.polarsys.capella.core.data.interaction.InteractionPackage;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.IHandler;
+import org.polarsys.capella.core.transition.common.handlers.merge.ICategoryItem;
 import org.polarsys.capella.core.transition.common.handlers.merge.IMergeHandler;
 import org.polarsys.capella.core.transition.common.handlers.traceability.CompoundTraceabilityHandler;
 import org.polarsys.capella.core.transition.common.handlers.transformation.TransformationHandlerHelper;
 import org.polarsys.capella.core.transition.common.merge.scope.IModelScopeFilter;
 import org.polarsys.capella.core.transition.common.merge.scope.ReferenceModelScope;
 import org.polarsys.capella.core.transition.common.merge.scope.TargetModelScope;
+import org.polarsys.capella.core.transition.system.handlers.merge.AttributeNameValueFromSource;
 import org.polarsys.capella.core.transition.system.topdown.handlers.merge.RealizationLinkCategoryFilter;
 import org.polarsys.capella.transition.system2subsystem.constants.ITransitionConstants2;
 import org.polarsys.capella.transition.system2subsystem.handlers.filter.UpdateOfCategoryFilter;
@@ -46,13 +48,19 @@ public class InitializeDiffMergeActivity extends org.polarsys.capella.core.trans
   @Override
   protected IStatus initializeCategoriesHandlers(IContext context, IMergeHandler handler,
       ActivityParameters activityParams) {
+    super.initializeCategoriesHandlers(context, handler, activityParams);
 
     handler.addCategory(new RealizationLinkCategoryFilter(context), context);
     handler.addCategory(new UpdateOfCategoryFilter(FaPackage.Literals.FUNCTIONAL_CHAIN, context), context);
     handler.addCategory(new UpdateOfCategoryFilter(CsPackage.Literals.PHYSICAL_PATH, context), context);
     handler.addCategory(new UpdateOfCategoryFilter(InteractionPackage.Literals.SCENARIO, context), context);
-
-    return super.initializeCategoriesHandlers(context, handler, activityParams);
+    
+    // We want to propagate name differences
+    ICategoryItem category = handler.getCategory(context, AttributeNameValueFromSource.class.getSimpleName());
+    if (category != null) {
+      category.setActive(false);
+    }
+    return Status.OK_STATUS;
   }
 
   @Override

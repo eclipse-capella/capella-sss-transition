@@ -36,8 +36,8 @@ public class RootComponentNameUpdater {
    // only if one component was selected. otherwise keep default values.
    if (selectedPhysicalComponents_p.size() == 1){
      Component[] toRename = new Component[] {
-         se_p.getContainedSystemAnalysis().get(0).getOwnedSystem(),
-         se_p.getContainedLogicalArchitectures().get(0).getOwnedLogicalComponent(),
+         se_p.getContainedSystemAnalysis().get(0).getSystem(),
+         se_p.getContainedLogicalArchitectures().get(0).getSystem(),
      };
      String newName = selectedPhysicalComponents_p.iterator().next().getName();
      for (Component rename : toRename){

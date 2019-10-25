@@ -12,6 +12,9 @@ package org.polarsys.capella.transition.system2subsystem.tests.interphases;
 
 import java.util.Collection;
 
+import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest;
+import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Interphase;
+
 //@formatter:off
 /**
  * Physical Path transition: Test if Physical Path are correctly imported
@@ -198,7 +201,7 @@ import java.util.Collection;
  */
 //@formatter:on
 
-public class PhysicalPathTest extends InterPhasesTest {
+public class PhysicalPathTest extends System2SubsystemTest implements Interphase {
 
   private String _id_c_5 = "6dbecd55-0645-40bd-9a79-dfc90bcf243d"; //$NON-NLS-1$
   private String _id_c_3 = "610fe8d4-26d7-4c99-9113-ac082f8705a7"; //$NON-NLS-1$
@@ -274,7 +277,7 @@ public class PhysicalPathTest extends InterPhasesTest {
     shouldNotBeTransitioned(_id_c_4);
     shouldNotBeTransitioned(_id_pc_13);
     shouldNotBeTransitioned(_id_pc_10);
-    shouldNotBeTransitioned(_id_pl_6);
+    mustBeTransitioned(_id_pl_6);
 
     shouldNotBeTransitioned(_id_c_5);
     shouldNotBeTransitioned(_id_c_6);

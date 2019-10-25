@@ -22,9 +22,8 @@ import org.eclipse.osgi.util.NLS;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.cs.Part;
-import org.polarsys.capella.core.data.information.Partition;
-import org.polarsys.capella.core.data.pa.AbstractPhysicalComponent;
 import org.polarsys.capella.core.data.pa.PaPackage;
+import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.core.model.helpers.ComponentExt;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.constants.Messages;
@@ -68,20 +67,20 @@ protected void premicesContainement(EObject element, ArrayList<IPremise> needed)
 @Override
   protected void premicesRelated(EObject element, ArrayList<IPremise> needed) {
     super.premicesRelated(element, needed);
-    AbstractPhysicalComponent physicalElement = (AbstractPhysicalComponent) element;
+    PhysicalComponent physicalElement = (PhysicalComponent) element;
 
-    for (Partition partition : physicalElement.getRepresentingPartitions()) {
-      Collection es = ComponentExt.getPartAncestors((Part) partition, true);
+    for (Part part : physicalElement.getRepresentingParts()) {
+      Collection es = ComponentExt.getPartAncestors(part, true);
       needed.addAll(createDefaultPrecedencePremices(es, "part"));
     }
-    needed.addAll(createDefaultPrecedencePremices(element, CsPackage.Literals.COMPONENT__ALLOCATING_COMPONENTS));
+    needed.addAll(createDefaultPrecedencePremices(element, CsPackage.Literals.COMPONENT__REALIZING_COMPONENTS));
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public IStatus transformRequired(EObject source, IContext context) {
 
-    AbstractPhysicalComponent element = (AbstractPhysicalComponent) source;
+    PhysicalComponent element = (PhysicalComponent) source;
 
     /*
      * Is it in selection?
@@ -110,11 +109,9 @@ protected void premicesContainement(EObject element, ArrayList<IPremise> needed)
     if (ContextScopeHandlerHelper.getInstance(context).contains(ITransitionConstants.SOURCE_SCOPE, source, context)) {
       if (source instanceof Component) {
         Component element = (Component) source;
-        for (Partition part : element.getOwnedPartitions()) {
-          if (part instanceof Part) {
-            result.add(part);
-            ContextScopeHandlerHelper.getInstance(context).add(ITransitionConstants.SOURCE_SCOPE, part, context);
-          }
+        for (Part part : element.getContainedParts()) {
+          result.add(part);
+          ContextScopeHandlerHelper.getInstance(context).add(ITransitionConstants.SOURCE_SCOPE, part, context);
         }
       }
     }

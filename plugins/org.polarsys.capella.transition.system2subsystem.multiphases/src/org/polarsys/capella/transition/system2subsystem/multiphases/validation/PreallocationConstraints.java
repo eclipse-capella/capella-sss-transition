@@ -56,19 +56,16 @@ public class PreallocationConstraints extends AbstractModelConstraint {
 	}
 
 	private final boolean isAllocatedToOrToAChild(LogicalFunction target, LogicalComponent shouldBeAllocatedOn) {
-		boolean result = false;
-
-		if (target.getAllocatorLogicalComponents().contains(shouldBeAllocatedOn)) {
-			result = true;
-		} else {
-			for (LogicalComponent lc : shouldBeAllocatedOn.getOwnedLogicalComponents()) {
-				result = isAllocatedToOrToAChild(target, lc);
-				if (result == true) {
-					break;
-				}
+		if (target.getAllocatingLogicalComponents().contains(shouldBeAllocatedOn)) {
+			return true;
+		}
+		
+		for (LogicalComponent lc : shouldBeAllocatedOn.getOwnedLogicalComponents()) {
+			if(isAllocatedToOrToAChild(target, lc)) {
+				return true;
 			}
 		}
-		return result;
+		return false;
 	}
 
 	// The transition shall contain a validation rule that warns the end user if 
@@ -112,7 +109,7 @@ public class PreallocationConstraints extends AbstractModelConstraint {
 	
 	private final PhysicalComponent getParentPhysicalComponent(PhysicalComponent lf) {
 		EObject parent = lf;
-		PhysicalComponent rootPhysicalComponent = (PhysicalComponent) BlockArchitectureExt.getFirstComponent(BlockArchitectureExt.getRootBlockArchitecture(parent));
+		PhysicalComponent rootPhysicalComponent = (PhysicalComponent) BlockArchitectureExt.getOrCreateSystem(BlockArchitectureExt.getRootBlockArchitecture(parent));
 		if (parent != rootPhysicalComponent) {
 			do {
 				parent = parent.eContainer();
@@ -134,7 +131,7 @@ public class PreallocationConstraints extends AbstractModelConstraint {
 	
 	private final boolean isParentOfPhysicalComponent(PhysicalComponent parentCandidate, PhysicalComponent child) {
 		boolean isParentOfPhysicalComponent = false;
-		PhysicalComponent rootPhysicalComponent = (PhysicalComponent) BlockArchitectureExt.getFirstComponent(BlockArchitectureExt.getRootBlockArchitecture(child));
+		PhysicalComponent rootPhysicalComponent = (PhysicalComponent) BlockArchitectureExt.getOrCreateSystem(BlockArchitectureExt.getRootBlockArchitecture(child));
 		PhysicalComponent parent = child;
 		
 		while (parent!= parentCandidate && parent !=rootPhysicalComponent) {
@@ -149,7 +146,7 @@ public class PreallocationConstraints extends AbstractModelConstraint {
 	
 	private final LogicalComponent getParentLogicalComponent(LogicalComponent lf) {
 		EObject parent = lf;
-		LogicalComponent rootLogicalComponent = (LogicalComponent) BlockArchitectureExt.getFirstComponent(BlockArchitectureExt.getRootBlockArchitecture(parent));
+		LogicalComponent rootLogicalComponent = (LogicalComponent) BlockArchitectureExt.getOrCreateSystem(BlockArchitectureExt.getRootBlockArchitecture(parent));
 		if (parent != rootLogicalComponent) {
 			do {
 				parent = parent.eContainer();
@@ -168,7 +165,7 @@ public class PreallocationConstraints extends AbstractModelConstraint {
 		PhysicalComponent target = (PhysicalComponent) ctx.getTarget();
 		PhysicalComponent parentComponent;
 		EList<LogicalComponent>  realisedLogicalComponents;
-		PhysicalComponent rootPhysicalComponent = (PhysicalComponent) BlockArchitectureExt.getFirstComponent(BlockArchitectureExt.getRootBlockArchitecture(target));
+		PhysicalComponent rootPhysicalComponent = (PhysicalComponent) BlockArchitectureExt.getOrCreateSystem(BlockArchitectureExt.getRootBlockArchitecture(target));
 
 		
 		if (target.getNature() == PhysicalComponentNature.BEHAVIOR){
@@ -184,7 +181,7 @@ public class PreallocationConstraints extends AbstractModelConstraint {
 			// Get LC parent with JustificationLink link
 			for (LogicalComponent realized : realisedLogicalComponents){
 				LogicalComponent realizedParent = realized;
-				LogicalComponent rootLogicalComponent = (LogicalComponent) BlockArchitectureExt.getFirstComponent(BlockArchitectureExt.getRootBlockArchitecture(realized));
+				LogicalComponent rootLogicalComponent = (LogicalComponent) BlockArchitectureExt.getOrCreateSystem(BlockArchitectureExt.getRootBlockArchitecture(realized));
 				while (!hasJustificationLink(realizedParent) && realizedParent!=rootLogicalComponent) {
 					realizedParent = getParentLogicalComponent(realizedParent);
 				}

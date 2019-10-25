@@ -15,7 +15,9 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
+import org.polarsys.capella.core.data.cs.ComponentPkg;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.transition.common.handlers.attachment.AttachmentHelper;
@@ -58,7 +60,26 @@ public class PhysicalLinkCategoryRule extends AbstractCapellaElementRule {
     BlockArchitecture target =
         (BlockArchitecture) TransformationHandlerHelper.getInstance(context_p).getBestTracedElement(root, context_p, CsPackage.Literals.BLOCK_ARCHITECTURE,
             element_p, result_p);
-    return BlockArchitectureExt.getFirstComponent(target);
+    return BlockArchitectureExt.getContext(target);
+  }
+  
+  @Override
+  protected EStructuralFeature getTargetContainementFeature(EObject element, EObject result, EObject container, IContext context) {
+    if (container instanceof ComponentPkg) {
+      return CsPackage.Literals.COMPONENT_PKG__OWNED_PHYSICAL_LINK_CATEGORIES;
+    }
+    
+    return element.eContainingFeature();
+  }
+  
+  @Override
+  protected EObject getBestContainer(EObject element, EObject result, IContext context) {
+    // If the PL Category is contained in the System, we cannot find its container just by traceability.
+    if (BlockArchitectureExt.getRootBlockArchitecture(element).getSystem() == element.eContainer()) {
+      return null;
+    }
+
+    return super.getBestContainer(element, result, context);
   }
 
 }

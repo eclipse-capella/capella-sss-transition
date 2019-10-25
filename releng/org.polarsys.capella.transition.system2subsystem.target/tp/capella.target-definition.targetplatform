@@ -14,10 +14,10 @@ include "http://git.polarsys.org/c/capella/capella.git/plain/releng/plugins/org.
 
 with source, requirements
 
-location capella-master "https://ci.polarsys.org/capella/job/capella-master/lastSuccessfulBuild/artifact/releng/plugins/org.polarsys.capella.rcp.site/target/repository" {
+location capella-master "https://download.eclipse.org/capella/core/updates/nightly/1.4.x/org.polarsys.capella.rcp.site" {
 	org.polarsys.capella.rcp.feature.feature.group
 }
 
-location capella-tests-master "https://ci.polarsys.org/capella/job/capella-master/lastSuccessfulBuild/artifact/releng/plugins/org.polarsys.capella.test.site/target/repository" {
+location capella-tests-master "https://download.eclipse.org/capella/core/updates/nightly/1.4.x/org.polarsys.capella.test.site" {
 	org.polarsys.capella.test.feature.feature.group
 }

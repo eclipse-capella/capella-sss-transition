@@ -11,7 +11,6 @@
 package org.polarsys.capella.transition.system2subsystem.multiphases.handlers.attachment;
 
 import org.polarsys.capella.core.data.cs.Component;
-import org.polarsys.capella.core.data.pa.AbstractPhysicalComponent;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.core.data.pa.PhysicalComponentNature;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
@@ -38,7 +37,7 @@ public class LAAttachmentHelper extends CrossPhasesAttachmentHelper {
         return true;
       }
     }
-    return (element_p instanceof AbstractPhysicalComponent)
+    return (element_p instanceof PhysicalComponent)
            || OptionsHandlerHelper.getInstance(context_p).getBooleanValue(context_p, IOptionsConstants.SYSTEM2SUBSYSTEM_CROSSPHASES_PREFERENCES,
                IOptionsConstants.COMPONENT_MERGE, IOptionsConstants.COMPONENT_MERGE__DEFAULT_VALUE);
   }

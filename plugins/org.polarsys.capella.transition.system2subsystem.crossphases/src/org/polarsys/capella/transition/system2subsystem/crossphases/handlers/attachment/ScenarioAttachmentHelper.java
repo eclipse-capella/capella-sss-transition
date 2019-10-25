@@ -17,10 +17,10 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.common.data.modellingcore.AbstractType;
 import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.information.AbstractInstance;
 import org.polarsys.capella.core.data.information.InformationPackage;
-import org.polarsys.capella.core.data.information.PartitionableElement;
 import org.polarsys.capella.core.transition.common.handlers.scope.ScopeHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.traceability.TraceabilityHandlerHelper;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
@@ -58,10 +58,10 @@ public class ScenarioAttachmentHelper extends org.polarsys.capella.transition.sy
         }
 
         Collection<EObject> result =
-            TraceabilityHandlerHelper.getInstance(context_p).retrieveTracedElements(type, context_p, InformationPackage.Literals.PARTITIONABLE_ELEMENT);
+            TraceabilityHandlerHelper.getInstance(context_p).retrieveTracedElements(type, context_p, CsPackage.Literals.COMPONENT);
         for (EObject element : result) {
-          if (element instanceof PartitionableElement) {
-            partBounds.addAll(((PartitionableElement) element).getRepresentingPartitions());
+          if (element instanceof Component) {
+            partBounds.addAll(((Component) element).getRepresentingParts());
           }
         }
       }

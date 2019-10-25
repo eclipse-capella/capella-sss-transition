@@ -38,10 +38,13 @@ import org.polarsys.capella.core.data.capellacore.NamedElement;
 import org.polarsys.capella.core.data.capellacore.Type;
 import org.polarsys.capella.core.data.capellamodeller.CapellamodellerPackage;
 import org.polarsys.capella.core.data.capellamodeller.Library;
+import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.ctx.CtxPackage;
+import org.polarsys.capella.core.data.ctx.SystemComponent;
 import org.polarsys.capella.core.data.ctx.SystemFunction;
+import org.polarsys.capella.core.data.epbs.ConfigurationItem;
 import org.polarsys.capella.core.data.epbs.EpbsPackage;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FaPackage;
@@ -56,12 +59,16 @@ import org.polarsys.capella.core.data.information.datavalue.LiteralBooleanValue;
 import org.polarsys.capella.core.data.information.datavalue.LiteralNumericValue;
 import org.polarsys.capella.core.data.information.datavalue.LiteralStringValue;
 import org.polarsys.capella.core.data.la.LaPackage;
+import org.polarsys.capella.core.data.la.LogicalComponent;
 import org.polarsys.capella.core.data.la.LogicalFunction;
 import org.polarsys.capella.core.data.oa.OaPackage;
 import org.polarsys.capella.core.data.oa.OperationalActivity;
 import org.polarsys.capella.core.data.pa.PaPackage;
+import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.core.data.pa.PhysicalFunction;
+import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.naming.NamingConstants;
+import org.polarsys.capella.core.transition.common.merge.scope.TargetModelScope;
 
 public class MultiphasesMatchPolicy implements IMatchPolicy {
 
@@ -157,46 +164,71 @@ public class MultiphasesMatchPolicy implements IMatchPolicy {
           && (EcoreUtil2.getFirstContainer(e_p, FaPackage.Literals.ABSTRACT_FUNCTION) == null);
     }
   }
+  
+  private enum RootSystem {
+
+    ROOT_SYSTEM_COMPONENT, ROOT_LOGICAL_COMPONENT, ROOT_PHYSICAL_COMPONENT, ROOT_CONFIGURATION_ITEM;
+
+    static RootSystem getRootSystemKey(EObject e) {
+      if (e instanceof Component && BlockArchitectureExt.getRootBlockArchitecture(e).getSystem() == e) {
+        if (e instanceof SystemComponent) {
+          return ROOT_SYSTEM_COMPONENT;
+        } else if (e instanceof LogicalComponent) {
+          return ROOT_LOGICAL_COMPONENT;
+        } else if (e instanceof PhysicalComponent) {
+          return ROOT_PHYSICAL_COMPONENT;
+        } else if (e instanceof ConfigurationItem) {
+          return ROOT_CONFIGURATION_ITEM;
+        }
+      }
+      return null;
+    }
+  }
 
   public MultiphasesMatchPolicy() {
 
-    Collection<ENamedElement> uniqueKeys = Arrays.asList(CapellamodellerPackage.Literals.PROJECT,
-        CapellamodellerPackage.Literals.SYSTEM_ENGINEERING, LaPackage.Literals.LOGICAL_ARCHITECTURE,
-        PaPackage.Literals.PHYSICAL_ARCHITECTURE, CtxPackage.Literals.SYSTEM_ANALYSIS,
-        OaPackage.Literals.OPERATIONAL_ANALYSIS, EpbsPackage.Literals.EPBS_ARCHITECTURE,
+    Collection<ENamedElement> uniqueKeys = Arrays.asList(
+        CapellamodellerPackage.Literals.PROJECT,
+        CapellamodellerPackage.Literals.SYSTEM_ENGINEERING,
+        CtxPackage.Literals.SYSTEM_ANALYSIS,
+        CtxPackage.Literals.SYSTEM_ANALYSIS__OWNED_MISSION_PKG,
+        CtxPackage.Literals.SYSTEM_ANALYSIS__OWNED_OPERATIONAL_ANALYSIS_REALIZATIONS,
+        CtxPackage.Literals.SYSTEM_ANALYSIS__CONTAINED_SYSTEM_FUNCTION_PKG,
+        CtxPackage.Literals.SYSTEM_ANALYSIS__OWNED_SYSTEM_COMPONENT_PKG,
+        OaPackage.Literals.OPERATIONAL_ANALYSIS,
         OaPackage.Literals.OPERATIONAL_ANALYSIS__OWNED_CONCEPT_PKG,
         OaPackage.Literals.OPERATIONAL_ANALYSIS__OWNED_ENTITY_PKG,
-        OaPackage.Literals.OPERATIONAL_ANALYSIS__OWNED_OPERATIONAL_CONTEXT,
         OaPackage.Literals.OPERATIONAL_ANALYSIS__OWNED_ROLE_PKG,
-        LaPackage.Literals.LOGICAL_ARCHITECTURE__OWNED_LOGICAL_COMPONENT,
-        LaPackage.Literals.LOGICAL_ARCHITECTURE__OWNED_LOGICAL_ACTOR_PKG,
-        LaPackage.Literals.LOGICAL_ARCHITECTURE__OWNED_LOGICAL_COMPONENT_PKG,
-        LaPackage.Literals.LOGICAL_ARCHITECTURE__OWNED_LOGICAL_CONTEXT,
+        OaPackage.Literals.OPERATIONAL_ANALYSIS__OWNED_ENTITY_PKG,
+        LaPackage.Literals.LOGICAL_ARCHITECTURE,
         LaPackage.Literals.LOGICAL_ARCHITECTURE__OWNED_SYSTEM_ANALYSIS_REALIZATIONS,
-        CtxPackage.Literals.SYSTEM_ANALYSIS__OWNED_ACTOR_PKG, CtxPackage.Literals.SYSTEM_ANALYSIS__OWNED_MISSION_PKG,
-        CtxPackage.Literals.SYSTEM_ANALYSIS__OWNED_OPERATIONAL_ANALYSIS_REALIZATIONS,
-        CtxPackage.Literals.SYSTEM_ANALYSIS__OWNED_SYSTEM, CtxPackage.Literals.SYSTEM_ANALYSIS__OWNED_SYSTEM_CONTEXT,
+        LaPackage.Literals.LOGICAL_ARCHITECTURE__OWNED_LOGICAL_COMPONENT_PKG,
+        PaPackage.Literals.PHYSICAL_ARCHITECTURE,
         PaPackage.Literals.PHYSICAL_ARCHITECTURE__OWNED_LOGICAL_ARCHITECTURE_REALIZATIONS,
-        PaPackage.Literals.PHYSICAL_ARCHITECTURE__OWNED_PHYSICAL_ACTOR_PKG,
-        PaPackage.Literals.PHYSICAL_ARCHITECTURE__OWNED_PHYSICAL_COMPONENT,
         PaPackage.Literals.PHYSICAL_ARCHITECTURE__OWNED_PHYSICAL_COMPONENT_PKG,
-        PaPackage.Literals.PHYSICAL_ARCHITECTURE__OWNED_PHYSICAL_CONTEXT,
-        EpbsPackage.Literals.EPBS_ARCHITECTURE__OWNED_EPBS_CONTEXT,
-        EpbsPackage.Literals.EPBS_ARCHITECTURE__OWNED_CONFIGURATION_ITEM,
+        EpbsPackage.Literals.EPBS_ARCHITECTURE,
         EpbsPackage.Literals.EPBS_ARCHITECTURE__OWNED_PHYSICAL_ARCHITECTURE_REALIZATIONS,
-        CapellamodellerPackage.Literals.PROJECT__OWNED_MODEL_ROOTS, LibrariesPackage.Literals.MODEL_INFORMATION);
-
+        EpbsPackage.Literals.EPBS_ARCHITECTURE__OWNED_CONFIGURATION_ITEM_PKG,
+        CapellamodellerPackage.Literals.PROJECT__OWNED_MODEL_ROOTS,
+        LibrariesPackage.Literals.MODEL_INFORMATION);
+    
     for (ENamedElement o : uniqueKeys) {
       matchIDs.put(o, EcoreUtil.getURI(o).toString());
     }
 
-    Collection<EClass> allBlockArchitectures = Arrays.asList(OaPackage.Literals.OPERATIONAL_ANALYSIS,
-        CtxPackage.Literals.SYSTEM_ANALYSIS, LaPackage.Literals.LOGICAL_ARCHITECTURE,
-        PaPackage.Literals.PHYSICAL_ARCHITECTURE, EpbsPackage.Literals.EPBS_ARCHITECTURE);
+    Collection<EClass> allBlockArchitectures = Arrays.asList(
+        OaPackage.Literals.OPERATIONAL_ANALYSIS,
+        CtxPackage.Literals.SYSTEM_ANALYSIS,
+        LaPackage.Literals.LOGICAL_ARCHITECTURE,
+        PaPackage.Literals.PHYSICAL_ARCHITECTURE,
+        EpbsPackage.Literals.EPBS_ARCHITECTURE);
 
     for (EClass c : allBlockArchitectures) {
 
-      Key key = new Key(c, CsPackage.Literals.BLOCK_ARCHITECTURE__OWNED_ABSTRACT_CAPABILITY_PKG);
+      Key key = new Key(c, CsPackage.Literals.BLOCK_ARCHITECTURE__SYSTEM);
+      matchIDs.put(key, key.toString());
+      
+      key = new Key(c, CsPackage.Literals.BLOCK_ARCHITECTURE__OWNED_ABSTRACT_CAPABILITY_PKG);
       matchIDs.put(key, key.toString());
 
       key = new Key(c, CsPackage.Literals.BLOCK_ARCHITECTURE__OWNED_DATA_PKG);
@@ -212,6 +244,10 @@ public class MultiphasesMatchPolicy implements IMatchPolicy {
       matchIDs.put(key, key.toString());
     }
 
+    for (RootSystem k : RootSystem.values()) {
+      matchIDs.put(k, k.toString());
+    }
+    
     for (RootFunction k : RootFunction.values()) {
       matchIDs.put(k, k.toString());
     }
@@ -258,13 +294,10 @@ public class MultiphasesMatchPolicy implements IMatchPolicy {
 
     String result = null;
 
-    // if the element has a non-empty, non-null sid, use this as its match id
-    if ((element_p instanceof ModelElement) && (((ModelElement) element_p).getSid() != null)
-        && !((ModelElement) element_p).getSid().isEmpty()) {
-      EObject archi = EcoreUtil2.getFirstContainer(element_p, CsPackage.Literals.BLOCK_ARCHITECTURE);
-      return archi == null ? "" : archi.eClass().getName() + ((ModelElement) element_p).getSid();
+    // Test if the element is one of the root system
+    if (result == null) {
+      result = matchIDs.get(RootSystem.getRootSystemKey(element_p));
     }
-
     if ((element_p instanceof AbstractTrace) && (((AbstractTrace) element_p).getSourceElement() != null)
         && (((AbstractTrace) element_p).getTargetElement() != null)) {
       result = String.format("t[(%s)%s=>%s]", element_p.eClass().getName(),
@@ -347,13 +380,14 @@ public class MultiphasesMatchPolicy implements IMatchPolicy {
       // root component parts
       if (element_p instanceof Part) {
         Type type = ((Part) element_p).getType();
-        if ((type != null) && (type.getTypedElements().size() == 1)) {
-          String typeMatchId = matchIDs.get(type.eContainingFeature());
+        if (BlockArchitectureExt.getRootBlockArchitecture(type).getSystem() == type) {
+          String typeMatchId = matchIDs.get(RootSystem.getRootSystemKey(type));
           if (typeMatchId != null) {
             result = typeMatchId + "Part";
           }
         }
       }
+      
       if (element_p instanceof StateMachine) {
         String parentMatch = getMatchID(element_p.eContainer(), scope_p);
         if (parentMatch != null) {
@@ -380,6 +414,16 @@ public class MultiphasesMatchPolicy implements IMatchPolicy {
       }
       String libraryName = ((Library) element_p.eResource().getContents().get(0)).getName();
       result += "-LIBRARY-" + libraryName;
+    }
+
+    
+    if (result == null) {
+      // if the element has a non-empty, non-null sid, use this as its match id
+    if ((element_p instanceof ModelElement) && (((ModelElement) element_p).getSid() != null)
+        && !((ModelElement) element_p).getSid().isEmpty()) {
+      EObject archi = EcoreUtil2.getFirstContainer(element_p, CsPackage.Literals.BLOCK_ARCHITECTURE);
+      return archi == null ? "" : archi.eClass().getName() + ((ModelElement) element_p).getSid();
+    }
     }
 
     if (result == null) {

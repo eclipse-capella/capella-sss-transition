@@ -73,7 +73,7 @@ public class PhysicalPathRule extends AbstractCapellaElementRule {
     BlockArchitecture target =
         (BlockArchitecture) TransformationHandlerHelper.getInstance(context_p).getBestTracedElement(root, context_p, CsPackage.Literals.BLOCK_ARCHITECTURE,
             element_p, result_p);
-    return BlockArchitectureExt.getFirstComponent(target);
+    return BlockArchitectureExt.getOrCreateSystem(target);
   }
 
   @Override

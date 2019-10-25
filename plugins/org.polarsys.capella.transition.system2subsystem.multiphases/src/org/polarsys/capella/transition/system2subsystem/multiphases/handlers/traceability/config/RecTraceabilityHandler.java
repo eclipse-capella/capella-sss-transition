@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.polarsys.capella.common.data.modellingcore.AbstractNamedElement;
 import org.polarsys.capella.core.data.capellacore.Structure;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
-import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.data.cs.ComponentPkg;
 import org.polarsys.capella.core.data.cs.InterfacePkg;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionPkg;
@@ -85,8 +85,8 @@ public class RecTraceabilityHandler implements ITraceabilityHandler {
       map.put(sourceActorPkg, targetActorPkg);
     }
 
-    Component sourceContext = BlockArchitectureExt.getContext(sourcePA, false);
-    Component targetContext = BlockArchitectureExt.getContext(targetBlockArchitecture, false);
+    ComponentPkg sourceContext = BlockArchitectureExt.getContext(sourcePA, false);
+    ComponentPkg targetContext = BlockArchitectureExt.getContext(targetBlockArchitecture, false);
     if ((sourceContext != null) && (targetContext != null)) {
       map.put(sourceContext, targetContext);
     }

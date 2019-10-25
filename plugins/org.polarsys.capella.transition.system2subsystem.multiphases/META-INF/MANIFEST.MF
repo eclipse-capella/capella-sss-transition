@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.polarsys.capella.transition.system2subsystem.multiphases;singleton:=true
-Bundle-Version: 1.3.1.qualifier
+Bundle-Version: 1.4.0.qualifier
 Bundle-Activator: org.polarsys.capella.transition.system2subsystem.multiphases.MultiphasesActivator
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -16,7 +16,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.polarsys.capella.core.model.skeleton,
  org.polarsys.capella.core.platform.sirius.ui.project,
  org.polarsys.capella.core.compare,
- org.polarsys.capella.core.transition.system.topdown
+ org.polarsys.capella.core.transition.system.topdown,
+ org.eclipse.emf.ecore
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.polarsys.capella.transition.system2subsystem.multiphases,

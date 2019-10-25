@@ -13,12 +13,10 @@ package org.polarsys.capella.transition.system2subsystem.rules.interaction;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.polarsys.capella.core.data.capellacommon.CapabilityRealizationInvolvement;
 import org.polarsys.capella.core.data.capellacore.CapellacorePackage;
-import org.polarsys.capella.core.data.cs.ActorCapabilityRealizationInvolvement;
-import org.polarsys.capella.core.data.cs.SystemComponentCapabilityRealizationInvolvement;
-import org.polarsys.capella.core.data.ctx.ActorCapabilityInvolvement;
+import org.polarsys.capella.core.data.ctx.CapabilityInvolvement;
 import org.polarsys.capella.core.data.ctx.CtxPackage;
-import org.polarsys.capella.core.data.ctx.SystemCapabilityInvolvement;
 import org.polarsys.capella.core.data.la.LaPackage;
 import org.polarsys.capella.core.data.oa.EntityOperationalCapabilityInvolvement;
 import org.polarsys.capella.core.data.oa.OaPackage;
@@ -39,56 +37,50 @@ public class ActorCapabilityInvolvementRule extends InvolvementRule {
    * {@inheritDoc}
    */
   @Override
-  public EClass getTargetType(EObject element_p, IContext context_p) {
-    return super.getTargetType(element_p, context_p);
+  public EClass getTargetType(EObject element, IContext context) {
+    return super.getTargetType(element, context);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected EStructuralFeature getTargetContainementFeature(EObject element_p, EObject result_p, EObject container_p, IContext context_p) {
-    if (result_p instanceof SystemComponentCapabilityRealizationInvolvement) {
-      return LaPackage.Literals.CAPABILITY_REALIZATION__OWNED_SYSTEM_COMPONENT_CAPABILITY_REALIZATIONS;
+  protected EStructuralFeature getTargetContainementFeature(EObject element, EObject result, EObject container, IContext context) {
+    
+    if (result instanceof CapabilityRealizationInvolvement) {
+      return LaPackage.Literals.CAPABILITY_REALIZATION__OWNED_CAPABILITY_REALIZATION_INVOLVEMENTS;
 
-    } else if (result_p instanceof ActorCapabilityRealizationInvolvement) {
-      return LaPackage.Literals.CAPABILITY_REALIZATION__OWNED_ACTOR_CAPABILITY_REALIZATIONS;
+    } else if (result instanceof CapabilityInvolvement) {
+      return CtxPackage.Literals.CAPABILITY__OWNED_CAPABILITY_INVOLVEMENTS;
 
-    } else if (result_p instanceof SystemCapabilityInvolvement) {
-      return CtxPackage.Literals.CAPABILITY__OWNED_SYSTEM_CAPABILITY_INVOLVEMENT;
-
-    } else if (result_p instanceof ActorCapabilityInvolvement) {
-      return CtxPackage.Literals.CAPABILITY__OWNED_ACTOR_CAPABILITY_INVOLVEMENTS;
-
-    } else if (result_p instanceof EntityOperationalCapabilityInvolvement) {
+    } else if (result instanceof EntityOperationalCapabilityInvolvement) {
       return OaPackage.Literals.OPERATIONAL_CAPABILITY__OWNED_ENTITY_OPERATIONAL_CAPABILITY_INVOLVEMENTS;
     }
 
-    return super.getTargetContainementFeature(element_p, result_p, container_p, context_p);
+    return super.getTargetContainementFeature(element, result, container, context);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  protected void attachContainement(EObject element_p, EObject result_p, IContext context_p) {
-    super.attachContainement(element_p, result_p, context_p);
+  protected void attachContainement(EObject element, EObject result, IContext context) {
+    super.attachContainement(element, result, context);
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public void apply(EObject element_p, IContext context_p) throws Exception {
-    super.apply(element_p, context_p);
+  public void apply(EObject element, IContext context) throws Exception {
+    super.apply(element, context);
   }
 
   @Override
-  public boolean isApplicableOn(EObject element_p) {
-    if (super.isApplicableOn(element_p)) {
-      return (element_p instanceof EntityOperationalCapabilityInvolvement) || (element_p instanceof ActorCapabilityInvolvement)
-             || (element_p instanceof SystemCapabilityInvolvement) || (element_p instanceof ActorCapabilityRealizationInvolvement)
-             || (element_p instanceof SystemComponentCapabilityRealizationInvolvement);
+  public boolean isApplicableOn(EObject element) {
+    if (super.isApplicableOn(element)) {
+      return (element instanceof EntityOperationalCapabilityInvolvement)
+          || (element instanceof CapabilityInvolvement) || (element instanceof CapabilityRealizationInvolvement);
     }
     return false;
   }

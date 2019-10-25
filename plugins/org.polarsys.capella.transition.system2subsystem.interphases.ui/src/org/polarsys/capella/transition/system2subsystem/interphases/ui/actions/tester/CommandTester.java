@@ -18,19 +18,21 @@ import org.polarsys.capella.common.data.modellingcore.AbstractType;
 import org.polarsys.capella.common.ui.actions.ModelAdaptation;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.Part;
+import org.polarsys.capella.core.data.ctx.SystemComponent;
 import org.polarsys.capella.core.data.la.LogicalComponent;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
+import org.polarsys.capella.core.model.helpers.ComponentExt;
 
 public class CommandTester extends PropertyTester {
 
   /**
    * @see org.eclipse.core.expressions.IPropertyTester#test(java.lang.Object, java.lang.String, java.lang.Object[], java.lang.Object)
    */
-  public boolean test(Object object_p, String propertyName_p, Object[] params_p, Object testedValue_p) {
-    if (propertyName_p.equals("transitionMode")) { //$NON-NLS-1$ 
-      List<EObject> elements = (List) ModelAdaptation.adaptToCapellaElements(object_p);
-      if ((!elements.isEmpty()) && (testedValue_p instanceof String)) {
-        String value = (String) testedValue_p;
+  public boolean test(Object object, String propertyName, Object[] params, Object testedValue) {
+    if (propertyName.equals("transitionMode")) { //$NON-NLS-1$ 
+      List<EObject> elements = (List) ModelAdaptation.adaptToCapellaElements(object);
+      if ((!elements.isEmpty()) && (testedValue instanceof String)) {
+        String value = (String) testedValue;
 
         if (value.equals("transitionInterPhases")) { //$NON-NLS-1$
           for (EObject element : elements) {
@@ -40,10 +42,9 @@ public class CommandTester extends PropertyTester {
             } else if (element instanceof Part) {
               type = ((Part) element).getAbstractType();
             }
-            return (type != null)
-                   && ((type instanceof org.polarsys.capella.core.data.ctx.System) || (type instanceof LogicalComponent) || (type instanceof PhysicalComponent));
+            return (type != null) && ((type instanceof SystemComponent) || (type instanceof LogicalComponent)
+                || (type instanceof PhysicalComponent)) && !ComponentExt.isActor(type);
           }
-
         }
       }
     }
