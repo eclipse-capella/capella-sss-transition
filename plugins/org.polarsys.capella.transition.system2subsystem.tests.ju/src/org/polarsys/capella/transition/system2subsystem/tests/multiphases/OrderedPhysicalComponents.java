@@ -31,6 +31,14 @@ public class OrderedPhysicalComponents extends MultiPhasesTest {
   public static final String MP_ORDERED_PA_PC_4 = "b271ea03-5360-43a3-823f-1f4aa88f83ba"; //$NON-NLS-1$
   public static final String MP_ORDERED_PA_PC_5 = "3161c9e8-a19f-49eb-98e2-ed3e867a9a08"; //$NON-NLS-1$
 
+  public OrderedPhysicalComponents() {
+    super();
+  }
+  
+  public OrderedPhysicalComponents(boolean withLibrary) {
+    super(withLibrary);
+  }
+  
   @Override
   protected Collection<?> getProjectionElements() {
     return getObjects(MP_ORDERED_PA_PC_4);
