@@ -10,6 +10,9 @@
  *******************************************************************************/
 package org.polarsys.capella.transition.system2subsystem.tests.multiphases;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt.Type;
@@ -19,10 +22,33 @@ import org.polarsys.capella.transition.system2subsystem.tests.TraceabilitySID;
 
 public abstract class MultiPhasesTest extends System2SubsystemTest {
 
+  private boolean withLibrary = false;
+  
   public MultiPhasesTest() {
     setKind(Kind.MULTI_PHASES);
   }
+  
+  public MultiPhasesTest(boolean withLibrary) {
+    this();
+    this.withLibrary = withLibrary;
+  }
 
+  @Override
+  public List<String> getRequiredTestModels() {
+    if (withLibrary) {
+      return Arrays.asList("Project_test_01", "output_lib"); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+    return super.getRequiredTestModels();
+  }
+  
+  @Override
+  protected String getOutputModelPlatformURIString() {
+    if (withLibrary) {
+      return "/output_lib/output_lib.melodymodeller";
+    }
+    return super.getOutputModelPlatformURIString();
+  }
+  
   @Override
   protected TraceabilitySID createTraceability() {
     return new TraceabilityArchitectureSID();

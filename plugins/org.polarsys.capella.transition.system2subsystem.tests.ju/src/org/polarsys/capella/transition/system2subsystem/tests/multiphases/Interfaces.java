@@ -51,6 +51,14 @@ public class Interfaces extends MultiPhasesTest {
   public static String MP_INTERFACES__PA__INTERFACES__INTERFACE_7 = "71672f91-529b-4ed7-9a31-5c3b4ed17229"; //$NON-NLS-1$
   public static String MP_INTERFACES__PA__INTERFACES__INTERFACE_8 = "f6d77a1b-9d6a-4091-8730-16b03e41aca9"; //$NON-NLS-1$
 
+  public Interfaces() {
+    super();
+  }
+
+  public Interfaces(boolean withLibrary) {
+    super(withLibrary);
+  }
+
   @Override
   protected Collection<Object> getProjectionElements() {
     Collection<Object> selectedElements = new ArrayList<Object>();

@@ -22,7 +22,7 @@ public class MultiphasesDifferencesComputingActivity extends DifferencesComputin
 	
 	@Override
 	protected IMatchPolicy createMatchPolicy(IContext context_p) {
-		return new MultiphasesMatchPolicy();
+		return new MultiphasesMatchPolicy(context_p);
 	}
 
 }

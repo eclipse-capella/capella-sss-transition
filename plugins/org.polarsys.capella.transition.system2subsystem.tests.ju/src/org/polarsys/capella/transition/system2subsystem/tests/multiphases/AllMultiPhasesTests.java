@@ -33,6 +33,10 @@ public class AllMultiPhasesTests extends BasicTestSuite {
     tests.add(new OrderedPhysicalComponents());
     tests.add(new MultiphasesTransitionTest());
 
+    tests.add(new SimpleComponents(true));
+    tests.add(new Interfaces(true));
+    tests.add(new OrderedPhysicalComponents(true));
+    tests.add(new MultiphasesTransitionTest(true));
     return tests;
   }
 
