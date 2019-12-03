@@ -1,12 +1,14 @@
 Manifest-Version: 1.0
-Export-Package: org.polarsys.capella.transition.system2subsystem.ui
+Export-Package: org.polarsys.capella.transition.system2subsystem.ui,
+ org.polarsys.capella.transition.system2subsystem.ui.merge
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.sirius.diagram,
  org.eclipse.gmf.runtime.diagram.ui,
  org.polarsys.capella.core.data.gen,
  org.polarsys.capella.transition.system2subsystem;visibility:=reexport,
- org.polarsys.capella.core.transition.system.ui;visibility:=reexport
+ org.polarsys.capella.core.transition.system.ui;visibility:=reexport,
+ org.eclipse.emf.diffmerge.ui
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-Version: 1.3.1.qualifier

@@ -17,11 +17,11 @@ import org.polarsys.capella.common.ef.command.ICommand;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.IHandler;
 import org.polarsys.capella.core.transition.common.ui.commands.CommandUIHandler;
-import org.polarsys.capella.core.transition.common.ui.handlers.merge.MergeUIDifferencesHandler;
 import org.polarsys.capella.core.transition.common.ui.handlers.options.TransitionUIOptionsHandler;
 import org.polarsys.capella.transition.system2subsystem.interphases.activities.InitializeDiffMergeActivity;
 import org.polarsys.capella.transition.system2subsystem.interphases.activities.InitializeTransitionActivity;
 import org.polarsys.capella.transition.system2subsystem.interphases.commands.InterPhasesCommand;
+import org.polarsys.capella.transition.system2subsystem.ui.merge.SubSystemUIDifferencesHandler;
 import org.polarsys.kitalpha.cadence.core.api.parameter.GenericParameter;
 
 
@@ -32,7 +32,7 @@ public class InterPhasesTransitionHandler extends CommandUIHandler {
     InterPhasesCommand command = new InterPhasesCommand(selection_p, progressMonitor_p);
 
     command.addParameter(InitializeDiffMergeActivity.ID, new GenericParameter<IHandler>(ITransitionConstants.MERGE_DIFFERENCES_HANDLER,
-        new MergeUIDifferencesHandler(), "Merge UI wizard")); //$NON-NLS-1$
+        new SubSystemUIDifferencesHandler(), "Merge UI wizard")); //$NON-NLS-1$
 
     // Add UI Options handler
     GenericParameter<IHandler> optionsHandler = new GenericParameter<IHandler>(ITransitionConstants.OPTIONS_HANDLER, new TransitionUIOptionsHandler() {

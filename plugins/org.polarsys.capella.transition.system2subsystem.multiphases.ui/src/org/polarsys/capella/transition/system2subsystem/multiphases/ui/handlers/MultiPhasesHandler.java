@@ -18,11 +18,11 @@ import org.polarsys.capella.core.transition.common.constants.ITransitionConstant
 import org.polarsys.capella.core.transition.common.handlers.IHandler;
 import org.polarsys.capella.core.transition.common.transposer.SharedWorkflowActivityParameter;
 import org.polarsys.capella.core.transition.common.ui.commands.CommandUIHandler;
-import org.polarsys.capella.core.transition.common.ui.handlers.merge.MergeUIDifferencesHandler;
 import org.polarsys.capella.core.transition.common.ui.handlers.options.TransitionUIOptionsHandler;
 import org.polarsys.capella.transition.system2subsystem.multiphases.activities.InitializeMultiphasesDiffMergeActivity;
 import org.polarsys.capella.transition.system2subsystem.multiphases.activities.InitializeMultiphasesTransitionActivity;
 import org.polarsys.capella.transition.system2subsystem.multiphases.commands.HeadlessMultiphasesCommand;
+import org.polarsys.capella.transition.system2subsystem.ui.merge.SubSystemUIDifferencesHandler;
 import org.polarsys.kitalpha.cadence.core.api.parameter.GenericParameter;
 
 
@@ -41,7 +41,7 @@ public class MultiPhasesHandler extends CommandUIHandler {
     }, "Transposer Options handler")); //$NON-NLS-1$
 
     parameter.addParameter(InitializeMultiphasesDiffMergeActivity.ID, new GenericParameter<IHandler>(ITransitionConstants.MERGE_DIFFERENCES_HANDLER,
-        new MergeUIDifferencesHandler(), "Merge UI wizard")); //$NON-NLS-1$
+        new SubSystemUIDifferencesHandler(), "Merge UI wizard")); //$NON-NLS-1$
 
     HeadlessMultiphasesCommand c = new HeadlessMultiphasesCommand(selection);
     c.addParameters(parameter);
