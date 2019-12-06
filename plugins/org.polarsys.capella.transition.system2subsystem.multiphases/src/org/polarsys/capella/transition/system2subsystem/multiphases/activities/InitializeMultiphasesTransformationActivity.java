@@ -28,7 +28,9 @@ import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.ui.business.api.viewpoint.ViewpointSelection;
 import org.eclipse.ui.statushandlers.StatusManager;
 import org.polarsys.capella.common.libraries.ModelInformation;
+import org.polarsys.capella.core.data.capellamodeller.Library;
 import org.polarsys.capella.core.data.capellamodeller.Project;
+import org.polarsys.capella.core.libraries.ui.wizard.newLibrary.LibrarySessionCreationHelper;
 import org.polarsys.capella.core.model.handler.command.CapellaResourceHelper;
 import org.polarsys.capella.core.model.helpers.ProjectExt;
 import org.polarsys.capella.core.platform.sirius.ui.project.operations.ProjectSessionCreationHelper;
@@ -100,25 +102,33 @@ public final class InitializeMultiphasesTransformationActivity extends Initializ
   }
 
   @Override
-  protected EObject createTargetTransformationContainer(Resource source, IContext context) {
-    Project targetProject = null;
+  protected EObject createTargetTransformationContainer(Resource targetResource, IContext context) {
+    Project targetTemporaryProject = null;
+    Project targetProject = ProjectExt.getProject(targetResource);
     if (context.get(ITransitionConstants.DIFFMERGE_DISABLE) == Boolean.TRUE) {
       // elements are created directly in the target model
-      Project project = ProjectExt.getProject(source);
-      targetProject = project;
+      targetTemporaryProject = targetProject;
     } else {
 
       // Create a temporary project and reload its model through the target editing domain
       // The temporary project is removed later in FinalizeSubsystemTransitionActivity
       try {
         String temporaryProjectName = getTemporaryProjectName();
-        Session session = new ProjectSessionCreationHelper(true, true).createFullProject(temporaryProjectName, null,
-            Collections.<IProject> emptyList(),
-            ViewpointSelection.getViewpoints(CapellaResourceHelper.CAPELLA_MODEL_FILE_EXTENSION),
-            new NullProgressMonitor());
+        Session session = null;
+        if (targetProject instanceof Library) {
+          session = new LibrarySessionCreationHelper(true, true).createFullProject(temporaryProjectName, null,
+              Collections.<IProject> emptyList(),
+              ViewpointSelection.getViewpoints(CapellaResourceHelper.CAPELLA_MODEL_FILE_EXTENSION),
+              new NullProgressMonitor());
+        } else {
+          session = new ProjectSessionCreationHelper(true, true).createFullProject(temporaryProjectName, null,
+              Collections.<IProject> emptyList(),
+              ViewpointSelection.getViewpoints(CapellaResourceHelper.CAPELLA_MODEL_FILE_EXTENSION),
+              new NullProgressMonitor());
+        }
         Project project = SessionHelper.getCapellaProject(session);
         session.close(new NullProgressMonitor());
-        targetProject = (Project) ((EditingDomain) context.get(ITransitionConstants.TRANSITION_TARGET_EDITING_DOMAIN))
+        targetTemporaryProject = (Project) ((EditingDomain) context.get(ITransitionConstants.TRANSITION_TARGET_EDITING_DOMAIN))
             .getResourceSet().getEObject(EcoreUtil.getURI(project), true);
         context.put(FinalizeSubsystemTransitionActivity.PARAM__DELETE_PROJECT,
             ResourcesPlugin.getWorkspace().getRoot().getProject(temporaryProjectName));
@@ -130,7 +140,7 @@ public final class InitializeMultiphasesTransformationActivity extends Initializ
         for (ElementExtension extension : sourceProject.getOwnedExtensions()) {
           if (extension instanceof ModelInformation) {
             ElementExtension copy = EcoreUtil.copy(extension);
-            targetProject.getOwnedExtensions().add(copy);
+            targetTemporaryProject.getOwnedExtensions().add(copy);
           }
         }
       } catch (InvocationTargetException exception_p) {
@@ -143,7 +153,7 @@ public final class InitializeMultiphasesTransformationActivity extends Initializ
                 exception_p.getMessage(), exception_p));
       }
     }
-    return targetProject;
+    return targetTemporaryProject;
   }
 
   private String getTemporaryProjectName() {

@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.polarsys.capella.common.data.modellingcore.AbstractTrace;
 import org.polarsys.capella.common.data.modellingcore.ModelElement;
@@ -68,10 +69,13 @@ import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.core.data.pa.PhysicalFunction;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.naming.NamingConstants;
-import org.polarsys.capella.core.transition.common.merge.scope.TargetModelScope;
+import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
+import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 public class MultiphasesMatchPolicy implements IMatchPolicy {
 
+  private IContext context;
+  
   private final Map<Object, String> matchIDs = new HashMap<Object, String>();
 
   private enum PredefinedType {
@@ -189,6 +193,7 @@ public class MultiphasesMatchPolicy implements IMatchPolicy {
 
     Collection<ENamedElement> uniqueKeys = Arrays.asList(
         CapellamodellerPackage.Literals.PROJECT,
+        CapellamodellerPackage.Literals.LIBRARY,
         CapellamodellerPackage.Literals.SYSTEM_ENGINEERING,
         CtxPackage.Literals.SYSTEM_ANALYSIS,
         CtxPackage.Literals.SYSTEM_ANALYSIS__OWNED_MISSION_PKG,
@@ -256,6 +261,11 @@ public class MultiphasesMatchPolicy implements IMatchPolicy {
       matchIDs.put(k, k.toString());
     }
 
+  }
+  
+  public MultiphasesMatchPolicy(IContext context) {
+    this();
+    this.context = context;
   }
 
   private static final class Key {
@@ -403,19 +413,29 @@ public class MultiphasesMatchPolicy implements IMatchPolicy {
 
     }
 
-    if (element_p instanceof LibraryReference) {
-      result = "-LIBRARYREFERENCE-" + ((LibraryReference) element_p).getLibrary().getId();
+    Resource transformationResource = null;
+    EObject transformationRoot = (EObject) context.get(ITransitionConstants.TRANSFORMATION_TARGET_ROOT);
+    if (transformationRoot != null) {
+      transformationResource = transformationRoot.eResource();
     }
+    Resource targetResource = (Resource) context.get(ITransitionConstants.TRANSITION_TARGET_RESOURCE);
 
-    // If the element is in a library.
-    if (element_p.eResource().getContents().get(0) instanceof Library) {
-      if (element_p instanceof ModelElement) {
-        result += "-" + ((ModelElement) element_p).getId();
+    // Only customize library elements' match ids if they do not belong to the temporary resource or the target resource 
+    if (element_p.eResource() != null && transformationResource != null && targetResource != null
+        && element_p.eResource() != transformationResource && element_p.eResource() != targetResource) {
+      if (element_p instanceof LibraryReference) {
+        result = "-LIBRARYREFERENCE-" + ((LibraryReference) element_p).getLibrary().getId();
       }
-      String libraryName = ((Library) element_p.eResource().getContents().get(0)).getName();
-      result += "-LIBRARY-" + libraryName;
-    }
 
+      // If the element is in a library.
+      if (element_p.eResource().getContents().get(0) instanceof Library) {
+        if (element_p instanceof ModelElement) {
+          result += "-" + ((ModelElement) element_p).getId();
+        }
+        String libraryName = ((Library) element_p.eResource().getContents().get(0)).getName();
+        result += "-LIBRARY-" + libraryName;
+      }
+    }
     
     if (result == null) {
       // if the element has a non-empty, non-null sid, use this as its match id

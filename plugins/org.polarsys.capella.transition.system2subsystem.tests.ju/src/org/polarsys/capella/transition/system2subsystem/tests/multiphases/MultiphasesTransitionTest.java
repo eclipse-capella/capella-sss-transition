@@ -38,6 +38,14 @@ public class MultiphasesTransitionTest extends MultiPhasesTest {
   private static final String PC1 = "eeed51b0-e875-4f01-b43c-7bda9d0a2699"; //$NON-NLS-1$
   private static final String PC2 = "0adec35f-010e-4281-8a61-7146263486e7"; //$NON-NLS-1$
 
+  public MultiphasesTransitionTest() {
+    super();
+  }
+
+  public MultiphasesTransitionTest(boolean withLibrary) {
+    super(withLibrary);
+  }
+  
   @Override
   public void setUp() throws Exception {
     super.setUp();

@@ -38,6 +38,14 @@ public class SimpleComponents extends MultiPhasesTest {
   public static String MP_SIMPLECOMPONENTS__PA__PC1__PC11__PART_PC112__PC112 = "4a3ea7a3-daa8-466b-a7b3-f1d0a8051d6d"; //$NON-NLS-1$
   public static String MP_SIMPLECOMPONENTS__PA__PART_PC3__PC3 = "06eb081b-e0de-45d6-9bee-81e2602347f0"; //$NON-NLS-1$
 
+  public SimpleComponents() {
+    super();
+  }
+
+  public SimpleComponents(boolean withLibrary) {
+    super(withLibrary);
+  }
+
   @Override
   protected Collection<?> getProjectionElements() {
     return getObjects(MP_SIMPLECOMPONENTS__PA__PC1__PC11);
