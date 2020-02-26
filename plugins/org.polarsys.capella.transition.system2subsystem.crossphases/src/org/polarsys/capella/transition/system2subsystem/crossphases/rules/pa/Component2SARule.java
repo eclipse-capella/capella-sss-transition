@@ -74,9 +74,11 @@ public class Component2SARule extends ComponentRule {
       BlockArchitecture target = (BlockArchitecture) TransformationHandlerHelper.getInstance(context).getBestTracedElement(root, context, CsPackage.Literals.BLOCK_ARCHITECTURE);
       if (target instanceof SystemAnalysis) {
         SystemAnalysis analysis = (SystemAnalysis) target;
-        if (analysis.getSystem() != null) {
-          return analysis.getSystem();
+        Component system = BlockArchitectureExt.getOrCreateSystem(analysis);
+        if (element instanceof AbstractNamedElement) {
+          system.setName(((AbstractNamedElement) element).getName());
         }
+        return system;
       }
     }
 
