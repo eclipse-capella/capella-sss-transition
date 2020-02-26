@@ -28,6 +28,7 @@ public class AllMultiPhasesTests extends BasicTestSuite {
   protected List<BasicTestArtefact> getTests() {
     final List<BasicTestArtefact> tests = new ArrayList<BasicTestArtefact>();
     tests.add(new SimpleComponents());
+    tests.add(new SubPhyscialComponent());
     tests.add(new Interfaces());
     tests.add(new HWRulesTestSuite());
     tests.add(new OrderedPhysicalComponents());

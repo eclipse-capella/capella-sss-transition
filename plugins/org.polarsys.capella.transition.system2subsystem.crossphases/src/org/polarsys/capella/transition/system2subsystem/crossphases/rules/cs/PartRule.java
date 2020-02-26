@@ -17,7 +17,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.osgi.util.NLS;
-import org.polarsys.capella.core.data.capellacore.Structure;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.CsPackage;
@@ -28,11 +27,11 @@ import org.polarsys.capella.core.transition.common.constants.ITransitionConstant
 import org.polarsys.capella.core.transition.common.constants.Messages;
 import org.polarsys.capella.core.transition.common.handlers.contextscope.ContextScopeHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.log.LogHelper;
+import org.polarsys.capella.core.transition.common.handlers.selection.EClassSelectionContext;
 import org.polarsys.capella.core.transition.common.handlers.selection.ISelectionContext;
 import org.polarsys.capella.core.transition.common.handlers.selection.SelectionContextHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.transformation.TransformationHandlerHelper;
 import org.polarsys.capella.transition.system2subsystem.crossphases.handlers.attachment.CrossPhasesAttachmentHelper;
-import org.polarsys.capella.transition.system2subsystem.handlers.selection.ExceptEClassSelectionContext;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 /**
@@ -64,7 +63,7 @@ public class PartRule extends org.polarsys.capella.transition.system2subsystem.r
       Component d = CrossPhasesAttachmentHelper.getInstance(context).getRelatedComponent(e, context);
       if (d != e) {
         return new Status(IStatus.WARNING, Messages.Activity_Transformation, NLS.bind("Part ''{0}'' is typed by an element transitioned to the System.",
-            LogHelper.getInstance().getText(element)));
+                LogHelper.getInstance().getText(element)));
       }
     }
     return super.transformRequired(element, context);
@@ -83,40 +82,35 @@ public class PartRule extends org.polarsys.capella.transition.system2subsystem.r
   @Override
   protected EObject getDefaultContainer(EObject element, EObject result, IContext context) {
     EObject root = TransformationHandlerHelper.getInstance(context).getLevelElement(element, context);
-    BlockArchitecture target =
-        (BlockArchitecture) TransformationHandlerHelper.getInstance(context).getBestTracedElement(root, context, CsPackage.Literals.BLOCK_ARCHITECTURE,
-            element, result);
-
-    Component component = (Component) ((Part)element).getAbstractType();
-    ISelectionContext sContext =
-        SelectionContextHandlerHelper.getHandler(context).getSelectionContext(context, ITransitionConstants.SELECTION_CONTEXT__TRANSFORMATION, element,
-            result);
-    Component componentT = (Component) TransformationHandlerHelper.getInstance(context).getBestTracedElement(component, context, sContext);
-    if (BlockArchitectureExt.isRootComponent(componentT) || (element.eContainer() instanceof Structure)) {
-      return BlockArchitectureExt.getContext(target);
-
-    } else if (!ComponentExt.isActor(componentT)) {
-      return BlockArchitectureExt.getOrCreateSystem(target);
-    }
+    BlockArchitecture target = (BlockArchitecture) TransformationHandlerHelper.getInstance(context)
+        .getBestTracedElement(root, context, CsPackage.Literals.BLOCK_ARCHITECTURE, element, result);
 
     return BlockArchitectureExt.getContext(target);
   }
 
   @Override
   protected EObject getBestContainer(EObject element, EObject result, IContext context) {
-    Component component = (Component) ((Part)element).getAbstractType();
+    // If System, fall back to Structure pkg
+    Component component = (Component) ((Part) element).getAbstractType();
     if (component instanceof Component && ComponentExt.isComponentRoot((Component) component)) {
+      return null;
+    }
+
+    // If Actor, fall back to Structure pkg
+    ISelectionContext sContext = SelectionContextHandlerHelper.getHandler(context).getSelectionContext(context,
+        ITransitionConstants.SELECTION_CONTEXT__TRANSFORMATION, element, result);
+    Component componentT = (Component) TransformationHandlerHelper.getInstance(context).getBestTracedElement(component,
+        context, sContext);
+    if (ComponentExt.isActor(componentT)) {
       return null;
     }
 
     EObject container = getSourceContainer(element, result, context);
     EObject bestContainer = null;
     if (container != null) {
-      ISelectionContext sContext =
-          SelectionContextHandlerHelper.getHandler(context).getSelectionContext(context, ITransitionConstants.SELECTION_CONTEXT__TRANSFORMATION, element,
-              result);
-      sContext = new ExceptEClassSelectionContext(sContext, CsPackage.Literals.COMPONENT);
-      bestContainer = TransformationHandlerHelper.getInstance(context).getBestTracedElement(container, context, sContext);
+      sContext = new EClassSelectionContext(sContext, CsPackage.Literals.COMPONENT);
+      bestContainer = TransformationHandlerHelper.getInstance(context).getBestTracedElement(container, context,
+          sContext);
     }
 
     return bestContainer;

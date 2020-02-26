@@ -15,6 +15,8 @@ import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.core.data.capellacore.CapellacorePackage;
+import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.transition.system2subsystem.constants.IOptionsConstants;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Crossphase;
@@ -106,6 +108,7 @@ public class PropertyValuesTest {
   public static final String LA__LPVP2 = "4bcde41c-0254-4180-b737-ea5698054e88"; //$NON-NLS-1$
   public static final String LA__LPVP2__BPV1 = "f9614b1f-847f-4f23-ac41-1b0a898d18a3"; //$NON-NLS-1$
   public static final String LA__INTERFACES__E1 = "c261d2aa-c641-428a-bc5b-6ea70471db88"; //$NON-NLS-1$
+  public static final String PC_11__PV1 = "f4b40f3e-b15c-4397-9997-3d1a743702c4"; //$NON-NLS-1$
 
   /**
    * PropertyValues transition: Test that property values are correctly imported (according to scope)
@@ -361,6 +364,41 @@ public class PropertyValuesTest {
       mustBeTransitionedAndLinkedTo(LA__INTERFACES__E1, LA__LPVP__BPV1,
           CapellacorePackage.Literals.CAPELLA_ELEMENT__APPLIED_PROPERTY_VALUES);
 
+    }
+  }
+  
+  /**
+   * 
+   *
+   */
+  public static class Test3 extends System2SubsystemTest implements Interphase, Crossphase {
+
+    private String _id_pc11 = "30ed9216-9b63-4120-88bd-9f1234c7897f"; //$NON-NLS-1$
+
+    @Override
+    public void setUp() throws Exception {
+      super.setUp();
+      Collection<EObject> collection = new ArrayList<EObject>();
+      collection.add(getObject(PC_11__PV1));
+
+      getHeadlessParameters().addSharedParameter(new GenericParameter<Collection<EObject>>(
+          IOptionsConstants.PROPERTY_VALUES_ELEMENTS, collection, IOptionsConstants.PROPERTY_VALUES_ELEMENTS));
+    }
+
+    @Override
+    protected Collection<?> getProjectionElements() {
+      return getObjects(_id_pc11);
+    }
+
+    @Override
+    protected void verify() {
+      mustBeTransitioned(_id_pc11);
+      mustBeTransitioned(PC_11__PV1);
+      EObject transformedPC11 = retrieveTargetElement(_id_pc11);
+      assertTrue(transformedPC11 instanceof Component);
+      Part part = ((Component) transformedPC11).getRepresentingParts().get(0);
+      assertTrue(part != null);
+      assertTrue(transformedPC11.eContainer() == part.eContainer());
     }
   }
 

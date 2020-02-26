@@ -89,7 +89,7 @@ public class LogicalComponentRule extends Component2SARule {
     LogicalComponent element = (LogicalComponent) source;
 
     // Disable merge of components if option is disabled
-    if (!OptionsHandlerHelper.getInstance(getCurrentContext()).getBooleanValue(context, IOptionsConstants.SYSTEM2SUBSYSTEM_CROSSPHASES_PREFERENCES,
+    if (!OptionsHandlerHelper.getInstance(context).getBooleanValue(context, IOptionsConstants.SYSTEM2SUBSYSTEM_CROSSPHASES_PREFERENCES,
         IOptionsConstants.COMPONENT_MERGE, IOptionsConstants.COMPONENT_MERGE__DEFAULT_VALUE)) {
       return super.transformRequired(source, context);
     }
