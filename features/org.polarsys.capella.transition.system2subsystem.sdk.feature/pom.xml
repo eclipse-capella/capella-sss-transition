@@ -15,20 +15,31 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.polarsys</groupId>
-	<artifactId>org.polarsys.capella.transition.system2subsystem.features</artifactId>
+	<artifactId>org.polarsys.capella.transition.system2subsystem.sdk.feature</artifactId>
 	<version>1.4.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<packaging>eclipse-feature</packaging>
 
 	<parent>
 		<groupId>org.polarsys</groupId>
-		<artifactId>org.polarsys.capella.addon.transition.system2subsystem</artifactId>
+		<artifactId>org.polarsys.capella.addon.transition.system2subsystem.features</artifactId>
 		<version>1.4.1-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
-
-	<modules>
-		<module>org.polarsys.capella.transition.system2subsystem.feature</module>
-		<module>org.polarsys.capella.transition.system2subsystem.sdk.feature</module>
-		<module>org.polarsys.capella.transition.system2subsystem.tests.feature</module>
-	</modules>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-source-feature-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>source-feature</id>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	
 </project>
