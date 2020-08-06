@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,6 +16,8 @@ import org.osgi.framework.BundleContext;
 public class Activator implements BundleActivator {
 
 	private static BundleContext context;
+	
+	public static final String PLUGIN_ID = "org.polarsys.capella.transition.system2subsystem.crossphases";
 
 	static BundleContext getContext() {
 		return context;
