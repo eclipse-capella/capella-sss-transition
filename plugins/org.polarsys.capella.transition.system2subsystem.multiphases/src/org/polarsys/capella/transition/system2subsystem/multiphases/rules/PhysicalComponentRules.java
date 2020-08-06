@@ -18,12 +18,16 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.osgi.util.NLS;
 import org.polarsys.capella.common.data.modellingcore.AbstractNamedElement;
 import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
+import org.polarsys.capella.core.data.cs.BlockArchitecture;
+import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.la.LaPackage;
 import org.polarsys.capella.core.data.la.LogicalArchitecture;
 import org.polarsys.capella.core.data.pa.PaPackage;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.core.data.pa.PhysicalComponentNature;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
+import org.polarsys.capella.core.model.helpers.ComponentExt;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.constants.Messages;
 import org.polarsys.capella.core.transition.common.handlers.contextscope.ContextScopeHandlerHelper;
@@ -86,7 +90,7 @@ public class PhysicalComponentRules {
       }
       return result;
     }
-
+    
     @Override
     public EClass getTargetType(EObject element, IContext context) {
       return LaPackage.Literals.LOGICAL_COMPONENT;
@@ -126,11 +130,24 @@ public class PhysicalComponentRules {
       EObject bestContainer = null;
       EObject container = getSourceContainer(element, result, context);
 
+      ISelectionContext sContext =
+          new EClassSelectionContext(SelectionContextHandlerHelper.getHandler(context).getSelectionContext(context,
+              ITransitionConstants.SELECTION_CONTEXT__TRANSFORMATION, element, result), PaPackage.Literals.PHYSICAL_COMPONENT);
       if (container != null) {
-        ISelectionContext sContext =
-            new EClassSelectionContext(SelectionContextHandlerHelper.getHandler(context).getSelectionContext(context,
-                ITransitionConstants.SELECTION_CONTEXT__TRANSFORMATION, element, result), PaPackage.Literals.PHYSICAL_COMPONENT);
         bestContainer = TransformationHandlerHelper.getInstance(context).getBestTracedElement(container, context, sContext);
+      }
+
+      // Case selected PC is contained in another PC (which is not traced) => Container should be the Physical System
+      if (bestContainer == null) {
+        Component component = (Component) element;
+        EObject root = TransformationHandlerHelper.getInstance(context).getLevelElement(element, context);
+        BlockArchitecture target = (BlockArchitecture) TransformationHandlerHelper.getInstance(context)
+            .getBestTracedElement(root, context, CsPackage.Literals.BLOCK_ARCHITECTURE, element, result);
+        Component componentT = (Component) TransformationHandlerHelper.getInstance(context)
+            .getBestTracedElement(component, context, sContext);
+        if (!ComponentExt.isActor(componentT) && BlockArchitectureExt.getFirstComponent(target, false) != null) {
+          bestContainer = BlockArchitectureExt.getFirstComponent(target, false);
+        }
       }
       return bestContainer;
     }

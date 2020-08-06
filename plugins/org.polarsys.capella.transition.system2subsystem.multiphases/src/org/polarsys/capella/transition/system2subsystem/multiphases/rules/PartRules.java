@@ -11,8 +11,12 @@
 package org.polarsys.capella.transition.system2subsystem.multiphases.rules;
 
 import org.eclipse.emf.ecore.EObject;
+import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.cs.Part;
+import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
+import org.polarsys.capella.core.model.helpers.ComponentExt;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.selection.ISelectionContext;
 import org.polarsys.capella.core.transition.common.handlers.selection.SelectionContextHandlerHelper;
@@ -65,6 +69,26 @@ public class PartRules {
         return tComponent.getRepresentingParts().get(0);
       }
       return super.transformDirectElement(element_p, context_p);
+    }
+    
+    @Override
+    protected EObject getBestContainer(EObject element, EObject result, IContext context) {
+      EObject bestContainer = super.getBestContainer(element, result, context);
+      // In case selected PC is contained in another PC (which is not traced) => Container should be the Physical System
+      if (bestContainer == null) {
+        Component component = (Component) ((Part) element).getAbstractType();
+        EObject root = TransformationHandlerHelper.getInstance(context).getLevelElement(element, context);
+        BlockArchitecture target = (BlockArchitecture) TransformationHandlerHelper.getInstance(context)
+            .getBestTracedElement(root, context, CsPackage.Literals.BLOCK_ARCHITECTURE, element, result);
+        ISelectionContext sContext = SelectionContextHandlerHelper.getHandler(context).getSelectionContext(context,
+            ITransitionConstants.SELECTION_CONTEXT__TRANSFORMATION, element, result);
+        Component componentT = (Component) TransformationHandlerHelper.getInstance(context)
+            .getBestTracedElement(component, context, sContext);
+        if (!ComponentExt.isActor(componentT) && BlockArchitectureExt.getFirstComponent(target, false) != null) {
+          bestContainer = BlockArchitectureExt.getFirstComponent(target, false);
+        }
+      }
+      return bestContainer;
     }
 
   }
