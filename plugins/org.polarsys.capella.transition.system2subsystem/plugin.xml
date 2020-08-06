@@ -291,18 +291,6 @@
                      name="ComponentExchangeCategory">
                </defaultMappingPossibility>
             </mappingElement>
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.fa.FunctionalExchange"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.rules.fa.FunctionalExchangeRule"
-                     enabled="true"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.rules.fa.FunctionalExchangeRule"
-                     name="FunctionalExchange">
-               </defaultMappingPossibility>
-            </mappingElement>
-            
          </mappingPackage>
          
          
