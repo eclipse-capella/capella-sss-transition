@@ -28,7 +28,6 @@
 
 	<modules>
 		<module>org.polarsys.capella.transition.system2subsystem.feature</module>
-		<module>org.polarsys.capella.transition.system2subsystem.sdk.feature</module>
 		<module>org.polarsys.capella.transition.system2subsystem.tests.feature</module>
 	</modules>
 </project>
