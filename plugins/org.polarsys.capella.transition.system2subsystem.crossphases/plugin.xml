@@ -102,6 +102,17 @@
                      name="PropertyValueGroup">
                </defaultMappingPossibility>
             </mappingElement>
+            <mappingElement
+                  domainMetaClass="org.polarsys.capella.core.data.capellacore.Generalization"
+                  reuseExtendedElementDefaultPossibility="true"
+                  reuseExtendedElementPossibilities="true">
+               <defaultMappingPossibility
+                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.core.GeneralizationRule"
+                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.core.GeneralizationRule"
+                     enabled="true"
+                     name="Generalization">
+               </defaultMappingPossibility>
+            </mappingElement>
          </mappingPackage>
          
          <mappingPackage
@@ -430,6 +441,45 @@
                       name="AbstractCapability">
                 </defaultMappingPossibility>
              </mappingElement>
+          </mappingPackage>
+          <mappingPackage
+                name="information">
+             <mappingPackage
+                   name="communication">
+                <mappingElement
+                      domainMetaClass="org.polarsys.capella.core.data.information.communication.CommunicationLink"
+                      reuseExtendedElementDefaultPossibility="true"
+                      reuseExtendedElementPossibilities="true">
+                   <defaultMappingPossibility
+                         completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.information.communication.CommunicationLinkRule"
+                         enabled="true"
+                         incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.information.communication.CommunicationLinkRule"
+                         name="CommunicationLink">
+                   </defaultMappingPossibility>
+                </mappingElement>
+             </mappingPackage>
+             <mappingElement
+                  domainMetaClass="org.polarsys.capella.core.data.information.ExchangeItem"
+                  reuseExtendedElementDefaultPossibility="true"
+                  reuseExtendedElementPossibilities="true">
+               <defaultMappingPossibility
+                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.information.ExchangeItemRule"
+                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.information.ExchangeItemRule"
+                     enabled="true"
+                     name="ExchangeItem">
+               </defaultMappingPossibility>
+            </mappingElement>
+            <mappingElement
+                  domainMetaClass="org.polarsys.capella.core.data.information.ExchangeItemElement"
+                  reuseExtendedElementDefaultPossibility="true"
+                  reuseExtendedElementPossibilities="true">
+               <defaultMappingPossibility
+                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.information.ExchangeItemElementRule"
+                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.information.ExchangeItemElementRule"
+                     enabled="true"
+                     name="ExchangeItemElement">
+               </defaultMappingPossibility>
+            </mappingElement>
           </mappingPackage>
          
       </mapping>
