@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2020 THALES GLOBAL SERVICES.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -17,9 +17,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.polarsys.capella.common.helpers.EObjectExt;
-import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.Component;
-import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.interaction.InteractionPackage;
 import org.polarsys.capella.core.data.la.LaPackage;
@@ -37,6 +35,19 @@ import org.polarsys.capella.transition.system2subsystem.constants.IOptionsConsta
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 public class ComponentRule extends org.polarsys.capella.core.transition.system.rules.cs.ComponentRule {
+  
+  @Override
+  protected void retrieveGoDeep(EObject source, List<EObject> result, IContext context) {
+    super.retrieveGoDeep(source, result, context);
+    
+    Component element = (Component)source;
+    result.addAll(element.getOwnedCommunicationLinks());
+    
+    IContextScopeHandler handler = ContextScopeHandlerHelper.getInstance(context);
+    if (handler.contains(ITransitionConstants.SOURCE_SCOPE, element, context)) {
+      handler.addAll(ITransitionConstants.SOURCE_SCOPE, element.getOwnedCommunicationLinks(), context);
+    }
+  }
 
   @Override
   protected void retrieveComponentGoDeep(EObject source, List<EObject> result, IContext context) {

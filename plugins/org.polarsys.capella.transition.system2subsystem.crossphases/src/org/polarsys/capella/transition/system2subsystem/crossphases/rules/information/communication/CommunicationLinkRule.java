@@ -16,6 +16,7 @@ package org.polarsys.capella.transition.system2subsystem.crossphases.rules.infor
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
