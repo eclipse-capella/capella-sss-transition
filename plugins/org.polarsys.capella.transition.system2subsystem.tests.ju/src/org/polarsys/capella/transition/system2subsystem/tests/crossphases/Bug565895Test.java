@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2020 THALES GLOBAL SERVICES.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *   
+ * Contributors:
+ *    Thales - initial API and implementation
+ *******************************************************************************/
 package org.polarsys.capella.transition.system2subsystem.tests.crossphases;
 
 import java.util.Arrays;
@@ -5,13 +15,6 @@ import java.util.Collection;
 import java.util.List;
 
 public class Bug565895Test extends CrossPhasesTest {
-  
-  /** model */
-//  private String physical_sys_ID = "73aae8b6-0572-4acf-9513-5c9aa368303d";
-//
-//  private String pc1_ID = "9b4c014c-3938-4e4d-a4b8-528bf514748d";
-//  private String comLink_ID = "bb60437f-0d20-4564-bb86-fcb71453f934";
-//  private String generalization_ID = "460fb649-e18b-4141-ab5e-c75a3e3a0b97";
   
   /** test */
   private String pc1_ID = "3e6f14e8-983b-42dc-9d5d-0065073c0315";

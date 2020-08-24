@@ -11,7 +11,7 @@
  *    Thales - initial API and implementation
  *******************************************************************************/
 
-package org.polarsys.capella.transition.system2subsystem.crossphases.rules.information.communication;
+package org.polarsys.capella.transition.system2subsystem.rules.information.communication;
 
 import java.util.ArrayList;
 import java.util.List;

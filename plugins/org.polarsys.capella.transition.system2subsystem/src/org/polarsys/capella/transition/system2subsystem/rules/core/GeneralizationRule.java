@@ -8,7 +8,7 @@
  * Contributors:
  *    Thales - initial API and implementation
  *******************************************************************************/
-package org.polarsys.capella.transition.system2subsystem.crossphases.rules.core;
+package org.polarsys.capella.transition.system2subsystem.rules.core;
 
 public class GeneralizationRule extends org.polarsys.capella.core.transition.system.rules.core.GeneralizationRule {
 

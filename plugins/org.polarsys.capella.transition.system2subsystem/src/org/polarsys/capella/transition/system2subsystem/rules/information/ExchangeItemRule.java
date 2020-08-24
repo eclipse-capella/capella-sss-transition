@@ -10,7 +10,7 @@
  * Contributors:
  *    Thales - initial API and implementation
  *******************************************************************************/
-package org.polarsys.capella.transition.system2subsystem.crossphases.rules.information;
+package org.polarsys.capella.transition.system2subsystem.rules.information;
 
 import java.util.List;
 
