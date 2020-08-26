@@ -66,8 +66,7 @@ public abstract class System2SubsystemTest extends AbstractSystem2SubsystemTest 
     Collection<System2SubsystemTest> result = new ArrayList<System2SubsystemTest>();
     try {
       if (Crossphase.class.isAssignableFrom(clazz)) {
-        System2SubsystemTest test;
-        test = clazz.newInstance();
+        System2SubsystemTest test = clazz.newInstance();
         test.setKind(Kind.CROSS_PHASES);
         result.add(test);
       }

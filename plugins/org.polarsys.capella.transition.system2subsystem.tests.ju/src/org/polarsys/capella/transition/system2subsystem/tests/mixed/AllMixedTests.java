@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.polarsys.capella.test.framework.api.BasicTestArtefact;
 import org.polarsys.capella.test.framework.api.BasicTestSuite;
+import org.polarsys.capella.transition.system2subsystem.tests.interphases.PhysicalPathTest;
 
 import junit.framework.Test;
 
@@ -83,6 +84,7 @@ public class AllMixedTests extends BasicTestSuite {
     tests.addAll(testsFor(StateMachineTest.Test4.class));
 
     tests.addAll(testsFor(StatesReferencesTest.class));
+    tests.addAll(testsFor(Bug565895Test.class));
 
     return tests;
   }
