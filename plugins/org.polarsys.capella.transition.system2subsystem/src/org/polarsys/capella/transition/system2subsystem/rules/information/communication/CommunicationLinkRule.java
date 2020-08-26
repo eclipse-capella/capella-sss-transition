@@ -19,7 +19,6 @@ import java.util.List;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.information.communication.CommunicationLink;
@@ -46,6 +45,28 @@ public class CommunicationLinkRule extends AbstractCapellaElementRule {
     return CommunicationPackage.Literals.COMMUNICATION_LINK;
   }
 
+  @Override
+  public IStatus transformRequired(EObject source, IContext context) {
+    IStatus result = super.transformRequired(source, context);
+
+    if (result.isOK()) {
+      CommunicationLink element = (CommunicationLink) source;
+      EObject sourceElement = element.getExchangeItem();
+      result = TransformationHandlerHelper.getInstance(context).checkTransformRequired(element, context, sourceElement);
+    }
+    return result;
+  }
+
+  @Override
+  protected EObject getSourceContainer(EObject element, EObject result, IContext context) {
+    return getSource(element, context);
+  }
+
+  protected EObject getSource(EObject source_p, IContext context_p) {
+    CommunicationLink element = (CommunicationLink) source_p;
+    return element.eContainer();
+  }
+  
   @Override
   protected EObject getDefaultContainer(EObject element, EObject result, IContext context) {
     EObject root = TransformationHandlerHelper.getInstance(context).getLevelElement(element, context);

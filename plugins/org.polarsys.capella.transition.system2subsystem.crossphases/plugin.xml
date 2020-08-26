@@ -297,6 +297,23 @@
           </mappingElement>
          </mappingPackage>
             
+         <mappingPackage
+                name="information">
+             <mappingPackage
+                   name="communication">
+                <mappingElement
+                      domainMetaClass="org.polarsys.capella.core.data.information.communication.CommunicationLink"
+                      reuseExtendedElementDefaultPossibility="true"
+                      reuseExtendedElementPossibilities="true">
+                   <defaultMappingPossibility
+                         completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.information.communication.CommunicationLinkRule"
+                         enabled="true"
+                         incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.information.communication.CommunicationLinkRule"
+                         name="CommunicationLink">
+                   </defaultMappingPossibility>
+                </mappingElement>
+             </mappingPackage>
+         </mappingPackage>
             
          <mappingPackage
                name="la">

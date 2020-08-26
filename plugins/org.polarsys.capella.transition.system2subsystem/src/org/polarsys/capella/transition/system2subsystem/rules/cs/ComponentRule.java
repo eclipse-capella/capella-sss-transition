@@ -37,19 +37,6 @@ import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 public class ComponentRule extends org.polarsys.capella.core.transition.system.rules.cs.ComponentRule {
   
   @Override
-  protected void retrieveGoDeep(EObject source, List<EObject> result, IContext context) {
-    super.retrieveGoDeep(source, result, context);
-    
-    Component element = (Component)source;
-    result.addAll(element.getOwnedCommunicationLinks());
-    
-    IContextScopeHandler handler = ContextScopeHandlerHelper.getInstance(context);
-    if (handler.contains(ITransitionConstants.SOURCE_SCOPE, element, context)) {
-      handler.addAll(ITransitionConstants.SOURCE_SCOPE, element.getOwnedCommunicationLinks(), context);
-    }
-  }
-
-  @Override
   protected void retrieveComponentGoDeep(EObject source, List<EObject> result, IContext context) {
 
     Component element = (Component) source;
@@ -59,6 +46,7 @@ public class ComponentRule extends org.polarsys.capella.core.transition.system.r
     result.addAll(element.getFunctionalAllocations());
     result.addAll(element.getUsedInterfaceLinks());
     result.addAll(element.getImplementedInterfaceLinks());
+    result.addAll(element.getOwnedCommunicationLinks());
 
     IContextScopeHandler handler = ContextScopeHandlerHelper.getInstance(context);
 
@@ -88,6 +76,8 @@ public class ComponentRule extends org.polarsys.capella.core.transition.system.r
           IOptionsConstants.SCENARIO_EXPORT, IOptionsConstants.SCENARIO_EXPORT_DEFAULT_VALUE)) {
         result.addAll(EObjectExt.getReferencers(element, InteractionPackage.Literals.INSTANCE_ROLE__REPRESENTED_INSTANCE));
       }
+
+      handler.addAll(ITransitionConstants.SOURCE_SCOPE, element.getOwnedCommunicationLinks(), context);
     }
 
   }

@@ -19,6 +19,7 @@ Export-Package: org.polarsys.capella.transition.system2subsystem,
  org.polarsys.capella.transition.system2subsystem.rules.cs,
  org.polarsys.capella.transition.system2subsystem.rules.fa,
  org.polarsys.capella.transition.system2subsystem.rules.information,
+ org.polarsys.capella.transition.system2subsystem.rules.information.communication,
  org.polarsys.capella.transition.system2subsystem.rules.interaction,
  org.polarsys.capella.transition.system2subsystem.rules.pa,
  org.polarsys.capella.transition.system2subsystem.transposer
