@@ -101,23 +101,21 @@ public class FunctionalChainAttachmentHelper implements IHandler {
       inScope = ExternalFunctionsScopeRetriever.isPrimaryFunction((AbstractFunction) involvedElement, context_p);
     } else {
       inScope =
-          (scope.contains(ISubSystemConstants.SCOPE_SECONDARY_ELEMENT, involvedElement, context_p) == false)
+          (!scope.contains(ISubSystemConstants.SCOPE_SECONDARY_ELEMENT, involvedElement, context_p))
               && ScopeHandlerHelper.getInstance(context_p).isInScope(involvedElement, context_p);
     }
 
     // If functional exchange is in scope, the next FunctionalChainInvolvement must be scoped.
-    if (inScope && (involvedElement instanceof FunctionalExchange) && (element_p.getNextFunctionalChainInvolvements().isEmpty() == false)) {
+    if ((involvedElement instanceof FunctionalExchange) && inScope && (!element_p.getNextFunctionalChainInvolvements().isEmpty())) {
       FunctionalChainInvolvement nextFCI = element_p.getNextFunctionalChainInvolvements().get(0);
       boolean nextInScope = isValidInvolvement(nextFCI, context_p);
-      if (nextInScope == false) {
-        // System.out.println(((NamedElement)element_p.getInvolver()).getName());
-        // System.out.println("\t _ " + ((NamedElement)element_p.getInvolved()).getName());
+      if (!nextInScope) {
         return false;
       }
     }
 
     // If not in initial scope, we check the neightbors involvedElements
-    if (inScope == false) {
+    if (!inScope) {
 
       if (involvedElement instanceof AbstractFunction) {
         // The function is secondary scoped if it is concerned by a scoped FunctionalExchange
@@ -167,8 +165,7 @@ public class FunctionalChainAttachmentHelper implements IHandler {
       return;
     }
 
-    boolean isValid = isValidInvolvement(involmt, context_p) && ((lastValid == null) || (lastValid.getInvolved().equals(involmt.getInvolved()) == false));
-
+    boolean isValid = isValidInvolvement(involmt, context_p);
     setValidElement(involmt, Boolean.valueOf(isValid), context_p);
     if (isValid) {
       lastValid = involmt;
@@ -193,7 +190,7 @@ public class FunctionalChainAttachmentHelper implements IHandler {
   }
 
   private void getNextValidInternal(FunctionalChainInvolvement fci, IContext context_p, Collection<FunctionalChainInvolvement> res) {
-    if ((fci.getNextFunctionalChainInvolvements() != null) && (fci.getNextFunctionalChainInvolvements().isEmpty() == false)) {
+    if ((fci.getNextFunctionalChainInvolvements() != null) && (!fci.getNextFunctionalChainInvolvements().isEmpty())) {
       for (FunctionalChainInvolvement next : fci.getNextFunctionalChainInvolvements()) {
         if (next != null) {
           if (isValidElement(next, context_p)) {
@@ -215,7 +212,7 @@ public class FunctionalChainAttachmentHelper implements IHandler {
   }
 
   private void getPreviousValidInternal(FunctionalChainInvolvement fci, IContext context_p, Collection<FunctionalChainInvolvement> res) {
-    if ((fci.getPreviousFunctionalChainInvolvements() != null) && (fci.getPreviousFunctionalChainInvolvements().isEmpty() == false)) {
+    if ((fci.getPreviousFunctionalChainInvolvements() != null) && (!fci.getPreviousFunctionalChainInvolvements().isEmpty())) {
       for (FunctionalChainInvolvement prev : fci.getPreviousFunctionalChainInvolvements()) {
         if (prev != null) {
           if (isValidElement(prev, context_p)) {
