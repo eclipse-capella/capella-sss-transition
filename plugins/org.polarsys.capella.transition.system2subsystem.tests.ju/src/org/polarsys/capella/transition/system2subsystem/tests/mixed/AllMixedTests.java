@@ -31,7 +31,8 @@ public class AllMixedTests extends BasicTestSuite {
     final List<BasicTestArtefact> tests = new ArrayList<BasicTestArtefact>();
 
     tests.add(new IncrementalModeTest());
-    
+
+    tests.addAll(testsFor(TestComposite568503.class));
     tests.addAll(testsFor(CapabilityTest.class));
 
     tests.add(new CategoriesTest.Crossphases());

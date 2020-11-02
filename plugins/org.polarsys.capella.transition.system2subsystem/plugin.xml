@@ -278,6 +278,18 @@
                    name="FunctionalChainInvolvement">
              </defaultMappingPossibility>
           </mappingElement>
+          <mappingElement
+                domainMetaClass="org.polarsys.capella.core.data.fa.FunctionalChainInvolvementLink"
+                reuseExtendedElementDefaultPossibility="true"
+                reuseExtendedElementPossibilities="true">
+             <defaultMappingPossibility
+                   completeRule="org.polarsys.capella.transition.system2subsystem.rules.fa.FunctionalChainInvolvementLinkRule"
+                   incompleteRule="org.polarsys.capella.transition.system2subsystem.rules.fa.FunctionalChainInvolvementLinkRule"
+                   enabled="true"
+                   name="FunctionalChainInvolvementLink">
+             </defaultMappingPossibility>
+          </mappingElement>
+          
           
             
             <mappingElement

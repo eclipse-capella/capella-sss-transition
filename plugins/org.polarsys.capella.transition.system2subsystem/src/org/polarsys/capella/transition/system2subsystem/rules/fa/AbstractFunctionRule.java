@@ -37,6 +37,7 @@ import org.polarsys.capella.core.transition.common.handlers.options.OptionsHandl
 import org.polarsys.capella.core.transition.common.handlers.scope.IScopeHandler;
 import org.polarsys.capella.core.transition.common.handlers.scope.ScopeHandlerHelper;
 import org.polarsys.capella.transition.system2subsystem.constants.IOptionsConstants;
+import org.polarsys.capella.transition.system2subsystem.handlers.scope.ExternalFunctionsScopeRetriever;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 /**
@@ -112,22 +113,16 @@ public class AbstractFunctionRule extends org.polarsys.capella.core.transition.s
     boolean isPrimary = scope.contains(ITransitionConstants.SOURCE_SCOPE, source_p, context_p);
 
     result_p.addAll(element.getComponentFunctionalAllocations());
+
     if (isPrimary) {
 
       super.retrieveGoDeep(source_p, result_p, context_p);
 
       for (Involvement involvement : element.getInvolvingInvolvements()) {
         InvolverElement fc = involvement.getInvolver();
-
-        // Add all involving FunctionalChains
-        if (involvement instanceof FunctionalChainInvolvement) {
-          if ((fc != null) && (fc instanceof FunctionalChain)) {
-            result_p.add(fc);
-          }
-        }
         // Add all involving Capabilities
         if (involvement instanceof AbstractFunctionAbstractCapabilityInvolvement) {
-          if ((fc != null) && (fc instanceof AbstractCapability)) {
+          if (fc instanceof AbstractCapability) {
             result_p.add(fc);
           }
         }
@@ -146,6 +141,22 @@ public class AbstractFunctionRule extends org.polarsys.capella.core.transition.s
         }
       }
     }
+
+    if (isPrimary || ExternalFunctionsScopeRetriever.isLinkToPrimaryFunction(element, context_p)) {
+      // Here we retrieve all functional chains that are involving a primary or a secondary function. (and only those chains)
+      // Indeed, we don't want to retrieve for a chain all inner chains as they might be involve only unrelated
+      // functions and those chains are irrelevant
+      for (Involvement involvement : element.getInvolvingInvolvements()) {
+        // Add all involving FunctionalChains
+        if (involvement instanceof FunctionalChainInvolvement) {
+          InvolverElement fc = involvement.getInvolver();
+          if (fc instanceof FunctionalChain) {
+            result_p.add(fc);
+          }
+        }
+      }
+    }
+    
   }
 
 }
