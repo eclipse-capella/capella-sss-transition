@@ -17,26 +17,30 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.polarsys.capella.common.libraries.LibraryReference;
 import org.polarsys.capella.common.libraries.ModelInformation;
+import org.polarsys.capella.core.data.capellamodeller.ModelRoot;
 import org.polarsys.capella.core.data.capellamodeller.Project;
+import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
+import org.polarsys.capella.core.data.sharedmodel.SharedPkg;
 import org.polarsys.capella.core.transition.system.helpers.ContextHelper;
 import org.polarsys.kitalpha.emde.model.ElementExtension;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 /**
  * A temporary class and to be removed in newer Capella release.
- * @deprecated use org.polarsys.capella.core.transition.system.helpers.
  */
-@Deprecated
 public class SubSystemContextHelper {
 
+  @Deprecated
   public static ModelInformation getSourceModelInformation(IContext context) {
     return getModelInformation(ContextHelper.getSourceProject(context));
   }
 
+  @Deprecated
   public static ModelInformation getTransformedModelInformation(IContext context) {
     return getModelInformation(ContextHelper.getTransformedProject(context));
   }
 
+  @Deprecated
   public static ModelInformation getTargetModelInformation(IContext context) {
     return getModelInformation(ContextHelper.getTargetProject(context));
   }
@@ -50,13 +54,23 @@ public class SubSystemContextHelper {
   public static Set<EObject> getLibraryRoots(Set<Resource> libraryResources) {
     return libraryResources.stream().map(r -> r.getContents().get(0)).collect(Collectors.toSet());
   }
-  
+
+  @Deprecated
   private static ModelInformation getModelInformation(Project project) {
     if (project != null) {
       for (ElementExtension elt : project.getOwnedExtensions()) {
         if (elt instanceof ModelInformation) {
           return (ModelInformation) elt;
         }
+      }
+    }
+    return null;
+  }
+  
+  public static SystemEngineering getTransformedEngineering(IContext context) {
+    for (ModelRoot root: ContextHelper.getTransformedProject(context).getOwnedModelRoots()) {
+      if (root instanceof SystemEngineering && !(root instanceof SharedPkg)) {
+        return (SystemEngineering)root;
       }
     }
     return null;

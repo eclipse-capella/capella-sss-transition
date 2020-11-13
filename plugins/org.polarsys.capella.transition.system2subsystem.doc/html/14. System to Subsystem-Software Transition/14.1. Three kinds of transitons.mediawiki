@@ -46,7 +46,7 @@ The objective of this transition is to re-apply the methodology starting from on
 The transformation algorithm performs the following steps:
 
 # Computation of the transitive closure of elements to be transformed or copied starting from one or several Configuration Items
-# Transformation of elements (for example, a sibling Physical Component will become a System Actor
+# Transformation of elements (for example, a sibling Physical Component will become a System Actor)
 # Comparison with previous transition
 # Merge
 
@@ -54,7 +54,7 @@ The transformation algorithm performs the following steps:
 
 The principle of the transition is to select one or more Node Physical Component from a source model and generate (or update) a target model whose system of interest will be the selection.
 
-The transition will automatically create the target model and fill its three phases (System Analysis, Logical Architecture and Physical Architecture) with new Melody Advance objects linked to the objects of the source model:
+The transition will automatically create the target model and fill its three phases (System Analysis, Logical Architecture and Physical Architecture) with new Capella objects linked to the objects of the source model:
 
 [[Image:Images/Vertical_SALAPA.png|1000px]]
 

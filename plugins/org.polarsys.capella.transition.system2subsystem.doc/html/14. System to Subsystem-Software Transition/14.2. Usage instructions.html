@@ -2,6 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>14.2. Usage instructions</title>
+		<link type="text/css" rel="stylesheet" href="PLUGINS_ROOT/org.polarsys.capella.doc/html/styles.css"/>
 	</head>
 	<body>
 		<table border="1">
@@ -24,10 +26,9 @@
 				<td>The System to Sub System transition is not integrated by default in Capella. This extension is available for download on the Capella website. </td>
 			</tr>
 		</table>
-		<h2 id="TRANSFORMATION_COMMAND">TRANSFORMATION COMMAND</h2>
 		<p>Transitions are possible from one or several logical, physical components or one Configuration Item. The Multiphase Transition is only available from one or more selected node physical components.</p>
 		<ol>
-			<li>Open the source Melody Advance project model</li>
+			<li>Open the source Capella project model</li>
 			<li>Select one or several components (in the Project Explorer or in a diagram).</li>
 			<li>From the contextual menu (right click), select "System To SubSystem Transition" and then, the kind of Transition to be performed.</li>
 		</ol>
@@ -47,8 +48,6 @@
 		</ul>
 		<p>
 			<img width="400" border="0" src="Images/Config_Transition_extensions.png"/>
-
-			<br/>
 		</p>
 		<h2 id="Gap_analysis_with_previous_iteration_of_the_transition">Gap analysis with previous iteration of the transition</h2>
 		<p>Once the target project selected, a Diff/Merge dialog displays the the differences between the transformation result shown in the center and the target model shown on the right.</p>
@@ -89,5 +88,11 @@
 		<p>To launch a validation, select a suitable model element (e.g. SystemEngineering) and choose 
 			<i>Validate Model</i> from its context menu.
 		</p>
+		<h2 id="Subsystem_specificities">Subsystem specificities</h2>
+		<h4 id="Functional_chains">Functional chains</h4>
+		<p>When a functional chain in the System model is involving functions that are not directly linked to the selected subsystem components, the addon will try to ensure that chain remains valid on the subsystem. It will create some Functional Exchange replacing irrelevant functions to ensure chain is still involving the same chain of relevant involved functions.</p>
+		<h4 id="Name_of_Subsystem">Name of Subsystem</h4>
+		<p>Subsystem will be named based on the selected Component (or Configuration item according to the subsystem transition kind). 
+			When subsystem is resulting from several Components, the subsystem will use default name.</p>
 	</body>
 </html>
