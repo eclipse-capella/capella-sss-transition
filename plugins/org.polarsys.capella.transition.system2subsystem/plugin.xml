@@ -646,6 +646,22 @@
       </ActivityDeclaration>
    </extension>
    
+   <extension
+         point="org.polarsys.kitalpha.cadence.core.activity.declaration">
+      <ActivityDeclaration
+            ActivityClass="org.polarsys.capella.transition.system2subsystem.activities.RootComponentNameUpdater"
+            Identifier="org.polarsys.capella.transition.system2subsystem.activities.RootComponentNameUpdater"
+            Multiple="false"
+            Name="RootComponentNameUpdater"
+            WorkflowElementIdentifier="org.polarsys.kitalpha.transposer.after.rule.execution"
+            WorkflowIdentifier="org.polarsys.kitalpha.transposer.workflow">
+         <Description>
+            Updates root component names according to selection
+         </Description>
+      </ActivityDeclaration>
+   </extension>
+   
+   
    
    <extension
          point="org.polarsys.kitalpha.cadence.core.activity.declaration">

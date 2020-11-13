@@ -25,11 +25,9 @@
 | The System to Sub System transition is not integrated by default in Capella. This extension is available for download on the Capella website. 
 |}  
 
-== TRANSFORMATION COMMAND ==
- 
 Transitions are possible from one or several logical, physical components or one Configuration Item. The Multiphase Transition is only available from one or more selected node physical components.
 
-# Open the source Melody Advance project model
+# Open the source Capella project model
 # Select one or several components (in the Project Explorer or in a diagram).
 # From the contextual menu (right click), select "System To SubSystem Transition" and then, the kind of Transition to be performed.
  
@@ -48,7 +46,7 @@ The "Extensions" tab allows to add elements to take in the transition:
 * Requirement Packages: the list of Requirement Packages where to look for Requirements to take in the transition along with their referencing objects.
 
 [[Image:Images/Config_Transition_extensions.png|400px]]
-<br>
+
  
 == Gap analysis with previous iteration of the transition ==
  
@@ -94,4 +92,13 @@ The validation rules can be enabled/disabled selectively by selecting Window->Pr
 To launch a validation, select a suitable model element (e.g. SystemEngineering) and choose ''Validate Model'' from its context menu.
 
 
+== Subsystem specificities ==
 
+==== Functional chains ====
+
+When a functional chain in the System model is involving functions that are not directly linked to the selected subsystem components, the addon will try to ensure that chain remains valid on the subsystem. It will create some Functional Exchange replacing irrelevant functions to ensure chain is still involving the same chain of relevant involved functions.
+
+==== Name of Subsystem ====
+
+Subsystem will be named based on the selected Component (or Configuration item according to the subsystem transition kind). 
+When subsystem is resulting from several Components, the subsystem will use default name.

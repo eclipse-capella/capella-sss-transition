@@ -15,9 +15,12 @@ import java.util.Set;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
+import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.CsPackage;
+import org.polarsys.capella.core.data.ctx.SystemComponent;
 import org.polarsys.capella.core.data.fa.FaPackage;
 import org.polarsys.capella.core.data.interaction.InteractionPackage;
+import org.polarsys.capella.core.data.la.LogicalComponent;
 import org.polarsys.capella.core.model.helpers.naming.NamingConstants;
 import org.polarsys.capella.core.transition.common.activities.InitializeDiffMergeFromTransformationActivity;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
@@ -69,7 +72,11 @@ public class InitializeMultiphasesDiffMergeActivity extends InitializeDiffMergeF
     handler.addCategory(new AttributeNameValueFromSource(context) {
       @Override
       public boolean isUpdatableValue(EObject source, EObject target, Object oldValue, Object newValue) {
-        if (NamingConstants.CreateLogicalArchCmd_logicalComponent_name.equals(oldValue)) {
+        if (source instanceof SystemComponent && NamingConstants.CreateSysAnalysisCmd_system_name.equals(oldValue)) {
+          return true;
+
+        } else if (source instanceof LogicalComponent
+            && NamingConstants.CreateLogicalArchCmd_logicalComponent_name.equals(oldValue)) {
           return true;
         }
         return super.isUpdatableValue(source, target, oldValue, newValue);
