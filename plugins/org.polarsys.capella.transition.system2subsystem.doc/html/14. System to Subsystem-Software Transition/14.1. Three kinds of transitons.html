@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-		<link rel="stylesheet" type="text/css"
-	href="PLUGINS_ROOT/org.polarsys.capella.doc/html/styles.css" media="all" />
+		<title>14.1. Three kinds of transitons</title>
+		<link type="text/css" rel="stylesheet" href="PLUGINS_ROOT/org.polarsys.capella.doc/html/styles.css"/>
 	</head>
 	<body>
 		<table border="1">
@@ -44,13 +44,13 @@
 		<p>The transformation algorithm performs the following steps:</p>
 		<ol>
 			<li>Computation of the transitive closure of elements to be transformed or copied starting from one or several Configuration Items</li>
-			<li>Transformation of elements (for example, a sibling Physical Component will become a System Actor</li>
+			<li>Transformation of elements (for example, a sibling Physical Component will become a System Actor)</li>
 			<li>Comparison with previous transition</li>
 			<li>Merge</li>
 		</ol>
 		<h2 id="Vertical_Transition_.28SA-LA-PA.29">Vertical Transition (SA-LA-PA)</h2>
 		<p>The principle of the transition is to select one or more Node Physical Component from a source model and generate (or update) a target model whose system of interest will be the selection.</p>
-		<p>The transition will automatically create the target model and fill its three phases (System Analysis, Logical Architecture and Physical Architecture) with new Melody Advance objects linked to the objects of the source model:</p>
+		<p>The transition will automatically create the target model and fill its three phases (System Analysis, Logical Architecture and Physical Architecture) with new Capella objects linked to the objects of the source model:</p>
 		<p>
 			<img width="1000" border="0" src="Images/Vertical_SALAPA.png"/>
 		</p>

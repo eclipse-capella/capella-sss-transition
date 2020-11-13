@@ -11,15 +11,13 @@
 package org.polarsys.capella.transition.system2subsystem.tests.crossphases;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.polarsys.capella.test.framework.api.BasicTestArtefact;
 import org.polarsys.capella.test.framework.api.BasicTestSuite;
+import org.polarsys.capella.transition.system2subsystem.tests.mixed.ComponentToSystemName;
 
 import junit.framework.Test;
-
-import static org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.testsFor;
 
 public class AllCrossPhasesTests extends BasicTestSuite {
 

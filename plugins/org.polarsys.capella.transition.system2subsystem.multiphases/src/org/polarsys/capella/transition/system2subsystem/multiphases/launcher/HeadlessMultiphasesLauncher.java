@@ -28,6 +28,7 @@ import org.polarsys.capella.core.transition.common.constants.ITransitionConstant
 import org.polarsys.capella.core.transition.common.transposer.ExtendedRulesHandler;
 import org.polarsys.capella.core.transition.common.transposer.SharedWorkflowActivityParameter;
 import org.polarsys.capella.transition.system2subsystem.activities.FinalizeSubsystemTransitionActivity;
+import org.polarsys.capella.transition.system2subsystem.activities.RootComponentNameUpdater;
 import org.polarsys.capella.transition.system2subsystem.crossphases.handlers.attachment.CrossPhasesAttachmentHelper;
 import org.polarsys.capella.transition.system2subsystem.multiphases.MultiphasesContext;
 import org.polarsys.capella.transition.system2subsystem.multiphases.activities.InitializeMultiphasesDiffMergeActivity;
@@ -36,7 +37,6 @@ import org.polarsys.capella.transition.system2subsystem.multiphases.activities.I
 import org.polarsys.capella.transition.system2subsystem.multiphases.activities.JustificationLinkPass;
 import org.polarsys.capella.transition.system2subsystem.multiphases.activities.MultiphasesDifferencesComputingActivity;
 import org.polarsys.capella.transition.system2subsystem.multiphases.activities.RealizationLinkPass;
-import org.polarsys.capella.transition.system2subsystem.multiphases.activities.RootComponentNameUpdater;
 import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.attachment.LAAttachmentHelper;
 import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.attachment.PAAttachmentHelper;
 import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.attachment.SAAttachmentHelper;
@@ -79,8 +79,8 @@ public class HeadlessMultiphasesLauncher {
         new RealizationLinkPass().createRealizationLinks(context.getTempSystemEngineering(), context);
         new PostTransformationActivity().run(createActivityParameters(PostTransformationActivity.ID, context));
         new JustificationLinkPass().createJustificationLinks(context.getTempSystemEngineering(), context.getSelectedPhysicalComponents());
-        new RootComponentNameUpdater().updateRootComponentNames(context.getTempSystemEngineering(), context.getSelectedPhysicalComponents());
-
+        new RootComponentNameUpdater().run(createActivityParameters(RootComponentNameUpdater.ID, context));
+        
         new InitializeMultiphasesDiffMergeActivity().run(createActivityParameters(InitializeMultiphasesDiffMergeActivity.ID, context));
         new MultiphasesDifferencesComputingActivity().run(createActivityParameters(MultiphasesDifferencesComputingActivity.ID, context));
         new DifferencesMergingActivity().run(createActivityParameters(DifferencesMergingActivity.ID, context));
