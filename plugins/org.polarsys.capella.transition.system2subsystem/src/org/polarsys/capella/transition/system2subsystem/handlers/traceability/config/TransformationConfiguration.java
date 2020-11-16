@@ -16,7 +16,9 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
+import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
 import org.polarsys.capella.core.transition.common.constants.ISchemaConstants;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
@@ -43,8 +45,9 @@ public class TransformationConfiguration extends ExtendedTraceabilityConfigurati
     addHandler(fContext_p, new ReconciliationTraceabilityHandler(getIdentifier(fContext_p)) {
 
       @Override
-      protected void initializeComponent(Component source_p, Component target_p, IContext context_p, LevelMappingTraceability map_p) {
-        //Nothing here, we don't want to play with matching though stateMachines size while transformation
+      protected void initializeComponent(Component source_p, Component target_p, IContext context_p,
+          LevelMappingTraceability map_p) {
+        // Nothing here, we don't want to play with matching though stateMachines size while transformation
       }
 
       /**
@@ -53,8 +56,52 @@ public class TransformationConfiguration extends ExtendedTraceabilityConfigurati
       @Override
       protected void initializeRootMappings(IContext context_p) {
         super.initializeRootMappings(context_p);
-        addMappings(ContextHelper.getSourceProject(context_p), ContextHelper.getTransformedProject(context_p), context_p);
-        addMappings(ContextHelper.getSourceEngineering(context_p), ContextHelper.getTransformedEngineering(context_p), context_p);
+        addMappings(ContextHelper.getSourceProject(context_p), ContextHelper.getTransformedProject(context_p),
+            context_p);
+        addMappings(ContextHelper.getSourceEngineering(context_p), ContextHelper.getTransformedEngineering(context_p),
+            context_p);
+      }
+
+      /**
+       * @param sourceRoot_p
+       * @param targetRoot_p
+       * @param context
+       * @param map
+       */
+      protected void initializeBlockArchitecture(BlockArchitecture source, BlockArchitecture target, IContext context,
+          LevelMappingTraceability map) {
+        EObject sourceChild = BlockArchitectureExt.getFunctionPkg(source, false);
+        if (sourceChild != null) {
+          addMapping(map, sourceChild, BlockArchitectureExt.getFunctionPkg(target, true), context);
+        }
+        sourceChild = BlockArchitectureExt.getRootFunction(source, false);
+        if (sourceChild != null) {
+          addMapping(map, sourceChild, BlockArchitectureExt.getRootFunction(target, true), context);
+        }
+        sourceChild = BlockArchitectureExt.getDataPkg(source, false);
+        if (sourceChild != null) {
+          addMapping(map, sourceChild, BlockArchitectureExt.getDataPkg(target, true), context);
+        }
+        sourceChild = BlockArchitectureExt.getActorPkg(source, false);
+        if (sourceChild != null) {
+          addMapping(map, sourceChild, BlockArchitectureExt.getActorPkg(target, true), context);
+        }
+        sourceChild = BlockArchitectureExt.getContext(source, false);
+        if (sourceChild != null) {
+          addMapping(map, sourceChild, BlockArchitectureExt.getContext(target, true), context);
+        }
+        sourceChild = BlockArchitectureExt.getInterfacePkg(source, false);
+        if (sourceChild != null) {
+          addMapping(map, sourceChild, BlockArchitectureExt.getInterfacePkg(target, true), context);
+        }
+        sourceChild = BlockArchitectureExt.getRequirementsPkg(source, false);
+        if (sourceChild != null) {
+          addMapping(map, sourceChild, BlockArchitectureExt.getRequirementsPkg(target, true), context);
+        }
+        sourceChild = BlockArchitectureExt.getAbstractCapabilityPkg(source, false);
+        if (sourceChild != null) {
+          addMapping(map, sourceChild, BlockArchitectureExt.getAbstractCapabilityPkg(target, true), context);
+        }
       }
 
     });
@@ -67,34 +114,34 @@ public class TransformationConfiguration extends ExtendedTraceabilityConfigurati
       @Override
       protected void initializeRootMappings(IContext context_p) {
         super.initializeRootMappings(context_p);
-        initializeMappings(ContextHelper.getSourceProject(context_p), ContextHelper.getTransformedProject(context_p), context_p);
+        initializeMappings(ContextHelper.getSourceProject(context_p), ContextHelper.getTransformedProject(context_p),
+            context_p);
       }
-      
+
       @Override
-     	protected void createAttachment(EObject sourceElement_p, EObject targetElement_p, IContext context_p) {
-     	    EAttribute attribute = getAttribute(context_p);
-     	    if (! targetElement_p.eClass().getEAllAttributes().contains(attribute))
-     	    {
-     	    	return ;
-     	    }
-     		super.createAttachment(sourceElement_p, targetElement_p, context_p);
-     	}
+      protected void createAttachment(EObject sourceElement_p, EObject targetElement_p, IContext context_p) {
+        EAttribute attribute = getAttribute(context_p);
+        if (!targetElement_p.eClass().getEAllAttributes().contains(attribute)) {
+          return;
+        }
+        super.createAttachment(sourceElement_p, targetElement_p, context_p);
+      }
 
     });
-    
+
     addHandler(fContext_p, new LibraryTraceabilityHandler());
 
   }
-  
+
   public SystemEngineering getSourceEngineering(IContext context) {
     Collection<EObject> selection = (Collection<EObject>) context.get(ITransitionConstants.TRANSITION_SOURCES);
     if (!selection.isEmpty()) {
       EObject sourceSelection = (EObject) selection.toArray()[0];
-      return SystemEngineeringExt.getSystemEngineering((CapellaElement)sourceSelection);
+      return SystemEngineeringExt.getSystemEngineering((CapellaElement) sourceSelection);
     }
     return null;
   }
-  
+
   @Override
   public boolean useHandlerForSourceElements(EObject source, ITraceabilityHandler handler, IContext context) {
     if (LibraryTraceabilityHandler.isLibraryElement(source, context)) {
@@ -102,7 +149,7 @@ public class TransformationConfiguration extends ExtendedTraceabilityConfigurati
     }
     return super.useHandlerForSourceElements(source, handler, context);
   }
-  
+
   @Override
   public boolean useHandlerForTracedElements(EObject source, ITraceabilityHandler handler, IContext context) {
     if (LibraryTraceabilityHandler.isLibraryElement(source, context)) {
@@ -111,19 +158,19 @@ public class TransformationConfiguration extends ExtendedTraceabilityConfigurati
     return super.useHandlerForTracedElements(source, handler, context);
   }
 
-
   /**
    * {@inheritDoc}
    */
   @Override
-  public boolean useHandlerForAttachment(EObject source_p, EObject target_p, ITraceabilityHandler handler_p, IContext context_p) {
+  public boolean useHandlerForAttachment(EObject source_p, EObject target_p, ITraceabilityHandler handler_p,
+      IContext context_p) {
     if (LibraryTraceabilityHandler.isLibraryElement(source_p, context_p)) {
       return handler_p instanceof LibraryTraceabilityHandler;
     }
 
     boolean result = super.useHandlerForAttachment(source_p, target_p, handler_p, context_p);
     if (result) {
-      //We disable Reconciliation for attachment
+      // We disable Reconciliation for attachment
       if (handler_p instanceof ReconciliationTraceabilityHandler) {
         result = false;
       }
