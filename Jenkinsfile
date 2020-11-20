@@ -107,15 +107,24 @@ pipeline {
 		        			['org.polarsys.capella.transition.system2subsystem.tests.AllSystem2SubsystemTests'])		        			 
 	        		}
 	        		
-	        		junit '*.xml'
+	        		tester.publishTests()
 				}
 			}
 		}
+		
+		stage('Sonar') {
+			steps {
+				script {
+					sonar.runSonar("eclipse_capella-sss-transition", "eclipse/capella-sss-transition", 'sonarcloud-token-sss-transition')
+				}
+			}
+		}
+		
 	}
   
 	post {
     	always {
-       		archiveArtifacts artifacts: '**/*.log, *.log, *.xml, **/*.layout'
+       		archiveArtifacts artifacts: '**/*.log, *.log, *.xml, **/*.layout, *.exec'
     	}
     	
     	success  {
