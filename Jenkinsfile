@@ -5,12 +5,12 @@ pipeline {
   
 	tools {
 		maven 'apache-maven-latest'
-		jdk 'oracle-jdk8-latest'
+		jdk 'openjdk-jdk14-latest'
 	}
   
 	environment {
 		BUILD_KEY = (github.isPullRequest() ? CHANGE_TARGET : BRANCH_NAME).replaceFirst(/^v/, '')
-		CAPELLA_PRODUCT_PATH = "${WORKSPACE}/capella/eclipse/eclipse"
+		CAPELLA_PRODUCT_PATH = "${WORKSPACE}/capella/capella"
   	}
   
   	stages {
@@ -57,7 +57,7 @@ pipeline {
 	    stage('Download Capella') {
         	steps {
         		script {
-	        		def capellaURL = capella.getDownloadURL("1.4.x", 'linux', '')
+	        		def capellaURL = capella.getDownloadURL("master", 'linux', '')
 	        		
 	        		sh "curl -k -o capella.zip ${capellaURL}"
 					sh "unzip -q capella.zip"
@@ -70,9 +70,9 @@ pipeline {
         	steps {
         		script {
 	        		sh "chmod 755 ${CAPELLA_PRODUCT_PATH}"
+	        		sh "chmod 755 ${WORKSPACE}/capella/jre/bin/java"
 	        		
-	        		eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", 'http://download.eclipse.org/tools/orbit/downloads/drops/R20130827064939/repository', 'org.jsoup')	        		
-	        		eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", capella.getTestUpdateSiteURL("1.4.x"), 'org.polarsys.capella.test.feature.feature.group')
+	        		eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", capella.getTestUpdateSiteURL("master"), 'org.polarsys.capella.test.feature.feature.group')
 	        		
 	        		eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", "file:/${WORKSPACE}/releng/org.polarsys.capella.transition.system2subsystem.site/target/repository/".replace("\\", "/"), 'org.polarsys.capella.transition.system2subsystem.feature.feature.group')
 	        		eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", "file:/${WORKSPACE}/releng/org.polarsys.capella.transition.system2subsystem.site/target/repository/".replace("\\", "/"), 'org.polarsys.capella.transition.system2subsystem.tests.feature.feature.group')

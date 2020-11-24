@@ -10,7 +10,8 @@
  *******************************************************************************/
 package org.polarsys.capella.transition.system2subsystem.multiphases.activities;
 
-import org.eclipse.emf.diffmerge.api.IMatchPolicy;
+import org.eclipse.emf.diffmerge.generic.api.IMatchPolicy;
+import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.transition.system2subsystem.activities.DifferencesComputingActivity;
 import org.polarsys.capella.transition.system2subsystem.multiphases.diffmerge.MultiphasesMatchPolicy;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
@@ -21,7 +22,7 @@ public class MultiphasesDifferencesComputingActivity extends DifferencesComputin
 	public static final String ID = "org.polarsys.capella.transition.system2subsystem.multiphases.activities.MultiphasesDifferencesComputingActivity"; //$NON-NLS-1$
 	
 	@Override
-	protected IMatchPolicy createMatchPolicy(IContext context_p) {
+	protected IMatchPolicy<EObject> createMatchPolicy(IContext context_p) {
 		return new MultiphasesMatchPolicy(context_p);
 	}
 

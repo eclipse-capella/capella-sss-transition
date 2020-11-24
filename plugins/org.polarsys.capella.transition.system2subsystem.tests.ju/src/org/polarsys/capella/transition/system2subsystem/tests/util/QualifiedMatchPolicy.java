@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.polarsys.capella.transition.system2subsystem.tests.util;
 
-import org.eclipse.emf.diffmerge.api.scopes.IModelScope;
+import org.eclipse.emf.diffmerge.generic.api.scopes.ITreeDataScope;
 import org.eclipse.emf.diffmerge.impl.policies.DefaultMatchPolicy;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -26,7 +26,8 @@ public class QualifiedMatchPolicy extends DefaultMatchPolicy {
     return true;
   }
 
-  public Object getMatchID(EObject next, IModelScope arg1) {
+  @Override
+  public Object getMatchID(EObject next, ITreeDataScope<EObject> arg1) {
     if (next == null) {
       return "null";
     }

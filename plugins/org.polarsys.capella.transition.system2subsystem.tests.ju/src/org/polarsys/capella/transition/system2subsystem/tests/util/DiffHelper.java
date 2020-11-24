@@ -16,10 +16,10 @@ import java.util.HashSet;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.diffmerge.api.IMatchPolicy;
-import org.eclipse.emf.diffmerge.api.Role;
-import org.eclipse.emf.diffmerge.api.diff.IDifference;
 import org.eclipse.emf.diffmerge.diffdata.impl.EComparisonImpl;
+import org.eclipse.emf.diffmerge.generic.api.IMatchPolicy;
+import org.eclipse.emf.diffmerge.generic.api.Role;
+import org.eclipse.emf.diffmerge.generic.api.diff.IDifference;
 import org.eclipse.emf.diffmerge.impl.policies.DefaultDiffPolicy;
 import org.eclipse.emf.diffmerge.impl.policies.DefaultMatchPolicy;
 import org.eclipse.emf.diffmerge.impl.policies.DefaultMergePolicy;
@@ -71,7 +71,7 @@ public class DiffHelper {
 
     impl.compute(getMatchPolicy(), new DefaultDiffPolicy() {
       @Override
-      public boolean considerOrdered(EStructuralFeature feature_p) {
+      protected boolean considerOrderedFeature(EStructuralFeature feature_p) {
         return false;
       }
     }, new DefaultMergePolicy(), new NullProgressMonitor());
