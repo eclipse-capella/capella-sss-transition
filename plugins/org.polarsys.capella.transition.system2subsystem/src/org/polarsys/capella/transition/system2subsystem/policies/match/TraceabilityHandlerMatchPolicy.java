@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.diffmerge.api.scopes.IModelScope;
+import org.eclipse.emf.diffmerge.generic.api.scopes.ITreeDataScope;
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.common.helpers.EcoreUtil2;
 import org.polarsys.capella.core.data.interaction.InteractionPackage;
@@ -44,7 +45,7 @@ public class TraceabilityHandlerMatchPolicy extends org.polarsys.capella.core.tr
    * @return
    */
   @Override
-  public boolean isMatchable(EObject element_p, IModelScope scope_p, IContext context_p) {
+  public boolean isMatchable(EObject element_p, ITreeDataScope<EObject> scope_p, IContext context_p) {
     Collection<EObject> bounds = new ArrayList<EObject>();
 
     ITraceabilityHandler handler = null;

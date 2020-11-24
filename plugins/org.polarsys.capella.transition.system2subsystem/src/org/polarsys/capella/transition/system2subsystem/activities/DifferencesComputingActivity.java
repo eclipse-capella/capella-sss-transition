@@ -10,7 +10,8 @@
  *******************************************************************************/
 package org.polarsys.capella.transition.system2subsystem.activities;
 
-import org.eclipse.emf.diffmerge.api.IMatchPolicy;
+import org.eclipse.emf.diffmerge.generic.api.IMatchPolicy;
+import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.transition.system2subsystem.policies.match.TraceabilityHandlerMatchPolicy;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
@@ -26,9 +27,8 @@ public class DifferencesComputingActivity extends org.polarsys.capella.core.tran
    * @return
    */
   @Override
-  protected IMatchPolicy createMatchPolicy(IContext context_p) {
-    IMatchPolicy policy = new TraceabilityHandlerMatchPolicy(context_p);
-    return policy;
+  protected IMatchPolicy<EObject> createMatchPolicy(IContext context_p) {
+    return new TraceabilityHandlerMatchPolicy(context_p);
   }
 
 }

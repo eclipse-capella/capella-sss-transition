@@ -10,21 +10,22 @@
  *******************************************************************************/
 package org.polarsys.capella.transition.system2subsystem.multiphases.diffmerge;
 
-import org.eclipse.emf.diffmerge.api.IMatchPolicy;
+import org.eclipse.emf.diffmerge.generic.api.IMatchPolicy;
 import org.eclipse.emf.diffmerge.ui.specification.IComparisonMethodFactory;
 import org.eclipse.emf.diffmerge.ui.specification.IModelScopeDefinition;
+import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.core.compare.CapellaComparisonMethod;
 
 public class MultiphaseCapellaComparisonSpecification extends
 		CapellaComparisonMethod {
 
 	public MultiphaseCapellaComparisonSpecification(IModelScopeDefinition leftScopeDef,
-      IModelScopeDefinition rightScopeDef, IModelScopeDefinition ancestorScopeDef, IComparisonMethodFactory factory) {
+      IModelScopeDefinition rightScopeDef, IModelScopeDefinition ancestorScopeDef, IComparisonMethodFactory<EObject> factory) {
     super(leftScopeDef, rightScopeDef, ancestorScopeDef, factory);
   }
 
   @Override
-	protected IMatchPolicy createMatchPolicy() {
+	protected IMatchPolicy<EObject> createMatchPolicy() {
 		return new MultiphasesMatchPolicy();
 	}
 

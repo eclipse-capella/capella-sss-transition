@@ -16,8 +16,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.emf.diffmerge.api.IMatchPolicy;
-import org.eclipse.emf.diffmerge.api.scopes.IModelScope;
+import org.eclipse.emf.diffmerge.generic.api.IMatchPolicy;
+import org.eclipse.emf.diffmerge.generic.api.scopes.ITreeDataScope;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
@@ -72,7 +72,7 @@ import org.polarsys.capella.core.model.helpers.naming.NamingConstants;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
-public class MultiphasesMatchPolicy implements IMatchPolicy {
+public class MultiphasesMatchPolicy implements IMatchPolicy<EObject> {
 
   private IContext context;
   
@@ -300,7 +300,7 @@ public class MultiphasesMatchPolicy implements IMatchPolicy {
   }
 
   @Override
-  public String getMatchID(final EObject element_p, IModelScope scope_p) {
+  public String getMatchID(final EObject element_p, ITreeDataScope<EObject> scope_p) {
 
     String result = null;
 

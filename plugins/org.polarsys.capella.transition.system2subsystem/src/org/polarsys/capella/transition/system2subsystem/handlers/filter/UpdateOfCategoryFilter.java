@@ -10,12 +10,12 @@
  *******************************************************************************/
 package org.polarsys.capella.transition.system2subsystem.handlers.filter;
 
-import org.eclipse.emf.diffmerge.api.IMatch;
-import org.eclipse.emf.diffmerge.api.Role;
-import org.eclipse.emf.diffmerge.api.diff.IDifference;
-import org.eclipse.emf.diffmerge.api.diff.IElementPresence;
-import org.eclipse.emf.diffmerge.api.diff.IElementRelativeDifference;
-import org.eclipse.emf.diffmerge.api.diff.IPresenceDifference;
+import org.eclipse.emf.diffmerge.diffdata.EElementRelativePresence;
+import org.eclipse.emf.diffmerge.generic.api.IMatch;
+import org.eclipse.emf.diffmerge.generic.api.Role;
+import org.eclipse.emf.diffmerge.generic.api.diff.IDifference;
+import org.eclipse.emf.diffmerge.generic.api.diff.IElementPresence;
+import org.eclipse.emf.diffmerge.generic.api.diff.IPresenceDifference;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.common.helpers.EcoreUtil2;
@@ -41,8 +41,8 @@ public class UpdateOfCategoryFilter extends CategoryFilter {
 
   protected boolean isUpdateOf(IDifference diff, EClass clazz) {
     // any update of clazz is disabled
-    if (diff instanceof IElementRelativeDifference) {
-      IElementRelativeDifference presence = (IElementRelativeDifference) diff;
+    if (diff instanceof EElementRelativePresence) {
+      EElementRelativePresence presence = (EElementRelativePresence) diff;
       EObject source = presence.getElementMatch().get(Role.REFERENCE);
 
       if (source != null) {
