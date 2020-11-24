@@ -55,12 +55,6 @@ pipeline {
 	    }
 	    
 	    stage('Download Capella') {
-    		when {
-        		expression { 
-        			github.isPullRequest() 
-        		}
-      		}
-      		
         	steps {
         		script {
 	        		def capellaURL = capella.getDownloadURL("1.4.x", 'linux', '')
@@ -73,12 +67,6 @@ pipeline {
 	    }
 
     	stage('Install test features') {
-    		when {
-        		expression { 
-        			github.isPullRequest() 
-        		}
-      		}
-      		
         	steps {
         		script {
 	        		sh "chmod 755 ${CAPELLA_PRODUCT_PATH}"
@@ -93,12 +81,6 @@ pipeline {
 	    }
 	    
     	stage('Run tests') {
-    		when {
-        		expression { 
-        			github.isPullRequest() 
-        		}
-      		}
-    	
         	steps {
         		script {
         			wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
