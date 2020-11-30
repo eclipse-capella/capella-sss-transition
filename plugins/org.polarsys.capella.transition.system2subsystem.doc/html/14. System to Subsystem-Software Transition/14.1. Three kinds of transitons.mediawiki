@@ -9,27 +9,21 @@
        Thales - initial API and implementation
 -->
 
-{| border="1"
-|-
-| [[Image:Images/warning.png|34x34px]] 
-| Warning: The Capella User Manual is currently being refactored. This page might contain obsolete diagram look and feel / user interface screenshots / references to Melody Advance, the ancestor of Capella. 
-|}  
-
 = Scope = 
 
 '''System to Sub System transition''' add-on enables automated and iterative transition between system and subsystems.
 
 = Three Kinds of Transitions =
- 
+
 '''System to Sub System transitions are top-down and iterative:''' any change performed in the original System can be propagated at any moment to the Sub System.
- 
+
 Traceability between System and Sub System is ensured through a '''mechanism based on system-wide ID&rsquo;s'''.
- 
+
 == Scoped Horizontal Extraction ==
 
 The objective of this transition is to extract a subset of the Physical or Logical Architecture and populate a new model with this subset.
 
-[[Image:Images/Scoped_Horizontal_Extraction.png|600px]]
+[[Image:Images/Scoped_Horizontal_Extraction.png|800px]]
 
 The transformation algorithm performs the following steps:
 
@@ -41,7 +35,7 @@ The transformation algorithm performs the following steps:
 
 The objective of this transition is to re-apply the methodology starting from one or several given Configuration Item(s). 
 
-[[Image:Images/Vertical_Transition.png|600px]]
+[[Image:Images/Vertical_Transition.png|800px]]
 
 The transformation algorithm performs the following steps:
 
@@ -56,12 +50,4 @@ The principle of the transition is to select one or more Node Physical Component
 
 The transition will automatically create the target model and fill its three phases (System Analysis, Logical Architecture and Physical Architecture) with new Capella objects linked to the objects of the source model:
 
-[[Image:Images/Vertical_SALAPA.png|1000px]]
-
-
-
-
-
-
-
-
+[[Image:Images/Vertical_SALAPA.png|800px]]
