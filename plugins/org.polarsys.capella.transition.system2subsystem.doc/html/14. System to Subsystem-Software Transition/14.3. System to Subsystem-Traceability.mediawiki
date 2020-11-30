@@ -9,12 +9,6 @@
        Thales - initial API and implementation
 -->
 
-{| border="1"
-|-
-| [[Image:Images/warning.png|34x34px]] 
-| Warning: The Capella User Manual is currently being refactored. This page might contain obsolete diagram look and feel / user interface screenshots / references to Melody Advance, the ancestor of Capella. 
-|}  
-
 = System to Subsystem Traceability = 
 
 == System Model (Source) ==

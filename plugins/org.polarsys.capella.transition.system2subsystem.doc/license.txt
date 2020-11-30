@@ -14,7 +14,6 @@ Subsystem-Model.png
 Traceability_SysModel.png
 Transfo_Cmd.png
 Transition_Log.png
-Transition_Preferences.png
 Validation_Rules.png
 Vertical_SALAPA.png
 Vertical_Transition.png
