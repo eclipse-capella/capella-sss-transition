@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.polarsys.capella.core.model.handler.command.CapellaResourceHelper;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt.Type;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest;
@@ -44,7 +45,7 @@ public abstract class MultiPhasesTest extends System2SubsystemTest {
   @Override
   protected String getOutputModelPlatformURIString() {
     if (withLibrary) {
-      return "/output_lib/output_lib.melodymodeller";
+      return "/output_lib/output_lib."+CapellaResourceHelper.CAPELLA_MODEL_FILE_EXTENSION;
     }
     return super.getOutputModelPlatformURIString();
   }

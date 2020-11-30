@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description" uid="_TYuPAJyqEeCQgtIgaD9r9w" selectedViews="_TZ6h0JyqEeCQgtIgaD9r9w _TaDrwJyqEeCQgtIgaD9r9w _TaNcwJyqEeCQgtIgaD9r9w _TaWmsJyqEeCQgtIgaD9r9w _TagXsJyqEeCQgtIgaD9r9w _TaqIsJyqEeCQgtIgaD9r9w _wVFukEe8EeO6YKPAQogEKA" version="14.3.0.201909031200">
-  <semanticResources>output.melodymodeller</semanticResources>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description" uid="_TYuPAJyqEeCQgtIgaD9r9w" selectedViews="_TZ6h0JyqEeCQgtIgaD9r9w _TaDrwJyqEeCQgtIgaD9r9w _TaNcwJyqEeCQgtIgaD9r9w _TaWmsJyqEeCQgtIgaD9r9w _TagXsJyqEeCQgtIgaD9r9w _TaqIsJyqEeCQgtIgaD9r9w _wVFukEe8EeO6YKPAQogEKA" version="14.3.1.202003261200">
+  <semanticResources>output.capella</semanticResources>
   <semanticResources>output.afm</semanticResources>
   <ownedViews xmi:type="viewpoint:DView" uid="_TZ6h0JyqEeCQgtIgaD9r9w">
     <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']"/>

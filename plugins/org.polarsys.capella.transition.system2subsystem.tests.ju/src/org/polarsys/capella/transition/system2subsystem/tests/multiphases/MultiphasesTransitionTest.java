@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.diffmerge.generic.api.diff.IDifference;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.osgi.util.NLS;
+import org.polarsys.capella.core.model.handler.command.CapellaResourceHelper;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTestActivator;
 import org.polarsys.capella.transition.system2subsystem.tests.util.DiffHelper;
 import org.polarsys.capella.transition.system2subsystem.tests.util.ProjectCreationHelper;
@@ -35,7 +36,7 @@ import org.polarsys.capella.transition.system2subsystem.tests.util.QualifiedMatc
 public class MultiphasesTransitionTest extends MultiPhasesTest {
 
   private static final String OUTPUT_PROJECT_NAME = "PC1PC2"; //$NON-NLS-1$
-  private static final String OUTPUT_FILENAME = "PC1PC2.melodymodeller"; //$NON-NLS-1$
+  private static final String OUTPUT_FILENAME = "PC1PC2."+CapellaResourceHelper.CAPELLA_MODEL_FILE_EXTENSION; //$NON-NLS-1$
   private static final String PC1 = "eeed51b0-e875-4f01-b43c-7bda9d0a2699"; //$NON-NLS-1$
   private static final String PC2 = "0adec35f-010e-4281-8a61-7146263486e7"; //$NON-NLS-1$
 
@@ -83,7 +84,7 @@ public class MultiphasesTransitionTest extends MultiPhasesTest {
     
     super.test(); //Perform the transition into the output
 
-    IFile expectedResult = ResourcesPlugin.getWorkspace().getRoot().getProject("PC1PC2_result").getFile("PC1PC2.melodymodeller");
+    IFile expectedResult = ResourcesPlugin.getWorkspace().getRoot().getProject("PC1PC2_result").getFile(OUTPUT_FILENAME);
     IFile currentResult = ResourcesPlugin.getWorkspace().getRoot().getProject(OUTPUT_PROJECT_NAME).getFile(OUTPUT_FILENAME);
     
     Collection<IDifference> differences = new DiffHelper().setMatchPolicy(new QualifiedMatchPolicy()).getDifferences(currentResult, expectedResult);
