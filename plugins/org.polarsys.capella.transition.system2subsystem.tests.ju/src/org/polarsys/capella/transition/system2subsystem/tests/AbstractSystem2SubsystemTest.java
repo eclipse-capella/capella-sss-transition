@@ -32,6 +32,7 @@ import org.polarsys.capella.core.data.la.LogicalComponent;
 import org.polarsys.capella.core.data.la.LogicalComponentPkg;
 import org.polarsys.capella.core.data.pa.PhysicalArchitecture;
 import org.polarsys.capella.core.data.pa.PhysicalComponentPkg;
+import org.polarsys.capella.core.model.handler.command.CapellaResourceHelper;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.ComponentExt;
 import org.polarsys.capella.core.model.helpers.ComponentPkgExt;
@@ -280,7 +281,7 @@ public abstract class AbstractSystem2SubsystemTest extends BasicCommandTestCase 
   }
 
   protected String getOutputModelPlatformURIString() {
-    return "/output/output.melodymodeller";
+    return "/output/output."+CapellaResourceHelper.CAPELLA_MODEL_FILE_EXTENSION;
   }
 
   protected Resource getOutputModelResource() {
