@@ -10,7 +10,6 @@
  * Contributors:
  *    Thales - initial API and implementation
  *******************************************************************************/
-
 package org.polarsys.capella.transition.system2subsystem.crossphases.rules.information.communication;
 
 import org.eclipse.emf.ecore.EObject;

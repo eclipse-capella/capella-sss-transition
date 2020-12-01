@@ -10,7 +10,6 @@
  * Contributors:
  *    Thales - initial API and implementation
  *******************************************************************************/
-
 package org.polarsys.capella.transition.system2subsystem.rules.information.communication;
 
 import java.util.ArrayList;
