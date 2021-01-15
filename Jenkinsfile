@@ -49,7 +49,8 @@ pipeline {
 					
 					deployer.addonNightlyDropins("${WORKSPACE}/releng/org.polarsys.capella.transition.system2subsystem.site/target/*-dropins-*.zip", deploymentDirName)
 					deployer.addonNightlyUpdateSite("${WORKSPACE}/releng/org.polarsys.capella.transition.system2subsystem.site/target/*-updateSite-*.zip", deploymentDirName)					
-
+					currentBuild.description = "${deploymentDirName} - <a href=\"https://download.eclipse.org/capella/addons/subsystemtransition/dropins/nightly/${deploymentDirName}\">drop-in</a> - <a href=\"https://download.eclipse.org/capella/addons/subsystemtransition/updates/nightly/${deploymentDirName}\">update-site</a>"
+                   
 	       		}         
 	     	}
 	    }
