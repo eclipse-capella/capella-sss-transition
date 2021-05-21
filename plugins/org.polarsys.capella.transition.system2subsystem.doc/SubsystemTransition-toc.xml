@@ -11,22 +11,33 @@
   Contributors:
        Thales - initial API and implementation
 -->
-<toc label="System to Subsystem-Software Transition Guide">
-	<topic href="html/14. System to Subsystem-Software Transition/14.1. Three kinds of transitons.html" label="Three Kinds of Transitions">
-		<topic href="html/14. System to Subsystem-Software Transition/14.1. Three kinds of transitons.html#Scoped_Horizontal_Extraction" label="Scoped Horizontal Extraction"></topic>
-		<topic href="html/14. System to Subsystem-Software Transition/14.1. Three kinds of transitons.html#Vertical_Transition_.28SA.29" label="Vertical Transition (SA)"></topic>
-		<topic href="html/14. System to Subsystem-Software Transition/14.1. Three kinds of transitons.html#Vertical_Transition_.28SA-LA-PA.29" label="Vertical Transition (SA-LA-PA)"></topic>
+<toc label="System to Subsystem-Software Transition Viewpoint Guide">
+   <topic label="Release Notes">
+      <topic href="html/Release Notes/Whatsnew.html" label="What&apos;s New">
+      </topic>
+      <topic href="html/Release Notes/KnownIssues.html" label="Known Issues">
+      </topic>
+   </topic>
+ <topic href="html/Installation and Uninstallation.html" label="Installation and Uninstallation">
+ </topic>
+ <topic label="User Manual">
+ 	<topic href="html/User Manual/14.1. Three kinds of transitons.html" label="Three Kinds of Transitions">
+		<topic href="html/User Manual/14.1. Three kinds of transitons.html#Scoped_Horizontal_Extraction" label="Scoped Horizontal Extraction"></topic>
+		<topic href="html/User Manual/14.1. Three kinds of transitons.html#Vertical_Transition_.28SA.29" label="Vertical Transition (SA)"></topic>
+		<topic href="html/User Manual/14.1. Three kinds of transitons.html#Vertical_Transition_.28SA-LA-PA.29" label="Vertical Transition (SA-LA-PA)"></topic>
 	</topic>
-	<topic href="html/14. System to Subsystem-Software Transition/14.2. Usage instructions.html" label="Transition System to Subsystem">
-		<topic href="html/14. System to Subsystem-Software Transition/14.2. Usage instructions.html#Configuration_of_the_transition" label="Configuration of the transition"></topic>
-		<topic href="html/14. System to Subsystem-Software Transition/14.2. Usage instructions.html#Gap_analysis_with_previous_iteration_of_the_transition" label="Gap analysis with previous iteration of the transition"></topic>
-		<topic href="html/14. System to Subsystem-Software Transition/14.2. Usage instructions.html#Transition_Log" label="Transition Log"></topic>
-		<topic href="html/14. System to Subsystem-Software Transition/14.2. Usage instructions.html#Validation_Rules" label="Validation Rules"></topic>
-		<topic href="html/14. System to Subsystem-Software Transition/14.2. Usage instructions.html#Subsystem_specificities" label="Subsystem specificities"></topic>
+	<topic href="html/User Manual/14.2. Usage instructions.html" label="Transition System to Subsystem">
+		<topic href="html/User Manual/14.2. Usage instructions.html#Configuration_of_the_transition" label="Configuration of the transition"></topic>
+		<topic href="html/User Manual/14.2. Usage instructions.html#Gap_analysis_with_previous_iteration_of_the_transition" label="Gap analysis with previous iteration of the transition"></topic>
+		<topic href="html/User Manual/14.2. Usage instructions.html#Transition_Log" label="Transition Log"></topic>
+		<topic href="html/User Manual/14.2. Usage instructions.html#Validation_Rules" label="Validation Rules"></topic>
+		<topic href="html/User Manual/14.2. Usage instructions.html#Subsystem_specificities" label="Subsystem specificities"></topic>
 	</topic>
-	<topic href="html/14. System to Subsystem-Software Transition/14.3. System to Subsystem-Traceability.html" label="System to Subsystem Traceability">
-		<topic href="html/14. System to Subsystem-Software Transition/14.3. System to Subsystem-Traceability.html#System_Model_.28Source.29" label="System Model (Source)"></topic>
-		<topic href="html/14. System to Subsystem-Software Transition/14.3. System to Subsystem-Traceability.html#Sub-System_Model" label="Sub-System Model"></topic>
+	<topic href="html/User Manual/14.3. System to Subsystem-Traceability.html" label="System to Subsystem Traceability">
+		<topic href="html/User Manual/14.3. System to Subsystem-Traceability.html#System_Model_.28Source.29" label="System Model (Source)"></topic>
+		<topic href="html/User Manual/14.3. System to Subsystem-Traceability.html#Sub-System_Model" label="Sub-System Model"></topic>
 	</topic>
+ </topic>
+	
 	<anchor id="contribution"/>
 </toc>
