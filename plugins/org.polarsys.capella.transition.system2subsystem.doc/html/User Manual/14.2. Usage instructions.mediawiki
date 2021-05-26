@@ -41,7 +41,7 @@ It is now possible to either selectively merge changes, or to merge all planned 
 
 [[Image:Images/Diff_Display.png|814px]]
 
-Further information about the Diff/Merge tool can also be found in the [[../help/topic/org.polarsys.capella.diffmerge.doc/html/21.%20Model%20DiffMerge/21.1.%20Model%20DiffMerge.html?cp=5_0_8_2#Configuration_and_Features_of_the_Diff.2FMerge_Tool|Diff/Merge documentation]]
+Further information about the Diff/Merge tool can also be found in the [[../help/topic/org.polarsys.capella.diffmerge.doc/html/21.%20Model%20DiffMerge/21.1.%20Model%20DiffMerge.html?cp=5_0_8_2#Configuration_and_Features_of_the_Diff.2FMerge_Tool|Diff/Merge documentation]]<span class="github-link">[[https://github.com/eclipse/emf.diffmerge.core/blob/master/doc/org.eclipse.emf.diffmerge.doc/src/EMF-DiffMerge.mediawiki|(online documentation)]]</span>.
 
 == Transition Log ==
 

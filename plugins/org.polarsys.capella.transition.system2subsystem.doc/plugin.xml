@@ -21,15 +21,15 @@
             primary="true">
       </toc>
       <toc
-            file="html/14. System to Subsystem-Software Transition/14.1. Three kinds of transitons-toc.xml"
+            file="html/User Manual/14.1. Three kinds of transitons-toc.xml"
             primary="false">
       </toc>
       <toc
-            file="html/14. System to Subsystem-Software Transition/14.2. Usage instructions-toc.xml"
+            file="html/User Manual/14.2. Usage instructions-toc.xml"
             primary="false">
       </toc>
       <toc
-            file="html/14. System to Subsystem-Software Transition/14.3. System to Subsystem-Traceability-toc.xml"
+            file="html/User Manual/14.3. System to Subsystem-Traceability-toc.xml"
             primary="false">
       </toc>
    </extension>
