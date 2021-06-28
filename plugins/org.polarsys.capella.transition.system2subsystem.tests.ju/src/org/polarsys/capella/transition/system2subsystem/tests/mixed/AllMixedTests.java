@@ -51,6 +51,7 @@ public class AllMixedTests extends BasicTestSuite {
     tests.addAll(testsFor(FunctionalChainLoopTest.class));
     tests.addAll(testsFor(FunctionalChainScopeTest.class));
     tests.addAll(testsFor(FunctionalChainTest.class));
+    tests.addAll(testsFor(HierarchicalFunctionAndPkgs.Always.class));
     tests.addAll(testsFor(HierarchicalFunctionParameter.Always.class));
     tests.addAll(testsFor(HierarchicalFunctionParameter.Restricted.class));
     tests.addAll(testsFor(HierarchicalFunctionParameter.Leaf.class));
