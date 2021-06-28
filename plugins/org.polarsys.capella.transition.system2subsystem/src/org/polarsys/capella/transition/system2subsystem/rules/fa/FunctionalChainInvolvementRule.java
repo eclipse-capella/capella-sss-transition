@@ -28,10 +28,12 @@ import org.polarsys.capella.common.data.activity.AbstractAction;
 import org.polarsys.capella.common.data.activity.InputPin;
 import org.polarsys.capella.common.data.activity.OutputPin;
 import org.polarsys.capella.common.helpers.EObjectExt;
+import org.polarsys.capella.common.helpers.EcoreUtil2;
 import org.polarsys.capella.core.data.capellacore.CapellacorePackage;
 import org.polarsys.capella.core.data.capellacore.NamedElement;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FaFactory;
+import org.polarsys.capella.core.data.fa.FaPackage;
 import org.polarsys.capella.core.data.fa.FunctionInputPort;
 import org.polarsys.capella.core.data.fa.FunctionOutputPort;
 import org.polarsys.capella.core.data.fa.FunctionPort;
@@ -451,9 +453,8 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
       String srcPortId = String.format("ID_FakeFunctionPortOut_%s_%s", src.getSid(), id);
       String trgPortId = String.format("ID_FakeFunctionPortIn_%s_%s", trg.getSid(), id);
 
-      EObject container = src.eContainer();
-
-      for (FunctionalExchange existingFE : ((AbstractFunction) container).getOwnedFunctionalExchanges()) {
+      AbstractFunction container = (AbstractFunction) EcoreUtil2.getFirstContainer(src, FaPackage.Literals.ABSTRACT_FUNCTION);
+      for (FunctionalExchange existingFE : container.getOwnedFunctionalExchanges()) {
         if (existingFE.getSid().equals(id)) {
           fe = existingFE;
           break;
@@ -475,9 +476,7 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
 
         fe.setSource(srcPort);
         fe.setTarget(trgPort);
-        if (container instanceof AbstractFunction) {
-          ((AbstractFunction) container).getOwnedFunctionalExchanges().add(fe);
-        }
+        container.getOwnedFunctionalExchanges().add(fe);
       }
     }
     return fe;

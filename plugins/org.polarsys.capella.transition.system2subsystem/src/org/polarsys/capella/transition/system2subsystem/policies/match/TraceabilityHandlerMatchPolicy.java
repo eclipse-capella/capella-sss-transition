@@ -25,19 +25,28 @@ import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 /**
  * A match policy for diff/merge within pairs of corresponding elements.
  */
-public class TraceabilityHandlerMatchPolicy extends org.polarsys.capella.core.transition.common.policies.match.TraceabilityHandlerMatchPolicy {
+public class TraceabilityHandlerMatchPolicy
+    extends org.polarsys.capella.core.transition.common.policies.match.TraceabilityHandlerMatchPolicy {
 
   /**
    * Constructor
-   * @param a non-null mapping of corresponding elements whose further modifications will impact this policy
+   * 
+   * @param a
+   *          non-null mapping of corresponding elements whose further modifications will impact this policy
    */
   public TraceabilityHandlerMatchPolicy(IContext context_p2) {
     super(context_p2);
   }
 
+  @Override
+  public boolean keepMatchIDs() {
+    return true;
+  }
+
   /**
-   * Some elements should not be matched even if they are traced to an element from the model source.
-   * for instance, a scenario is automatically erased
+   * Some elements should not be matched even if they are traced to an element from the model source. for instance, a
+   * scenario is automatically erased
+   * 
    * @param element_p
    * @param scope_p
    * @param context_p
