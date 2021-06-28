@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2021 THALES GLOBAL SERVICES.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -54,6 +54,9 @@ import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IPremise;
 
 public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.transition.system.rules.fa.FunctionalChainInvolvementRule {
 
+  public static final String ID_FAKE_FUNCTIONAL_EXCHANGE = "ID_FakeFunctionalExchange";
+  public static final String ID_FAKE_FUNCTIONAL_CHAIN_INVOLVEMENT = "ID_FakeFunctionalChainInvolvement";
+  
   @Override
   public IStatus transformRequired(EObject element_p, IContext context_p) {
     FunctionalChainInvolvement element = (FunctionalChainInvolvement) element_p;
@@ -404,8 +407,8 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
     FunctionalChain tParent = tracedOf(parent, context_p);
     Collection<FunctionalChainReference> tsH = tracedOf(sH, context_p);
     Collection<FunctionalChainReference> ttH = tracedOf(tH, context_p);
-
-    String id = String.format("ID_FakeFunctionalChainInvolvement_%s_%s_%s", idPrefix, tSrc.getSid(), tTgt.getSid());
+ 
+    String id = String.format("%s_%s_%s_%s", ID_FAKE_FUNCTIONAL_CHAIN_INVOLVEMENT, idPrefix, tSrc.getSid(), tTgt.getSid());
     if (!sH.isEmpty()) {
       id += sH.stream().map(x -> x.getSid()).collect(Collectors.joining("_"));
     }
@@ -430,6 +433,7 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
 
     if (res == null) {
       res = FaFactory.eINSTANCE.createFunctionalChainInvolvementLink();
+      res.setId(id);
       res.setSid(id);
       res.getSourceReferenceHierarchy().addAll(tsH);
       res.getTargetReferenceHierarchy().addAll(ttH);
@@ -451,7 +455,7 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
       AbstractFunction src = (AbstractFunction) srcFci.getInvolved();
       AbstractFunction trg = targetFunction;
 
-      String id = String.format("ID_FakeFunctionalExchange_%s_%s_%s", idPrefix, src.getSid(), trg.getSid());
+      String id = String.format("%s_%s_%s_%s", ID_FAKE_FUNCTIONAL_EXCHANGE, idPrefix, src.getSid(), trg.getSid());
       String srcPortId = String.format("ID_FakeFunctionPortOut_%s_%s", src.getSid(), id);
       String trgPortId = String.format("ID_FakeFunctionPortIn_%s_%s", trg.getSid(), id);
 

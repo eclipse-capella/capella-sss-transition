@@ -22,8 +22,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.common.data.modellingcore.ModellingcorePackage;
 import org.polarsys.capella.common.mdsofa.common.constant.ICommonConstants;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
+import org.polarsys.capella.core.data.fa.FunctionalChainInvolvementLink;
+import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.transition.common.handlers.session.SessionHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.traceability.LinkTraceabilityHandler;
+import org.polarsys.capella.transition.system2subsystem.rules.fa.FunctionalChainInvolvementRule;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 /**
@@ -61,11 +64,28 @@ public class SIDTraceabilityHandler extends LinkTraceabilityHandler {
     return elements;
   }
 
+  protected void fixIssue56FunctionalChainInvolvmentLinkId(FunctionalChainInvolvementLink link) {
+    if (link.getInvolved() instanceof FunctionalExchange) {
+      FunctionalExchange exchange = (FunctionalExchange) link.getInvolved();
+      if (exchange.getSid() != null && exchange.getSid().startsWith(FunctionalChainInvolvementRule.ID_FAKE_FUNCTIONAL_EXCHANGE)) {
+        if (link.getSid() != null && link.getSid().startsWith(FunctionalChainInvolvementRule.ID_FAKE_FUNCTIONAL_CHAIN_INVOLVEMENT) && !link.getSid().equals(link.getId())) {
+            link.setId(link.getSid());
+        }
+      }
+    }
+  }
+  
   protected List<String> getSourceIds(EObject targetElement_p, IContext context_p) {
     List<String> ids = new ArrayList<String>();
 
     if (targetElement_p instanceof CapellaElement) {
       EAttribute attribute = getAttribute(context_p);
+
+      // Issue #56, the InvolvementLink doesn't have a correct Id.
+      if (targetElement_p instanceof FunctionalChainInvolvementLink) {
+        fixIssue56FunctionalChainInvolvmentLinkId((FunctionalChainInvolvementLink) targetElement_p);
+      }
+
       String propertyValue = (String) targetElement_p.eGet(attribute);
       propertyValue = propertyValue == null ? ICommonConstants.EMPTY_STRING : propertyValue;
       String values[] = propertyValue.split(";");
@@ -80,23 +100,25 @@ public class SIDTraceabilityHandler extends LinkTraceabilityHandler {
 
   @Override
   public void attachTraceability(EObject sourceElement_p, EObject targetElement_p, IContext context_p) {
-	  EAttribute attribute = getAttribute(context_p);
-	    
-    if (targetElement_p != null &&  targetElement_p.eClass().getEAllAttributes().contains(attribute)) { // we allow transformation one to nothing
+    EAttribute attribute = getAttribute(context_p);
+
+    if (targetElement_p != null && targetElement_p.eClass().getEAllAttributes().contains(attribute)) { // we allow
+                                                                                                       // transformation
+                                                                                                       // one to nothing
       createAttachment(sourceElement_p, targetElement_p, context_p);
     }
   }
 
   protected void createAttachment(EObject sourceElement_p, EObject targetElement_p, IContext context_p) {
     EAttribute attribute = getAttribute(context_p);
-    
+
     List<String> values = new ArrayList<String>();
     String propertyValue = (String) targetElement_p.eGet(attribute);
     if ((propertyValue != null) && (propertyValue.length() > 0)) {
-    	values.addAll(Arrays.asList(propertyValue.split(";")));
+      values.addAll(Arrays.asList(propertyValue.split(";")));
     }
 
-    //Retrieve SID from sourceElement or ID if none
+    // Retrieve SID from sourceElement or ID if none
     List<String> ids = getSourceIds(sourceElement_p, context_p);
     if (ids.size() == 0) {
       String id = SessionHandlerHelper.getInstance(context_p).getId(sourceElement_p, context_p);
@@ -112,7 +134,7 @@ public class SIDTraceabilityHandler extends LinkTraceabilityHandler {
       if (!values.contains(id)) {
         values.add(id);
       } else {
-        //return already attached !
+        // return already attached !
         return;
       }
     }
@@ -132,7 +154,7 @@ public class SIDTraceabilityHandler extends LinkTraceabilityHandler {
         return 0;
       }
     });
-    
+
     String result = ICommonConstants.EMPTY_STRING;
     int i = 0;
     for (String value : values) {
