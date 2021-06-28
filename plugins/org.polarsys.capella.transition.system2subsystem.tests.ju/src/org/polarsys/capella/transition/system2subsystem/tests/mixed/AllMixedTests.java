@@ -28,7 +28,7 @@ public class AllMixedTests extends BasicTestSuite {
   @Override
   protected List<BasicTestArtefact> getTests() {
     final List<BasicTestArtefact> tests = new ArrayList<BasicTestArtefact>();
-
+    
     tests.add(new IncrementalModeTest());
 
     tests.addAll(testsFor(TestComposite568503.class));
@@ -46,6 +46,7 @@ public class AllMixedTests extends BasicTestSuite {
     tests.add(new DataValuesTest.Interphase());
 
     tests.addAll(testsFor(ExchangeCategoryTest.class));
+    tests.addAll(testsFor(FakeChainInvolvementLink.Always.class));
     tests.addAll(testsFor(FunctionalChainLoopTest.class));
     tests.addAll(testsFor(FunctionalChainScopeTest.class));
     tests.addAll(testsFor(FunctionalChainTest.class));
