@@ -34,6 +34,7 @@ import org.polarsys.capella.core.transition.common.merge.scope.TargetModelScope;
 import org.polarsys.capella.core.transition.system.handlers.merge.AttributeNameValueFromSource;
 import org.polarsys.capella.core.transition.system.topdown.handlers.merge.RealizationLinkCategoryFilter;
 import org.polarsys.capella.transition.system2subsystem.constants.ITransitionConstants2;
+import org.polarsys.capella.transition.system2subsystem.handlers.filter.InvalidInvolvementLinks;
 import org.polarsys.capella.transition.system2subsystem.handlers.filter.UpdateOfCategoryFilter;
 import org.polarsys.capella.transition.system2subsystem.handlers.traceability.config.MergeSourceConfiguration;
 import org.polarsys.capella.transition.system2subsystem.handlers.traceability.config.MergeTargetConfiguration;
@@ -50,10 +51,12 @@ public class InitializeDiffMergeActivity extends org.polarsys.capella.core.trans
       ActivityParameters activityParams) {
     super.initializeCategoriesHandlers(context, handler, activityParams);
 
+    handler.addCategory(new InvalidInvolvementLinks(context), context);
     handler.addCategory(new RealizationLinkCategoryFilter(context), context);
     handler.addCategory(new UpdateOfCategoryFilter(FaPackage.Literals.FUNCTIONAL_CHAIN, context), context);
     handler.addCategory(new UpdateOfCategoryFilter(CsPackage.Literals.PHYSICAL_PATH, context), context);
     handler.addCategory(new UpdateOfCategoryFilter(InteractionPackage.Literals.SCENARIO, context), context);
+    
     
     // We want to propagate name differences
     ICategoryItem category = handler.getCategory(context, AttributeNameValueFromSource.class.getSimpleName());
