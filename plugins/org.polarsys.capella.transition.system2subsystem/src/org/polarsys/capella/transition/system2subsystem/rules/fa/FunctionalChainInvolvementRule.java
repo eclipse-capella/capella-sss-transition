@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,7 @@ import org.polarsys.capella.common.data.activity.OutputPin;
 import org.polarsys.capella.common.helpers.EObjectExt;
 import org.polarsys.capella.common.helpers.EcoreUtil2;
 import org.polarsys.capella.core.data.capellacore.CapellacorePackage;
+import org.polarsys.capella.core.data.capellacore.InvolvedElement;
 import org.polarsys.capella.core.data.capellacore.NamedElement;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FaFactory;
@@ -52,11 +54,12 @@ import org.polarsys.capella.transition.system2subsystem.handlers.attachment.Func
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IPremise;
 
-public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.transition.system.rules.fa.FunctionalChainInvolvementRule {
+public class FunctionalChainInvolvementRule
+    extends org.polarsys.capella.core.transition.system.rules.fa.FunctionalChainInvolvementRule {
 
   public static final String ID_FAKE_FUNCTIONAL_EXCHANGE = "ID_FakeFunctionalExchange";
   public static final String ID_FAKE_FUNCTIONAL_CHAIN_INVOLVEMENT = "ID_FakeFunctionalChainInvolvement";
-  
+
   @Override
   public IStatus transformRequired(EObject element_p, IContext context_p) {
     FunctionalChainInvolvement element = (FunctionalChainInvolvement) element_p;
@@ -64,7 +67,8 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
 
     NamedElement involved = (NamedElement) element.getInvolved();
 
-    IStatus result = TransformationHandlerHelper.getInstance(context_p).isOrWillBeTransformed(element.getInvolver(), context_p);
+    IStatus result = TransformationHandlerHelper.getInstance(context_p).isOrWillBeTransformed(element.getInvolver(),
+        context_p);
     if (!result.isOK()) {
       return result;
     }
@@ -74,14 +78,12 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
 
     if (result.isOK()) {
       if (!(helper.isValidElement(element, context_p) == Boolean.TRUE)) {
-        result =
-            new Status(IStatus.WARNING, Messages.Activity_Transformation, NLS.bind("Functional Chain Involvement ''{0}'' is not valid.", LogHelper
-                .getInstance().getText(element_p)));
+        result = new Status(IStatus.WARNING, Messages.Activity_Transformation,
+            NLS.bind("Functional Chain Involvement ''{0}'' is not valid.", LogHelper.getInstance().getText(element_p)));
       }
-    } else {
-      if (helper.isValidElement(element, context_p) == Boolean.TRUE) {
-        result = Status.OK_STATUS;
-      }
+
+    } else if (helper.isValidElement(element, context_p) == Boolean.TRUE) {
+      result = Status.OK_STATUS;
     }
 
     if (result.isOK() && (involved instanceof FunctionalExchange)) {
@@ -117,7 +119,8 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
     return result;
   }
 
-  private boolean FCIsCollectionMatching(Collection<FunctionalChainInvolvement> fci1, Collection<FunctionalChainInvolvement> fci2) {
+  private boolean FCIsCollectionMatching(Collection<FunctionalChainInvolvement> fci1,
+      Collection<FunctionalChainInvolvement> fci2) {
     boolean containOne = false;
     for (FunctionalChainInvolvement fci : fci1) {
       for (FunctionalChainInvolvement nextValid : fci2) {
@@ -137,12 +140,14 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
   @Override
   protected void attachRelated(EObject src, EObject trg, IContext context) {
     super.attachRelated(src, trg, context);
+
     FunctionalChainAttachmentHelper helper = FunctionalChainAttachmentHelper.getInstance(context);
     FunctionalChainInvolvement fSrc = (FunctionalChainInvolvement) src;
     FunctionalChainInvolvement fTrg = (FunctionalChainInvolvement) trg;
 
     if (!fSrc.getNextFunctionalChainInvolvements().isEmpty()) {
       for (FunctionalChainInvolvement nextSrcValid : helper.getNextValid(fSrc, context)) {
+
         if (nextSrcValid instanceof FunctionalChainInvolvementLink) {
           // If jump and if try to link through a FE => redirection to FE's target.
           if (!isDirectJump(nextSrcValid, fSrc)) {
@@ -172,18 +177,8 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
           // If there is a jump to next and that this jump concern two Functions => creation of a fake FE
           else if (fSrc instanceof FunctionalChainInvolvementFunction
               && nextSrcValid instanceof FunctionalChainInvolvementFunction) {
-            // Creation of a fake FE
-            Collection<FunctionalChainInvolvement> involvments = listInvolvments(
-                (FunctionalChainInvolvementFunction) fSrc, (FunctionalChainInvolvementFunction) nextSrcValid);
-            String description = buildDescription(involvments);
-
-            Collection<EObject> nextTrgFcts = retrieveTracedElements(nextSrcValid.getInvolved(), context);
-            AbstractFunction nextTrgFct = (AbstractFunction) nextTrgFcts.iterator().next();
-            String idDiff = nextTrgFct.getClass().getSimpleName().replaceAll("Function", "").replaceAll("Impl", "");
-            FunctionalExchange fakeFE = createFakeFE(fTrg, nextTrgFct, context, description, idDiff);
-
             createInvolvements((FunctionalChainInvolvementFunction) fSrc,
-                (FunctionalChainInvolvementFunction) nextSrcValid, context, fakeFE, idDiff);
+                (FunctionalChainInvolvementFunction) nextSrcValid, context);
           }
         }
       }
@@ -225,20 +220,20 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
 
     LinkedList<FunctionalChainInvolvement> toVisit = new LinkedList<>();
     toVisit.add(invs);
-    
+
     while (!toVisit.isEmpty()) {
       FunctionalChainInvolvement currentInv = toVisit.removeFirst();
       List<FunctionalChainReference> currentPath = paths.computeIfAbsent(currentInv, defaultValue);
-      
+
       FunctionalChain chain = (FunctionalChain) currentInv.getInvolver();
       Collection<FunctionalChainReference> referencingRefs = getReferencingChainReferences(chain);
-      
+
       if (!referencingRefs.isEmpty()) {
         for (FunctionalChainReference ref : referencingRefs) {
           paths.computeIfAbsent(ref, x -> new ArrayList<>(currentPath)).add(ref);
         }
         toVisit.addAll(referencingRefs);
-        
+
       } else {
         result.add(currentPath);
       }
@@ -258,7 +253,7 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
     }
     return result;
   }
-  
+
   private Collection<FunctionalChainInvolvement> listInvolvments(FunctionalChainInvolvement startFci,
       FunctionalChainInvolvement endFci) {
     Collection<FunctionalChainInvolvement> res = new ArrayList<>();
@@ -277,9 +272,15 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
     return res;
   }
 
+  /**
+   * Return a path of FunctionalChainReference and the top-most chain
+   * 
+   * (container of the last chainReference if any or the container of startFci)
+   * 
+   * @return not empty list
+   */
   public ArrayList<EObject> createFullPath(FunctionalChainInvolvementFunction startFci,
       List<FunctionalChainReference> sourcePath) {
-    // We also add the container of the last chainReference (the top most chain)
     ArrayList<EObject> fullSourcePath = new ArrayList<>(sourcePath);
     if (sourcePath.isEmpty()) {
       fullSourcePath.add(startFci.eContainer());
@@ -292,9 +293,34 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
   /**
    * Create involvement links between startFci and endFci. As an involvement can be part of several composite chain,
    * there might have several involvement created in owning composite chains.
+   * 
+   * - If involvments are involving two different functions, we create an exchange between them, and involvementLink
+   * involving the exchange.
+   * 
+   * - If involvments are involving the same function
+   * 
+   * -- If they are part in different chains, we create a involvementLink involving the function (ie 'Connect Function
+   * tool' in diagram)
+   * 
+   * -- If they are part in same chain, we will merge the involvments at the end of the transformation phase. (@see
+   * FunctionalChainAttachmentHelper.notifyChanged)
    */
   private void createInvolvements(FunctionalChainInvolvementFunction startFci,
-      FunctionalChainInvolvementFunction endFci, IContext context, FunctionalExchange ex, String id) {
+      FunctionalChainInvolvementFunction endFci, IContext context) {
+
+    // Creation of a description containing all cut involvements
+    Collection<FunctionalChainInvolvement> involvments = listInvolvments((FunctionalChainInvolvementFunction) startFci,
+        (FunctionalChainInvolvementFunction) endFci);
+    String description = buildDescription(involvments);
+
+    AbstractFunction tSrtFct = (AbstractFunction) tracedOf(startFci.getInvolved(), context);
+    AbstractFunction tEndFct = (AbstractFunction) tracedOf(endFci.getInvolved(), context);
+    String architectureType = tEndFct.getClass().getSimpleName().replaceAll("Function", "").replaceAll("Impl", "");
+
+    // Retrieve the involvedElement.
+    // If the both functions are equals, then we create a InvolvedLink with the Function, otherwise we create a FE
+    InvolvedElement involvedElement = (tSrtFct == tEndFct) ? tEndFct
+        : createFakeFE(tSrtFct, tEndFct, context, description, architectureType);
 
     // Main idea:
     // We retrieve for both source and target involvements where they are used.
@@ -320,25 +346,39 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
         // If there is a common parent between both paths, then we create an involvement
         if (!commonParents.isEmpty()) {
 
-          EObject firstCommon = commonParents.get(0);
-          EObject container = firstCommon instanceof FunctionalChainReference
-              ? ((FunctionalChainReference) firstCommon).getInvolved()
-              : firstCommon;
+          if (startFci.getInvolved() == endFci.getInvolved() && sameHierarchy(fullSourcePath, fullTargetPath)) {
+            toMerge(startFci, endFci, context);
 
-          // we compute hierarchy. which is subList of Paths(0, indexOf(commonParent)). (the common parent may be the
-          // main chain, then the hierarchy is all the path)
-          Collection<FunctionalChainReference> sHierarchy = firstCommon instanceof FunctionalChainReference
-              ? sourcePath.subList(0, sourcePath.indexOf(firstCommon))
-              : sourcePath;
-          Collection<FunctionalChainReference> tHierarchy = firstCommon instanceof FunctionalChainReference
-              ? targetPath.subList(0, targetPath.indexOf(firstCommon))
-              : targetPath;
-          createFakeFunctionalChainInvolvementLink(startFci, endFci, ex, context, id, (FunctionalChain) container,
-              sHierarchy, tHierarchy);
+          } else {
+            EObject firstCommon = commonParents.get(0);
+            EObject container = firstCommon instanceof FunctionalChainReference
+                ? ((FunctionalChainReference) firstCommon).getInvolved()
+                : firstCommon;
+
+            // we compute hierarchy. which is subList of Paths(0, indexOf(commonParent)). (the common parent may be the
+            // main chain, then the hierarchy is all the path)
+            Collection<FunctionalChainReference> sHierarchy = firstCommon instanceof FunctionalChainReference
+                ? sourcePath.subList(0, sourcePath.indexOf(firstCommon))
+                : sourcePath;
+            Collection<FunctionalChainReference> tHierarchy = firstCommon instanceof FunctionalChainReference
+                ? targetPath.subList(0, targetPath.indexOf(firstCommon))
+                : targetPath;
+            createFakeFunctionalChainInvolvementLink(startFci, endFci, involvedElement, context, architectureType,
+                (FunctionalChain) container, sHierarchy, tHierarchy);
+          }
         }
       }
     }
+  }
 
+  /**
+   * Mark both involvments to be merged at the end of the transformation
+   */
+  private void toMerge(FunctionalChainInvolvementFunction startFci, FunctionalChainInvolvementFunction endFci,
+      IContext context) {
+    FunctionalChainInvolvementFunction tSrc = tracedOf(startFci, context);
+    FunctionalChainInvolvementFunction tTgt = tracedOf(endFci, context);
+    FunctionalChainAttachmentHelper.getInstance(context).merge(tSrc, tTgt, context);
   }
 
   private void sort(List<EObject> commonParents, List<EObject> fullSourcePath) {
@@ -370,7 +410,8 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
 
       Collection<EObject> nexts = new ArrayList<EObject>();
 
-      while ((src.getNextFunctionalChainInvolvements() != null) && (src.getNextFunctionalChainInvolvements().isEmpty() == false)) {
+      while ((src.getNextFunctionalChainInvolvements() != null)
+          && (src.getNextFunctionalChainInvolvements().isEmpty() == false)) {
         src = src.getNextFunctionalChainInvolvements().get(0);
         nexts.add(src);
 
@@ -398,7 +439,7 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
   }
 
   private FunctionalChainInvolvementLink createFakeFunctionalChainInvolvementLink(
-      FunctionalChainInvolvementFunction src, FunctionalChainInvolvementFunction trg, FunctionalExchange fe,
+      FunctionalChainInvolvementFunction src, FunctionalChainInvolvementFunction trg, InvolvedElement feOrFct,
       IContext context_p, String idPrefix, FunctionalChain parent, Collection<FunctionalChainReference> sH,
       Collection<FunctionalChainReference> tH) {
 
@@ -407,8 +448,9 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
     FunctionalChain tParent = tracedOf(parent, context_p);
     Collection<FunctionalChainReference> tsH = tracedOf(sH, context_p);
     Collection<FunctionalChainReference> ttH = tracedOf(tH, context_p);
- 
-    String id = String.format("%s_%s_%s_%s", ID_FAKE_FUNCTIONAL_CHAIN_INVOLVEMENT, idPrefix, tSrc.getSid(), tTgt.getSid());
+
+    String id = String.format("%s_%s_%s_%s", ID_FAKE_FUNCTIONAL_CHAIN_INVOLVEMENT, idPrefix, tSrc.getSid(),
+        tTgt.getSid());
     if (!sH.isEmpty()) {
       id += sH.stream().map(x -> x.getSid()).collect(Collectors.joining("_"));
     }
@@ -439,56 +481,67 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
       res.getTargetReferenceHierarchy().addAll(ttH);
       res.setSource(tSrc);
       res.setTarget(tTgt);
-      res.setInvolved(fe);
+      res.setInvolved(feOrFct);
       tParent.getOwnedFunctionalChainInvolvements().add(res);
     }
 
     return res;
   }
 
-  private FunctionalExchange createFakeFE(FunctionalChainInvolvement srcFci, AbstractFunction targetFunction,
-      IContext context_p, String description, String idPrefix) {
+  private boolean sameHierarchy(Collection<EObject> tsH, Collection<EObject> ttH) {
+    Iterator<EObject> source = tsH.iterator();
+    Iterator<EObject> target = ttH.iterator();
+    while (source.hasNext() && target.hasNext()) {
+      EObject sourceI = source.next();
+      EObject targetI = target.next();
+      if (sourceI != targetI) {
+        return false;
+      }
+    }
+    return !source.hasNext() && !target.hasNext();
+  }
+
+  private FunctionalExchange createFakeFE(AbstractFunction src, AbstractFunction tgt, IContext context_p,
+      String description, String idPrefix) {
 
     FunctionalExchange fe = null;
 
-    if (srcFci.getInvolved() instanceof AbstractFunction) {
-      AbstractFunction src = (AbstractFunction) srcFci.getInvolved();
-      AbstractFunction trg = targetFunction;
+    String id = String.format("%s_%s_%s_%s", ID_FAKE_FUNCTIONAL_EXCHANGE, idPrefix, src.getSid(), tgt.getSid());
+    String srcPortId = String.format("ID_FakeFunctionPortOut_%s_%s", src.getSid(), id);
+    String trgPortId = String.format("ID_FakeFunctionPortIn_%s_%s", tgt.getSid(), id);
 
-      String id = String.format("%s_%s_%s_%s", ID_FAKE_FUNCTIONAL_EXCHANGE, idPrefix, src.getSid(), trg.getSid());
-      String srcPortId = String.format("ID_FakeFunctionPortOut_%s_%s", src.getSid(), id);
-      String trgPortId = String.format("ID_FakeFunctionPortIn_%s_%s", trg.getSid(), id);
-
-      AbstractFunction container = (AbstractFunction) EcoreUtil2.getFirstContainer(src, FaPackage.Literals.ABSTRACT_FUNCTION);
-      for (FunctionalExchange existingFE : container.getOwnedFunctionalExchanges()) {
-        if (existingFE.getSid().equals(id)) {
-          fe = existingFE;
-          break;
-        }
+    AbstractFunction container = (AbstractFunction) EcoreUtil2.getFirstContainer(src,
+        FaPackage.Literals.ABSTRACT_FUNCTION);
+    for (FunctionalExchange existingFE : container.getOwnedFunctionalExchanges()) {
+      if (existingFE.getSid().equals(id)) {
+        fe = existingFE;
+        break;
       }
+    }
 
-      if (fe == null) {
-        String feName = String.format("FakeFE_%s_%s", src.getName(), trg.getName());
-        String outPortName = "out_" + feName;
-        String inPortName = "in_" + feName;
-        FunctionOutputPort srcPort = (FunctionOutputPort) getOrCreateFakePort(srcPortId, outPortName, src, false, context_p);
-        FunctionInputPort trgPort = (FunctionInputPort) getOrCreateFakePort(trgPortId, inPortName, trg, true, context_p);
+    if (fe == null) {
+      String feName = String.format("FakeFE_%s_%s", src.getName(), tgt.getName());
+      String outPortName = "out_" + feName;
+      String inPortName = "in_" + feName;
+      FunctionOutputPort srcPort = (FunctionOutputPort) getOrCreateFakePort(srcPortId, outPortName, src, false,
+          context_p);
+      FunctionInputPort trgPort = (FunctionInputPort) getOrCreateFakePort(trgPortId, inPortName, tgt, true, context_p);
 
-        fe = FaFactory.eINSTANCE.createFunctionalExchange();
-        fe.setSid(id);
-        fe.setId(id);
-        fe.setDescription(description);
-        fe.setName(feName);
+      fe = FaFactory.eINSTANCE.createFunctionalExchange();
+      fe.setSid(id);
+      fe.setId(id);
+      fe.setDescription(description);
+      fe.setName(feName);
 
-        fe.setSource(srcPort);
-        fe.setTarget(trgPort);
-        container.getOwnedFunctionalExchanges().add(fe);
-      }
+      fe.setSource(srcPort);
+      fe.setTarget(trgPort);
+      container.getOwnedFunctionalExchanges().add(fe);
     }
     return fe;
   }
 
-  private FunctionPort getOrCreateFakePort(String id, String name, AbstractAction fct, boolean input, IContext context_p) {
+  private FunctionPort getOrCreateFakePort(String id, String name, AbstractAction fct, boolean input,
+      IContext context_p) {
     FunctionPort res = null;
 
     if (res == null) {
@@ -504,6 +557,7 @@ public class FunctionalChainInvolvementRule extends org.polarsys.capella.core.tr
           res = FaFactory.eINSTANCE.createFunctionInputPort();
           fct.getInputs().add((FunctionInputPort) res);
         }
+
       } else {
         for (OutputPin port : fct.getOutputs()) {
           if (port.getId().equals(id)) {
