@@ -33,6 +33,7 @@ public class AllMixedTests extends BasicTestSuite {
     
     tests.add(new IncrementalModeTest());
 
+    tests.addAll(testsFor(FakeExchangeChain.Always.class));
     tests.addAll(testsFor(TestComposite568503.class));
     tests.addAll(testsFor(CapabilityTest.class));
 
