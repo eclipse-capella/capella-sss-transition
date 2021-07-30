@@ -11,8 +11,8 @@
 package org.polarsys.capella.transition.system2subsystem.tests.mixed;
 
 import java.util.Arrays;
+
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,13 +20,12 @@ import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.fa.FunctionalChainInvolvement;
 import org.polarsys.capella.core.data.fa.FunctionalChainInvolvementFunction;
 import org.polarsys.capella.core.data.fa.FunctionalChainInvolvementLink;
-import org.polarsys.capella.core.data.fa.FunctionalChainReference;
-import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.transition.system2subsystem.rules.fa.FunctionalChainInvolvementRule;
 import org.polarsys.capella.transition.system2subsystem.rules.fa.FunctionalChainRule;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Crossphase;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Interphase;
+import static org.polarsys.capella.transition.system2subsystem.tests.util.ChainHelper.*;
 
 public class TestComposite568503 extends System2SubsystemTest implements Interphase, Crossphase {
 
@@ -142,7 +141,7 @@ public class TestComposite568503 extends System2SubsystemTest implements Interph
     link = referencingFakeExchange(bb);
 
     assertTrue(link.getSourceReferenceHierarchy().contains(mustBeTransitioned(BB_FUNCTIONAL_CHAIN_REFERENCE_TO_BBB)));
-    assertTrue(toString(link.getSourceReferenceHierarchy()).equals("BBB"));
+    assertTrue(toListString(link.getSourceReferenceHierarchy()).equals("BBB"));
     assertTrue(link.getTargetReferenceHierarchy().isEmpty());
 
     FunctionalChain b2 = (FunctionalChain) mustBeTransitioned(B2);
@@ -150,19 +149,19 @@ public class TestComposite568503 extends System2SubsystemTest implements Interph
     assertTrue(referencingFakeExchanges(b2).size() == 1);
     link = referencingFakeExchange(b2);
     assertTrue(link.getSourceReferenceHierarchy().contains(mustBeTransitioned(B2_FUNCTIONAL_CHAIN_REFERENCE_TO_BBB)));
-    assertTrue(toString(link.getSourceReferenceHierarchy()).equals("BBB"));
+    assertTrue(toListString(link.getSourceReferenceHierarchy()).equals("BBB"));
     assertTrue(link.getTargetReferenceHierarchy().contains(mustBeTransitioned(BB2_FUNCTIONAL_CHAIN_REFERENCE_TO_CC)));
     assertTrue(link.getTargetReferenceHierarchy().contains(mustBeTransitioned(B2_FUNCTIONAL_CHAIN_REFERENCE_TO_BB2)));
-    assertTrue(toString(link.getTargetReferenceHierarchy()).equals("CC/BB2"));
+    assertTrue(toListString(link.getTargetReferenceHierarchy()).equals("CC/BB2"));
 
     FunctionalChain bb2 = (FunctionalChain) mustBeTransitioned(BB2);
     assertTrue(referenceFakeExchange(bb2));
     assertTrue(referencingFakeExchanges(bb2).size() == 1);
     link = referencingFakeExchange(bb2);
     assertTrue(link.getSourceReferenceHierarchy().contains(mustBeTransitioned(BB2_FUNCTIONAL_CHAIN_REFERENCE_TO_BBB)));
-    assertTrue(toString(link.getSourceReferenceHierarchy()).equals("BBB"));
+    assertTrue(toListString(link.getSourceReferenceHierarchy()).equals("BBB"));
     assertTrue(link.getTargetReferenceHierarchy().contains(mustBeTransitioned(BB2_FUNCTIONAL_CHAIN_REFERENCE_TO_CC)));
-    assertTrue(toString(link.getTargetReferenceHierarchy()).equals("CC"));
+    assertTrue(toListString(link.getTargetReferenceHierarchy()).equals("CC"));
 
   }
 
@@ -177,7 +176,7 @@ public class TestComposite568503 extends System2SubsystemTest implements Interph
     final FunctionalChainInvolvementRule rule = new FunctionalChainInvolvementRule();
     final FunctionalChainInvolvementFunction inv = getObject(
         BBB_FUNCTIONAL_CHAIN_INVOLVEMENT_FUNCTION_TO_PHYSICALFUNCTION_32);
-    Collection<String> paths = rule.getPaths(inv).stream().map(x -> toString(rule.createFullPath(inv, x)))
+    Collection<String> paths = rule.getPaths(inv).stream().map(x -> toListString(rule.createFullPath(inv, x)))
         .collect(Collectors.toList());
     assertTrue(paths.size() == 3);
     assertTrue(paths.contains("BBB/B2"));
@@ -186,13 +185,13 @@ public class TestComposite568503 extends System2SubsystemTest implements Interph
 
     final FunctionalChainInvolvementFunction inv2 = getObject(
         CC_FUNCTIONAL_CHAIN_INVOLVEMENT_FUNCTION_TO_PHYSICALFUNCTION_34);
-    paths = rule.getPaths(inv2).stream().map(x -> toString(rule.createFullPath(inv2, x))).collect(Collectors.toList());
+    paths = rule.getPaths(inv2).stream().map(x -> toListString(rule.createFullPath(inv2, x))).collect(Collectors.toList());
     assertTrue(paths.size() == 1);
     assertTrue(paths.contains("CC/BB2/B2"));
 
     final FunctionalChainInvolvementFunction inv3 = getObject(
         BB_FUNCTIONAL_CHAIN_INVOLVEMENT_FUNCTION_TO_PHYSICALFUNCTION_34);
-    paths = rule.getPaths(inv3).stream().map(x -> toString(rule.createFullPath(inv3, x))).collect(Collectors.toList());
+    paths = rule.getPaths(inv3).stream().map(x -> toListString(rule.createFullPath(inv3, x))).collect(Collectors.toList());
     assertTrue(paths.size() == 1);
     assertTrue(paths.contains("BB/B"));
 
@@ -200,36 +199,6 @@ public class TestComposite568503 extends System2SubsystemTest implements Interph
         Arrays.asList("BB", "B", "B2", "BB2")));
     assertTrue(equalsUnordered(toName(new FunctionalChainRule().getAllReferencingChains(getObject(CC))),
         Arrays.asList("B2", "BB2")));
-  }
-
-  /**
-   * Returns whether the first list contains duplicates and all elements of second and only them, unordered
-   */
-  private <T> boolean equalsUnordered(Collection<T> o, Collection<T> r) {
-    HashSet<T> result = new HashSet<T>(o);
-    result.retainAll(r);
-    return result.size() == o.size() && result.size() == r.size();
-  }
-
-  /**
-   * Return a list of all names of given objects
-   */
-  private <T> Collection<String> toName(Collection<T> arrayList) {
-    return arrayList.stream().map(fcr -> getName(fcr)).collect(Collectors.toList());
-  }
-
-  /**
-   * Return a string of all names of the given objects separated by /
-   */
-  private <T> String toString(Collection<T> arrayList) {
-    return arrayList.stream().map(fcr -> getName(fcr)).collect(Collectors.joining("/"));
-  }
-
-  private <T> String getName(T obj) {
-    if (obj instanceof FunctionalChain) {
-      return ((FunctionalChain) obj).getName();
-    }
-    return ((FunctionalChain) ((FunctionalChainReference) obj).getInvolved()).getName();
   }
 
   /**
@@ -249,46 +218,6 @@ public class TestComposite568503 extends System2SubsystemTest implements Interph
         }
       }
     }
-  }
-
-  /**
-   * Returns whether the chain references the sub chain
-   */
-  private boolean referenceSubChain(FunctionalChain chain, FunctionalChain sub) {
-    return chain.getOwnedFunctionalChainInvolvements().stream().filter(x -> referenceSubChain(x, sub)).findFirst()
-        .isPresent();
-  }
-
-  private boolean referenceSubChain(FunctionalChainInvolvement f, FunctionalChain sub) {
-    return f.getInvolved().equals(sub);
-  }
-
-  /**
-   * Returns the first involvement referencing a fake exchange created while transition
-   */
-  private FunctionalChainInvolvementLink referencingFakeExchange(FunctionalChain chain) {
-    return (FunctionalChainInvolvementLink) chain.getOwnedFunctionalChainInvolvements().stream()
-        .filter(this::referenceFakeExchange).findFirst().get();
-  }
-
-  /**
-   * Returns the involvements referencing a fake exchange created while transition
-   */
-  private List<FunctionalChainInvolvementLink> referencingFakeExchanges(FunctionalChain chain) {
-    return chain.getOwnedFunctionalChainInvolvements().stream().filter(this::referenceFakeExchange)
-        .map(FunctionalChainInvolvementLink.class::cast).collect(Collectors.toList());
-  }
-
-  /**
-   * Returns whether the chain references a fake exchange created while transition
-   */
-  private boolean referenceFakeExchange(FunctionalChain chain) {
-    return referencingFakeExchange(chain) != null;
-  }
-
-  private boolean referenceFakeExchange(FunctionalChainInvolvement f) {
-    return f instanceof FunctionalChainInvolvementLink && f.getInvolved() instanceof FunctionalExchange
-        && ((FunctionalExchange) f.getInvolved()).getName().contains("Fake");
   }
 
   @Override

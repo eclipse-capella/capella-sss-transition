@@ -15,7 +15,6 @@ import java.util.Set;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
-import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.ctx.SystemComponent;
 import org.polarsys.capella.core.data.fa.FaPackage;
@@ -37,6 +36,7 @@ import org.polarsys.capella.core.transition.system.handlers.merge.CapellaClassFi
 import org.polarsys.capella.core.transition.system.handlers.merge.RootCategoryFilter;
 import org.polarsys.capella.core.transition.system.topdown.handlers.merge.RealizationLinkCategoryFilter;
 import org.polarsys.capella.transition.system2subsystem.constants.ITransitionConstants2;
+import org.polarsys.capella.transition.system2subsystem.handlers.filter.InvalidInvolvementLinks;
 import org.polarsys.capella.transition.system2subsystem.handlers.filter.UpdateOfCategoryFilter;
 import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.traceability.config.MultiphasesSourceConfiguration;
 import org.polarsys.capella.transition.system2subsystem.multiphases.handlers.traceability.config.MultiphasesTargetConfiguration;
@@ -82,6 +82,7 @@ public class InitializeMultiphasesDiffMergeActivity extends InitializeDiffMergeF
         return super.isUpdatableValue(source, target, oldValue, newValue);
       }
     }, context);
+    handler.addCategory(new InvalidInvolvementLinks(context), context);
     handler.addCategory(new AttributeSummaryValueFromSource(context), context);
     handler.addCategory(new AttributeDescriptionValueFromSource(context), context);
     handler.addCategory(new RealizationLinkCategoryFilter(context), context);
