@@ -17,7 +17,9 @@ Export-Package: org.polarsys.capella.transition.system2subsystem.crossphases,
 Require-Bundle: org.eclipse.core.runtime,
  org.polarsys.capella.common.libraries;visibility:=reexport,
  org.polarsys.capella.transition.system2subsystem;visibility:=reexport,
- org.polarsys.capella.core.transition.system.topdown
+ org.polarsys.capella.core.transition.system.topdown,
+ org.polarsys.capella.common.queries,
+ org.polarsys.capella.core.data.business.queries
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-Version: 1.5.1.qualifier
