@@ -40,7 +40,6 @@ import org.polarsys.capella.core.transition.common.handlers.session.SessionHandl
 import org.polarsys.capella.transition.system2subsystem.constants.IOptionsConstants;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
-
 /**
  * 
  */
@@ -155,23 +154,35 @@ public class PropertyValuesPreference extends PropertyPreference implements IRes
       IContext context = (IContext) source;
       Collection<EObject> selection = (Collection<EObject>) context.get(ITransitionConstants.TRANSITION_SOURCES);
       BlockArchitecture archi = null;
-      if (selection.size() > 0){
+      if (selection.size() > 0) {
         archi = BlockArchitectureExt.getRootBlockArchitecture(selection.iterator().next());
       }
-      if (archi != null) {
-        visit(values, archi);
-        if (archi.eContainer() instanceof SystemEngineering) {
-          Iterator<EObject> childsParent = ((SystemEngineering) archi.eContainer()).eContents().iterator();
-          while (childsParent.hasNext()) {
-            EObject child = childsParent.next();
-            if ((child instanceof AbstractPropertyValue) || (child instanceof PropertyValueGroup) || (child instanceof PropertyValuePkg)) {
-              visit(values, child);
-            }
+
+      if (archi != null && archi.eContainer() instanceof SystemEngineering) {
+
+        // retrieve the lowest level architecture of all selected elements so that we return all valid PV's
+        int lowestLevelArchi = selection.stream().map(BlockArchitectureExt::getRootBlockArchitecture)
+            .map(BlockArchitectureExt::getBlockArchitectureType).map(Enum::ordinal)
+            .max((elem1, elem2) -> elem1.compareTo(elem2)).orElse(0);
+
+        Iterator<EObject> childsParent = ((SystemEngineering) archi.eContainer()).eContents().iterator();
+        while (childsParent.hasNext()) {
+          EObject child = childsParent.next();
+          if ((child instanceof AbstractPropertyValue) || (child instanceof PropertyValueGroup)
+              || (child instanceof PropertyValuePkg)
+              || (child instanceof BlockArchitecture && isArchitectureAtOrAboveElement(child, lowestLevelArchi))) {
+            visit(values, child);
           }
         }
       }
     }
     return (Collection) values;
+
+  }
+
+  private boolean isArchitectureAtOrAboveElement(EObject architecture, int elementArchitectureLevel) {
+    return BlockArchitectureExt.getBlockArchitectureType((BlockArchitecture) architecture)
+        .ordinal() <= elementArchitectureLevel;
   }
 
   /**

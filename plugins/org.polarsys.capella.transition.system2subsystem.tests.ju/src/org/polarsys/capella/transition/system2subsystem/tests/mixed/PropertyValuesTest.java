@@ -13,13 +13,28 @@
 package org.polarsys.capella.transition.system2subsystem.tests.mixed;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.sirius.business.api.session.Session;
+import org.junit.Assert;
+import org.polarsys.capella.common.data.modellingcore.ModelElement;
+import org.polarsys.capella.common.flexibility.properties.loader.PropertiesLoader;
+import org.polarsys.capella.common.flexibility.properties.property.PropertyContext;
+import org.polarsys.capella.common.flexibility.properties.schema.IProperties;
+import org.polarsys.capella.common.flexibility.properties.schema.IPropertyContext;
 import org.polarsys.capella.core.data.capellacore.CapellacorePackage;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.Part;
+import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
+import org.polarsys.capella.core.transition.common.context.TransitionContext;
+import org.polarsys.capella.core.transition.system.topdown.constants.ITopDownConstants;
+import org.polarsys.capella.test.framework.api.BasicTestCase;
+import org.polarsys.capella.test.framework.context.SessionContext;
 import org.polarsys.capella.transition.system2subsystem.constants.IOptionsConstants;
+import org.polarsys.capella.transition.system2subsystem.preferences.PropertyValuesPreference;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Crossphase;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Interphase;
@@ -404,4 +419,71 @@ public class PropertyValuesTest {
     }
   }
 
+  /*
+   * Test if the proper amount of property values (at the element's or above architecture level, as well as system
+   * engineering) is being offered as choice in the transition ui, by using
+   * org.polarsys.capella.transition.system2subsystem.preferences.PropertyValuesPreference.getChoiceValues.
+   */
+  public static class Test4 extends BasicTestCase {
+
+    private static final String PC_1 = "9a05fc5a-09c4-4d93-98a6-7d127e0b93bf";
+    private static final String LC_1 = "c25b25b1-fcd3-4da8-a9ea-c1da76789438";
+    private static final List<String> PROPERTY_VALUES_LC = Arrays.asList("6a231c1a-fa3f-4197-890c-a0d8ad80aedd",
+        "391bf2a5-e244-4550-bbb5-01d09af23639", "39fbf71a-d3e7-40c0-9063-a4483ed56df2",
+        "1b5ee26a-0f73-4b0f-b33b-02843e7dd53f", "42d778cb-3fa0-4ada-927b-c4ce5666bc52",
+        "6880be2a-b093-4df2-86eb-722adee4cc1f");
+    private static final List<String> PROPERTY_VALUES_PC = new ArrayList<>(PROPERTY_VALUES_LC);
+    private IPropertyContext propertyContext;
+    private PropertyValuesPreference pvPreference;
+    private SessionContext context;
+
+    static {
+      PROPERTY_VALUES_PC
+          .addAll(Arrays.asList("22659098-4f4d-499f-8586-9f0497534353", "7467b8e2-0ca0-4443-951d-7e145ad7d814",
+              "32235a8c-94b4-4415-8a88-44a0cc067e92", "356f8d58-956c-4afd-8424-797c897b6685"));
+    }
+
+    @Override
+    public void setUp() throws Exception {
+      super.setUp();
+      IProperties properties = new PropertiesLoader().getProperties(ITopDownConstants.OPTIONS_SCOPE__PREFERENCES);
+      propertyContext = new PropertyContext(properties);
+      pvPreference = new PropertyValuesPreference();
+      Session session = getSessionForTestModel(getRequiredTestModels().get(0));
+      context = new SessionContext(session);
+    }
+
+    private void checkIfAllValidPVsAreProvided(List<String> actualPropertyValues, Collection<EObject> selection) {
+      TransitionContext transitionContext = new TransitionContext();
+      transitionContext.put(ITransitionConstants.TRANSITION_SOURCES, selection);
+      propertyContext.setSource(transitionContext);
+      Collection<Object> providedPvs = pvPreference.getChoiceValues(propertyContext);
+      Assert.assertEquals(actualPropertyValues.size(), providedPvs.size());
+      providedPvs.stream().forEach(pv -> assertTrue(actualPropertyValues.contains(((ModelElement) pv).getId())));
+    }
+
+    @Override
+    public void test() throws Exception {
+      checkIfAllValidPVsAreProvided(PROPERTY_VALUES_PC, getObjects(PC_1));
+      checkIfAllValidPVsAreProvided(PROPERTY_VALUES_LC, getObjects(LC_1));
+      checkIfAllValidPVsAreProvided(PROPERTY_VALUES_PC, getObjects(PC_1, LC_1));
+    }
+
+    @Override
+    public List<String> getRequiredTestModels() {
+      return Arrays.asList("testPVPreference");
+    }
+
+    protected <T extends EObject> T getObject(String id) {
+      return (T) context.getSemanticElement(id);
+    }
+
+    protected Collection<EObject> getObjects(String... idsp) {
+      Collection<EObject> objects = new ArrayList<>();
+      for (String id : idsp) {
+        objects.add(getObject(id));
+      }
+      return objects;
+    }
+  }
 }
