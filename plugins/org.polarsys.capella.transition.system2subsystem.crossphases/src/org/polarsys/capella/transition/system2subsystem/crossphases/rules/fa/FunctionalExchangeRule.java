@@ -20,10 +20,10 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.polarsys.capella.core.data.capellacore.CapellaElement;
+import org.polarsys.capella.common.queries.AbstractQuery;
+import org.polarsys.capella.core.business.queries.queries.fa.GetAvailable_ComponentExchange_AllocatedFunctionalExchanges;
 import org.polarsys.capella.core.data.fa.ComponentExchange;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
-import org.polarsys.capella.core.model.helpers.ComponentExchangeExt;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;;
 
 public class FunctionalExchangeRule
@@ -41,8 +41,9 @@ public class FunctionalExchangeRule
           return status;
         }
         for (ComponentExchange componentExchange : allocatingExchanges) {
-          List<CapellaElement> availableFuncExhcnage = ComponentExchangeExt
-              .getValidFEAvailableForAllocation(componentExchange);
+          AbstractQuery query = new GetAvailable_ComponentExchange_AllocatedFunctionalExchanges();
+          List<Object> availableFuncExhcnage = query.execute(componentExchange, null);
+          
           if (null != availableFuncExhcnage && !availableFuncExhcnage.isEmpty()) {
             if (!availableFuncExhcnage.contains(functionalExchange)) {
               return new Status(IStatus.ERROR, PLUGIN_ID,
