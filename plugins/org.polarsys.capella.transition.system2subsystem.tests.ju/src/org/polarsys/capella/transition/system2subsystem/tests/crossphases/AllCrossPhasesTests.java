@@ -17,7 +17,7 @@ import java.util.List;
 
 import org.polarsys.capella.test.framework.api.BasicTestArtefact;
 import org.polarsys.capella.test.framework.api.BasicTestSuite;
-import org.polarsys.capella.transition.system2subsystem.tests.mixed.ComponentToSystemName;
+import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest;
 
 import junit.framework.Test;
 
@@ -47,6 +47,7 @@ public class AllCrossPhasesTests extends BasicTestSuite {
     tests.add(new ScenarioComponentMerge.Test2());
     tests.add(new InternalExchangesTest.Exchanges());
     tests.add(new InternalExchangesTest.Ports());
+    tests.addAll(System2SubsystemTest.testsFor(InverseFunctionalExchangeTest.class));
 
     return tests;
   }
