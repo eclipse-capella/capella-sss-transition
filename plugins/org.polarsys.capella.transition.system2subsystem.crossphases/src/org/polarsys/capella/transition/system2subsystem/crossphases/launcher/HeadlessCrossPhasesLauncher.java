@@ -17,8 +17,8 @@ import org.polarsys.capella.core.transition.common.activities.DifferencesMerging
 import org.polarsys.capella.core.transition.common.activities.InitializeScopeActivity;
 import org.polarsys.capella.core.transition.common.activities.PostTransformationActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.FinalizeSubsystemTransitionActivity;
-import org.polarsys.capella.transition.system2subsystem.activities.InitializeTransformationActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.RootComponentNameUpdater;
+import org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeCrossPhasesTransformationActivity;
 import org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeDiffMergeActivity;
 import org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeTransitionActivity;
 import org.polarsys.capella.transition.system2subsystem.launcher.SubSystemLauncher;
@@ -55,8 +55,8 @@ public class HeadlessCrossPhasesLauncher extends SubSystemLauncher {
               getTransposer().getRulesHandler(), "Transposer Rule handler"); //$NON-NLS-1$
       parameter.addParameter(InitializeTransitionActivity.ID, param2);
 
-      // InitializeTransformationActivity
-      parameter.addActivity(InitializeTransformationActivity.ID);
+      // InitializeCrossPhasesTransformationActivity
+      parameter.addActivity(InitializeCrossPhasesTransformationActivity.ID);
 
       // InitializeScopeActivity
       parameter.addActivity(InitializeScopeActivity.ID);

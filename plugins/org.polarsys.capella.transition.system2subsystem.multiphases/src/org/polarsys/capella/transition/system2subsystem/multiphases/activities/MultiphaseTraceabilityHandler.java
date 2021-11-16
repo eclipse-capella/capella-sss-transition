@@ -18,6 +18,9 @@ import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.common.helpers.EcoreUtil2;
+import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
+import org.polarsys.capella.core.data.capellacore.PropertyValueGroup;
+import org.polarsys.capella.core.data.capellacore.PropertyValuePkg;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.cs.InterfacePkg;
@@ -87,9 +90,14 @@ public class MultiphaseTraceabilityHandler extends CompoundTraceabilityHandler {
 		}
 		
 		// data and interface package content is always traced into the SA
+    // same with property values
 		EObject dpkg = EcoreUtil2.getFirstContainer(source_p, InformationPackage.Literals.DATA_PKG);
 		EObject ipkg = EcoreUtil2.getFirstContainer(source_p, CsPackage.Literals.INTERFACE_PKG);
-		if (ipkg != null || dpkg != null || source_p instanceof DataPkg || source_p instanceof InterfacePkg){
+    EObject sourceBa = EcoreUtil2.getFirstContainer(source_p, CsPackage.Literals.BLOCK_ARCHITECTURE);
+    if (ipkg != null || dpkg != null
+        || (sourceBa != null && (source_p instanceof AbstractPropertyValue || source_p instanceof PropertyValuePkg
+            || source_p instanceof PropertyValueGroup))
+        || source_p instanceof DataPkg || source_p instanceof InterfacePkg) {
 			return super.retrieveTracedElements(source_p, context_p);
 		}
 

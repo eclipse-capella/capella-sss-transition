@@ -32,6 +32,7 @@ import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
 import org.polarsys.capella.core.data.capellacore.CapellacorePackage;
 import org.polarsys.capella.core.data.capellacore.PropertyValueGroup;
 import org.polarsys.capella.core.data.capellacore.PropertyValuePkg;
+import org.polarsys.capella.core.data.capellamodeller.Project;
 import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
@@ -159,7 +160,8 @@ public class PropertyValuesPreference extends PropertyPreference implements IRes
       }
 
       if (archi != null && archi.eContainer() instanceof SystemEngineering) {
-
+        if (archi.eContainer().eContainer() instanceof Project)
+          visit(values, archi.eContainer().eContainer());
         // retrieve the lowest level architecture of all selected elements so that we return all valid PV's
         int lowestLevelArchi = selection.stream().map(BlockArchitectureExt::getRootBlockArchitecture)
             .map(BlockArchitectureExt::getBlockArchitectureType).map(Enum::ordinal)
@@ -195,6 +197,16 @@ public class PropertyValuesPreference extends PropertyPreference implements IRes
     }
     if (archi_p instanceof PropertyValuePkg) {
       values_p.addAll(EObjectExt.getAll(archi_p, CapellacorePackage.Literals.PROPERTY_VALUE_PKG));
+      return;
+    }
+    if (archi_p instanceof Project) {
+      archi_p.eContents().stream().forEach(elem -> {
+        if (elem instanceof AbstractPropertyValue || elem instanceof PropertyValueGroup
+            || elem instanceof PropertyValuePkg)
+          values_p.add(elem);
+        if (elem instanceof PropertyValuePkg)
+          values_p.addAll(EObjectExt.getAll(elem, CapellacorePackage.Literals.PROPERTY_VALUE_PKG));
+      });
       return;
     }
 

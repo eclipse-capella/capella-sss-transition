@@ -38,6 +38,7 @@ import org.polarsys.capella.transition.system2subsystem.preferences.PropertyValu
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Crossphase;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Interphase;
+import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Multiphase;
 import org.polarsys.kitalpha.cadence.core.api.parameter.GenericParameter;
 
 //@formatter:off
@@ -126,6 +127,14 @@ public class PropertyValuesTest {
   public static final String LA__LPVP2__BPV1 = "f9614b1f-847f-4f23-ac41-1b0a898d18a3"; //$NON-NLS-1$
   public static final String LA__INTERFACES__E1 = "c261d2aa-c641-428a-bc5b-6ea70471db88"; //$NON-NLS-1$
   public static final String PC_11__PV1 = "f4b40f3e-b15c-4397-9997-3d1a743702c4"; //$NON-NLS-1$
+  public static final String PVG_11 = "82178d7e-72ad-4207-8074-091626958f95"; //$NON-NLS-1$
+  public static final String PVG_12 = "ea213073-de56-4447-9d30-bba2ff814798"; //$NON-NLS-1$
+  public static final String EPV_2111 = "bec77078-66bb-40f8-af61-7b7fe9c2d4c1"; //$NON-NLS-1$
+  public static final String IPV_2112 = "e662ea2e-5e62-4d03-919c-6cfb5a27657e"; //$NON-NLS-1$
+  public static final String IPV_2113 = "1fc7da80-1ec9-4706-8776-a81b7e0ce21a"; //$NON-NLS-1$
+  public static final String PVG_11111 = "0cdae9cf-cc39-4d9a-935b-16481711e92c"; //$NON-NLS-1$
+  public static final String PVG_11112 = "b337cf76-9484-4c48-a4e1-4ace00ac7d92"; //$NON-NLS-1$
+  public static final String PVG_11113 = "c89d3099-c662-463e-9a7b-dceae1444b5d"; //$NON-NLS-1$
 
   /**
    * PropertyValues transition: Test that property values are correctly imported (according to scope)
@@ -134,11 +143,9 @@ public class PropertyValuesTest {
 
     private final String _id_pvp1 = "2958d369-0525-4bb0-95e3-e5a5fc0bc1c0"; //$NON-NLS-1$
     private final String _id_bpv11 = "9da356c0-e2cc-4853-8f71-f3a64cce7dca"; //$NON-NLS-1$
-    private final String _id_pvg11 = "82178d7e-72ad-4207-8074-091626958f95"; //$NON-NLS-1$
     private final String _id_epv111 = "3a8170cb-0d8d-4824-bbce-8ba87944b1fb"; //$NON-NLS-1$
     private final String _id_ipv112 = "c034ba71-0a35-4ebc-8626-6dbfad6506d1"; //$NON-NLS-1$
     private final String _id_ipv113 = "35ed0e48-5ab2-456e-810b-cb8f4fe70333"; //$NON-NLS-1$
-    private final String _id_pvg12 = "ea213073-de56-4447-9d30-bba2ff814798"; //$NON-NLS-1$
     private final String _id_epv121 = "9dbb0488-38bb-4907-90a2-d18bcbf7a8af"; //$NON-NLS-1$
     private final String _id_ipv122 = "240fcadd-0172-4902-8460-fd5ec3166318"; //$NON-NLS-1$
     private final String _id_ipv123 = "4b53fef8-9f81-4dad-b2a4-ddd33d270185"; //$NON-NLS-1$
@@ -149,9 +156,6 @@ public class PropertyValuesTest {
     private final String _id_pvp21 = "50936eab-96fd-41e8-8b3e-1d2319f0d471"; //$NON-NLS-1$
     private final String _id_bpv211 = "14152666-9450-491d-9cd1-f9cb97ea55b2"; //$NON-NLS-1$
     private final String _id_pvg211 = "4045cb96-744e-4046-9665-5614999f419d"; //$NON-NLS-1$
-    private final String _id_epv2111 = "bec77078-66bb-40f8-af61-7b7fe9c2d4c1"; //$NON-NLS-1$
-    private final String _id_ipv2112 = "e662ea2e-5e62-4d03-919c-6cfb5a27657e"; //$NON-NLS-1$
-    private final String _id_ipv2113 = "1fc7da80-1ec9-4706-8776-a81b7e0ce21a"; //$NON-NLS-1$
     private final String _id_pvg212 = "a6f4eee6-77e8-4e93-a140-54767e14428f"; //$NON-NLS-1$
     private final String _id_epv2121 = "3441d4aa-e7cb-4768-b981-ee01f9fdc0c3"; //$NON-NLS-1$
     private final String _id_fpv2122 = "40bddd17-caed-49cd-a96d-4936b7a6776e"; //$NON-NLS-1$
@@ -169,19 +173,16 @@ public class PropertyValuesTest {
     private final String _id_pvg1111 = "6ade04ca-26df-449e-9916-615189809d7c"; //$NON-NLS-1$
     private final String _id_bpv11111 = "aa063629-77b5-43eb-915a-fad93968c1c8"; //$NON-NLS-1$
     private final String _id_bpv11112 = "edff2b9c-5b14-4cb1-b1ba-c201c48b4d2d"; //$NON-NLS-1$
-    private final String _id_pvg11111 = "0cdae9cf-cc39-4d9a-935b-16481711e92c"; //$NON-NLS-1$
     private final String _id_bpv111111 = "bca5f08a-801c-4048-9d60-9039022e1140"; //$NON-NLS-1$
     private final String _id_bpv111112 = "51441522-28c1-473b-b9d4-26a505701a31"; //$NON-NLS-1$
     private final String _id_pvg111111 = "3d879f67-0014-45e6-a4ea-0774b057d4ea"; //$NON-NLS-1$
     private final String _id_bpv1111111 = "68e84860-26fd-4f0a-8011-6faac9386bca"; //$NON-NLS-1$
     private final String _id_bpv1111112 = "144fc667-f218-44a8-ae20-d41a86913d89"; //$NON-NLS-1$
-    private final String _id_pvg11112 = "b337cf76-9484-4c48-a4e1-4ace00ac7d92"; //$NON-NLS-1$
     private final String _id_bpv111121 = "bbccc670-5281-4f4c-8630-1b94c8feb7c7"; //$NON-NLS-1$
     private final String _id_bpv111122 = "a6b8f9b1-8714-4cf7-885e-9b8044800879"; //$NON-NLS-1$
     private final String _id_pvg111121 = "deb2c2d4-f7c1-4561-9d19-c3287909cf95"; //$NON-NLS-1$
     private final String _id_bpv1111211 = "0101ee0d-52d6-4c71-9fd3-0ea846295c57"; //$NON-NLS-1$
     private final String _id_bpv1111212 = "738079d0-fda3-47cb-b3a1-3dcad6620c46"; //$NON-NLS-1$
-    private final String _id_pvg11113 = "c89d3099-c662-463e-9a7b-dceae1444b5d"; //$NON-NLS-1$
     private final String _id_bpv111131 = "dd2ea859-f55c-409f-b534-7d807c835950"; //$NON-NLS-1$
     private final String _id_bpv111132 = "908dd3e6-fd8c-4040-9262-6c462d180d7a"; //$NON-NLS-1$
     private final String _id_pvg111131 = "9f123f40-ea1d-46a1-87b3-6af021891ba0"; //$NON-NLS-1$
@@ -201,19 +202,19 @@ public class PropertyValuesTest {
       collection.add(getObject(_id_pvg1111));// "6ade04ca-26df-449e-9916-615189809d7c";
       collection.add(getObject(_id_bpv11111));// "aa063629-77b5-43eb-915a-fad93968c1c8";
       collection.add(getObject(_id_bpv11112));// "edff2b9c-5b14-4cb1-b1ba-c201c48b4d2d";
-      collection.add(getObject(_id_pvg11111));// "0cdae9cf-cc39-4d9a-935b-16481711e92c";
+      collection.add(getObject(PVG_11111));// "0cdae9cf-cc39-4d9a-935b-16481711e92c";
       collection.add(getObject(_id_bpv111111));// "bca5f08a-801c-4048-9d60-9039022e1140";
       collection.add(getObject(_id_bpv111112));// "51441522-28c1-473b-b9d4-26a505701a31";
       collection.add(getObject(_id_pvg111111));// "3d879f67-0014-45e6-a4ea-0774b057d4ea";
       collection.add(getObject(_id_bpv1111111));// "68e84860-26fd-4f0a-8011-6faac9386bca";
       collection.add(getObject(_id_bpv1111112));// "144fc667-f218-44a8-ae20-d41a86913d89";
-      collection.add(getObject(_id_pvg11112));// "b337cf76-9484-4c48-a4e1-4ace00ac7d92";
+      collection.add(getObject(PVG_11112));// "b337cf76-9484-4c48-a4e1-4ace00ac7d92";
       collection.add(getObject(_id_bpv111121));// "bbccc670-5281-4f4c-8630-1b94c8feb7c7";
       collection.add(getObject(_id_bpv111122));// "a6b8f9b1-8714-4cf7-885e-9b8044800879";
       collection.add(getObject(_id_pvg111121));// "deb2c2d4-f7c1-4561-9d19-c3287909cf95";
       collection.add(getObject(_id_bpv1111211));// "0101ee0d-52d6-4c71-9fd3-0ea846295c57";
       collection.add(getObject(_id_bpv1111212));// "738079d0-fda3-47cb-b3a1-3dcad6620c46";
-      collection.add(getObject(_id_pvg11113));// "c89d3099-c662-463e-9a7b-dceae1444b5d";
+      collection.add(getObject(PVG_11113));// "c89d3099-c662-463e-9a7b-dceae1444b5d";
       collection.add(getObject(_id_bpv111131));// "dd2ea859-f55c-409f-b534-7d807c835950";
       collection.add(getObject(_id_bpv111132));// "908dd3e6-fd8c-4040-9262-6c462d180d7a";
       collection.add(getObject(_id_pvg111131));// "9f123f40-ea1d-46a1-87b3-6af021891ba0";
@@ -236,11 +237,11 @@ public class PropertyValuesTest {
 
       // All properties not included into selected elements should not be transitioned
       shouldNotBeTransitioned(_id_bpv11);
-      shouldNotBeTransitioned(_id_pvg11);
+      shouldNotBeTransitioned(PVG_11);
       shouldNotBeTransitioned(_id_epv111);
       shouldNotBeTransitioned(_id_ipv112);
       shouldNotBeTransitioned(_id_ipv113);
-      shouldNotBeTransitioned(_id_pvg12);
+      shouldNotBeTransitioned(PVG_12);
       shouldNotBeTransitioned(_id_epv121);
       shouldNotBeTransitioned(_id_ipv122);
       shouldNotBeTransitioned(_id_ipv123);
@@ -262,10 +263,10 @@ public class PropertyValuesTest {
       // Package is selected
       mustBeTransitioned(_id_pvp21);
 
-      mustBeTransitioned(_id_ipv2112);
+      mustBeTransitioned(IPV_2112);
       // Not sure
-      mustBeTransitioned(_id_epv2111);
-      mustBeTransitioned(_id_ipv2113);
+      mustBeTransitioned(EPV_2111);
+      mustBeTransitioned(IPV_2113);
 
       mustBeTransitioned(_id_pvg111);
       mustBeTransitioned(_id_bpv1111);
@@ -273,7 +274,7 @@ public class PropertyValuesTest {
       mustBeTransitioned(_id_pvg1111);
       mustBeTransitioned(_id_bpv11111);
       mustBeTransitioned(_id_bpv11112);
-      mustBeTransitioned(_id_pvg11111);
+      mustBeTransitioned(PVG_11111);
       mustBeTransitioned(_id_bpv111111);
       mustBeTransitioned(_id_bpv111112);
       mustBeTransitioned(_id_pvg111111);
@@ -281,7 +282,7 @@ public class PropertyValuesTest {
       mustBeTransitioned(_id_bpv1111112);
 
       mustBeTransitioned(_id_bpv111122);
-      mustBeTransitioned(_id_pvg11112);
+      mustBeTransitioned(PVG_11112);
       mustBeTransitioned(_id_bpv111121);
       mustBeTransitioned(_id_pvg111121);
       mustBeTransitioned(_id_bpv1111211);
@@ -290,7 +291,7 @@ public class PropertyValuesTest {
       mustBeTransitioned(_id_bpv1111312);
       mustBeTransitioned(_id_pvg111131);
       mustBeTransitioned(_id_bpv1111311);
-      shouldNotBeTransitioned(_id_pvg11113);
+      shouldNotBeTransitioned(PVG_11113);
       shouldNotBeTransitioned(_id_bpv111131);
       shouldNotBeTransitioned(_id_bpv111132);
 
@@ -347,18 +348,12 @@ public class PropertyValuesTest {
           CapellacorePackage.Literals.CAPELLA_ELEMENT__APPLIED_PROPERTY_VALUES);
 
       // OA elements
-      // Operational Property values propagation works on Interphases.
-      // It doens't work on CrossPhases since TraceabilityHandler (TargetConfiguration) is matching only SA, not OA
-      if (kind == Kind.INTER_PHASES) {
-        mustBeTransitioned(OA__OPVP);
-        mustBeTransitioned(OA__OPVP__BPV1);
-        mustBeTransitionedAndLinkedTo(LA__INTERFACES__E1, OA__OPVP__BPV1,
-            CapellacorePackage.Literals.CAPELLA_ELEMENT__APPLIED_PROPERTY_VALUES);
+      mustBeTransitioned(OA__OPVP);
+      mustBeTransitioned(OA__OPVP__BPV1);
+      mustBeTransitionedAndLinkedTo(LA__INTERFACES__E1, OA__OPVP__BPV1,
+          CapellacorePackage.Literals.CAPELLA_ELEMENT__APPLIED_PROPERTY_VALUES);
 
-      } else if (kind == Kind.CROSS_PHASES) {
-        shouldNotBeTransitioned(OA__OPVP);
-        shouldNotBeTransitioned(OA__OPVP__BPV1);
-      }
+
       shouldNotBeTransitioned(OA__OPVP2);
       shouldNotBeTransitioned(OA__OPVP2__BPV1);
 
@@ -485,5 +480,74 @@ public class PropertyValuesTest {
       }
       return objects;
     }
+  }
+
+  public static class Test5 extends System2SubsystemTest implements Multiphase {
+
+    private static final String PC_15 = "a674da5d-4edd-480b-a93a-048e0d7eea41";
+
+    @Override
+    public void setUp() throws Exception {
+      super.setUp();
+      Collection<EObject> collection = new ArrayList<EObject>();
+      collection.add(getObject(PVG_11111));
+      collection.add(getObject(PVG_11112));
+      collection.add(getObject(PVG_11));
+      collection.add(getObject(PVG_12));
+      collection.add(getObject(EPV_2111));
+      collection.add(getObject(IPV_2113));
+      collection.add(getObject(IPV_2112));
+      // in a practical scenario only the package containing the pv's can be selected
+      collection.add(getObject(LA__LPVP));
+
+      getHeadlessParameters().addSharedParameter(new GenericParameter<Collection<EObject>>(
+          IOptionsConstants.PROPERTY_VALUES_ELEMENTS, collection, IOptionsConstants.PROPERTY_VALUES_ELEMENTS));
+    }
+
+    @Override
+    protected void verify() throws Exception {
+      super.verify();
+      mustBeTransitionedInto(PVG_11111, ComponentType.SYSTEM_ANALYSIS);
+      shouldNotBeTransitionedInto(PVG_11111, ComponentType.LOGICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(PVG_11111, ComponentType.PHYSICAL_ARCHITECTURE);
+
+      // selected during transition, but not applied to component
+      shouldNotBeTransitioned(PVG_11112);
+      // applied to component, but not selected during transition
+      shouldNotBeTransitioned(PVG_11113);
+
+      mustBeTransitionedInto(PVG_11, ComponentType.SYSTEM_ANALYSIS);
+      shouldNotBeTransitionedInto(PVG_11, ComponentType.LOGICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(PVG_11, ComponentType.PHYSICAL_ARCHITECTURE);
+
+      mustBeTransitionedInto(PVG_12, ComponentType.SYSTEM_ANALYSIS);
+      shouldNotBeTransitionedInto(PVG_12, ComponentType.LOGICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(PVG_12, ComponentType.PHYSICAL_ARCHITECTURE);
+
+      mustBeTransitionedInto(EPV_2111, ComponentType.SYSTEM_ANALYSIS);
+      shouldNotBeTransitionedInto(EPV_2111, ComponentType.LOGICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(EPV_2111, ComponentType.PHYSICAL_ARCHITECTURE);
+
+      mustBeTransitionedInto(IPV_2112, ComponentType.SYSTEM_ANALYSIS);
+      shouldNotBeTransitionedInto(IPV_2112, ComponentType.LOGICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(IPV_2112, ComponentType.PHYSICAL_ARCHITECTURE);
+
+      mustBeTransitionedInto(IPV_2113, ComponentType.SYSTEM_ANALYSIS);
+      shouldNotBeTransitionedInto(IPV_2113, ComponentType.LOGICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(IPV_2113, ComponentType.PHYSICAL_ARCHITECTURE);
+
+      mustBeTransitionedInto(LA__LPVP__BPV1, ComponentType.SYSTEM_ANALYSIS);
+      shouldNotBeTransitionedInto(LA__LPVP__BPV1, ComponentType.LOGICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(LA__LPVP__BPV1, ComponentType.PHYSICAL_ARCHITECTURE);
+
+      // applied to component but not selected during transition
+      shouldNotBeTransitioned(LA__LPVP2__BPV1);
+    }
+
+    @Override
+    protected Collection<?> getProjectionElements() {
+      return getObjects(PC_15);
+    }
+
   }
 }

@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.capellacore.PropertyValuePkg;
+import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.transition.common.handlers.scope.IScopeRetriever;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
@@ -49,7 +50,8 @@ public class PropertyValuesScopeRetriever implements IScopeRetriever {
   public Collection<? extends EObject> retrieveRelatedElements(EObject source_p, IContext context_p) {
     Collection<EObject> result = new LinkedList<EObject>();
 
-    if ((source_p instanceof CapellaElement) && !(source_p instanceof PropertyValuePkg)) {
+    if ((source_p instanceof CapellaElement) && !(source_p instanceof PropertyValuePkg)
+        && !(source_p instanceof BlockArchitecture)) {
       CapellaElement element = (CapellaElement) source_p;
       result.addAll(element.getAppliedPropertyValueGroups());
       result.addAll(element.getAppliedPropertyValues());
