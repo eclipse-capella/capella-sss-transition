@@ -28,4 +28,3 @@ Export-Package: org.polarsys.capella.transition.system2subsystem.tests,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Import-Package: org.polarsys.capella.core.transition.system.topdown.constants

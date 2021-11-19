@@ -20,9 +20,10 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.polarsys.capella.common.queries.AbstractQuery;
-import org.polarsys.capella.core.business.queries.queries.fa.GetAvailable_ComponentExchange_AllocatedFunctionalExchanges;
+import org.polarsys.capella.core.business.queries.IBusinessQuery;
+import org.polarsys.capella.core.business.queries.capellacore.BusinessQueriesProvider;
 import org.polarsys.capella.core.data.fa.ComponentExchange;
+import org.polarsys.capella.core.data.fa.FaPackage;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;;
 
@@ -41,9 +42,11 @@ public class FunctionalExchangeRule
           return status;
         }
         for (ComponentExchange componentExchange : allocatingExchanges) {
-          AbstractQuery query = new GetAvailable_ComponentExchange_AllocatedFunctionalExchanges();
-          List<Object> availableFuncExhcnage = query.execute(componentExchange, null);
-          
+          IBusinessQuery query = BusinessQueriesProvider.getInstance().getContribution(
+              componentExchange.eClass(),
+              FaPackage.Literals.COMPONENT_EXCHANGE__OWNED_COMPONENT_EXCHANGE_FUNCTIONAL_EXCHANGE_ALLOCATIONS);
+          List<EObject> availableFuncExhcnage = query.getAvailableElements(componentExchange);
+
           if (null != availableFuncExhcnage && !availableFuncExhcnage.isEmpty()) {
             if (!availableFuncExhcnage.contains(functionalExchange)) {
               return new Status(IStatus.ERROR, PLUGIN_ID,
