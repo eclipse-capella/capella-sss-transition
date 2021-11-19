@@ -41,6 +41,8 @@ import org.polarsys.capella.core.data.capellacore.NamedElement;
 import org.polarsys.capella.core.data.capellacore.Type;
 import org.polarsys.capella.core.data.capellamodeller.CapellamodellerPackage;
 import org.polarsys.capella.core.data.capellamodeller.Library;
+import org.polarsys.capella.core.data.capellamodeller.Project;
+import org.polarsys.capella.core.data.capellamodeller.SystemEngineering;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.cs.Part;
@@ -443,8 +445,15 @@ public class MultiphasesMatchPolicy implements IMatchPolicy<EObject> {
       // if the element has a non-empty, non-null sid, use this as its match id
     if ((element_p instanceof ModelElement) && (((ModelElement) element_p).getSid() != null)
         && !((ModelElement) element_p).getSid().isEmpty()) {
-      EObject archi = EcoreUtil2.getFirstContainer(element_p, CsPackage.Literals.BLOCK_ARCHITECTURE);
-      return archi == null ? "" : archi.eClass().getName() + ((ModelElement) element_p).getSid();
+      EObject container = null;
+      if (element_p.eContainer() instanceof Project)
+        container = EcoreUtil2.getFirstContainer(element_p, CapellamodellerPackage.Literals.PROJECT);
+      else if (element_p.eContainer() instanceof SystemEngineering)
+        container = EcoreUtil2.getFirstContainer(element_p, CapellamodellerPackage.Literals.SYSTEM_ENGINEERING);
+      else
+        container = EcoreUtil2.getFirstContainer(element_p, CsPackage.Literals.BLOCK_ARCHITECTURE);
+
+      return container == null ? "" : container.eClass().getName() + ((ModelElement) element_p).getSid();
     }
     }
 

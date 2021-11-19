@@ -323,7 +323,40 @@
                       incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.InterfaceImplementationRules$ToSA"
                       name="InterfaceImplementation">
                 </defaultMappingPossibility>
-             </mappingElement>            
+             </mappingElement> 
+            <mappingElement
+                  domainMetaClass="org.polarsys.capella.core.data.capellacore.AbstractPropertyValue"
+                  reuseExtendedElementDefaultPossibility="false"
+                  reuseExtendedElementPossibilities="false">
+               <defaultMappingPossibility
+                     completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValueRules$ToSA"
+                     incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValueRules$ToSA"
+                     enabled="true"
+                     name="PropertyValue">
+               </defaultMappingPossibility>
+            </mappingElement>
+            <mappingElement
+                  domainMetaClass="org.polarsys.capella.core.data.capellacore.PropertyValuePkg"
+                  reuseExtendedElementDefaultPossibility="false"
+                  reuseExtendedElementPossibilities="false">
+               <defaultMappingPossibility
+                     completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValuePkgRules$ToSA"
+                     incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValuePkgRules$ToSA"
+                     enabled="true"
+                     name="PropertyValuePkg">
+               </defaultMappingPossibility>
+            </mappingElement>
+            <mappingElement
+                  domainMetaClass="org.polarsys.capella.core.data.capellacore.PropertyValueGroup"
+                  reuseExtendedElementDefaultPossibility="false"
+                  reuseExtendedElementPossibilities="false">
+               <defaultMappingPossibility
+                     completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValueGroupRules$ToSA"
+                     incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValueGroupRules$ToSA"
+                     enabled="true"
+                     name="PropertyValueGroup">
+               </defaultMappingPossibility>
+            </mappingElement>       
          </mappingPackage>
       </mapping>
 </extension>
@@ -585,6 +618,39 @@
                       name="InterfaceImplementation">
                 </defaultMappingPossibility>
              </mappingElement>
+            <mappingElement
+                  domainMetaClass="org.polarsys.capella.core.data.capellacore.AbstractPropertyValue"
+                  reuseExtendedElementDefaultPossibility="false"
+                  reuseExtendedElementPossibilities="false">
+               <defaultMappingPossibility
+                     completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValueRules$ToLA"
+                     incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValueRules$ToLA"
+                     enabled="true"
+                     name="PropertyValue">
+               </defaultMappingPossibility>
+            </mappingElement>
+            <mappingElement
+                  domainMetaClass="org.polarsys.capella.core.data.capellacore.PropertyValuePkg"
+                  reuseExtendedElementDefaultPossibility="false"
+                  reuseExtendedElementPossibilities="false">
+               <defaultMappingPossibility
+                     completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValuePkgRules$ToLA"
+                     incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValuePkgRules$ToLA"
+                     enabled="true"
+                     name="PropertyValuePkg">
+               </defaultMappingPossibility>
+            </mappingElement>
+            <mappingElement
+                  domainMetaClass="org.polarsys.capella.core.data.capellacore.PropertyValueGroup"
+                  reuseExtendedElementDefaultPossibility="false"
+                  reuseExtendedElementPossibilities="false">
+               <defaultMappingPossibility
+                     completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValueGroupRules$ToLA"
+                     incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValueGroupRules$ToLA"
+                     enabled="true"
+                     name="PropertyValueGroup">
+               </defaultMappingPossibility>
+            </mappingElement>  
          </mappingPackage>
       </mapping>
 </extension>
@@ -848,6 +914,39 @@
                       name="InterfaceImplementation">
                 </defaultMappingPossibility>
              </mappingElement>
+            <mappingElement
+                  domainMetaClass="org.polarsys.capella.core.data.capellacore.AbstractPropertyValue"
+                  reuseExtendedElementDefaultPossibility="false"
+                  reuseExtendedElementPossibilities="false">
+               <defaultMappingPossibility
+                     completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValueRules$ToPA"
+                     incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValueRules$ToPA"
+                     enabled="true"
+                     name="PropertyValue">
+               </defaultMappingPossibility>
+            </mappingElement>
+            <mappingElement
+                  domainMetaClass="org.polarsys.capella.core.data.capellacore.PropertyValuePkg"
+                  reuseExtendedElementDefaultPossibility="false"
+                  reuseExtendedElementPossibilities="false">
+               <defaultMappingPossibility
+                     completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValuePkgRules$ToPA"
+                     incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValuePkgRules$ToPA"
+                     enabled="true"
+                     name="PropertyValuePkg">
+               </defaultMappingPossibility>
+            </mappingElement>
+            <mappingElement
+                  domainMetaClass="org.polarsys.capella.core.data.capellacore.PropertyValueGroup"
+                  reuseExtendedElementDefaultPossibility="false"
+                  reuseExtendedElementPossibilities="false">
+               <defaultMappingPossibility
+                     completeRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValueGroupRules$ToPA"
+                     incompleteRule="org.polarsys.capella.transition.system2subsystem.multiphases.rules.PropertyValueGroupRules$ToPA"
+                     enabled="true"
+                     name="PropertyValueGroup">
+               </defaultMappingPossibility>
+            </mappingElement>  
          </mappingPackage>
       </mapping>
 </extension>
