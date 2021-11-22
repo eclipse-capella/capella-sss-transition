@@ -71,7 +71,7 @@ public class AllMixedTests extends BasicTestSuite {
     tests.addAll(testsFor(PropertyValuesTest.Test2.class));
     tests.addAll(testsFor(PropertyValuesTest.Test3.class));
     tests.add(new PropertyValuesTest.Test4());
-    tests.addAll(testsFor(PropertyValuesTest.Test5.class));
+    tests.add(new PropertyValuesTest.Test5());
 
     tests.addAll(testsFor(ScenarioTest.Enabled.class));
     tests.addAll(testsFor(ScenarioTest.Disabled.class));
