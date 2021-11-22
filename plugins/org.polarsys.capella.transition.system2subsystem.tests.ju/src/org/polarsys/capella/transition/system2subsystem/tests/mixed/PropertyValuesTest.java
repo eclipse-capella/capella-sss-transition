@@ -30,7 +30,6 @@ import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.context.TransitionContext;
-import org.polarsys.capella.core.transition.system.topdown.constants.ITopDownConstants;
 import org.polarsys.capella.test.framework.api.BasicTestCase;
 import org.polarsys.capella.test.framework.context.SessionContext;
 import org.polarsys.capella.transition.system2subsystem.constants.IOptionsConstants;
@@ -441,7 +440,7 @@ public class PropertyValuesTest {
     @Override
     public void setUp() throws Exception {
       super.setUp();
-      IProperties properties = new PropertiesLoader().getProperties(ITopDownConstants.OPTIONS_SCOPE__PREFERENCES);
+      IProperties properties = new PropertiesLoader().getProperties(IOptionsConstants.SYSTEM2SUBSYSTEM_PREFERENCES);
       propertyContext = new PropertyContext(properties);
       pvPreference = new PropertyValuesPreference();
       Session session = getSessionForTestModel(getRequiredTestModels().get(0));
