@@ -15,6 +15,7 @@ package org.polarsys.capella.transition.system2subsystem.tests.mixed;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -25,9 +26,17 @@ import org.polarsys.capella.common.flexibility.properties.loader.PropertiesLoade
 import org.polarsys.capella.common.flexibility.properties.property.PropertyContext;
 import org.polarsys.capella.common.flexibility.properties.schema.IProperties;
 import org.polarsys.capella.common.flexibility.properties.schema.IPropertyContext;
+import org.polarsys.capella.core.data.capellacore.AbstractPropertyValue;
+import org.polarsys.capella.core.data.capellacore.CapellaElement;
 import org.polarsys.capella.core.data.capellacore.CapellacorePackage;
+import org.polarsys.capella.core.data.capellacore.PropertyValueGroup;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.Part;
+import org.polarsys.capella.core.data.ctx.SystemComponent;
+import org.polarsys.capella.core.data.la.LogicalComponent;
+import org.polarsys.capella.core.data.pa.PhysicalComponent;
+import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
+import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.context.TransitionContext;
 import org.polarsys.capella.test.framework.api.BasicTestCase;
@@ -37,7 +46,8 @@ import org.polarsys.capella.transition.system2subsystem.preferences.PropertyValu
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Crossphase;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Interphase;
-import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Multiphase;
+import org.polarsys.capella.transition.system2subsystem.tests.TraceabilityArchitectureSID;
+import org.polarsys.capella.transition.system2subsystem.tests.multiphases.MultiPhasesTest;
 import org.polarsys.kitalpha.cadence.core.api.parameter.GenericParameter;
 
 //@formatter:off
@@ -219,6 +229,7 @@ public class PropertyValuesTest {
       collection.add(getObject(_id_pvg111131));// "9f123f40-ea1d-46a1-87b3-6af021891ba0";
       collection.add(getObject(_id_bpv1111311));// "c144f839-af93-404c-a089-c73f5f58702b";
       collection.add(getObject(_id_bpv1111312));// "62fa84ee-d617-4ae9-83bb-fc4c007feb4a";
+      collection.add(getObject(SA__SPVP2__BPV1));
 
       addSharedParameter(IOptionsConstants.PROPERTY_VALUES_ELEMENTS, collection);
     }
@@ -230,9 +241,15 @@ public class PropertyValuesTest {
 
     @Override
     protected void verify() {
+      // Check that no Sys analysis was added during transition
+      assertTrue(
+          SystemEngineeringExt.getSystemEngineering(retrieveTargetSystem()).getContainedSystemAnalysis().size() == 1);
 
       mustBeTransitioned(_id_pc11);
       mustBeTransitioned(_id_pf111);
+
+      // PV from SA level should be transitioned
+      mustBeTransitioned(SA__SPVP2__BPV1);
 
       // All properties not included into selected elements should not be transitioned
       shouldNotBeTransitioned(_id_bpv11);
@@ -481,9 +498,12 @@ public class PropertyValuesTest {
     }
   }
 
-  public static class Test5 extends System2SubsystemTest implements Multiphase {
+  public static class Test5 extends MultiPhasesTest {
 
     private static final String PC_15 = "a674da5d-4edd-480b-a93a-048e0d7eea41";
+    private static final String OA_PV_NESTED = "9c9b6706-150a-4aa1-9785-210eb9eb5afc";
+    private List<PropertyValueGroup> propertyValueGroups = new ArrayList<>();
+    private List<AbstractPropertyValue> propertyValues = new ArrayList<>();
 
     @Override
     public void setUp() throws Exception {
@@ -496,6 +516,7 @@ public class PropertyValuesTest {
       collection.add(getObject(EPV_2111));
       collection.add(getObject(IPV_2113));
       collection.add(getObject(IPV_2112));
+      collection.add(getObject(OA_PV_NESTED));
       // in a practical scenario only the package containing the pv's can be selected
       collection.add(getObject(LA__LPVP));
 
@@ -506,41 +527,60 @@ public class PropertyValuesTest {
     @Override
     protected void verify() throws Exception {
       super.verify();
-      mustBeTransitionedInto(PVG_11111, ComponentType.SYSTEM_ANALYSIS);
-      shouldNotBeTransitionedInto(PVG_11111, ComponentType.LOGICAL_ARCHITECTURE);
-      shouldNotBeTransitionedInto(PVG_11111, ComponentType.PHYSICAL_ARCHITECTURE);
+      ((TraceabilityArchitectureSID) traceability).setArchitecture(BlockArchitectureExt.Type.SA);
+      SystemComponent systemComponent = (SystemComponent) mustBeTransitioned(PC_15, ComponentType.SYSTEM);
 
       // selected during transition, but not applied to component
       shouldNotBeTransitioned(PVG_11112);
       // applied to component, but not selected during transition
       shouldNotBeTransitioned(PVG_11113);
+      shouldNotBeTransitioned(LA__LPVP2__BPV1);
 
-      mustBeTransitionedInto(PVG_11, ComponentType.SYSTEM_ANALYSIS);
+      propertyValueGroups.add((PropertyValueGroup) mustBeTransitionedInto(PVG_11111, ComponentType.SYSTEM_ANALYSIS));
+      propertyValueGroups.add((PropertyValueGroup) mustBeTransitionedInto(PVG_11, ComponentType.SYSTEM_ANALYSIS));
+      propertyValueGroups.add((PropertyValueGroup) mustBeTransitionedInto(PVG_12, ComponentType.SYSTEM_ANALYSIS));
+      propertyValues.add((AbstractPropertyValue) mustBeTransitionedInto(EPV_2111, ComponentType.SYSTEM_ANALYSIS));
+      propertyValues.add((AbstractPropertyValue) mustBeTransitionedInto(IPV_2112, ComponentType.SYSTEM_ANALYSIS));
+      propertyValues.add((AbstractPropertyValue) mustBeTransitionedInto(IPV_2113, ComponentType.SYSTEM_ANALYSIS));
+      propertyValues.add((AbstractPropertyValue) mustBeTransitionedInto(LA__LPVP__BPV1, ComponentType.SYSTEM_ANALYSIS));
+      // pv deeply nested within oa data pkg, should be transitioned into sys analysis root
+      propertyValues.add((AbstractPropertyValue) mustBeTransitionedInto(OA_PV_NESTED, ComponentType.SYSTEM_ANALYSIS));
+
+      checkIfPvsAreApplied(systemComponent);
+      ((TraceabilityArchitectureSID) traceability).setArchitecture(BlockArchitectureExt.Type.LA);
+      LogicalComponent logicalComponent = (LogicalComponent) mustBeTransitioned(PC_15, ComponentType.LOGICAL_COMPONENT);
+
+      shouldNotBeTransitionedInto(PVG_11111, ComponentType.LOGICAL_ARCHITECTURE);
       shouldNotBeTransitionedInto(PVG_11, ComponentType.LOGICAL_ARCHITECTURE);
-      shouldNotBeTransitionedInto(PVG_11, ComponentType.PHYSICAL_ARCHITECTURE);
-
-      mustBeTransitionedInto(PVG_12, ComponentType.SYSTEM_ANALYSIS);
       shouldNotBeTransitionedInto(PVG_12, ComponentType.LOGICAL_ARCHITECTURE);
-      shouldNotBeTransitionedInto(PVG_12, ComponentType.PHYSICAL_ARCHITECTURE);
-
-      mustBeTransitionedInto(EPV_2111, ComponentType.SYSTEM_ANALYSIS);
       shouldNotBeTransitionedInto(EPV_2111, ComponentType.LOGICAL_ARCHITECTURE);
-      shouldNotBeTransitionedInto(EPV_2111, ComponentType.PHYSICAL_ARCHITECTURE);
-
-      mustBeTransitionedInto(IPV_2112, ComponentType.SYSTEM_ANALYSIS);
       shouldNotBeTransitionedInto(IPV_2112, ComponentType.LOGICAL_ARCHITECTURE);
-      shouldNotBeTransitionedInto(IPV_2112, ComponentType.PHYSICAL_ARCHITECTURE);
-
-      mustBeTransitionedInto(IPV_2113, ComponentType.SYSTEM_ANALYSIS);
       shouldNotBeTransitionedInto(IPV_2113, ComponentType.LOGICAL_ARCHITECTURE);
-      shouldNotBeTransitionedInto(IPV_2113, ComponentType.PHYSICAL_ARCHITECTURE);
-
-      mustBeTransitionedInto(LA__LPVP__BPV1, ComponentType.SYSTEM_ANALYSIS);
       shouldNotBeTransitionedInto(LA__LPVP__BPV1, ComponentType.LOGICAL_ARCHITECTURE);
+
+      checkIfPvsAreApplied(logicalComponent);
+      ((TraceabilityArchitectureSID) traceability).setArchitecture(BlockArchitectureExt.Type.PA);
+      PhysicalComponent physicalComponent = (PhysicalComponent) mustBeTransitioned(PC_15);
+
+      shouldNotBeTransitionedInto(PVG_11111, ComponentType.PHYSICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(PVG_11, ComponentType.PHYSICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(PVG_12, ComponentType.PHYSICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(EPV_2111, ComponentType.PHYSICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(IPV_2112, ComponentType.PHYSICAL_ARCHITECTURE);
+      shouldNotBeTransitionedInto(IPV_2113, ComponentType.PHYSICAL_ARCHITECTURE);
       shouldNotBeTransitionedInto(LA__LPVP__BPV1, ComponentType.PHYSICAL_ARCHITECTURE);
 
-      // applied to component but not selected during transition
-      shouldNotBeTransitioned(LA__LPVP2__BPV1);
+      checkIfPvsAreApplied(physicalComponent);
+    }
+
+    private void checkIfPvsAreApplied(CapellaElement component) {
+      assertEquals(propertyValueGroups.size(), component.getAppliedPropertyValueGroups().size());
+      assertEquals(propertyValues.size(), component.getAppliedPropertyValues().size());
+      
+      assertTrue((new HashSet<AbstractPropertyValue>(propertyValues))
+          .equals(new HashSet<AbstractPropertyValue>(component.getAppliedPropertyValues())));
+      assertTrue((new HashSet<PropertyValueGroup>(propertyValueGroups))
+          .equals(new HashSet<PropertyValueGroup>(component.getAppliedPropertyValueGroups())));
     }
 
     @Override

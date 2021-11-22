@@ -30,8 +30,10 @@ import org.polarsys.capella.core.data.cs.ComponentPkg;
 import org.polarsys.capella.core.data.cs.InterfacePkg;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionPkg;
+import org.polarsys.capella.core.data.oa.OperationalAnalysis;
 import org.polarsys.capella.core.data.pa.PhysicalArchitecture;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
+import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
 import org.polarsys.capella.core.transition.common.handlers.traceability.ITraceabilityHandler;
 import org.polarsys.capella.transition.system2subsystem.multiphases.MultiphasesContext;
 import org.polarsys.capella.transition.system2subsystem.multiphases.MultiphasesContext.Mapping;
@@ -119,6 +121,12 @@ public class RecTraceabilityHandler implements ITraceabilityHandler {
     initializeDataTypes(context_p.getSourceSystemAnalysis().getOwnedDataPkg(), context_p.getTempSystemAnalysis().getOwnedDataPkg(), map);
     initializeDataTypes(context_p.getSourceLogicalArchitecture().getOwnedDataPkg(), context_p.getTempSystemAnalysis().getOwnedDataPkg(), map);
     initializeDataTypes(context_p.getSourcePhysicalArchitecture().getOwnedDataPkg(), context_p.getTempSystemAnalysis().getOwnedDataPkg(), map);
+
+    OperationalAnalysis oa = SystemEngineeringExt.getOperationalAnalysis(context_p.getSourceSystemEngineering());
+    if (oa != null) {
+      map.put(oa.getOwnedDataPkg(), context_p.getTempSystemAnalysis().getOwnedDataPkg());
+      initializeDataTypes(oa.getOwnedDataPkg(), context_p.getTempSystemAnalysis().getOwnedDataPkg(), map);
+    }
 
     return map;
   }

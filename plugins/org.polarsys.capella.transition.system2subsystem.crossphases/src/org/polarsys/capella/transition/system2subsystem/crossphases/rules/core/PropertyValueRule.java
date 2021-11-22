@@ -15,6 +15,8 @@ package org.polarsys.capella.transition.system2subsystem.crossphases.rules.core;
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.data.oa.OperationalAnalysis;
+import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
 import org.polarsys.capella.transition.system2subsystem.context.SubSystemContextHelper;
 import org.polarsys.capella.transition.system2subsystem.crossphases.handlers.attachment.CrossPhasesAttachmentHelper;
@@ -38,5 +40,13 @@ public class PropertyValueRule extends org.polarsys.capella.transition.system2su
       return SystemEngineeringExt.getOwnedSystemAnalysis(SubSystemContextHelper.getTransformedEngineering(context));
     }
     return super.getBestContainer(element, result, context);
+  }
+
+  @Override
+  protected EObject getDefaultContainer(EObject element, EObject result, IContext context) {
+    if (BlockArchitectureExt.getRootBlockArchitecture(element) instanceof OperationalAnalysis) {
+      return SystemEngineeringExt.getOwnedSystemAnalysis(SubSystemContextHelper.getTransformedEngineering(context));
+    }
+    return super.getDefaultContainer(element, result, context);
   }
 }

@@ -18668,7 +18668,16 @@
       <ownedInterfacePkg xsi:type="org.polarsys.capella.core.data.cs:InterfacePkg"
           id="62dc7041-978a-4cfb-abf9-13dfb4a0c618" name="Interfaces"/>
       <ownedDataPkg xsi:type="org.polarsys.capella.core.data.information:DataPkg"
-          id="e8fbbfc7-d77d-4d6b-8e8b-84b6194697a7" name="Data"/>
+          id="e8fbbfc7-d77d-4d6b-8e8b-84b6194697a7" name="Data">
+        <ownedDataPkgs xsi:type="org.polarsys.capella.core.data.information:DataPkg"
+            id="40b35652-ab61-4dea-8da2-398e2b500820" name="DataPkg 1">
+          <ownedDataPkgs xsi:type="org.polarsys.capella.core.data.information:DataPkg"
+              id="29ce2b60-34d7-4346-a954-20a7347dff46" name="DataPkg 1" appliedPropertyValues="#9c9b6706-150a-4aa1-9785-210eb9eb5afc">
+            <ownedPropertyValues xsi:type="org.polarsys.capella.core.data.capellacore:BooleanPropertyValue"
+                id="9c9b6706-150a-4aa1-9785-210eb9eb5afc" name="OA_PV_nested"/>
+          </ownedDataPkgs>
+        </ownedDataPkgs>
+      </ownedDataPkg>
       <ownedRolePkg xsi:type="org.polarsys.capella.core.data.oa:RolePkg" id="f5745537-347a-43c1-8196-8703438a2ae0"
           name="Roles"/>
       <ownedEntityPkg xsi:type="org.polarsys.capella.core.data.oa:EntityPkg" id="ae592506-c17d-4512-8db0-58a1faf4a2a9"
@@ -19252,8 +19261,8 @@
               sourceElement="#c1bb49ad-1259-471d-a992-3144670dff62"/>
           <ownedPhysicalComponents xsi:type="org.polarsys.capella.core.data.pa:PhysicalComponent"
               id="30ed9216-9b63-4120-88bd-9f1234c7897f" sid="30ed9216-9b63-4120-88bd-9f1234c7897f"
-              appliedPropertyValues="#f4b40f3e-b15c-4397-9997-3d1a743702c4" name="PC11"
-              nature="NODE">
+              appliedPropertyValues="#f4b40f3e-b15c-4397-9997-3d1a743702c4 #744f10e9-48eb-4bb5-a151-5bcdd4fee4eb"
+              name="PC11" nature="NODE">
             <ownedPropertyValues xsi:type="org.polarsys.capella.core.data.capellacore:BooleanPropertyValue"
                 id="f4b40f3e-b15c-4397-9997-3d1a743702c4" name="PC11_PV1"/>
           </ownedPhysicalComponents>
@@ -19270,7 +19279,7 @@
           <ownedPhysicalComponents xsi:type="org.polarsys.capella.core.data.pa:PhysicalComponent"
               id="9ec07d7d-7d3a-4de8-b2be-a9f88c827026" name="PC14" nature="BEHAVIOR"/>
           <ownedPhysicalComponents xsi:type="org.polarsys.capella.core.data.pa:PhysicalComponent"
-              id="a674da5d-4edd-480b-a93a-048e0d7eea41" appliedPropertyValues="#bec77078-66bb-40f8-af61-7b7fe9c2d4c1 #1fc7da80-1ec9-4706-8776-a81b7e0ce21a #e662ea2e-5e62-4d03-919c-6cfb5a27657e #f9614b1f-847f-4f23-ac41-1b0a898d18a3 #a1205b44-7545-428e-8e60-acbca3ebc1e6"
+              id="a674da5d-4edd-480b-a93a-048e0d7eea41" appliedPropertyValues="#bec77078-66bb-40f8-af61-7b7fe9c2d4c1 #1fc7da80-1ec9-4706-8776-a81b7e0ce21a #e662ea2e-5e62-4d03-919c-6cfb5a27657e #f9614b1f-847f-4f23-ac41-1b0a898d18a3 #a1205b44-7545-428e-8e60-acbca3ebc1e6 #9c9b6706-150a-4aa1-9785-210eb9eb5afc"
               appliedPropertyValueGroups="#ea213073-de56-4447-9d30-bba2ff814798 #82178d7e-72ad-4207-8074-091626958f95 #0cdae9cf-cc39-4d9a-935b-16481711e92c #c89d3099-c662-463e-9a7b-dceae1444b5d"
               name="PC 15" nature="NODE"/>
         </ownedPhysicalComponents>

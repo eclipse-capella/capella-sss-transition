@@ -174,15 +174,17 @@ public abstract class AbstractSystem2SubsystemTest extends BasicCommandTestCase 
 
   public EObject mustBeTransitionedInto(String id, ComponentType container_p) {
     boolean is = false;
+    EObject transitionedObject = null;
     for (EObject source : traceability.getTracedObjects(id)) {
       assertTrue(source != null);
       if (getFirstContainer(source, container_p) != null) {
         is = true;
+        transitionedObject = source;
         break;
       }
     }
     assertTrue(is);
-    return null;
+    return transitionedObject;
   }
   
   public EObject mustBeTransitionedInto(String id, String containerId) {
