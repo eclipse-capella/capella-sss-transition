@@ -20,18 +20,6 @@
             file="SubsystemTransition-toc.xml"
             primary="true">
       </toc>
-      <toc
-            file="html/User Manual/14.1. Three kinds of transitons-toc.xml"
-            primary="false">
-      </toc>
-      <toc
-            file="html/User Manual/14.2. Usage instructions-toc.xml"
-            primary="false">
-      </toc>
-      <toc
-            file="html/User Manual/14.3. System to Subsystem-Traceability-toc.xml"
-            primary="false">
-      </toc>
    </extension>
 
 </plugin>
