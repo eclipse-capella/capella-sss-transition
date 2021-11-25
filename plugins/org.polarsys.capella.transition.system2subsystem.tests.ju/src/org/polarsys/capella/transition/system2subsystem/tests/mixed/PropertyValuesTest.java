@@ -517,6 +517,8 @@ public class PropertyValuesTest {
       collection.add(getObject(IPV_2113));
       collection.add(getObject(IPV_2112));
       collection.add(getObject(OA_PV_NESTED));
+      collection.add(getObject(COPY_OF_RPVP));
+      
       // in a practical scenario only the package containing the pv's can be selected
       collection.add(getObject(LA__LPVP));
 
@@ -546,6 +548,9 @@ public class PropertyValuesTest {
       // pv deeply nested within oa data pkg, should be transitioned into sys analysis root
       propertyValues.add((AbstractPropertyValue) mustBeTransitionedInto(OA_PV_NESTED, ComponentType.SYSTEM_ANALYSIS));
 
+      ((TraceabilityArchitectureSID) traceability).setArchitecture(null);
+      propertyValues.add((AbstractPropertyValue) mustBeTransitioned(COPY_OF_RPVP__BPV1));
+      
       checkIfPvsAreApplied(systemComponent);
       ((TraceabilityArchitectureSID) traceability).setArchitecture(BlockArchitectureExt.Type.LA);
       LogicalComponent logicalComponent = (LogicalComponent) mustBeTransitioned(PC_15, ComponentType.LOGICAL_COMPONENT);
