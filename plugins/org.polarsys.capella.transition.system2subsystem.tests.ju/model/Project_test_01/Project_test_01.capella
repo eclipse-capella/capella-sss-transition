@@ -18211,7 +18211,8 @@
     </ownedArchitectures>
   </ownedModelRoots>
   <ownedModelRoots xsi:type="org.polarsys.capella.core.data.capellamodeller:SystemEngineering"
-      id="7de91d30-045e-4f37-8a15-bdfbaaaf54fb" name="AllPhases-StatesReferences">
+      id="7de91d30-045e-4f37-8a15-bdfbaaaf54fb" name="AllPhases-StatesReferences"
+      description="&lt;p>&lt;span class=&quot;marker&quot;>gfcghbgfhbgfhn$*&lt;/span>&lt;/p>&#xA;&#xA;&lt;p>&amp;nbsp;&lt;/p>&#xA;&#xA;&lt;p>&lt;del>&lt;span class=&quot;marker&quot;>h&lt;big>gjhgjhgjg&lt;/big>hj&lt;/span>&lt;/del>&lt;/p>&#xA;&#xA;&lt;p>&lt;del>h&lt;ins>jbkjnhkjk&lt;/ins>&lt;/del>&lt;/p>&#xA;">
     <ownedArchitectures xsi:type="org.polarsys.capella.core.data.oa:OperationalAnalysis"
         id="b8860f5e-43ad-4a82-af26-9c58dd9ba3a3" name="Operational Analysis">
       <ownedFunctionPkg xsi:type="org.polarsys.capella.core.data.oa:OperationalActivityPkg"
@@ -19279,7 +19280,7 @@
           <ownedPhysicalComponents xsi:type="org.polarsys.capella.core.data.pa:PhysicalComponent"
               id="9ec07d7d-7d3a-4de8-b2be-a9f88c827026" name="PC14" nature="BEHAVIOR"/>
           <ownedPhysicalComponents xsi:type="org.polarsys.capella.core.data.pa:PhysicalComponent"
-              id="a674da5d-4edd-480b-a93a-048e0d7eea41" appliedPropertyValues="#bec77078-66bb-40f8-af61-7b7fe9c2d4c1 #1fc7da80-1ec9-4706-8776-a81b7e0ce21a #e662ea2e-5e62-4d03-919c-6cfb5a27657e #f9614b1f-847f-4f23-ac41-1b0a898d18a3 #a1205b44-7545-428e-8e60-acbca3ebc1e6 #9c9b6706-150a-4aa1-9785-210eb9eb5afc"
+              id="a674da5d-4edd-480b-a93a-048e0d7eea41" appliedPropertyValues="#bec77078-66bb-40f8-af61-7b7fe9c2d4c1 #1fc7da80-1ec9-4706-8776-a81b7e0ce21a #e662ea2e-5e62-4d03-919c-6cfb5a27657e #f9614b1f-847f-4f23-ac41-1b0a898d18a3 #a1205b44-7545-428e-8e60-acbca3ebc1e6 #9c9b6706-150a-4aa1-9785-210eb9eb5afc #c4226366-056b-4dba-8098-2c97fef45416"
               appliedPropertyValueGroups="#ea213073-de56-4447-9d30-bba2ff814798 #82178d7e-72ad-4207-8074-091626958f95 #0cdae9cf-cc39-4d9a-935b-16481711e92c #c89d3099-c662-463e-9a7b-dceae1444b5d"
               name="PC 15" nature="NODE"/>
         </ownedPhysicalComponents>

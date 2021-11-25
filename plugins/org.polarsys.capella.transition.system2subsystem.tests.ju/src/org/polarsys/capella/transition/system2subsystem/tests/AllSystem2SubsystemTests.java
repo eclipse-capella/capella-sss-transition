@@ -21,6 +21,7 @@ import org.polarsys.capella.transition.system2subsystem.tests.crossphases.AllCro
 import org.polarsys.capella.transition.system2subsystem.tests.interphases.AllInterPhasesTests;
 import org.polarsys.capella.transition.system2subsystem.tests.mixed.AllMixedTests;
 import org.polarsys.capella.transition.system2subsystem.tests.multiphases.AllMultiPhasesTests;
+import org.polarsys.capella.transition.system2subsystem.tests.util.SubSystemSessionHandlerTest;
 
 import junit.framework.Test;
 
@@ -29,6 +30,7 @@ public class AllSystem2SubsystemTests extends BasicTestSuite {
   @Override
   protected List<BasicTestArtefact> getTests() {
     final List<BasicTestArtefact> tests = new ArrayList<BasicTestArtefact>();
+    tests.add(new SubSystemSessionHandlerTest());
     tests.add(new AllMixedTests());
     tests.add(new AllCrossPhasesTests());
     tests.add(new AllInterPhasesTests());
