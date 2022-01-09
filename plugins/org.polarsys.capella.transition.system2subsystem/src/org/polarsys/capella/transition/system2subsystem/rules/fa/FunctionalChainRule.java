@@ -62,9 +62,7 @@ public class FunctionalChainRule extends org.polarsys.capella.core.transition.sy
     // Perform a computation of valid involvement
     if (applyRequired(element_p, context_p).isOK()) {
       FunctionalChain element = (FunctionalChain) element_p;
-      if (FunctionalChainExt.isFunctionalChainValid(element)) {
-        FunctionalChainAttachmentHelper.getInstance(context_p).computeChain(element, context_p);
-      }
+      FunctionalChainAttachmentHelper.getInstance(context_p).computeChains(element, context_p);
     }
 
     super.apply(element_p, context_p);
