@@ -197,7 +197,7 @@ public class FunctionalChainInvolvementRule
     return result;
   }
 
-  private Collection<FunctionalChainInvolvement> listInvolvments(FunctionalChainInvolvement startFci,
+  public Collection<FunctionalChainInvolvement> listInvolvments(FunctionalChainInvolvement startFci,
       FunctionalChainInvolvement endFci, IContext context) {
     FunctionalChainAttachmentHelper helper = FunctionalChainAttachmentHelper.getInstance(context);
     Collection<LinkedList<FunctionalChainInvolvement>> paths = helper.getNextPathsTowards(startFci, endFci, context);

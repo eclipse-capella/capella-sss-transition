@@ -11,12 +11,13 @@
 package org.polarsys.capella.transition.system2subsystem.handlers.attachment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.IStatus;
@@ -31,6 +32,7 @@ import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.fa.FunctionalChainInvolvement;
 import org.polarsys.capella.core.data.fa.FunctionalChainInvolvementFunction;
 import org.polarsys.capella.core.data.fa.FunctionalChainInvolvementLink;
+import org.polarsys.capella.core.data.fa.FunctionalChainReference;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.data.fa.SequenceLink;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
@@ -45,6 +47,8 @@ import org.polarsys.capella.core.transition.common.handlers.notify.NotifyHandler
 import org.polarsys.capella.core.transition.common.handlers.scope.ScopeHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.transformation.TransformationHandlerHelper;
 import org.polarsys.capella.transition.system2subsystem.constants.ISubSystemConstants;
+import org.polarsys.capella.transition.system2subsystem.handlers.attachment.InvolvementHierarchyGraph2.Element;
+import org.polarsys.capella.transition.system2subsystem.handlers.attachment.InvolvementHierarchyGraph2.Vertex;
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.ExternalFunctionsScopeRetriever;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
@@ -59,6 +63,8 @@ public class FunctionalChainAttachmentHelper implements IHandler, INotifyListene
 
   protected static final String IS_COMPUTED = "FunctionalChainAttachmentHelper.IS_COMPUTED"; //$NON-NLS-1$
 
+  protected static final String GRAPH_MAPS = "FunctionalChainAttachmentHelper.GraphMap"; //$NON-NLS-1$
+
   public static FunctionalChainAttachmentHelper getInstance(IContext context_p) {
     FunctionalChainAttachmentHelper handler = (FunctionalChainAttachmentHelper) context_p
         .get(ISubSystemConstants.FUNCTIONAL_CHAIN_ATTACHMENT_HELPER);
@@ -70,8 +76,25 @@ public class FunctionalChainAttachmentHelper implements IHandler, INotifyListene
     return handler;
   }
 
+  public HashMap<FunctionalChain, InvolvementHierarchyGraph2> getGraphs(IContext context_p) {
+    HashMap<FunctionalChain, InvolvementHierarchyGraph2> graphs = (HashMap) context_p.get(GRAPH_MAPS);
+    if (graphs == null) {
+      graphs = new HashMap<FunctionalChain, InvolvementHierarchyGraph2>();
+      context_p.put(GRAPH_MAPS, graphs);
+    }
+    return graphs;
+  }
+
+  public InvolvementHierarchyGraph2 getGraph(FunctionalChain chain, IContext context_p) {
+    HashMap<FunctionalChain, InvolvementHierarchyGraph2> graphs = getGraphs(context_p);
+    if (!graphs.containsKey(chain)) {
+      graphs.put(chain, new InvolvementHierarchyGraph2(chain));
+    }
+    return graphs.get(chain);
+  }
+
   public Boolean isValidElement(FunctionalChainInvolvement source, IContext context_p) {
-    computeChains((FunctionalChain) source.getInvolver(), context_p);
+    computeChains((FunctionalChain) source.eContainer(), context_p);
     Boolean cache = getValidityMap(context_p).get(source);
     if (cache == null) {
       cache = Boolean.FALSE;
@@ -215,108 +238,124 @@ public class FunctionalChainAttachmentHelper implements IHandler, INotifyListene
   }
 
   /**
-   * For an fci, return the next fci that are valids following getNextFunctionalChainInvolvements paths.
+   * For an fci, return the next fci that are valid on all chains including this fci.
    * 
    * @implNote those are the lasts of the computed paths
    */
   public Collection<FunctionalChainInvolvement> getNextValid(FunctionalChainInvolvement fci, IContext context) {
-    Collection<FunctionalChainInvolvement> lasts = new LinkedHashSet<FunctionalChainInvolvement>();
-    Collection<LinkedList<FunctionalChainInvolvement>> result = getNextPathsTowards(fci, null, context);
-    for (LinkedList<FunctionalChainInvolvement> list : result) {
-      if (list.getLast() != null && list.getLast() != fci) {
-        lasts.add(list.getLast());
+    computeChains((FunctionalChain) fci.eContainer(), context);
+
+    if (fci instanceof FunctionalChainInvolvementLink) {
+      FunctionalChainInvolvement target = ((FunctionalChainInvolvementLink) fci).getTarget();
+      if (isValidElement(target, context)) {
+        return Arrays.asList(target);
       }
+      return getNextValid(target, context);
+
+    } else if (fci instanceof FunctionalChainReference) {
+      return Collections.emptyList();
+
+    } else {
+      Collection<FunctionalChainInvolvement> lasts = new LinkedHashSet<FunctionalChainInvolvement>();
+      for (LinkedList<FunctionalChainInvolvement> list : getNextPathsTowards(fci, null, context)) {
+        if (list.getLast() != null && list.getLast() != fci) {
+          lasts.add(list.getLast());
+        }
+      }
+      return lasts;
     }
-    return lasts;
   }
 
   /**
-   * For an fci, return the previous fci that are valids following getPreviousFunctionalChainInvolvements paths.
+   * For an fci, return the previous fci that are valid on all chains including this fci.
    * 
    * @implNote those are the lasts of the computed paths
    */
   public Collection<FunctionalChainInvolvement> getPreviousValid(FunctionalChainInvolvement fci, IContext context) {
-    Collection<FunctionalChainInvolvement> lasts = new LinkedHashSet<FunctionalChainInvolvement>();
-    Collection<LinkedList<FunctionalChainInvolvement>> result = getPreviousPathsTowards(fci, null, context);
-    for (LinkedList<FunctionalChainInvolvement> list : result) {
-      if (list.getLast() != null && list.getLast() != fci) {
-        lasts.add(list.getLast());
+    computeChains((FunctionalChain) fci.eContainer(), context);
+
+    if (fci instanceof FunctionalChainInvolvementLink) {
+      FunctionalChainInvolvement source = ((FunctionalChainInvolvementLink) fci).getSource();
+      if (isValidElement(source, context)) {
+        return Arrays.asList(source);
       }
+      return getPreviousValid(source, context);
+
+    } else if (fci instanceof FunctionalChainReference) {
+      return Collections.emptyList();
+
+    } else {
+      Collection<FunctionalChainInvolvement> lasts = new LinkedHashSet<FunctionalChainInvolvement>();
+      for (LinkedList<FunctionalChainInvolvement> list : getPreviousPathsTowards(fci, null, context)) {
+        if (list.getLast() != null && list.getLast() != fci) {
+          lasts.add(list.getLast());
+        }
+      }
+      return lasts;
     }
-    return lasts;
   }
 
   /**
-   * getPathsTowardsValidElements using FunctionalChainInvolvement::getNextFunctionalChainInvolvements
+   * From a collection of graph element paths, we retrieve a collection of FCI paths.
+   */
+  public static Collection<LinkedList<FunctionalChainInvolvement>> toFCI(Collection<LinkedList<Element>> elements) {
+    return elements.stream().map(c -> toFCI(c)).collect(Collectors.toList());
+  }
+
+  /**
+   * For a list of graph elements, we retrieve the FCI behinds.
+   */
+  public static LinkedList<FunctionalChainInvolvement> toFCI(LinkedList<Element> elements) {
+    return elements.stream().map(d -> d.getElement()).collect(Collectors.toCollection(LinkedList::new));
+  }
+
+  /**
+   * From a fci, returns the list of all paths towards the expected one or the first valid elements, following next
+   * involvements from graphs of chains using the fci
+   * 
+   * @param expected:
+   *          the fci that we look paths for, or null if we look for paths towards the next valid involvements
    */
   public Collection<LinkedList<FunctionalChainInvolvement>> getNextPathsTowards(FunctionalChainInvolvement fci,
       FunctionalChainInvolvement expected, IContext context) {
-    return getPathsTowardsValidElements(fci, expected, context,
-        FunctionalChainInvolvement::getNextFunctionalChainInvolvements);
+    computeChains((FunctionalChain) fci.eContainer(), context);
+    // For all chains using this fci, we retrieve the paths towards the next valid fcis
+    Collection<LinkedList<FunctionalChainInvolvement>> allPaths = new ArrayList<LinkedList<FunctionalChainInvolvement>>();
+    for (InvolvementHierarchyGraph2 g : getGraphs(context).values()) {
+      for (Vertex v : g.getVertexs(fci)) { // (returns empty if the fci is not used) (we could have retrieve graphs of
+                                           // owning and all referencing chains)
+        allPaths.addAll(
+            toFCI(GraphHelper.getPathsTowards(v, n -> isTheOne(n, expected, context), context, n -> n.getNexts())));
+      }
+    }
+    return allPaths;
   }
 
   /**
-   * getPathsTowardsValidElements using FunctionalChainInvolvement::getPreviousFunctionalChainInvolvements
+   * From a fci, returns the list of all paths towards the expected one or the first valid elements, following previous
+   * involvements from graphs of chains using the fci
+   * 
+   * @param expected:
+   *          the fci that we look paths for, or null if we look for paths towards the previous valid involvements
    */
   public Collection<LinkedList<FunctionalChainInvolvement>> getPreviousPathsTowards(FunctionalChainInvolvement fci,
       FunctionalChainInvolvement expected, IContext context) {
-    return getPathsTowardsValidElements(fci, expected, context,
-        FunctionalChainInvolvement::getPreviousFunctionalChainInvolvements);
-  }
-
-  /**
-   * From a fci, returns the list of all paths towards the expected one or the firsts valid elements, following
-   * fci.getNexts method.
-   * 
-   * @param expectedValidElement:
-   *          the targeted valid fci that we want to compute paths towards to, or null to retrieve all paths towards the
-   *          first valid elements
-   * 
-   * @param getNexts:
-   *          accordingly FunctionalChainInvolvement::getNextFunctionalChainInvolvements or
-   *          FunctionalChainInvolvement::getPreviousFunctionalChainInvolvements
-   * 
-   * @return all the paths from fci towards the expectedValidElements. paths are containing both source fci at first of
-   *         the path and the expected one at the end.
-   */
-  public Collection<LinkedList<FunctionalChainInvolvement>> getPathsTowardsValidElements(FunctionalChainInvolvement fci,
-      FunctionalChainInvolvement expectedValidElement, IContext context_p,
-      Function<FunctionalChainInvolvement, Collection<FunctionalChainInvolvement>> getNexts) {
-    LinkedList<FunctionalChainInvolvement> path = new LinkedList<>();
-    path.add(fci);
-    return getPathsTowardsValidElements(fci, expectedValidElement, context_p, path, getNexts);
-  }
-
-  /**
-   * From a fci, returns the list of all paths towards the expected one or the firsts valid elements, following
-   * fci.getNexts method.
-   * 
-   * @param path
-   *          the current path computed.
-   * @implNote at first, we add the current fci in it to allow cycle detection
-   */
-  protected Collection<LinkedList<FunctionalChainInvolvement>> getPathsTowardsValidElements(
-      FunctionalChainInvolvement fci, FunctionalChainInvolvement expectedValidElement, IContext context_p,
-      LinkedList<FunctionalChainInvolvement> path,
-      Function<FunctionalChainInvolvement, Collection<FunctionalChainInvolvement>> getNexts) {
-    Collection<LinkedList<FunctionalChainInvolvement>> result = new ArrayList<LinkedList<FunctionalChainInvolvement>>();
-
-    for (FunctionalChainInvolvement next : getNexts.apply(fci)) {
-      if (path.contains(next)) {
-        path.clear();
-      } else if ((expectedValidElement == null && isValidElement(next, context_p))
-          || next.equals(expectedValidElement)) {
-        path.add(next);
-        result.add(path);
-      } else {
-        LinkedList<FunctionalChainInvolvement> newPath = new LinkedList<>();
-        newPath.addAll(path);
-        newPath.add(next);
-        result.addAll(getPathsTowardsValidElements(next, expectedValidElement, context_p, newPath, getNexts));
+    computeChains((FunctionalChain) fci.eContainer(), context);
+    // For all chains using this fci, we retrieve the paths towards the previous valid fcis
+    Collection<LinkedList<FunctionalChainInvolvement>> allPaths = new ArrayList<LinkedList<FunctionalChainInvolvement>>();
+    for (InvolvementHierarchyGraph2 g : getGraphs(context).values()) {
+      for (Vertex v : g.getVertexs(fci)) { // (returns empty if the fci is not used) (we could have retrieve graphs of
+                                           // owning and all referencing chains)
+        allPaths.addAll(
+            toFCI(GraphHelper.getPathsTowards(v, n -> isTheOne(n, expected, context), context, n -> n.getPrevious())));
       }
     }
+    return allPaths;
+  }
 
-    return result;
+  public boolean isTheOne(Element current, FunctionalChainInvolvement expected, IContext context) {
+    return (expected == null && isValidElement(((Element) current).getElement(), context))
+        || current.getElement().equals(expected);
   }
 
   public void merge(FunctionalChainInvolvementFunction tSrc, FunctionalChainInvolvementFunction tTgt,
@@ -351,13 +390,24 @@ public class FunctionalChainAttachmentHelper implements IHandler, INotifyListene
     return getValidityMap(context).get(fci) != null;
   }
 
+  /**
+   * We will compute here all the valid chains from the source architecture. We compute all the chains at once. It's
+   * easier to understand what's going on
+   */
+  protected Collection<FunctionalChain> getChainsToAnalyse(FunctionalChain element, IContext context_p) {
+    BlockArchitecture architecture = BlockArchitectureExt.getRootBlockArchitecture(element);
+    return FunctionalChainExt.getAllFunctionalChains(architecture).stream()
+        .filter(fc -> ScopeHandlerHelper.getInstance(context_p).isInScope(fc, context_p))
+        .filter(FunctionalChainExt::isFunctionalChainValid).collect(Collectors.toList());
+  }
+
   public void computeChains(FunctionalChain element, IContext context_p) {
     if (context_p.get(IS_COMPUTED) == null) {
-      BlockArchitecture architecture = BlockArchitectureExt.getRootBlockArchitecture(element);
-      Collection<FunctionalChain> validChainsInScope = FunctionalChainExt.getAllFunctionalChains(architecture).stream()
-          .filter(fc -> ScopeHandlerHelper.getInstance(context_p).isInScope(fc, context_p))
-          .filter(FunctionalChainExt::isFunctionalChainValid).collect(Collectors.toList());
+      Collection<FunctionalChain> validChainsInScope = getChainsToAnalyse(element, context_p);
 
+      for (FunctionalChain chain : validChainsInScope) {
+        getGraph(chain, context_p);
+      }
       for (FunctionalChain chain : validChainsInScope) {
         computeChainNodes(chain, context_p);
       }

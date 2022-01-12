@@ -53,7 +53,7 @@ public class FakeExchangeChain {
    * the Functional Exchange will have to be created in a parent function since we can"t store exchanges under a
    * FunctionPkg.
    */
-  public static class Always extends System2SubsystemTest implements Interphase, Crossphase {
+  public static class Always extends System2SubsystemTest implements Crossphase {
 
     @Override
     protected Collection<?> getProjectionElements() {
