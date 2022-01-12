@@ -31,7 +31,10 @@ public class AllMixedTests extends BasicTestSuite {
   protected List<BasicTestArtefact> getTests() {
     final List<BasicTestArtefact> tests = new ArrayList<BasicTestArtefact>();
 
+    tests.addAll(testsFor(FakeExchange.class));
+    tests.addAll(testsFor(CycleMerge.class));
     tests.addAll(testsFor(CyclePremices.class));
+    
     tests.add(new IncrementalModeTest());
 
     tests.addAll(testsFor(FakeExchangeChain.Always.class));

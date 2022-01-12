@@ -68,6 +68,7 @@ public class FunctionalChainInvolvementRule
     FunctionalChainInvolvement element = (FunctionalChainInvolvement) element_p;
     IStatus result = TransformationHandlerHelper.getInstance(context_p).isOrWillBeTransformed(element.getInvolver(),
         context_p);
+    // This can happen in Multiphase, chains are not propagated on the PA layer
     if (!result.isOK()) {
       return result;
     }
@@ -199,7 +200,7 @@ public class FunctionalChainInvolvementRule
     return result;
   }
 
-  private Collection<FunctionalChainInvolvement> listInvolvments(FunctionalChainInvolvement startFci,
+  public Collection<FunctionalChainInvolvement> listInvolvments(FunctionalChainInvolvement startFci,
       FunctionalChainInvolvement endFci, IContext context) {
     FunctionalChainAttachmentHelper helper = FunctionalChainAttachmentHelper.getInstance(context);
     Collection<LinkedList<FunctionalChainInvolvement>> paths = helper.getNextPathsTowards(startFci, endFci, context);
@@ -349,10 +350,12 @@ public class FunctionalChainInvolvementRule
     if (element_p instanceof FunctionalChainInvolvement) {
       FunctionalChainInvolvement src = (FunctionalChainInvolvement) element_p;
 
+      // We will attach getNextValid involvements to the current one, so they shall exist before
       FunctionalChainAttachmentHelper helper = FunctionalChainAttachmentHelper.getInstance(getCurrentContext());
       needed_p.addAll(createDefaultPrecedencePremices((Collection) helper.getNextValid(src, getCurrentContext()),
           "nextValidInvolvements"));
 
+      // We will use getPaths when attaching sourceHierarchy and targetHierarchy
       Set<FunctionalChainReference> refs = getPaths((FunctionalChainInvolvement) element_p).stream()
           .flatMap(List::stream).collect(Collectors.toSet());
       needed_p.addAll(createDefaultPrecedencePremices((Collection) refs, "getPaths"));

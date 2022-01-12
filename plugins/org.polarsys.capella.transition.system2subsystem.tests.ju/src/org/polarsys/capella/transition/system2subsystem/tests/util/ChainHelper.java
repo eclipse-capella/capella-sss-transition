@@ -14,9 +14,14 @@ package org.polarsys.capella.transition.system2subsystem.tests.util;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EObject;
+import org.polarsys.capella.common.data.modellingcore.AbstractNamedElement;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.fa.FunctionalChainInvolvement;
@@ -24,6 +29,12 @@ import org.polarsys.capella.core.data.fa.FunctionalChainInvolvementFunction;
 import org.polarsys.capella.core.data.fa.FunctionalChainInvolvementLink;
 import org.polarsys.capella.core.data.fa.FunctionalChainReference;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
+import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
+import org.polarsys.capella.core.transition.common.context.TransitionContext;
+import org.polarsys.capella.core.transition.common.handlers.scope.DefaultScopeHandler;
+import org.polarsys.capella.core.transition.common.handlers.traceability.CompoundTraceabilityHandler;
+import org.polarsys.capella.core.transition.common.handlers.transformation.DefaultTransformationHandler;
+import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 public class ChainHelper {
 
@@ -121,4 +132,42 @@ public class ChainHelper {
         && ((FunctionalExchange) f.getInvolved()).getName().contains("Fake");
   }
 
+  public static String fciToString(FunctionalChainInvolvement fci) {
+    return ((AbstractNamedElement) fci.getInvolved()).getName();
+  }
+  
+  public static String pathToString(Collection<FunctionalChainInvolvement> fcis) {
+    return fcis.stream().map(ChainHelper::fciToString).collect(Collectors.joining("/"));
+  }
+
+  public static Collection<String> pathsToString(Collection<LinkedList<FunctionalChainInvolvement>> paths) {
+    return paths.stream().map(ChainHelper::pathToString).collect(Collectors.toList());
+  }
+
+  /**
+   * Create a simple transition context saying everything is in the scope, traced and transformed.
+   */
+  public static TransitionContext createBasicContext() {
+
+    TransitionContext context = new TransitionContext();
+    context.put(ITransitionConstants.SCOPE_HANDLER, new DefaultScopeHandler() {
+      @Override
+      public boolean isInScope(EObject element, IContext context) {
+        return true;
+      }
+    });
+    context.put(ITransitionConstants.TRANSFORMATION_HANDLER, new DefaultTransformationHandler() {
+      @Override
+      public IStatus isOrWillBeTransformed(EObject source, IContext context) {
+        return Status.OK_STATUS;
+      }
+    });
+    context.put(ITransitionConstants.TRACEABILITY_TRANSFORMATION_HANDLER, new CompoundTraceabilityHandler(null) {
+      @Override
+      public boolean isTraced(EObject element, IContext context) {
+        return true;
+      }
+    });
+    return context;
+  }
 }
