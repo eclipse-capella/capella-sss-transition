@@ -17,13 +17,23 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.polarsys.capella.common.data.modellingcore.AbstractNamedElement;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EObject;
+import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
-import org.polarsys.capella.core.data.fa.FunctionalChainInvolvement;
+import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
+import org.polarsys.capella.core.model.helpers.FunctionalChainExt;
+import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.context.TransitionContext;
+import org.polarsys.capella.core.transition.common.handlers.scope.DefaultScopeHandler;
+import org.polarsys.capella.core.transition.common.handlers.traceability.CompoundTraceabilityHandler;
+import org.polarsys.capella.core.transition.common.handlers.transformation.DefaultTransformationHandler;
 import org.polarsys.capella.transition.system2subsystem.handlers.attachment.FunctionalChainAttachmentHelper;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest;
 import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Crossphase;
+import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
+
 import static org.polarsys.capella.transition.system2subsystem.tests.util.ChainHelper.*;
 
 public class CyclePremices extends System2SubsystemTest implements Crossphase {
@@ -66,9 +76,17 @@ public class CyclePremices extends System2SubsystemTest implements Crossphase {
     assertTrue(
         fc.getOwnedFunctionalChainInvolvements().size() == fcsource.getOwnedFunctionalChainInvolvements().size());
 
-    TransitionContext context = new TransitionContext();
-    FunctionalChainAttachmentHelper helper = FunctionalChainAttachmentHelper.getInstance(context);
-    // helper.setValidElement(fc, null, context);
+    TransitionContext context = createBasicContext();
+    
+    // Here we allow lookup on chains, as we test the helpers.
+    FunctionalChainAttachmentHelper helper = new FunctionalChainAttachmentHelper() {
+
+      protected Collection<FunctionalChain> getChainsToAnalyse(FunctionalChain element, IContext context_p) {
+        BlockArchitecture architecture = BlockArchitectureExt.getRootBlockArchitecture(element);
+        return FunctionalChainExt.getAllFunctionalChains(architecture);
+      }
+
+    };
 
     Collection<String> paths;
 
@@ -88,23 +106,12 @@ public class CyclePremices extends System2SubsystemTest implements Crossphase {
     assertTrue(paths.contains("LF4/FE4/LF3/FE2/LF2/FE17/LF1/FE19/LF8"));
     assertTrue(paths.contains("LF4/FE4/LF3/FE8/LF6/FE6/LF1/FE19/LF8"));
 
-    // This chain contains cycle. We exclude it and retrieve two path.
+    // This chain contains cycle. We exclude it and retrieve two paths.
     paths = pathsToString(helper.getNextPathsTowards(getObject(FUNCTIONAL_CHAIN_INVOLVEMENT_FUNCTION_TO_LF19),
         getObject(FUNCTIONAL_CHAIN_INVOLVEMENT_FUNCTION_TO_LF17), context));
     assertTrue(paths.contains("LF19/FE20/LF14/FE7/LF18/FE9/LF16/FE5/LF17"));
     assertTrue(paths.contains("LF19/FE20/LF14/FE18/LF15/FE3/LF16/FE5/LF17"));
 
-    System.out.println(paths);
   }
 
-  protected static Collection<String> pathsToString(Collection<LinkedList<FunctionalChainInvolvement>> paths) {
-    return paths.stream().map(CyclePremices::pathToString).collect(Collectors.toList());
-  }
-
-  protected static String fciToString(FunctionalChainInvolvement fci) {
-    return ((AbstractNamedElement) fci.getInvolved()).getName();
-  }
-  protected static String pathToString(Collection<FunctionalChainInvolvement> fcis) {
-    return fcis.stream().map(CyclePremices::fciToString).collect(Collectors.joining("/"));
-  }
 }
