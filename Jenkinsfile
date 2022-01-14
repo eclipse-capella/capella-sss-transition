@@ -33,7 +33,7 @@ pipeline {
     	stage('Build and Package') {
       		steps {
       			script {
-      				def customParams = github.isPullRequest() ? '-DSKIP_SONAR=true' : '-Psign'
+      				def customParams = github.isPullRequest() ? '-DSKIP_SONAR=true' : '-DSKIP_SONAR=true -Psign'
       	    
       	    		sh "mvn -Djacoco.skip=true -DjavaDocPhase=none ${customParams} clean package -f pom.xml"
 	       		}         
