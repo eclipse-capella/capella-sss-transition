@@ -39,6 +39,10 @@ import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.data.fa.SequenceLink;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.FunctionalChainExt;
+import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph;
+import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph.Edge;
+import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph.Element;
+import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph.Vertex;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.IHandler;
 import org.polarsys.capella.core.transition.common.handlers.contextscope.ContextScopeHandlerHelper;
@@ -49,8 +53,6 @@ import org.polarsys.capella.core.transition.common.handlers.notify.NotifyHandler
 import org.polarsys.capella.core.transition.common.handlers.scope.ScopeHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.transformation.TransformationHandlerHelper;
 import org.polarsys.capella.transition.system2subsystem.constants.ISubSystemConstants;
-import org.polarsys.capella.transition.system2subsystem.handlers.attachment.InvolvementHierarchyGraph2.Element;
-import org.polarsys.capella.transition.system2subsystem.handlers.attachment.InvolvementHierarchyGraph2.Vertex;
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.ExternalFunctionsScopeRetriever;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
@@ -78,19 +80,19 @@ public class FunctionalChainAttachmentHelper implements IHandler, INotifyListene
     return handler;
   }
 
-  public HashMap<FunctionalChain, InvolvementHierarchyGraph2> getGraphs(IContext context_p) {
-    HashMap<FunctionalChain, InvolvementHierarchyGraph2> graphs = (HashMap) context_p.get(GRAPH_MAPS);
+  public HashMap<FunctionalChain, InvolvementHierarchyGraph> getGraphs(IContext context_p) {
+    HashMap<FunctionalChain, InvolvementHierarchyGraph> graphs = (HashMap) context_p.get(GRAPH_MAPS);
     if (graphs == null) {
-      graphs = new HashMap<FunctionalChain, InvolvementHierarchyGraph2>();
+      graphs = new HashMap<FunctionalChain, InvolvementHierarchyGraph>();
       context_p.put(GRAPH_MAPS, graphs);
     }
     return graphs;
   }
 
-  public InvolvementHierarchyGraph2 getGraph(FunctionalChain chain, IContext context_p) {
-    HashMap<FunctionalChain, InvolvementHierarchyGraph2> graphs = getGraphs(context_p);
+  public InvolvementHierarchyGraph getGraph(FunctionalChain chain, IContext context_p) {
+    HashMap<FunctionalChain, InvolvementHierarchyGraph> graphs = getGraphs(context_p);
     if (!graphs.containsKey(chain)) {
-      graphs.put(chain, new InvolvementHierarchyGraph2(chain));
+      graphs.put(chain, new InvolvementHierarchyGraph(chain));
     }
     return graphs.get(chain);
   }
@@ -304,7 +306,7 @@ public class FunctionalChainAttachmentHelper implements IHandler, INotifyListene
    * For a list of graph elements, we retrieve the FCI behinds.
    */
   public static LinkedList<FunctionalChainInvolvement> toFCI(LinkedList<Element> elements) {
-    return elements.stream().map(d -> d.getElement()).collect(Collectors.toCollection(LinkedList::new));
+    return elements.stream().map(GraphHelper::getInvolvment).collect(Collectors.toCollection(LinkedList::new));
   }
 
   /**
@@ -319,11 +321,11 @@ public class FunctionalChainAttachmentHelper implements IHandler, INotifyListene
     computeChains((FunctionalChain) fci.eContainer(), context);
     // For all chains using this fci, we retrieve the paths towards the next valid fcis
     Collection<LinkedList<FunctionalChainInvolvement>> allPaths = new ArrayList<LinkedList<FunctionalChainInvolvement>>();
-    for (InvolvementHierarchyGraph2 g : getGraphs(context).values()) {
-      for (Vertex v : g.getVertexs(fci)) { // (returns empty if the fci is not used) (we could have retrieve graphs of
+    for (InvolvementHierarchyGraph g : getGraphs(context).values()) {
+      for (Vertex v : GraphHelper.getVertices(g, fci)) { // (returns empty if the fci is not used) (we could have retrieve graphs of
                                            // owning and all referencing chains)
         allPaths.addAll(
-            toFCI(GraphHelper.getPathsTowards(v, n -> isTheOne(n, expected, context), context, n -> n.getNexts())));
+            toFCI(GraphHelper.getPathsTowards(v, n -> isTheOne(n, expected, context), context, GraphHelper::getNexts)));
       }
     }
     return allPaths;
@@ -341,19 +343,20 @@ public class FunctionalChainAttachmentHelper implements IHandler, INotifyListene
     computeChains((FunctionalChain) fci.eContainer(), context);
     // For all chains using this fci, we retrieve the paths towards the previous valid fcis
     Collection<LinkedList<FunctionalChainInvolvement>> allPaths = new ArrayList<LinkedList<FunctionalChainInvolvement>>();
-    for (InvolvementHierarchyGraph2 g : getGraphs(context).values()) {
-      for (Vertex v : g.getVertexs(fci)) { // (returns empty if the fci is not used) (we could have retrieve graphs of
+    for (InvolvementHierarchyGraph g : getGraphs(context).values()) {
+      for (Vertex v : GraphHelper.getVertices(g, fci)) { // (returns empty if the fci is not used) (we could have retrieve graphs of
                                            // owning and all referencing chains)
         allPaths.addAll(
-            toFCI(GraphHelper.getPathsTowards(v, n -> isTheOne(n, expected, context), context, n -> n.getPrevious())));
+            toFCI(GraphHelper.getPathsTowards(v, n -> isTheOne(n, expected, context), context, GraphHelper::getPrevious)));
       }
     }
     return allPaths;
   }
 
   public boolean isTheOne(Element current, FunctionalChainInvolvement expected, IContext context) {
-    return (expected == null && isValidElement(((Element) current).getElement(), context))
-        || current.getElement().equals(expected);
+    FunctionalChainInvolvement element = GraphHelper.getInvolvment(current);
+    return (expected == null && isValidElement(element, context))
+        || element.equals(expected);
   }
 
   public void merge(FunctionalChainInvolvementFunction tSrc, FunctionalChainInvolvementFunction tTgt,

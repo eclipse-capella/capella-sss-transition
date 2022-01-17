@@ -13,10 +13,18 @@
 package org.polarsys.capella.transition.system2subsystem.handlers.attachment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
+import org.polarsys.capella.core.data.fa.FunctionalChainInvolvement;
+import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph;
+import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph.Edge;
+import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph.Element;
+import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph.Vertex;
+import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph.VertexKey;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 public class GraphHelper {
@@ -65,5 +73,33 @@ public class GraphHelper {
     }
     return result;
   }
+
+
+  public static FunctionalChainInvolvement getInvolvment(Element e) {
+    if (e instanceof Edge) {
+      return ((Edge) e).getLink();
+    }
+    return ((Vertex) e).getFunction();
+  }
+  
+  public static Collection<Element> getPrevious(Element e) {
+    if (e instanceof Edge) {
+      return Arrays.asList((Element)((Edge)e).getSource());
+    }
+    return (Collection)((Vertex)e).getIncomingEdges();
+  }
+  
+  public static Collection<Element> getNexts(Element e) {
+    if (e instanceof Edge) {
+      return Arrays.asList((Element)((Edge)e).getTarget());
+    }
+    return (Collection)((Vertex)e).getOutgoingEdges();
+  }
+  
+  public static Collection<Vertex> getVertices(InvolvementHierarchyGraph graph, FunctionalChainInvolvement fci) {
+    return (Collection) graph.getVertices().keySet().stream().filter(v -> ((VertexKey) v).getFunction() == fci)
+        .map(v -> graph.getVertices().get(v)).collect(Collectors.toList());
+  }
+
 
 }
