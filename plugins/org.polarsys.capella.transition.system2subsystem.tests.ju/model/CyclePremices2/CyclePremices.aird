@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:concern="http://www.eclipse.org/sirius/diagram/description/concern/1.1.0" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:filter="http://www.eclipse.org/sirius/diagram/description/filter/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:org.polarsys.capella.core.data.cs="http://www.polarsys.org/capella/core/cs/5.0.0" xmlns:org.polarsys.capella.core.data.ctx="http://www.polarsys.org/capella/core/ctx/5.0.0" xmlns:org.polarsys.capella.core.data.fa="http://www.polarsys.org/capella/core/fa/5.0.0" xmlns:org.polarsys.capella.core.data.la="http://www.polarsys.org/capella/core/la/5.0.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/diagram/description/concern/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/concern http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/filter/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/filter http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
-  <viewpoint:DAnalysis uid="_MpW6AG_AEeyF--07gOKFtA" selectedViews="_MuFB8G_AEeyF--07gOKFtA _M4gwUG_AEeyF--07gOKFtA _NRt6gG_AEeyF--07gOKFtA _NVhccG_AEeyF--07gOKFtA _TR2Q8G_AEeyF--07gOKFtA _TVxusG_AEeyF--07gOKFtA _TYNXoG_AEeyF--07gOKFtA" version="14.6.0.202110251100">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:concern="http://www.eclipse.org/sirius/diagram/description/concern/1.1.0" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:filter="http://www.eclipse.org/sirius/diagram/description/filter/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:org.polarsys.capella.core.data.cs="http://www.polarsys.org/capella/core/cs/6.0.0" xmlns:org.polarsys.capella.core.data.ctx="http://www.polarsys.org/capella/core/ctx/6.0.0" xmlns:org.polarsys.capella.core.data.fa="http://www.polarsys.org/capella/core/fa/6.0.0" xmlns:org.polarsys.capella.core.data.la="http://www.polarsys.org/capella/core/la/6.0.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/diagram/description/concern/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/concern http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/filter/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/filter http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis uid="_MpW6AG_AEeyF--07gOKFtA" selectedViews="_MuFB8G_AEeyF--07gOKFtA _M4gwUG_AEeyF--07gOKFtA _NRt6gG_AEeyF--07gOKFtA _NVhccG_AEeyF--07gOKFtA _TR2Q8G_AEeyF--07gOKFtA _TVxusG_AEeyF--07gOKFtA _TYNXoG_AEeyF--07gOKFtA" version="15.0.0.202201261500">
     <semanticResources>CyclePremices.afm</semanticResources>
     <semanticResources>CyclePremices.capella</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_MuFB8G_AEeyF--07gOKFtA">
@@ -282,14 +282,14 @@
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_YokeAG_AEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_YokeAG_AEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='SDFB_Function']/@borderedNodeMappings[name='SDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='SDFB_Function']/@borderedNodeMappings[name='SDFB_Pin']"/>
       </ownedBorderedNodes>
       <ownedBorderedNodes xmi:type="diagram:DNode" uid="_JSdqI2_VEeyF--07gOKFtA" name="FIP 1" incomingEdges="_JSeRMW_VEeyF--07gOKFtA" width="1" height="1">
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_JSeRMG_VEeyF--07gOKFtA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_JSdqJG_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_JSdqJG_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='SDFB_Function']/@borderedNodeMappings[name='SDFB_Pin']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='SDFB_Function']/@borderedNodeMappings[name='SDFB_Pin']"/>
@@ -310,7 +310,7 @@
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_YopWgG_AEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_YopWgG_AEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='SDFB_Function']/@borderedNodeMappings[name='SDFB_Pin']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='SDFB_Function']/@borderedNodeMappings[name='SDFB_Pin']"/>
@@ -320,7 +320,7 @@
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_bnIg4G_AEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_bnIg4G_AEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='SDFB_Function']/@borderedNodeMappings[name='SDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='SDFB_Function']/@borderedNodeMappings[name='SDFB_Pin']"/>
@@ -338,14 +338,14 @@
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_YNVTgG_AEeyF--07gOKFtA" name="SystemFunction 3">
       <ownedBorderedNodes xmi:type="diagram:DNode" uid="_bnKWEm_AEeyF--07gOKFtA" name="FIP 1" incomingEdges="_bnLkMW_AEeyF--07gOKFtA" width="1" height="1">
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_bnLkMG_AEeyF--07gOKFtA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_bnK9IG_AEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_bnK9IG_AEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='SDFB_Function']/@borderedNodeMappings[name='SDFB_Pin']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='SDFB_Function']/@borderedNodeMappings[name='SDFB_Pin']"/>
       </ownedBorderedNodes>
       <ownedBorderedNodes xmi:type="diagram:DNode" uid="_dDw28G_AEeyF--07gOKFtA" name="FOP 1" outgoingEdges="_dD1IYW_AEeyF--07gOKFtA" width="1" height="1">
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_dDyFEW_AEeyF--07gOKFtA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_dDxeAG_AEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_dDxeAG_AEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='SDFB_Function']/@borderedNodeMappings[name='SDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='SDFB_Function']/@borderedNodeMappings[name='SDFB_Pin']"/>
@@ -388,7 +388,7 @@
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_fjFZEG_AEeyF--07gOKFtA" name="SystemFunction 4">
       <ownedBorderedNodes xmi:type="diagram:DNode" uid="_dDzTMG_AEeyF--07gOKFtA" name="FIP 1" incomingEdges="_dD1IYW_AEeyF--07gOKFtA" width="1" height="1">
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_dD1IYG_AEeyF--07gOKFtA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_dDz6QG_AEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_dDz6QG_AEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='SDFB_Function']/@borderedNodeMappings[name='SDFB_Pin']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='SDFB_Function']/@borderedNodeMappings[name='SDFB_Pin']"/>
@@ -398,7 +398,7 @@
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_JSdqIG_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_JSdqIG_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='SDFB_Function']/@borderedNodeMappings[name='SDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='SDFB_Function']/@borderedNodeMappings[name='SDFB_Pin']"/>
@@ -1041,7 +1041,7 @@
           <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
           <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
           <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_c_KeQW_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_c_KeQW_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
             <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']"/>
@@ -1053,7 +1053,7 @@
           <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
           <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
           <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_c_LFUm_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_c_LFUm_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
             <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']/@conditionnalStyles.0/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']"/>
@@ -1075,7 +1075,7 @@
           <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#5ed626cd-eb72-42d4-857e-0e9ee2d6dd0a"/>
           <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#5ed626cd-eb72-42d4-857e-0e9ee2d6dd0a"/>
           <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_c_MTcG_VEeyF--07gOKFtA"/>
-          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_c_LsZG_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_c_LsZG_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
             <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']"/>
@@ -1087,7 +1087,7 @@
           <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
           <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
           <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_c_MTcm_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_c_MTcm_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
             <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']/@conditionnalStyles.0/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']"/>
@@ -1112,7 +1112,7 @@
           <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
           <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
           <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_c_M6g2_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_c_M6g2_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
             <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']"/>
@@ -1121,7 +1121,7 @@
           <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#dd314ba8-c005-4db6-8723-2e102ea1c101"/>
           <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#dd314ba8-c005-4db6-8723-2e102ea1c101"/>
           <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_c_Nhk2_VEeyF--07gOKFtA"/>
-          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_c_Nhkm_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_c_Nhkm_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
             <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']/@conditionnalStyles.0/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']"/>
@@ -1146,7 +1146,7 @@
           <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
           <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
           <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_c_OvsW_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_c_OvsW_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
             <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']"/>
@@ -1155,7 +1155,7 @@
           <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#bfd2effe-0d23-45bd-862d-a81aa7955b4c"/>
           <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#bfd2effe-0d23-45bd-862d-a81aa7955b4c"/>
           <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_c_PWwG_VEeyF--07gOKFtA"/>
-          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_c_OvtG_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_c_OvtG_VEeyF--07gOKFtA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
             <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']/@conditionnalStyles.0/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']"/>
@@ -1177,7 +1177,7 @@
           <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#4f37ac57-79ba-49b2-9d3d-d65710058193"/>
           <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#4f37ac57-79ba-49b2-9d3d-d65710058193"/>
           <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_pX7RsHH5EeydKOlqsR1o_g"/>
-          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_pX6qoHH5EeydKOlqsR1o_g" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_pX6qoHH5EeydKOlqsR1o_g" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
             <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']/@conditionnalStyles.0/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']"/>
@@ -1199,7 +1199,7 @@
           <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#7f737469-bd46-46da-88ab-8fd2c2943ece"/>
           <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#7f737469-bd46-46da-88ab-8fd2c2943ece"/>
           <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_pxRl0XH5EeydKOlqsR1o_g"/>
-          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_pxQ-xHH5EeydKOlqsR1o_g" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_pxQ-xHH5EeydKOlqsR1o_g" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
             <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']"/>
@@ -1337,7 +1337,7 @@
           <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#94c349bb-c0c0-4065-8550-5f019e4a499a"/>
           <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#94c349bb-c0c0-4065-8550-5f019e4a499a"/>
           <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_pX74w3H5EeydKOlqsR1o_g"/>
-          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_pX74wXH5EeydKOlqsR1o_g" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_pX74wXH5EeydKOlqsR1o_g" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
             <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']"/>
@@ -1349,7 +1349,7 @@
           <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
           <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
           <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_pjBHYHH5EeydKOlqsR1o_g" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_pjBHYHH5EeydKOlqsR1o_g" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
             <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']/@conditionnalStyles.0/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']"/>
@@ -1381,7 +1381,7 @@
           <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
           <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
           <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_pjBucHH5EeydKOlqsR1o_g" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_pjBucHH5EeydKOlqsR1o_g" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
             <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']"/>
@@ -1390,7 +1390,7 @@
           <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#9e1a869d-a9d0-412c-9e28-70f70bbbf6ad"/>
           <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#9e1a869d-a9d0-412c-9e28-70f70bbbf6ad"/>
           <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_pxQ-wnH5EeydKOlqsR1o_g"/>
-          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_pxQ-wHH5EeydKOlqsR1o_g" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_pxQ-wHH5EeydKOlqsR1o_g" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
             <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']/@conditionnalStyles.0/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']"/>
@@ -1438,7 +1438,7 @@
           <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#f078575a-f8b2-4901-9126-cfba4af61c32"/>
           <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#f078575a-f8b2-4901-9126-cfba4af61c32"/>
           <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_6eE6UXH5EeydKOlqsR1o_g"/>
-          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_6eETQXH5EeydKOlqsR1o_g" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_6eETQXH5EeydKOlqsR1o_g" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
             <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']"/>
@@ -1447,7 +1447,7 @@
           <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#567dd05a-f4e8-4572-a542-605df5e014e0"/>
           <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#567dd05a-f4e8-4572-a542-605df5e014e0"/>
           <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_673CgHH5EeydKOlqsR1o_g"/>
-          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_672bcXH5EeydKOlqsR1o_g" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+          <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_672bcXH5EeydKOlqsR1o_g" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
             <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']/@conditionnalStyles.0/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='LAB%20Logical%20Component']/@subNodeMappings[name='LAB%20Logical%20Function']/@borderedNodeMappings[name='LAB%20Flow%20Port%20on%20Logical%20Function']"/>
@@ -2835,7 +2835,7 @@
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_AaDOAHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_AaDOAHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']"/>
@@ -2844,7 +2844,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#99a35ba3-e65f-4a6e-a833-4a2e5a808223"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#99a35ba3-e65f-4a6e-a833-4a2e5a808223"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_B3Ho8nMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_B3Ho8HMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_B3Ho8HMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']"/>
@@ -2853,7 +2853,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#9875a8ee-926b-49ae-828b-9b48efed872b"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#9875a8ee-926b-49ae-828b-9b48efed872b"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_HtwsMXMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_HtwFI3MBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_HtwFI3MBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']"/>
@@ -2862,7 +2862,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#c64bb09b-b964-4518-8b3d-3b28f2460d07"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#c64bb09b-b964-4518-8b3d-3b28f2460d07"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_QvXPknMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_QvXPkHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_QvXPkHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']"/>
@@ -2882,7 +2882,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#66c29fec-ef0a-4c86-a21c-716589e73356"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#66c29fec-ef0a-4c86-a21c-716589e73356"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_AaGRUXMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_AaFqQHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_AaFqQHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']"/>
@@ -2891,7 +2891,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#93773359-c2ee-4d23-b143-ae305dc9bd59"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#93773359-c2ee-4d23-b143-ae305dc9bd59"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_AlvgoHMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_AluSgHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_AluSgHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']"/>
@@ -2911,7 +2911,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#00540f13-99fc-411d-9b36-abae78c5c6f6"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#00540f13-99fc-411d-9b36-abae78c5c6f6"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_AlwHsXMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_AlvgonMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_AlvgonMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']"/>
@@ -2920,7 +2920,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#816632ad-463a-419f-a6b8-7cfea4cfed10"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#816632ad-463a-419f-a6b8-7cfea4cfed10"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_AwA28HMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_AwAP4HMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_AwAP4HMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']"/>
@@ -2929,7 +2929,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#07d1e6bb-fd1b-43a8-8a1a-65c9ddb180fa"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#07d1e6bb-fd1b-43a8-8a1a-65c9ddb180fa"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_CKtTUHMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_CKssQHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_CKssQHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']"/>
@@ -2938,7 +2938,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#4433bf65-fc6c-4c8f-838a-605fb45903c2"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#4433bf65-fc6c-4c8f-838a-605fb45903c2"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_QvWogXMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_QvWBcHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_QvWBcHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']"/>
@@ -2950,7 +2950,7 @@
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_mr1t83MBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_mr1t83MBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']"/>
@@ -2970,7 +2970,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#e918bf96-732c-47a7-9e04-0bd6b1da5f6a"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#e918bf96-732c-47a7-9e04-0bd6b1da5f6a"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_AwBeAXMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_AwA28nMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_AwA28nMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']"/>
@@ -3003,7 +3003,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#93c4f297-fbed-4dc7-9a30-4e92d353c2cc"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#93c4f297-fbed-4dc7-9a30-4e92d353c2cc"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_B3IQAXMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_B3Ho9HMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_B3Ho9HMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']"/>
@@ -3012,7 +3012,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#43f05410-e3f8-4565-8f21-6c088b6cc5a0"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#43f05410-e3f8-4565-8f21-6c088b6cc5a0"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_CKsFMnMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_CKsFMHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_CKsFMHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']"/>
@@ -3098,7 +3098,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#edfe366d-ac7a-4682-8973-bd3b2fa6d5a6"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#edfe366d-ac7a-4682-8973-bd3b2fa6d5a6"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_HtwFIXMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_HtveEXMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_HtveEXMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']"/>
@@ -3107,7 +3107,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#8b9cc31b-4c18-4b58-8a45-7a5e66c3606f"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#8b9cc31b-4c18-4b58-8a45-7a5e66c3606f"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_mr1t8XMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_mr1G4XMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_mr1G4XMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']"/>
@@ -3243,7 +3243,7 @@
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yMp9HMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yMp9HMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <customFeatures>uid</customFeatures>
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
@@ -3253,7 +3253,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#58260047-c673-435a-8379-002499a041ed"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#58260047-c673-435a-8379-002499a041ed"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_-mtLpHMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yMp8XMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yMp8XMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <customFeatures>uid</customFeatures>
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
@@ -3263,7 +3263,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#9bdb2dbd-428f-418a-8165-0dde792531a5"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#9bdb2dbd-428f-418a-8165-0dde792531a5"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_-mtLp3MBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yMp93MBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yMp93MBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <customFeatures>uid</customFeatures>
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@style"/>
         </ownedStyle>
@@ -3273,7 +3273,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#0af3d533-3b6f-4dc9-9adb-dd40099d2c70"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#0af3d533-3b6f-4dc9-9adb-dd40099d2c70"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_-mtLqnMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yNRAnMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yNRAnMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <customFeatures>uid</customFeatures>
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@style"/>
         </ownedStyle>
@@ -3298,7 +3298,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#963d3ed2-7e19-4848-89b7-49c95f7caeb1"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#963d3ed2-7e19-4848-89b7-49c95f7caeb1"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_-mtLr3MBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yPtQXMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yPtQXMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <customFeatures>uid</customFeatures>
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@style"/>
         </ownedStyle>
@@ -3308,7 +3308,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#7df3d6e7-7a38-4199-8677-a1677c7e042b"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#7df3d6e7-7a38-4199-8677-a1677c7e042b"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_-mtLsnMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yPtRHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yPtRHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <customFeatures>uid</customFeatures>
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
@@ -3332,7 +3332,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#000a8044-6677-426c-9f17-3ec157198b09"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#000a8044-6677-426c-9f17-3ec157198b09"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_-mtLt3MBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yI_knMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yI_knMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <customFeatures>uid</customFeatures>
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@style"/>
         </ownedStyle>
@@ -3342,7 +3342,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#7c0595c7-33c2-493b-9c90-bfb67b9e459b"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#7c0595c7-33c2-493b-9c90-bfb67b9e459b"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_-mtLunMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yIYgXMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yIYgXMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <customFeatures>uid</customFeatures>
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
@@ -3352,7 +3352,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#5c1f0ac1-e3d2-498f-a288-68197bd71f0e"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#5c1f0ac1-e3d2-498f-a288-68197bd71f0e"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_-mtysXMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yIYhHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yIYhHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <customFeatures>uid</customFeatures>
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@style"/>
         </ownedStyle>
@@ -3362,7 +3362,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#9a21e233-0050-4051-b753-6d1e01b4bbee"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#9a21e233-0050-4051-b753-6d1e01b4bbee"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_-mtytHMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yI_lXMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yI_lXMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <customFeatures>uid</customFeatures>
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
@@ -3375,7 +3375,7 @@
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yI_mHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yI_mHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <customFeatures>uid</customFeatures>
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@style"/>
         </ownedStyle>
@@ -3399,7 +3399,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#c858042a-3a3a-40bb-aedc-6b19dc5d5cec"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#c858042a-3a3a-40bb-aedc-6b19dc5d5cec"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_-mtyvHMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yLb0XMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yLb0XMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <customFeatures>uid</customFeatures>
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@style"/>
         </ownedStyle>
@@ -3424,7 +3424,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#66c63173-f2ff-4083-9afc-0cbfb3c187fd"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionInputPort" href="CyclePremices.capella#66c63173-f2ff-4083-9afc-0cbfb3c187fd"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_-mtywXMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yKNsXMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yKNsXMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionInputPort.svg">
           <customFeatures>uid</customFeatures>
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@style"/>
         </ownedStyle>
@@ -3434,7 +3434,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#6d460d8c-c994-45e7-9e02-8ff5034d47da"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#6d460d8c-c994-45e7-9e02-8ff5034d47da"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_-mtyxHMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yKNtHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yKNtHMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <customFeatures>uid</customFeatures>
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
@@ -3458,7 +3458,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#0bf7f118-4156-4bf3-b5cd-16f7dc68fcb2"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#0bf7f118-4156-4bf3-b5cd-16f7dc68fcb2"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_-muZz3MBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yOfInMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yOfInMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <customFeatures>uid</customFeatures>
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
@@ -3468,7 +3468,7 @@
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#61507f9c-b0a2-423f-8c6c-b1d93cba332b"/>
         <semanticElements xmi:type="org.polarsys.capella.core.data.fa:FunctionOutputPort" href="CyclePremices.capella#61507f9c-b0a2-423f-8c6c-b1d93cba332b"/>
         <graphicalFilters xmi:type="diagram:HideLabelFilter" uid="_-muZ0nMBEeyUxNjxKhfxIA"/>
-        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yN4EXMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.png">
+        <ownedStyle xmi:type="diagram:WorkspaceImage" uid="_-yN4EXMBEeyUxNjxKhfxIA" showIcon="false" hideLabelByDefault="true" workspacePath="/org.polarsys.capella.core.sirius.analysis/description/images/FunctionOutputPort.svg">
           <customFeatures>uid</customFeatures>
           <description xmi:type="style:WorkspaceImageDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/logical.odesign#//@ownedViewpoints[name='Logical%20Architecture']/@ownedRepresentations[name='Logical%20Data%20Flow%20Blank']/@defaultLayer/@containerMappings[name='LDFB_Function']/@borderedNodeMappings[name='LDFB_Pin']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
