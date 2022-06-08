@@ -101,6 +101,10 @@ public class AllMixedTests extends BasicTestSuite {
     tests.addAll(testsFor(ComponentToSystemName.Test2.class));
     tests.addAll(testsFor(ComponentToSystemName.Test3.class));
 
+    tests.addAll(testsFor(CopyImagesTest.CopyImagesInInterphasesTest.class));
+    tests.addAll(testsFor(CopyImagesTest.CopyImagesInCrossphasesTest.class));
+    tests.addAll(testsFor(CopyImagesTest.CopyImagesInMultiphasesTest.class));
+
     return tests;
   }
 
