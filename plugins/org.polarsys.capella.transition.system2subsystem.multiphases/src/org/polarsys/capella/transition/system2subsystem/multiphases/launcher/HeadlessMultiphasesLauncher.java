@@ -29,6 +29,7 @@ import org.polarsys.capella.core.transition.common.activities.PostTransformation
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.transposer.ExtendedRulesHandler;
 import org.polarsys.capella.core.transition.common.transposer.SharedWorkflowActivityParameter;
+import org.polarsys.capella.transition.system2subsystem.activities.CopyImagesActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.FinalizeSubsystemTransitionActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.RootComponentNameUpdater;
 import org.polarsys.capella.transition.system2subsystem.crossphases.handlers.attachment.CrossPhasesAttachmentHelper;
@@ -86,6 +87,8 @@ public class HeadlessMultiphasesLauncher {
         new InitializeMultiphasesDiffMergeActivity().run(createActivityParameters(InitializeMultiphasesDiffMergeActivity.ID, context));
         new MultiphasesDifferencesComputingActivity().run(createActivityParameters(MultiphasesDifferencesComputingActivity.ID, context));
         new DifferencesMergingActivity().run(createActivityParameters(DifferencesMergingActivity.ID, context));
+        // Copy images to the target project
+        new CopyImagesActivity().run(createActivityParameters(CopyImagesActivity.ID, context));
         new FinalizeTransitionActivity().run(createActivityParameters(FinalizeTransitionActivity.ID, context));
       } finally {
     	  try {

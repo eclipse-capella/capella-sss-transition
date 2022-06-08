@@ -689,6 +689,22 @@
       </ActivityDeclaration>
    </extension>
 
+
+   <extension
+         point="org.polarsys.kitalpha.cadence.core.activity.declaration">
+      <ActivityDeclaration
+            ActivityClass="org.polarsys.capella.transition.system2subsystem.activities.CopyImagesActivity"
+            Identifier="org.polarsys.capella.transition.system2subsystem.activities.CopyImagesActivity"
+            Multiple="false"
+            Name="CopyImagesActivity"
+            WorkflowElementIdentifier="transition.workflow.finalization"
+            WorkflowIdentifier="org.polarsys.kitalpha.transposer.workflow">
+         <Description>
+            Copy images to the target project
+         </Description>
+      </ActivityDeclaration>
+   </extension>
+
    <extension
          point="org.polarsys.kitalpha.cadence.core.activity.declaration">
       <ActivityDeclaration
