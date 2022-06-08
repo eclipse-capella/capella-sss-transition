@@ -16,6 +16,7 @@ import org.polarsys.capella.core.transition.common.activities.DifferencesComputi
 import org.polarsys.capella.core.transition.common.activities.DifferencesMergingActivity;
 import org.polarsys.capella.core.transition.common.activities.InitializeScopeActivity;
 import org.polarsys.capella.core.transition.common.activities.PostTransformationActivity;
+import org.polarsys.capella.transition.system2subsystem.activities.CopyImagesActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.FinalizeSubsystemTransitionActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.InitializeTransformationActivity;
 import org.polarsys.capella.transition.system2subsystem.interphases.activities.InitializeDiffMergeActivity;
@@ -75,7 +76,7 @@ public class HeadlessInterPhasesLauncher extends SubSystemLauncher {
     WorkflowActivityParameter parameter = new WorkflowActivityParameter();
 
     if (getTransposer() != null) {
-
+        
       // PostTransformationActivity
       parameter.addActivity(getActivity(PostTransformationActivity.ID));
 
@@ -99,6 +100,10 @@ public class HeadlessInterPhasesLauncher extends SubSystemLauncher {
   @Override
   protected WorkflowActivityParameter buildFinalizationActivities() {
     WorkflowActivityParameter parameter = super.buildFinalizationActivities();
+    
+    // Copy images to the target project 
+    parameter.addActivity(CopyImagesActivity.ID);
+    
     parameter.addActivity(FinalizeSubsystemTransitionActivity.ID);
     return parameter;
   }

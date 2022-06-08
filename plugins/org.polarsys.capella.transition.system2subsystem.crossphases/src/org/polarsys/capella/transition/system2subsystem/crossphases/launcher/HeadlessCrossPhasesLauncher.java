@@ -16,6 +16,7 @@ import org.polarsys.capella.core.transition.common.activities.DifferencesComputi
 import org.polarsys.capella.core.transition.common.activities.DifferencesMergingActivity;
 import org.polarsys.capella.core.transition.common.activities.InitializeScopeActivity;
 import org.polarsys.capella.core.transition.common.activities.PostTransformationActivity;
+import org.polarsys.capella.transition.system2subsystem.activities.CopyImagesActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.FinalizeSubsystemTransitionActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.RootComponentNameUpdater;
 import org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeCrossPhasesTransformationActivity;
@@ -102,6 +103,10 @@ public class HeadlessCrossPhasesLauncher extends SubSystemLauncher {
   @Override
   protected WorkflowActivityParameter buildFinalizationActivities() {
     WorkflowActivityParameter parameter = super.buildFinalizationActivities();
+
+    // Copy images to the target project 
+    parameter.addActivity(CopyImagesActivity.ID);
+    
     parameter.addActivity(FinalizeSubsystemTransitionActivity.ID);
     return parameter;
   }
