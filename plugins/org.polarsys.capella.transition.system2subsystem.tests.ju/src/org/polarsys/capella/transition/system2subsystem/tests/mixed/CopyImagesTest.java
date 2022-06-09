@@ -36,6 +36,9 @@ public class CopyImagesTest {
 
     private static final String COPIED_IMAGE_PATH = "images/Capella128x128.png";
     
+    // Hide default constructor
+    CopyImagesTest() {}
+    
     /**
      * Test that verifies the copy of images during a Multiphases transition
      */
