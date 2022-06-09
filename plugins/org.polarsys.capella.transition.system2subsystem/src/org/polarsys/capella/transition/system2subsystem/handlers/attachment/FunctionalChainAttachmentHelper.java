@@ -40,7 +40,6 @@ import org.polarsys.capella.core.data.fa.SequenceLink;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.FunctionalChainExt;
 import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph;
-import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph.Edge;
 import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph.Element;
 import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph.Vertex;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
@@ -80,17 +79,17 @@ public class FunctionalChainAttachmentHelper implements IHandler, INotifyListene
     return handler;
   }
 
-  public HashMap<FunctionalChain, InvolvementHierarchyGraph> getGraphs(IContext context_p) {
-    HashMap<FunctionalChain, InvolvementHierarchyGraph> graphs = (HashMap) context_p.get(GRAPH_MAPS);
+  public Map<FunctionalChain, InvolvementHierarchyGraph> getGraphs(IContext context) {
+    HashMap<FunctionalChain, InvolvementHierarchyGraph> graphs = (HashMap) context.get(GRAPH_MAPS);
     if (graphs == null) {
-      graphs = new HashMap<FunctionalChain, InvolvementHierarchyGraph>();
-      context_p.put(GRAPH_MAPS, graphs);
+      graphs = new HashMap<>();
+      context.put(GRAPH_MAPS, graphs);
     }
     return graphs;
   }
 
-  public InvolvementHierarchyGraph getGraph(FunctionalChain chain, IContext context_p) {
-    HashMap<FunctionalChain, InvolvementHierarchyGraph> graphs = getGraphs(context_p);
+  public InvolvementHierarchyGraph getGraph(FunctionalChain chain, IContext context) {
+    Map<FunctionalChain, InvolvementHierarchyGraph> graphs = getGraphs(context);
     if (!graphs.containsKey(chain)) {
       graphs.put(chain, new InvolvementHierarchyGraph(chain));
     }

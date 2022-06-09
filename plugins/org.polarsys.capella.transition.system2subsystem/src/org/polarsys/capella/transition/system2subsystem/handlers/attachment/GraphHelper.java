@@ -24,7 +24,6 @@ import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph;
 import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph.Edge;
 import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph.Element;
 import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph.Vertex;
-import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph.VertexKey;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 public class GraphHelper {
@@ -97,7 +96,7 @@ public class GraphHelper {
   }
   
   public static Collection<Vertex> getVertices(InvolvementHierarchyGraph graph, FunctionalChainInvolvement fci) {
-    return (Collection) graph.getVertices().keySet().stream().filter(v -> ((VertexKey) v).getFunction() == fci)
+    return graph.getVertices().keySet().stream().filter(v -> v.getFunction() == fci)
         .map(v -> graph.getVertices().get(v)).collect(Collectors.toList());
   }
 

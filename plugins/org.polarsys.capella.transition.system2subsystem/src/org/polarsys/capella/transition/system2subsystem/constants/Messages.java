@@ -52,7 +52,7 @@ public class Messages extends NLS {
   public static String Rule_InteractionState_FailMsg;
   public static String Rule_StateFragment_FailMsg;
   public static String Rule_InteractionFunctionState_FailMsg;
-  public static String Activity_CopyImages;
+  public static String activityCopyImages;
 
   static {
     // initialize resource bundle

@@ -22,6 +22,11 @@
 		<version>1.6.0-SNAPSHOT</version>
 		<relativePath>../../</relativePath>
 	</parent>
+	
+	<properties>
+		<!-- Skip test plugin in Sonar analysis -->
+		<sonar.skip>true</sonar.skip>
+	</properties>
 
 	<artifactId>org.polarsys.capella.transition.system2subsystem.tests.ju</artifactId>
 	<packaging>eclipse-test-plugin</packaging>

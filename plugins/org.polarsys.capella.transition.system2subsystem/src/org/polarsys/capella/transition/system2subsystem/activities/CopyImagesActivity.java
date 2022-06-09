@@ -43,9 +43,9 @@ public class CopyImagesActivity extends AbstractActivity {
      * {@inheritDoc}
      */
     @Override
-    protected IStatus _run(ActivityParameters activityParams_p) {
+    protected IStatus _run(ActivityParameters activityParams) {
 
-        IContext transformationContext = getContext(activityParams_p);
+        IContext transformationContext = getContext(activityParams);
         Project sourceProject = ContextHelper.getSourceProject(transformationContext);
         Project targetProject = ContextHelper.getTargetProject(transformationContext);
 
@@ -78,7 +78,7 @@ public class CopyImagesActivity extends AbstractActivity {
             }
         } catch (CoreException e) {
             LogHelper.getInstance().log(e.getMessage(), new Status(IStatus.ERROR, org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID, e.getMessage(), e),
-                    Messages.Activity_CopyImages);
+                    Messages.activityCopyImages);
         }
     }
 
