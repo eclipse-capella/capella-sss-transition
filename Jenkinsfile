@@ -57,7 +57,7 @@ pipeline {
 	    stage('Download Capella') {
         	steps {
         		script {
-	        		def capellaURL = capella.getDownloadURL("master-6.0", 'linux', '')
+	        		def capellaURL = capella.getDownloadURL("master", 'linux', '')
 	        		
 					sh "curl -k -o capella.tar.gz ${capellaURL}"
 					sh "tar xvzf capella.tar.gz"
@@ -72,7 +72,7 @@ pipeline {
 	        		sh "chmod 755 ${CAPELLA_PRODUCT_PATH}"
 	        		sh "chmod 755 ${WORKSPACE}/capella/jre/bin/java"
 	        		
-	        		eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", capella.getTestUpdateSiteURL("master-6.0"), 'org.polarsys.capella.test.feature.feature.group')
+	        		eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", capella.getTestUpdateSiteURL("master"), 'org.polarsys.capella.test.feature.feature.group')
 	        		
 	        		eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", "file:/${WORKSPACE}/releng/org.polarsys.capella.transition.system2subsystem.site/target/repository/".replace("\\", "/"), 'org.polarsys.capella.transition.system2subsystem.feature.feature.group')
 	        		eclipse.installFeature("${CAPELLA_PRODUCT_PATH}", "file:/${WORKSPACE}/releng/org.polarsys.capella.transition.system2subsystem.site/target/repository/".replace("\\", "/"), 'org.polarsys.capella.transition.system2subsystem.tests.feature.feature.group')
