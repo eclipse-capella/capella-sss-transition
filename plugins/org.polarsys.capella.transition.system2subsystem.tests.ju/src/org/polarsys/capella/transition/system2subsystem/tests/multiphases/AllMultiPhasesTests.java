@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 THALES GLOBAL SERVICES.
+ * Copyright (c) 2016, 2022 THALES GLOBAL SERVICES.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -40,6 +40,14 @@ public class AllMultiPhasesTests extends BasicTestSuite {
     tests.add(new Interfaces(true));
     tests.add(new OrderedPhysicalComponents(true));
     tests.add(new MultiphasesTransitionTest(true));
+
+    tests.add(new ManagementPropertiesTest.TransitionDefaultFalsePreferences());
+    tests.add(new ManagementPropertiesTest.TransitionVisibleInDoc());
+    tests.add(new ManagementPropertiesTest.TransitionVisibleInLM());
+    tests.add(new ManagementPropertiesTest.TransitionReview());
+    tests.add(new ManagementPropertiesTest.TransitionStatus());
+    tests.add(new ManagementPropertiesTest.TransitionAll());
+
     return tests;
   }
 

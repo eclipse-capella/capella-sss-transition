@@ -69,32 +69,38 @@ public class CopyManagementPropertiesActivity extends AbstractActivity implement
       Collection<EObject> candidateSourceElements = TraceabilityHandlerHelper.getInstance(context)
           .retrieveSourceElements(candidateComponent, context);
 
-      EObject sourceElement = candidateSourceElements.iterator().next();
+      if (candidateSourceElements.iterator().hasNext()) {
 
-      EnumerationPropertyLiteral status = ((CapellaElement) sourceElement).getStatus();
+        EObject sourceElement = candidateSourceElements.iterator().next();
 
-      if (status != null) {
-        Collection<EObject> tracedElements = TraceabilityHandlerHelper.getInstance(context)
-            .retrieveTracedElements(status, context);
-        EObject tracedStatus = tracedElements.iterator().next();
+        EnumerationPropertyLiteral status = ((CapellaElement) sourceElement).getStatus();
 
-        if (shouldExportStatus) {
-          attachmentHelper.attachElementByReference(candidateComponent, tracedStatus,
-              CapellacorePackage.Literals.CAPELLA_ELEMENT__STATUS);
+        if (status != null) {
+          Collection<EObject> tracedElements = TraceabilityHandlerHelper.getInstance(context)
+              .retrieveTracedElements(status, context);
+
+          if (tracedElements.iterator().hasNext()) {
+            EObject tracedStatus = tracedElements.iterator().next();
+
+            if (shouldExportStatus) {
+              attachmentHelper.attachElementByReference(candidateComponent, tracedStatus,
+                  CapellacorePackage.Literals.CAPELLA_ELEMENT__STATUS);
+            }
+          }
         }
-      }
 
-      if (shouldExportReview) {
-        attachmentHelper.updateElementAttribute(sourceElement, candidateComponent,
-            CapellacorePackage.Literals.CAPELLA_ELEMENT__REVIEW, context);
-      }
-      if (shouldExportVisibleInDoc) {
-        attachmentHelper.updateElementAttribute(sourceElement, candidateComponent,
-            ModellingcorePackage.Literals.PUBLISHABLE_ELEMENT__VISIBLE_IN_DOC, context);
-      }
-      if (shouldExportVisibleForTraceability) {
-        attachmentHelper.updateElementAttribute(sourceElement, candidateComponent,
-            ModellingcorePackage.Literals.PUBLISHABLE_ELEMENT__VISIBLE_IN_LM, context);
+        if (shouldExportReview) {
+          attachmentHelper.updateElementAttribute(sourceElement, candidateComponent,
+              CapellacorePackage.Literals.CAPELLA_ELEMENT__REVIEW, context);
+        }
+        if (shouldExportVisibleInDoc) {
+          attachmentHelper.updateElementAttribute(sourceElement, candidateComponent,
+              ModellingcorePackage.Literals.PUBLISHABLE_ELEMENT__VISIBLE_IN_DOC, context);
+        }
+        if (shouldExportVisibleForTraceability) {
+          attachmentHelper.updateElementAttribute(sourceElement, candidateComponent,
+              ModellingcorePackage.Literals.PUBLISHABLE_ELEMENT__VISIBLE_IN_LM, context);
+        }
       }
 
     }
