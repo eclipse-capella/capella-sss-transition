@@ -22,6 +22,7 @@ import org.polarsys.capella.core.transition.common.constants.Messages;
 import org.polarsys.capella.core.transition.common.exception.TransitionException;
 import org.polarsys.capella.core.transition.common.handlers.log.LogHelper;
 import org.polarsys.capella.core.transition.common.transposer.ExtendedTransposer;
+import org.polarsys.capella.transition.system2subsystem.activities.CopyManagementPropertiesActivity;
 import org.polarsys.capella.transition.system2subsystem.launcher.SubSystemLauncher;
 import org.polarsys.capella.transition.system2subsystem.multiphases.MultiphasesContext;
 import org.polarsys.capella.transition.system2subsystem.transposer.SubsystemRuleHandler;
@@ -53,7 +54,8 @@ class AbstractHeadlessMultiphasesLauncher extends SubSystemLauncher {
 
   @Override
   // overridden to update rules handler in context
-  public final void launch(Collection<?> selection_p, String purpose_p, String mappingId_p, IProgressMonitor monitor_p) {
+  public final void launch(Collection<?> selection_p, String purpose_p, String mappingId_p,
+      IProgressMonitor monitor_p) {
     try {
       initializeLogHandler();
       transposer = createTransposer(purpose_p, mappingId_p);
@@ -90,9 +92,8 @@ class AbstractHeadlessMultiphasesLauncher extends SubSystemLauncher {
 
   @Override
   /**
-   * Initialization is performed only once in the HeadlessMultiphasesLauncher,
-   * so this must be overridden to prevent re-initialisation when a new phase
-   * transition starts.
+   * Initialization is performed only once in the HeadlessMultiphasesLauncher, so this must be overridden to prevent
+   * re-initialisation when a new phase transition starts.
    */
   protected final WorkflowActivityParameter buildInitializationActivities() {
     return new WorkflowActivityParameter();
@@ -124,18 +125,24 @@ class AbstractHeadlessMultiphasesLauncher extends SubSystemLauncher {
 
   @Override
   /**
-   * Diffmerge is invoked manually after all phases transitions have been completed, so this
-   * must be overridden to prevent the launch of diffmerge after a phase transistion
-   * ends.
+   * Diffmerge is invoked manually after all phases transitions have been completed, so this must be overridden to
+   * prevent the launch of diffmerge after a phase transistion ends.
    */
   protected final WorkflowActivityParameter buildDiffMergeActivities() {
-    return new WorkflowActivityParameter();
+    WorkflowActivityParameter parameter = new WorkflowActivityParameter();
+
+    if (getTransposer() != null) {
+
+      // CopyManagementPropertiesActivity
+      parameter.addActivity(getActivity(CopyManagementPropertiesActivity.ID));
+    }
+
+    return parameter;
   }
-  
+
   /**
-   * Finalization is invoked manually after all phases transitions have been completed, so this
-   * must be overridden to prevent the launch of finalization after a phase transistion
-   * ends.
+   * Finalization is invoked manually after all phases transitions have been completed, so this must be overridden to
+   * prevent the launch of finalization after a phase transistion ends.
    */
   @Override
   protected WorkflowActivityParameter buildFinalizationActivities() {

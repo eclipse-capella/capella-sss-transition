@@ -17,6 +17,7 @@ import org.polarsys.capella.core.transition.common.activities.DifferencesMerging
 import org.polarsys.capella.core.transition.common.activities.InitializeScopeActivity;
 import org.polarsys.capella.core.transition.common.activities.PostTransformationActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.CopyImagesActivity;
+import org.polarsys.capella.transition.system2subsystem.activities.CopyManagementPropertiesActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.FinalizeSubsystemTransitionActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.InitializeTransformationActivity;
 import org.polarsys.capella.transition.system2subsystem.interphases.activities.InitializeDiffMergeActivity;
@@ -25,8 +26,6 @@ import org.polarsys.capella.transition.system2subsystem.launcher.SubSystemLaunch
 import org.polarsys.kitalpha.cadence.core.api.parameter.GenericParameter;
 import org.polarsys.kitalpha.cadence.core.api.parameter.WorkflowActivityParameter;
 import org.polarsys.kitalpha.transposer.rules.handler.api.IRulesHandler;
-
-
 
 public class HeadlessInterPhasesLauncher extends SubSystemLauncher {
 
@@ -37,10 +36,9 @@ public class HeadlessInterPhasesLauncher extends SubSystemLauncher {
     return MAPPING;
   }
 
- 
-
   /**
    * Activities to be loaded in the workflow element of cadence "PRE ANALYSIS"
+   * 
    * @return the associated workflow element
    */
   @Override
@@ -51,9 +49,9 @@ public class HeadlessInterPhasesLauncher extends SubSystemLauncher {
 
       // InitializeTransitionActivity
       parameter.addActivity(InitializeTransitionActivity.ID);
-      GenericParameter<IRulesHandler> param =
-          new GenericParameter<IRulesHandler>(org.polarsys.capella.core.transition.common.activities.InitializeTransitionActivity.PARAMETER_RULE_HANDLER,
-              getTransposer().getRulesHandler(), "Transposer Rule handler"); //$NON-NLS-1$
+      GenericParameter<IRulesHandler> param = new GenericParameter<IRulesHandler>(
+          org.polarsys.capella.core.transition.common.activities.InitializeTransitionActivity.PARAMETER_RULE_HANDLER,
+          getTransposer().getRulesHandler(), "Transposer Rule handler"); //$NON-NLS-1$
       parameter.addParameter(InitializeTransitionActivity.ID, param);
 
       // InitializeTransformationActivity
@@ -69,6 +67,7 @@ public class HeadlessInterPhasesLauncher extends SubSystemLauncher {
 
   /**
    * Activities to be loaded in the workflow element of cadence "POST EXECUTION"
+   * 
    * @return the associated workflow element
    */
   @Override
@@ -76,7 +75,10 @@ public class HeadlessInterPhasesLauncher extends SubSystemLauncher {
     WorkflowActivityParameter parameter = new WorkflowActivityParameter();
 
     if (getTransposer() != null) {
-        
+
+      // CopyManagementPropertiesActivity
+      parameter.addActivity(getActivity(CopyManagementPropertiesActivity.ID));
+
       // PostTransformationActivity
       parameter.addActivity(getActivity(PostTransformationActivity.ID));
 
@@ -89,6 +91,9 @@ public class HeadlessInterPhasesLauncher extends SubSystemLauncher {
       // DifferencesMergingActivity
       parameter.addActivity(DifferencesMergingActivity.ID);
 
+      // Copy images to the target project
+      parameter.addActivity(CopyImagesActivity.ID);
+
     }
 
     return parameter;
@@ -100,10 +105,7 @@ public class HeadlessInterPhasesLauncher extends SubSystemLauncher {
   @Override
   protected WorkflowActivityParameter buildFinalizationActivities() {
     WorkflowActivityParameter parameter = super.buildFinalizationActivities();
-    
-    // Copy images to the target project 
-    parameter.addActivity(CopyImagesActivity.ID);
-    
+
     parameter.addActivity(FinalizeSubsystemTransitionActivity.ID);
     return parameter;
   }
