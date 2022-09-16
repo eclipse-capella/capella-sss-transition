@@ -48,16 +48,17 @@ import org.polarsys.capella.transition.system2subsystem.handlers.scope.PropertyV
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.PropertyValuesScopeRetriever;
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.RequirementsScopeFilter;
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.RequirementsScopeRetriever;
+import org.polarsys.capella.transition.system2subsystem.handlers.scope.StatusScopeRetriever;
 import org.polarsys.capella.transition.system2subsystem.handlers.session.SubSystemSessionHandler;
 import org.polarsys.capella.transition.system2subsystem.handlers.traceability.config.TransformationConfiguration;
 import org.polarsys.kitalpha.cadence.core.api.parameter.ActivityParameters;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
-
 /**
  * 
  */
-public class InitializeTransitionActivity extends org.polarsys.capella.core.transition.system.activities.InitializeTransitionActivity {
+public class InitializeTransitionActivity
+    extends org.polarsys.capella.core.transition.system.activities.InitializeTransitionActivity {
 
   public static final String ID = "org.polarsys.capella.transition.system2subsystem.activities.InitializeTransitionActivity"; //$NON-NLS-1$
 
@@ -67,7 +68,8 @@ public class InitializeTransitionActivity extends org.polarsys.capella.core.tran
   }
 
   @Override
-  protected IStatus initializeScopeFilterHandlers(IContext context, CompoundScopeFilter handler, ActivityParameters activityParams) {
+  protected IStatus initializeScopeFilterHandlers(IContext context, CompoundScopeFilter handler,
+      ActivityParameters activityParams) {
     IScopeFilter filter = PropertyValuesScopeFilter.getInstance(context);
     handler.addScopeFilter(filter, context);
 
@@ -86,7 +88,7 @@ public class InitializeTransitionActivity extends org.polarsys.capella.core.tran
         if (item instanceof Part) {
           item = ((Part) item).getAbstractType();
         }
-        result.add((EObject)item);
+        result.add((EObject) item);
       }
     }
     return result;
@@ -96,15 +98,17 @@ public class InitializeTransitionActivity extends org.polarsys.capella.core.tran
    * {@inheritDoc}
    */
   @Override
-  protected IStatus initializeScopeRetrieverHandlers(IContext context, CompoundScopeRetriever handler, ActivityParameters activityParams) {
+  protected IStatus initializeScopeRetrieverHandlers(IContext context, CompoundScopeRetriever handler,
+      ActivityParameters activityParams) {
     IScopeRetriever retriever = new PropertyValuesScopeRetriever();
     handler.addScopeRetriever(retriever, context);
-    
+
     retriever = new RequirementsScopeRetriever();
     handler.addScopeRetriever(retriever, context);
-    
+
     handler.addScopeRetriever(new ExternalFunctionsScopeRetriever(), context);
-    
+    handler.addScopeRetriever(new StatusScopeRetriever(), context);
+
     return super.initializeScopeRetrieverHandlers(context, handler, activityParams);
   }
 
@@ -129,7 +133,7 @@ public class InitializeTransitionActivity extends org.polarsys.capella.core.tran
   @Override
   protected IStatus initializeSource(IContext context, ActivityParameters activityParams) {
     super.initializeSource(context, activityParams);
-    
+
     Object sourceProject = context.get(ITransitionConstants.TRANSITION_SOURCE_ROOT);
     if (sourceProject instanceof Project) {
       Set<Resource> libraryResources = SubSystemContextHelper.getLibraryResources((Project) sourceProject);
@@ -141,13 +145,13 @@ public class InitializeTransitionActivity extends org.polarsys.capella.core.tran
     }
     return Status.OK_STATUS;
   }
-  
+
   @Override
   protected IStatus initializeTarget(IContext context, ActivityParameters activityParams) {
 
-    String outputModelUriString =
-        OptionsHandlerHelper.getInstance(context).getStringValue(context, IOptionsConstants.TRANSITION_PREFERENCES, IOptionsConstants.OUTPUT_PROJECT,
-            IOptionsConstants.OUTPUT_PROJECT_DEFAULT_VALUE);
+    String outputModelUriString = OptionsHandlerHelper.getInstance(context).getStringValue(context,
+        IOptionsConstants.TRANSITION_PREFERENCES, IOptionsConstants.OUTPUT_PROJECT,
+        IOptionsConstants.OUTPUT_PROJECT_DEFAULT_VALUE);
 
     URI outputModelUri = URI.createPlatformResourceURI(outputModelUriString, true);
 
@@ -155,7 +159,6 @@ public class InitializeTransitionActivity extends org.polarsys.capella.core.tran
     EditingDomain targetDomain = (EditingDomain) context.get(ITransitionConstants.TRANSITION_SOURCE_EDITING_DOMAIN);
     context.put(ITransitionConstants.TRANSITION_TARGET_EDITING_DOMAIN, targetDomain);
 
-    
     ResourceSet resourceSet = targetDomain.getResourceSet();
     Resource outputResource = resourceSet.getResource(outputModelUri, true);
     context.put(ITransitionConstants.TRANSITION_TARGET_RESOURCE, outputResource);
@@ -177,12 +180,13 @@ public class InitializeTransitionActivity extends org.polarsys.capella.core.tran
         }
       }
     }
-    
+
     return Status.OK_STATUS;
   }
 
   /**
    * Create default session handler for common transition
+   * 
    * @return
    */
   @Override
@@ -191,18 +195,18 @@ public class InitializeTransitionActivity extends org.polarsys.capella.core.tran
   }
 
   /**
-   * Return a customized attachment handler that
-   * detaches elements from the holding resource 
-   * as soon as they are attached to their destination container
+   * Return a customized attachment handler that detaches elements from the holding resource as soon as they are
+   * attached to their destination container
    */
   @Override
   protected IHandler createDefaultAttachmentHandler() {
-    return new CapellaDefaultAttachmentHandler(){
+    return new CapellaDefaultAttachmentHandler() {
       @Override
-      public boolean attachElementByReference(EObject sourceAttaching, EObject targetAttaching, EObject sourceAttached, EObject targetAttached,
-          EReference sourceFeature, EReference targetFeature) {
-    	  HoldingResourceHelper.ensureMoveElement(targetAttached, targetAttaching);
-    	  return super.attachElementByReference(sourceAttaching, targetAttaching, sourceAttached, targetAttached, sourceFeature, targetFeature);
+      public boolean attachElementByReference(EObject sourceAttaching, EObject targetAttaching, EObject sourceAttached,
+          EObject targetAttached, EReference sourceFeature, EReference targetFeature) {
+        HoldingResourceHelper.ensureMoveElement(targetAttached, targetAttaching);
+        return super.attachElementByReference(sourceAttaching, targetAttaching, sourceAttached, targetAttached,
+            sourceFeature, targetFeature);
       }
     };
   }
@@ -211,5 +215,5 @@ public class InitializeTransitionActivity extends org.polarsys.capella.core.tran
   protected IHandler createDefaultTraceabilityTargetHandler() {
     return new CompoundTraceabilityHandler(new TransformationConfiguration());
   }
-  
+
 }

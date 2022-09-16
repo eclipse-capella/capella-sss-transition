@@ -672,7 +672,20 @@
       </ActivityDeclaration>
    </extension>
    
-   
+   <extension
+         point="org.polarsys.kitalpha.cadence.core.activity.declaration">
+      <ActivityDeclaration
+            ActivityClass="org.polarsys.capella.transition.system2subsystem.activities.CopyManagementPropertiesActivity"
+            Identifier="org.polarsys.capella.transition.system2subsystem.activities.CopyManagementPropertiesActivity"
+            Multiple="false"
+            Name="CopyManagementPropertiesActivity"
+            WorkflowElementIdentifier="org.polarsys.kitalpha.transposer.after.rule.execution"
+            WorkflowIdentifier="org.polarsys.kitalpha.transposer.workflow">
+         <Description>
+            Updates component management properties of the transformed element in relation to the selected element
+         </Description>
+      </ActivityDeclaration>
+   </extension>
    
    <extension
          point="org.polarsys.kitalpha.cadence.core.activity.declaration">
@@ -757,8 +770,8 @@
                parent="defaultGroup">
          </group>
          <group
-               id="diagramExport"
-               name="%group.diagramExport"
+               id="managementExport"
+               name="%group.managementExport"
                parent="defaultGroup">
          </group>
          <group
@@ -849,10 +862,46 @@
          </property>
          <property
                class="org.polarsys.capella.common.flexibility.properties.property.BooleanPropertyPreference"
-               enabled="false"
-               group="diagramExport"
-               id="diagramExport"
-               name="%property.diagramExport">
+               enabled="true"
+               group="managementExport"
+               id="managementExport.visibleInDocumentation"
+               name="%property.managementExport.visibleInDocumentation">
+               <argument id="scope" value="capella.core.transition.system2subsystem"></argument>
+               <argument
+                     id="default"
+                     value="false">
+               </argument>
+         </property>
+         <property
+               class="org.polarsys.capella.common.flexibility.properties.property.BooleanPropertyPreference"
+               enabled="true"
+               group="managementExport"
+               id="managementExport.visibleForTraceability"
+               name="%property.managementExport.visibleForTraceability">
+               <argument id="scope" value="capella.core.transition.system2subsystem"></argument>
+               <argument
+                     id="default"
+                     value="false">
+               </argument>
+         </property>
+         <property
+               class="org.polarsys.capella.common.flexibility.properties.property.BooleanPropertyPreference"
+               enabled="true"
+               group="managementExport"
+               id="managementExport.progressStatus"
+               name="%property.managementExport.progressStatus">
+               <argument id="scope" value="capella.core.transition.system2subsystem"></argument>
+               <argument
+                     id="default"
+                     value="false">
+               </argument>
+         </property>
+         <property
+               class="org.polarsys.capella.common.flexibility.properties.property.BooleanPropertyPreference"
+               enabled="true"
+               group="managementExport"
+               id="managementExport.review"
+               name="%property.managementExport.review">
                <argument id="scope" value="capella.core.transition.system2subsystem"></argument>
                <argument
                      id="default"

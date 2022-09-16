@@ -36,9 +36,18 @@ public class IOptionsConstants {
   public static final String FUNCTIONAL_CHAIN_EXPORT = "functionalChainExport";
   public static final String FUNCTIONAL_CHAIN_EXPORT_DEFAULT_VALUE = Boolean.TRUE.toString();
 
-  public static final String DIAGRAM_EXPORT = "diagramExport";
-  public static final String DIAGRAM_EXPORT_DEFAULT_VALUE = Boolean.FALSE.toString();
+  public static final String MANAGEMENT_VISIBLE_IN_DOCUMENT_EXPORT = "managementExport.visibleInDocumentation";
+  public static final boolean MANAGEMENT_VISIBLE_IN_DOCUMENT_DEFAULT_VALUE = false;
 
+  public static final String MANAGEMENT_VISIBLE_FOR_TRACEABILITY_EXPORT = "managementExport.visibleForTraceability";
+  public static final boolean MANAGEMENT_VISIBLE_FOR_TRACEABILITY_DEFAULT_VALUE = false;
+  
+  public static final String MANAGEMENT_PROGRESS_STATUS_EXPORT = "managementExport.progressStatus";
+  public static final boolean MANAGEMENT_PROGRESS_STATUS_DEFAULT_VALUE = false;
+  
+  public static final String MANAGEMENT_REVIEW_EXPORT = "managementExport.review";
+  public static final boolean MANAGEMENT_REVIEW_DEFAULT_VALUE = false;
+  
   public static final String HIERARCHICAL_EXPORT = "hierachicalExport";
   public static final String HIERARCHICAL_EXPORT_DEFAULT_VALUE = "leaf";
   public static final String HIERARCHICAL_EXPORT_LEAF_VALUE = "leaf";

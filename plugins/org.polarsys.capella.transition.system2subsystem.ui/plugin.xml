@@ -52,7 +52,19 @@
               renderer="checkboxRenderer">
         </propertyBinding>
         <propertyBinding
-              property="diagramExport"
+              property="managementExport.visibleInDocumentation"
+              renderer="checkboxRenderer">
+        </propertyBinding>
+        <propertyBinding
+              property="managementExport.visibleForTraceability"
+              renderer="checkboxRenderer">
+        </propertyBinding>
+        <propertyBinding
+              property="managementExport.progressStatus"
+              renderer="checkboxRenderer">
+        </propertyBinding>
+        <propertyBinding
+              property="managementExport.review"
               renderer="checkboxRenderer">
         </propertyBinding>
         <propertyBinding

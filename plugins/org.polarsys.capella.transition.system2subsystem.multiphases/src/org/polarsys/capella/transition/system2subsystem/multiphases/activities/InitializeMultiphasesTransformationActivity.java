@@ -80,6 +80,7 @@ public final class InitializeMultiphasesTransformationActivity extends Initializ
         if (handler_p instanceof RecTraceabilityHandler) {
           return false;
         }
+
         return super.useHandlerForAttachment(source_p, target_p, handler_p, context_p);
       }
 
@@ -87,6 +88,9 @@ public final class InitializeMultiphasesTransformationActivity extends Initializ
       public boolean useHandlerForSourceElements(EObject source, ITraceabilityHandler handler, IContext context) {
         if (LibraryTraceabilityHandler.isLibraryElement(source, context)) {
           return handler instanceof LibraryTraceabilityHandler;
+        }
+        if (handler instanceof RecTraceabilityHandler) {
+          return false;
         }
         return super.useHandlerForSourceElements(source, handler, context);
       }
@@ -130,12 +134,12 @@ public final class InitializeMultiphasesTransformationActivity extends Initializ
         }
         Project project = SessionHelper.getCapellaProject(session);
         session.close(new NullProgressMonitor());
-        targetTemporaryProject = (Project) ((EditingDomain) context.get(ITransitionConstants.TRANSITION_TARGET_EDITING_DOMAIN))
-            .getResourceSet().getEObject(EcoreUtil.getURI(project), true);
+        targetTemporaryProject = (Project) ((EditingDomain) context
+            .get(ITransitionConstants.TRANSITION_TARGET_EDITING_DOMAIN)).getResourceSet()
+                .getEObject(EcoreUtil.getURI(project), true);
         context.put(FinalizeSubsystemTransitionActivity.PARAM__DELETE_PROJECT,
             ResourcesPlugin.getWorkspace().getRoot().getProject(temporaryProjectName));
-        
-        
+
         Project sourceProject = ContextHelper.getSourceProject(context);
 
         // Copy Library information from source project to target project if any
@@ -145,6 +149,9 @@ public final class InitializeMultiphasesTransformationActivity extends Initializ
             targetTemporaryProject.getOwnedExtensions().add(copy);
           }
         }
+
+        targetTemporaryProject.getOwnedEnumerationPropertyTypes().clear(); // removes progress status
+
       } catch (InvocationTargetException exception_p) {
         StatusManager.getManager()
             .handle(new Status(IStatus.ERROR, org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID,
