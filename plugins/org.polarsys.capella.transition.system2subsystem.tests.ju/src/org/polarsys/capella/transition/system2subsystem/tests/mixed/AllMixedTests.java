@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 THALES GLOBAL SERVICES.
+ * Copyright (c) 2016, 2022 THALES GLOBAL SERVICES.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -31,10 +31,12 @@ public class AllMixedTests extends BasicTestSuite {
   protected List<BasicTestArtefact> getTests() {
     final List<BasicTestArtefact> tests = new ArrayList<BasicTestArtefact>();
 
+    tests.addAll(testsFor(AllocatedExchangeItemTest.class));
+
     tests.addAll(testsFor(FakeExchange.class));
     tests.addAll(testsFor(CycleMerge.class));
     tests.addAll(testsFor(CyclePremices.class));
-    
+
     tests.add(new IncrementalModeTest());
 
     tests.addAll(testsFor(FakeExchangeChain.Always.class));
@@ -53,6 +55,9 @@ public class AllMixedTests extends BasicTestSuite {
     tests.add(new DataValuesTest.Interphase());
 
     tests.addAll(testsFor(ExchangeCategoryTest.class));
+    tests.addAll(testsFor(ExternalFunctionExchangeItemTransitionnedTest.class));
+    tests.addAll(testsFor(ExternalFunctionExchangeItemNotTransitionnedTest.class));
+
     tests.addAll(testsFor(FakeChainInvolvementLink.Always.class));
     tests.addAll(testsFor(FunctionalChainLoopTest.class));
     tests.addAll(testsFor(FunctionalChainScopeTest.class));
