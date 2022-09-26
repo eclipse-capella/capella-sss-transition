@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2020, 2022 THALES GLOBAL SERVICES.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -22,9 +22,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.polarsys.capella.core.business.queries.IBusinessQuery;
 import org.polarsys.capella.core.business.queries.capellacore.BusinessQueriesProvider;
+import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.ComponentExchange;
 import org.polarsys.capella.core.data.fa.FaPackage;
 import org.polarsys.capella.core.data.fa.FunctionalExchange;
+import org.polarsys.capella.transition.system2subsystem.handlers.scope.ExternalFunctionsScopeRetriever;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;;
 
 public class FunctionalExchangeRule
@@ -42,8 +44,7 @@ public class FunctionalExchangeRule
           return status;
         }
         for (ComponentExchange componentExchange : allocatingExchanges) {
-          IBusinessQuery query = BusinessQueriesProvider.getInstance().getContribution(
-              componentExchange.eClass(),
+          IBusinessQuery query = BusinessQueriesProvider.getInstance().getContribution(componentExchange.eClass(),
               FaPackage.Literals.COMPONENT_EXCHANGE__OWNED_COMPONENT_EXCHANGE_FUNCTIONAL_EXCHANGE_ALLOCATIONS);
           List<EObject> availableFuncExhcnage = query.getAvailableElements(componentExchange);
 
@@ -55,6 +56,19 @@ public class FunctionalExchangeRule
             }
           }
         }
+        AbstractFunction sourceFc = (AbstractFunction) functionalExchange.getSource().eContainer();
+        AbstractFunction targetFc = (AbstractFunction) functionalExchange.getTarget().eContainer();
+
+        if (ExternalFunctionsScopeRetriever.isLinkToPrimaryFunction(sourceFc, context)
+            || ExternalFunctionsScopeRetriever.isLinkToPrimaryFunction(targetFc, context)
+            || !functionalExchange.getInvolvingFunctionalChains().isEmpty()) {
+          return status;
+        }
+        return new Status(IStatus.ERROR, PLUGIN_ID, functionalExchange.getName() + " ("
+            + functionalExchange.eClass().getName() + ") should not be transitionned as  "
+            + "its target or source function is not linked to primary function, or the exchange is not involved in a FC" //$NON-NLS-1$ //$NON-NLS-2$
+        );
+
       }
     }
     return status;
