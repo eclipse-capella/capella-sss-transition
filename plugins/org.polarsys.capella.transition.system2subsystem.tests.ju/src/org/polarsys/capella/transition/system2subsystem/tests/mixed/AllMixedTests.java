@@ -32,6 +32,7 @@ public class AllMixedTests extends BasicTestSuite {
     final List<BasicTestArtefact> tests = new ArrayList<BasicTestArtefact>();
 
     tests.addAll(testsFor(AllocatedExchangeItemTest.class));
+    tests.add(new TransitionMenuTest());
 
     tests.addAll(testsFor(FakeExchange.class));
     tests.addAll(testsFor(CycleMerge.class));

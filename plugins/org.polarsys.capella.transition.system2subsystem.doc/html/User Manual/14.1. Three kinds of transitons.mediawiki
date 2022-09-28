@@ -31,6 +31,12 @@ The transformation algorithm performs the following steps:
 # Comparison with previous extraction
 # Merge
 
+'''Recommandations'''
+
+Mixing both Node and Behavior PCs is not recommended.
+
+However if you do so, deploying nodes and merging rules will be applied for all deployed Behavioral PCs
+
 == Vertical Transition (SA) ==
 
 The objective of this transition is to re-apply the methodology starting from one or several given Configuration Item(s). 
@@ -43,6 +49,12 @@ The transformation algorithm performs the following steps:
 # Transformation of elements (for example, a sibling Physical Component will become a System Actor)
 # Comparison with previous transition
 # Merge
+
+'''Recommandations'''
+
+Mixing both Node and Behavior PCs is not recommended.
+
+However if you do so, deploying nodes and merging rules will be applied for all deployed Behavioral PCs
 
 == Vertical Transition (SA-LA-PA) ==
 

@@ -758,6 +758,23 @@
             </argument>
          </property>
          
+         <group
+               id="selection"
+               name="%property.selection"
+               parent="defaultGroup">
+         </group>
+         
+         <property
+               class="org.polarsys.capella.transition.system2subsystem.preferences.SelectionPreference"
+               enabled="true"
+               group="selection"
+               id="selection"
+               name="%property.selection">
+            <argument
+                   id="scope"
+                  value="capella.core.transition">
+            </argument>
+         </property>
          
          <group
                id="dataInterfaces"

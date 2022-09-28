@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2022 THALES GLOBAL SERVICES.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -28,10 +28,11 @@ import org.polarsys.capella.core.model.helpers.ComponentExt;
 public class CommandTester extends PropertyTester {
 
   /**
-   * @see org.eclipse.core.expressions.IPropertyTester#test(java.lang.Object, java.lang.String, java.lang.Object[], java.lang.Object)
+   * @see org.eclipse.core.expressions.IPropertyTester#test(java.lang.Object, java.lang.String, java.lang.Object[],
+   *      java.lang.Object)
    */
   public boolean test(Object object, String propertyName, Object[] params, Object testedValue) {
-    if (propertyName.equals("transitionMode")) { //$NON-NLS-1$ 
+    if (propertyName.equals("transitionMode")) { //$NON-NLS-1$
       List<EObject> elements = (List) ModelAdaptation.adaptToCapellaElements(object);
       if ((!elements.isEmpty()) && (testedValue instanceof String)) {
         String value = (String) testedValue;
@@ -44,8 +45,10 @@ public class CommandTester extends PropertyTester {
             } else if (element instanceof Part) {
               type = ((Part) element).getAbstractType();
             }
-            return (type != null) && ((type instanceof SystemComponent) || (type instanceof LogicalComponent)
-                || (type instanceof PhysicalComponent)) && !ComponentExt.isActor(type);
+            if ((type != null) && ((type instanceof SystemComponent) || (type instanceof LogicalComponent)
+                || (type instanceof PhysicalComponent)) && !ComponentExt.isActor(type)) {
+              return true;
+            }
           }
         }
       }

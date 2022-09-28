@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2022 THALES GLOBAL SERVICES.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -13,18 +13,27 @@
 package org.polarsys.capella.transition.system2subsystem.crossphases.handlers.attachment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.polarsys.capella.common.helpers.EcoreUtil2;
+import org.polarsys.capella.core.data.capellacore.GeneralizableElement;
 import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.data.cs.ComponentPkg;
+import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.cs.Part;
+import org.polarsys.capella.core.data.helpers.capellacore.services.GeneralizableElementExt;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
+import org.polarsys.capella.core.data.pa.PhysicalComponentNature;
 import org.polarsys.capella.core.model.helpers.ComponentExt;
 import org.polarsys.capella.core.transition.common.capellaHelpers.HashMapSet;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
@@ -32,6 +41,7 @@ import org.polarsys.capella.core.transition.common.handlers.options.OptionsHandl
 import org.polarsys.capella.core.transition.common.handlers.traceability.TraceabilityHandlerHelper;
 import org.polarsys.capella.core.transition.common.rules.AbstractRule;
 import org.polarsys.capella.core.transition.system.handlers.attachment.CapellaDefaultAttachmentHandler;
+import org.polarsys.capella.transition.system2subsystem.context.SubSystemContextHelper;
 import org.polarsys.capella.transition.system2subsystem.crossphases.constants.IOptionsConstants;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IPremise;
@@ -46,11 +56,73 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
   protected static final String CROSS_PHASES_ATTACHMENT_MAP = "CrossPhasesAttachmentMap"; //$NON-NLS-1$
   protected static final String CROSS_PHASES_ATTACHMENT_REVERSE_MAP = "CrossPhasesAttachmentReverseMap"; //$NON-NLS-1$
 
+  /**
+   * Retrieve part ancestors, deploying elements and owner
+   * 
+   * @param currentPart
+   * @param parents
+   */
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  public static Collection<Part> getBestPartAncestors(boolean behaviorOnly, Part currentPart) {
+    if (!behaviorOnly)
+      return ComponentExt.getBestPartAncestors(currentPart);
+
+    LinkedList<Part> parents = new LinkedList<>();
+    EObject parent = ComponentExt.getDirectParent(currentPart);
+    if (parent instanceof PhysicalComponent
+        && ((PhysicalComponent) parent).getNature().equals(PhysicalComponentNature.NODE)) {
+      parent = ComponentExt.getRootComponent(parent);
+    }
+
+    if (parent instanceof Component) {
+      parents.addAll(((Component) parent).getRepresentingParts());
+    }
+    return parents;
+  }
+
+  public static boolean isBrothers(boolean behaviorOnly, Part source, Part target) {
+    if (!behaviorOnly)
+      return ComponentExt.isBrothers(source, target);
+
+    Collection<EObject> deployingSource = new HashSet<EObject>();
+
+    if (deployingSource.size() == 0) {
+      EObject sourceContainer = EcoreUtil2.getFirstContainer(source,
+          Arrays.asList(CsPackage.Literals.COMPONENT, CsPackage.Literals.COMPONENT_PKG));
+      if (sourceContainer instanceof Component) {
+        deployingSource.addAll(((Component) sourceContainer).getRepresentingParts());
+      } else if (sourceContainer instanceof ComponentPkg) {
+        deployingSource.add(sourceContainer);
+      }
+    }
+
+    Collection<EObject> deployingTarget = new HashSet<EObject>();
+
+    if (deployingTarget.size() == 0) {
+      EObject targetContainer = EcoreUtil2.getFirstContainer(target,
+          Arrays.asList(CsPackage.Literals.COMPONENT, CsPackage.Literals.COMPONENT_PKG));
+      if (targetContainer instanceof Component) {
+        deployingTarget.addAll(((Component) targetContainer).getRepresentingParts());
+      } else if (targetContainer instanceof ComponentPkg) {
+        deployingTarget.add(targetContainer);
+      }
+    }
+
+    if ((deployingSource.size() == 0) && (deployingTarget.size() == 0)) {
+      return true;
+    }
+
+    deployingSource.retainAll(deployingTarget);
+    return deployingSource.size() > 0;
+  }
+
   public void computeRelatedComponent(Component element, IContext context_p) {
     Collection<EObject> transfoSources = (Collection<EObject>) context_p.get(ITransitionConstants.TRANSITION_SOURCES);
 
+    boolean behaviorOnly = SubSystemContextHelper.isBehaviorSelectionOnly(context_p);
+
     EObject relatedComponent = element;
-    Collection<Part> sourceAndAncestors = getSourceAndAncestors(transfoSources);
+    Collection<Part> sourceAndAncestors = getSourceAndAncestors(behaviorOnly, transfoSources);
 
     if (element != null) {
 
@@ -72,7 +144,7 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
           if (shouldMerge) {
             for (Part source : sourceAndAncestors) {
               if (shouldMerge) {
-                if (ComponentExt.isBrothers(part, source)) {
+                if (isBrothers(behaviorOnly, part, source)) {
                   shouldMerge = false;
                 }
               }
@@ -87,7 +159,7 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
         boolean componentFound = false;
         for (Part partElement : element.getRepresentingParts()) {
           if (!componentFound) {
-            for (Part part : ComponentExt.getBestPartAncestors(partElement)) {
+            for (Part part : getBestPartAncestors(behaviorOnly, partElement)) {
               if (!componentFound) {
                 if (part.getAbstractType() instanceof Component) {
                   Component type = (Component) part.getAbstractType();
@@ -107,7 +179,8 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
 
     // Register the default component
     if (relatedComponent != null) {
-      CrossPhasesAttachmentHelper.getInstance(context_p).setRelatedComponent(element, (Component) relatedComponent, context_p);
+      CrossPhasesAttachmentHelper.getInstance(context_p).setRelatedComponent(element, (Component) relatedComponent,
+          context_p);
     }
 
   }
@@ -118,27 +191,27 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
    * @return
    */
   protected boolean shouldMerge(Component element_p, IContext context_p) {
-    return (element_p instanceof PhysicalComponent)
-           || OptionsHandlerHelper.getInstance(context_p).getBooleanValue(context_p, IOptionsConstants.SYSTEM2SUBSYSTEM_CROSSPHASES_PREFERENCES,
-               IOptionsConstants.COMPONENT_MERGE, IOptionsConstants.COMPONENT_MERGE__DEFAULT_VALUE);
+    return (element_p instanceof PhysicalComponent) || OptionsHandlerHelper.getInstance(context_p).getBooleanValue(
+        context_p, IOptionsConstants.SYSTEM2SUBSYSTEM_CROSSPHASES_PREFERENCES, IOptionsConstants.COMPONENT_MERGE,
+        IOptionsConstants.COMPONENT_MERGE__DEFAULT_VALUE);
   }
 
   /**
    * @param transfoSources_p
    * @return
    */
-  private Collection<Part> getSourceAndAncestors(Collection<EObject> transfoSources_p) {
+  private Collection<Part> getSourceAndAncestors(boolean behaviorOnly, Collection<EObject> transfoSources_p) {
     Collection<Part> sources = new HashSet<Part>();
 
     for (EObject eObject : transfoSources_p) {
       if (eObject instanceof Part) {
         sources.add((Part) eObject);
-        sources.addAll(ComponentExt.getPartAncestors((Part) eObject));
+        sources.addAll(getPartAncestors(behaviorOnly, (Part) eObject));
 
       } else if (eObject instanceof Component) {
         for (Part part : ((Component) eObject).getRepresentingParts()) {
           sources.add(part);
-          sources.addAll(ComponentExt.getPartAncestors(part));
+          sources.addAll(getPartAncestors(behaviorOnly, part));
         }
       }
     }
@@ -146,12 +219,70 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
     return sources;
   }
 
+  public static Collection<Part> getPartAncestors(boolean behaviorOnly, Part child) {
+    return getPartAncestors(behaviorOnly, child, false);
+  }
+
+  /**
+   * Returns recursively all parts which contains the given part. All representing partition of containers and all parts
+   * deploying the given part
+   */
+  public static Collection<Part> getPartAncestors(boolean behaviorOnly, Part child,
+      boolean addGeneralizationOfParents) {
+    if (!behaviorOnly)
+      return ComponentExt.getPartAncestors(child, addGeneralizationOfParents);
+
+    Collection<Part> result = new ArrayList<Part>();
+    HashSet<Part> visited = new HashSet<Part>();
+    LinkedList<Part> toVisit = new LinkedList<>();
+
+    if (child != null) {
+      toVisit.add(child);
+
+      while (toVisit.size() > 0) {
+        Part visit = toVisit.removeFirst();
+
+        if (visit instanceof Part) {
+          Part pvisit = visit;
+
+          Component parent = ComponentExt.getDirectParent(pvisit);
+          if (parent != null) {
+            List<EObject> container = new ArrayList<EObject>();
+            container.add(parent);
+
+            // Retrieve also generalization of
+            if (addGeneralizationOfParents && (parent instanceof GeneralizableElement)) {
+              List<GeneralizableElement> elements = GeneralizableElementExt.getAllSuperGeneralizableElements(parent);
+              container.addAll(elements);
+            }
+
+            for (EObject element : container) {
+              if (element instanceof Component) {
+                for (Part part : ((Component) element).getRepresentingParts()) {
+                  if (!visited.contains(part)) {
+                    toVisit.addLast(part);
+                    result.add(part);
+                    visited.add(part);
+                  }
+                }
+              }
+            }
+          }
+
+        }
+      }
+
+    }
+
+    return result;
+  }
+
   /**
    * @param element_p
    * @param transfoSources_p
    * @return
    */
-  private boolean isBrotherWithSource(Component element_p, Collection<EObject> transfoSources_p) {
+  private boolean isBrotherWithSource(boolean behaviorOnly, Component element_p, Collection<EObject> transfoSources_p) {
 
     Collection<Part> sources = new HashSet<Part>();
 
@@ -168,7 +299,7 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
 
     for (Part part : element_p.getRepresentingParts()) {
       for (Part source : sources) {
-        if (ComponentExt.isBrothers(part, source)) {
+        if (isBrothers(behaviorOnly, part, source)) {
           return true;
         }
       }
@@ -182,10 +313,10 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
    * @param transfoSources_p
    * @return
    */
-  private boolean isAncestorOf(Component element_p, Collection<EObject> transfoSources_p) {
+  private boolean isAncestorOf(boolean behaviorOnly, Component element_p, Collection<EObject> transfoSources_p) {
     for (EObject source : transfoSources_p) {
       if (source instanceof Part) {
-        for (Part part : ComponentExt.getPartAncestors((Part) source)) {
+        for (Part part : getPartAncestors(behaviorOnly, (Part) source)) {
           if (element_p.equals(part.getAbstractType())) {
             return true;
           }
@@ -193,7 +324,7 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
       } else if (source instanceof Component) {
         for (Part partSource : ((Component) source).getRepresentingParts()) {
           if (partSource instanceof Part) {
-            for (Part part : ComponentExt.getPartAncestors(partSource)) {
+            for (Part part : getPartAncestors(behaviorOnly, partSource)) {
               if (element_p.equals(part.getAbstractType())) {
                 return true;
               }
@@ -275,13 +406,15 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
       if (traced instanceof Component) {
         traced = getRelatedComponent((Component) traced, context_p);
       }
-      for (EObject related : TraceabilityHandlerHelper.getInstance(context_p).retrieveTracedElements(traced, context_p)) {
+      for (EObject related : TraceabilityHandlerHelper.getInstance(context_p).retrieveTracedElements(traced,
+          context_p)) {
         attachElementByReference(source_p, target_p, traced, related, feature_p, feature_p);
       }
     }
   }
 
-  public void attachRelatedOfMergedElements(EObject element_p, EObject result_p, EReference reference_p, IContext context_p) {
+  public void attachRelatedOfMergedElements(EObject element_p, EObject result_p, EReference reference_p,
+      IContext context_p) {
     Collection<EObject> values = getReverseMap(context_p).get(element_p);
     if ((values != null) && (values.size() > 0)) {
       for (EObject value : values) {
@@ -292,7 +425,8 @@ public class CrossPhasesAttachmentHelper extends CapellaDefaultAttachmentHandler
     }
   }
 
-  public void addPremicesRelatedOfMergedComponent(EObject element_p, AbstractRule rule, EReference feature, ArrayList<IPremise> needed_p, IContext context_p) {
+  public void addPremicesRelatedOfMergedComponent(EObject element_p, AbstractRule rule, EReference feature,
+      ArrayList<IPremise> needed_p, IContext context_p) {
     Collection<EObject> values = getReverseMap(context_p).get(element_p);
     if ((values != null) && (values.size() > 0)) {
       for (EObject value : values) {

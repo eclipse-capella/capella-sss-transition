@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 THALES GLOBAL SERVICES.
+ * Copyright (c) 2016, 2022 THALES GLOBAL SERVICES.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -29,6 +29,8 @@ public class AllCrossPhasesTests extends BasicTestSuite {
   @Override
   protected List<BasicTestArtefact> getTests() {
     final List<BasicTestArtefact> tests = new ArrayList<BasicTestArtefact>();
+
+    tests.addAll(System2SubsystemTest.testsFor(BehaviorComponentTest.class));
 
     tests.add(new PhysicalToSystemComponent.Test1());
     tests.add(new PhysicalToSystemComponent.Test2());
