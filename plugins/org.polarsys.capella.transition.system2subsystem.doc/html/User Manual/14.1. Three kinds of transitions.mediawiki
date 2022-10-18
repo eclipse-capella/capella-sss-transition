@@ -23,7 +23,13 @@ Traceability between System and Sub System is ensured through a '''mechanism bas
 
 The objective of this transition is to extract a subset of the Physical or Logical Architecture and populate a new model with this subset.
 
-[[Image:Images/Scoped_Horizontal_Extraction.png|800px]]
+'''Configuration Items and Nodes :'''
+
+[[Image:Images/Scoped_Horizontal_Extraction_nodes_and_conf.png|800px]]
+
+'''Behaviour components :'''
+
+[[Image:Images/Scoped_Horizontal_Extraction_behaviour.png|800px]]
 
 The transformation algorithm performs the following steps:
 
@@ -33,7 +39,7 @@ The transformation algorithm performs the following steps:
 
 '''Recommandations'''
 
-Mixing both Node and Behavior PCs is not recommended.
+Selecting both Node and Behavior PCs as the Subsystem is not recommended.
 
 However if you do so, deploying nodes and merging rules will be applied for all deployed Behavioral PCs
 
@@ -41,7 +47,15 @@ However if you do so, deploying nodes and merging rules will be applied for all 
 
 The objective of this transition is to re-apply the methodology starting from one or several given Configuration Item(s). 
 
-[[Image:Images/Vertical_Transition.png|800px]]
+'''Configuration Items and Nodes :'''
+
+[[Image:Images/Vertical_Transition_nodes_and_conf.png|800px]]
+
+'''Behaviour components :'''
+
+[[Image:Images/Vertical_Transition_behaviour.png|800px]]
+
+
 
 The transformation algorithm performs the following steps:
 
@@ -52,7 +66,7 @@ The transformation algorithm performs the following steps:
 
 '''Recommandations'''
 
-Mixing both Node and Behavior PCs is not recommended.
+Selecting both Node and Behavior PCs as the Subsystem is not recommended.
 
 However if you do so, deploying nodes and merging rules will be applied for all deployed Behavioral PCs
 
