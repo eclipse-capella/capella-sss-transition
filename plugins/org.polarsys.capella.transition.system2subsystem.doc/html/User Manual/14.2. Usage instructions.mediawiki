@@ -23,7 +23,7 @@ Transitions are possible from one or several logical, physical components or one
 
 A configuration dialog opens with two tabs.
 
-The "Main" tab allows, among others parameters, to choose the target model.
+The "Main" tab allows, among others parameters, to choose the target model (excluding the source model).
  
 [[Image:Images/Config_Transition_main.png|682px]]
 

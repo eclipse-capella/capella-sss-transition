@@ -26,10 +26,14 @@
    </extension>
    <extension
          point="org.polarsys.capella.common.flexibility.wizards">
+      <propertyRenderer
+            id="filteredOutputModelRenderer"
+            class="org.polarsys.capella.transition.system2subsystem.ui.preferences.FilteredOutputModelRenderer">
+      </propertyRenderer>
       <bindings properties="capella.core.transition.system2subsystem">
         <propertyBinding
               property="outputModel"
-              renderer="outputModelRenderer">
+              renderer="filteredOutputModelRenderer">
         </propertyBinding>
         <propertyBinding
               property="dataExport"
