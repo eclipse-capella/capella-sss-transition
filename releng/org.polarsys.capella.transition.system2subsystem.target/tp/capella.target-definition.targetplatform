@@ -10,7 +10,7 @@
  *******************************************************************************/
 target "CapellaSubsystemTransition"
 
-include "https://raw.githubusercontent.com/eclipse/capella/master/releng/plugins/org.polarsys.capella.targets/full/capella.target-definition.targetplatform"
+include "https://download.eclipse.org/capella/core/updates/nightly/master/targets/capella.target-definition.targetplatform"
 
 with source, requirements
 
