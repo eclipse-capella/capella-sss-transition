@@ -22,7 +22,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.polarsys.capella.core.data.business.queries
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
-Bundle-Version: 1.6.0.qualifier
+Bundle-Version: 1.6.1.qualifier
 Bundle-Localization: plugin
 Bundle-Name: %pluginName
 Bundle-Activator: org.polarsys.capella.transition.system2subsystem.crossphases.Activator
