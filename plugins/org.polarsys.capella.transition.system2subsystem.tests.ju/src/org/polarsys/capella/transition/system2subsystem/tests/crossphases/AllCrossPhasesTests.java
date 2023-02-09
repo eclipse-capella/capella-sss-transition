@@ -34,6 +34,7 @@ public class AllCrossPhasesTests extends BasicTestSuite {
 
     tests.add(new PhysicalToSystemComponent.Test1());
     tests.add(new PhysicalToSystemComponent.Test2());
+    tests.add(new PhysicalToSystemComponent.Test3());
     tests.add(new ComponentExchangesAndPorts.Test1());
     tests.add(new ComponentExchangesAndPorts.Test2());
     tests.add(new FunctionAllocations());

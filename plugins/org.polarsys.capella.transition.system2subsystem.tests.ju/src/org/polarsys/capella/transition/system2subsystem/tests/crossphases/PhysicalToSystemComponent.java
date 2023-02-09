@@ -12,9 +12,13 @@
  *******************************************************************************/
 package org.polarsys.capella.transition.system2subsystem.tests.crossphases;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.polarsys.capella.common.data.modellingcore.ModellingcorePackage;
+import org.polarsys.capella.core.model.handler.command.CapellaResourceHelper;
 
 public class PhysicalToSystemComponent {
 
@@ -41,6 +45,7 @@ public class PhysicalToSystemComponent {
       retrieveReferenceElement(PC2);
       testInstanceOf(retrieveTargetElement(PC2), ComponentType.ACTOR);
     }
+    
   }
 
   /**
@@ -61,4 +66,39 @@ public class PhysicalToSystemComponent {
           ModellingcorePackage.Literals.ABSTRACT_NAMED_ELEMENT__NAME);
     }
   }
+  
+  /**
+   * PC to System: Test if a PC is correctly transitionned to a fragmented System
+   */
+  public static class Test3 extends CrossPhasesTest {
+	  
+	  
+	@Override
+	public List<String> getRequiredTestModels() {
+		return Arrays.asList("Project_test_01", "fragmentedOutput"); //$NON-NLS-1$ //$NON-NLS-2$
+	}
+	  
+	@Override
+	protected String getOutputModelPlatformURIString() {
+		return "/fragmentedOutput/fragmentedOutput."+CapellaResourceHelper.CAPELLA_MODEL_FILE_EXTENSION;
+	}
+
+	@Override
+	protected Collection<?> getProjectionElements() {
+		return getObjects(PC11);
+	}
+	  
+	@Override
+	protected void verify() {
+		  
+		retrieveReferenceElement(PC11);
+		testInstanceOf(retrieveTargetElement(PC11), ComponentType.SYSTEM);
+		  
+		retrieveReferenceElement(PC2);
+		testInstanceOf(retrieveTargetElement(PC2), ComponentType.ACTOR);
+	}
+	  
+  }
+  
 }
+

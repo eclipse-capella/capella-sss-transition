@@ -34,7 +34,6 @@ import org.polarsys.capella.core.transition.common.merge.scope.TargetModelScope;
 import org.polarsys.capella.core.transition.system.handlers.merge.AttributeDescriptionValueFromSource;
 import org.polarsys.capella.core.transition.system.handlers.merge.AttributeNameValueFromSource;
 import org.polarsys.capella.core.transition.system.handlers.merge.AttributeSummaryValueFromSource;
-import org.polarsys.capella.core.transition.system.handlers.merge.CapellaClassFilters;
 import org.polarsys.capella.core.transition.system.handlers.merge.RootCategoryFilter;
 import org.polarsys.capella.core.transition.system.topdown.handlers.merge.RealizationLinkCategoryFilter;
 import org.polarsys.capella.transition.system2subsystem.constants.ITransitionConstants2;
@@ -69,7 +68,6 @@ public class InitializeMultiphasesDiffMergeActivity extends InitializeDiffMergeF
       ActivityParameters activityParams) {
     super.initializeCategoriesHandlers(context, handler, activityParams);
 
-    CapellaClassFilters.addClassFilters(handler, context);
     handler.addCategory(new RootCategoryFilter(context), context);
     handler.addCategory(new AttributeNameValueFromSource(context) {
       @Override

@@ -14,6 +14,8 @@ package org.polarsys.capella.transition.system2subsystem.activities;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -23,7 +25,9 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.polarsys.capella.common.helpers.EcoreUtil2;
 import org.polarsys.capella.core.model.handler.helpers.HoldingResourceHelper;
 import org.polarsys.capella.core.transition.common.activities.AbstractActivity;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
@@ -33,12 +37,11 @@ import org.polarsys.capella.transition.system2subsystem.SubsystemPreferences;
 import org.polarsys.kitalpha.cadence.core.api.parameter.ActivityParameters;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
-
 public class FinalizeSubsystemTransitionActivity extends AbstractActivity {
 
   public static final String ID = "org.polarsys.capella.transition.system2subsystem.activities.FinalizeSubsystemTransitionActivity"; //$NON-NLS-1$
 
-  public static final String PARAM__DELETE_PROJECT = "FinalizeSubsystemTransitionActivity_Delete_Project"; //$NON-NLS-1$  
+  public static final String PARAM__DELETE_PROJECT = "FinalizeSubsystemTransitionActivity_Delete_Project"; //$NON-NLS-1$
 
   /**
    * {@inheritDoc}
@@ -54,13 +57,14 @@ public class FinalizeSubsystemTransitionActivity extends AbstractActivity {
   }
 
   private boolean keepTransformationProject() {
-    return Platform.getPreferencesService().getBoolean(org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID,
+    return Platform.getPreferencesService().getBoolean(
+        org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID,
         SubsystemPreferences.KEEP_TRANSFORMATION_PROJECT, false, null);
   }
 
   private void unloadHoldingResource(ActivityParameters activityParameters_p) {
-    TransactionalEditingDomain domain =
-        (TransactionalEditingDomain) getContext(activityParameters_p).get(ITransitionConstants.TRANSITION_TARGET_EDITING_DOMAIN);
+    TransactionalEditingDomain domain = (TransactionalEditingDomain) getContext(activityParameters_p)
+        .get(ITransitionConstants.TRANSITION_TARGET_EDITING_DOMAIN);
     if (domain != null) {
       HoldingResourceHelper.flushHoldingResource(domain);
     }
@@ -71,19 +75,23 @@ public class FinalizeSubsystemTransitionActivity extends AbstractActivity {
     EObject transformationRoot = (EObject) context.get(ITransitionConstants.TRANSFORMATION_TARGET_ROOT);
 
     if (transformationRoot != null) {
-
       Resource transformationResource = transformationRoot.eResource();
       Resource targetResource = (Resource) context.get(ITransitionConstants.TRANSITION_TARGET_RESOURCE);
+      
 
       // unless we transform directly into the target resource
-      // inter and crossphase transform into a resourceless model, so that in these cases the transformationResource is null
+      // inter and crossphase transform into a resourceless model, so that in these cases the transformationResource is
+      // null
       if ((transformationResource != null) && (transformationResource != targetResource)) {
 
         if (keepTransformationProject()) {
           try {
             transformationResource.save(Collections.emptyMap());
           } catch (IOException exception_p) {
-            LogHelper.getInstance().log(exception_p.getMessage(), new Status(IStatus.ERROR, org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID, exception_p.getMessage(), exception_p), Messages.Activity_Transformation);
+            LogHelper.getInstance().log(exception_p.getMessage(),
+                new Status(IStatus.ERROR, org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID,
+                    exception_p.getMessage(), exception_p),
+                Messages.Activity_Transformation);
           }
         }
 
@@ -92,12 +100,32 @@ public class FinalizeSubsystemTransitionActivity extends AbstractActivity {
         transformationResource.getResourceSet().getResources().remove(transformationResource);
       }
 
-      // Remember that the selected target file is loaded into 
+      // Remember that the selected target file is loaded into
       // the editing domain of the source resource to process the transformation.
-      // now we're done with it and need to unload it. (The resource was already saved in FinalizeTransitionAction, so theres no need to save it again here)
+      // now we're done with it and need to unload it. (The resource was already saved in FinalizeTransitionAction, so
+      // theres no need to save it again here)
       if (targetResource != null) {
-        targetResource.unload();
-        targetResource.getResourceSet().getResources().remove(targetResource);
+        
+        IProject targetProject = EcoreUtil2.getFile(targetResource).getProject();
+        ResourceSet set = targetResource.getResourceSet();
+        List<Resource> targetResources = targetResource.getResourceSet().getResources().stream()
+            .filter(r -> r.getURI().isPlatformResource() && targetProject.equals(EcoreUtil2.getFile(r).getProject()))
+            .collect(Collectors.toList());
+        
+        for (Resource resource : targetResources) {
+          try {
+            resource.save(Collections.emptyMap());
+            resource.unload();
+            set.getResources().remove(resource);
+            
+          } catch (IOException exception_p) {
+            LogHelper.getInstance().log(exception_p.getMessage(),
+                new Status(IStatus.ERROR, org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID,
+                    exception_p.getMessage(), exception_p),
+                Messages.Activity_Transformation);
+          }
+        }
+        
       }
 
     }
@@ -111,7 +139,10 @@ public class FinalizeSubsystemTransitionActivity extends AbstractActivity {
         try {
           toDelete.delete(true, new NullProgressMonitor());
         } catch (CoreException exception_p) {
-          LogHelper.getInstance().log(exception_p.getMessage(), new Status(IStatus.ERROR, org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID, exception_p.getMessage(), exception_p), Messages.Activity_Transformation);
+          LogHelper.getInstance().log(exception_p.getMessage(),
+              new Status(IStatus.ERROR, org.polarsys.capella.transition.system2subsystem.Activator.PLUGIN_ID,
+                  exception_p.getMessage(), exception_p),
+              Messages.Activity_Transformation);
         }
       }
     }
