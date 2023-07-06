@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022 THALES GLOBAL SERVICES.
+ * Copyright (c) 2022, 2023 THALES GLOBAL SERVICES.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -73,7 +73,7 @@ public class CopyManagementPropertiesActivity extends AbstractActivity implement
 
         EObject sourceElement = candidateSourceElements.iterator().next();
 
-        EnumerationPropertyLiteral status = ((CapellaElement) sourceElement).getStatus();
+        EnumerationPropertyLiteral status = sourceElement instanceof CapellaElement ? ((CapellaElement) sourceElement).getStatus() : null;
 
         if (status != null) {
           Collection<EObject> tracedElements = TraceabilityHandlerHelper.getInstance(context)
