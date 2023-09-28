@@ -234,6 +234,15 @@ public abstract class AbstractSystem2SubsystemTest extends BasicCommandTestCase 
     assertTrue(targetSystem != null);
     return targetSystem;
   }
+  
+  public SystemAnalysis retrieveTargetSystemAnalysis() {
+	    ModelElement dummyTargetElement = (ModelElement) getOutputModelResource().getContents().get(0);
+	    Project targetProject = ProjectExt.getProject(dummyTargetElement);
+	    SystemEngineering targetSystemEngineering = SystemEngineeringExt.getSystemEngineering(targetProject);
+	    SystemAnalysis targetSystemAnalysis = SystemEngineeringExt.getSystemAnalysis(targetSystemEngineering);
+	    assertTrue(targetSystemAnalysis != null);
+	    return targetSystemAnalysis;
+	  }
 
   public LogicalComponent retrieveTargetLogicalSystem() {
     ModelElement dummyTargetElement = (ModelElement) getOutputModelResource().getContents().get(0);
