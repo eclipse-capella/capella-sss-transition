@@ -3,10 +3,10 @@
    <description url="http://www.polarsys.org/capella">
       Capella Subsystem Transition
    </description>
-   <feature id="org.polarsys.capella.transition.system2subsystem.feature.source" version="1.6.3.qualifier">
+   <feature id="org.polarsys.capella.transition.system2subsystem.feature.source" version="1.6.4.qualifier">
       <category name="org.polarsys.capella.transition.system2subsystem"/>
    </feature>
-   <feature id="org.polarsys.capella.transition.system2subsystem.tests.feature" version="1.6.3.qualifier">
+   <feature id="org.polarsys.capella.transition.system2subsystem.tests.feature" version="1.6.4.qualifier">
       <category name="org.polarsys.capella.transition.system2subsystem.tests"/>
    </feature>
    <category-def name="org.polarsys.capella.transition.system2subsystem" label="Capella Subsystem Transition"/>
