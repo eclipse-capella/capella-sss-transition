@@ -114,7 +114,10 @@ public class PartRule extends org.polarsys.capella.transition.system2subsystem.r
       bestContainer = TransformationHandlerHelper.getInstance(context).getBestTracedElement(container, context,
           sContext);
     }
-
+    // If container was transformed to an Actor, fall back to Structure pkg
+    if (ComponentExt.isActor(bestContainer) && !ComponentExt.isActor(container)) {
+        return null;
+    }
     return bestContainer;
   }
 }
