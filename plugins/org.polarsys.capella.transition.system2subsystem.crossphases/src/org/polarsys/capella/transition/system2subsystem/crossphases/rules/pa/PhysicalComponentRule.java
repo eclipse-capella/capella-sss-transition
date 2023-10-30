@@ -108,6 +108,11 @@ protected void premicesContainement(EObject element, ArrayList<IPremise> needed)
   protected void retrieveGoDeep(EObject source, List<EObject> result, IContext context) {
     super.retrieveGoDeep(source, result, context);
 
+    Component related = CrossPhasesAttachmentHelper.getInstance(context).getRelatedComponent((Component) source, context);
+    if (related != source) {
+      result.add(related);
+    }
+    
     if (ContextScopeHandlerHelper.getInstance(context).contains(ITransitionConstants.SOURCE_SCOPE, source, context)) {
       if (source instanceof Component) {
         Component element = (Component) source;
