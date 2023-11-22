@@ -17,4 +17,4 @@ Bundle-Name: %pluginName
 Bundle-Activator: org.polarsys.capella.transition.system2subsystem.ui.Activator
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.polarsys.capella.transition.system2subsystem.ui;singleton:=true
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-17
