@@ -11,7 +11,7 @@ Require-Bundle: org.eclipse.ui,
  org.polarsys.capella.transition.system2subsystem.multiphases;visibility:=reexport,
  org.polarsys.capella.transition.system2subsystem.ui;visibility:=reexport,
  org.eclipse.core.expressions
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-ActivationPolicy: lazy
 Export-Package: org.polarsys.capella.transition.system2subsystem.multiphases.ui,
  org.polarsys.capella.transition.system2subsystem.multiphases.ui.handlers
