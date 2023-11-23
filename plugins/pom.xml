@@ -33,6 +33,7 @@
 		<module>org.polarsys.capella.transition.system2subsystem.crossphases</module>
 		<module>org.polarsys.capella.transition.system2subsystem.crossphases.ui</module>
 		<module>org.polarsys.capella.transition.system2subsystem.doc</module>
+		<module>org.polarsys.capella.transition.system2subsystem.extension</module>
 		<module>org.polarsys.capella.transition.system2subsystem.interphases</module>
 		<module>org.polarsys.capella.transition.system2subsystem.interphases.ui</module>
 		<module>org.polarsys.capella.transition.system2subsystem.multiphases</module>

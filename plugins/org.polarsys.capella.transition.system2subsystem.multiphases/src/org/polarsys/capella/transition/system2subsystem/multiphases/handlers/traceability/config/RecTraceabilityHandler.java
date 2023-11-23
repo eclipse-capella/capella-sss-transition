@@ -34,6 +34,7 @@ import org.polarsys.capella.core.data.oa.OperationalAnalysis;
 import org.polarsys.capella.core.data.pa.PhysicalArchitecture;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
+import org.polarsys.capella.core.transition.common.handlers.extension.TransitionExtensionManager;
 import org.polarsys.capella.core.transition.common.handlers.traceability.ITraceabilityHandler;
 import org.polarsys.capella.transition.system2subsystem.multiphases.MultiphasesContext;
 import org.polarsys.capella.transition.system2subsystem.multiphases.MultiphasesContext.Mapping;
@@ -101,11 +102,7 @@ public class RecTraceabilityHandler implements ITraceabilityHandler {
       map.put(sourceInterfacePkg, targetInterfacePkg);
     }
 
-    Structure sourceRequirementsPkg = BlockArchitectureExt.getRequirementsPkg(sourcePA, false);
-    Structure targetRequirementsPkg = BlockArchitectureExt.getRequirementsPkg(targetBlockArchitecture, false);
-    if ((sourceRequirementsPkg != null) && (targetRequirementsPkg != null)) {
-      map.put(sourceRequirementsPkg, targetRequirementsPkg);
-    }
+    TransitionExtensionManager.eINSTANCE.addAdditionnalTraceabilityMappings(map, sourcePA, targetBlockArchitecture);
 
     Structure sourceCapabilityPkg = BlockArchitectureExt.getAbstractCapabilityPkg(sourcePA, false);
     Structure targetCapabilityPkg = BlockArchitectureExt.getAbstractCapabilityPkg(targetBlockArchitecture, false);

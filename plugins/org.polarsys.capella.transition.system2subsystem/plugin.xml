@@ -581,48 +581,6 @@
                </defaultMappingPossibility>
             </mappingElement>
           </mappingPackage>
-         
-         
-         <mappingPackage
-               name="requirement">
-               
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.requirement.RequirementsPkg"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.rules.requirement.RequirementsPkgRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.rules.requirement.RequirementsPkgRule"
-                     enabled="true"
-                     name="RequirementsPkg">
-               </defaultMappingPossibility>
-            </mappingElement>
-            
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.requirement.Requirement"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.rules.requirement.RequirementRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.rules.requirement.RequirementRule"
-                     enabled="true"
-                     name="Requirement">
-               </defaultMappingPossibility>
-            </mappingElement>
-            
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.requirement.RequirementsTrace"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.rules.requirement.RequirementsTraceRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.rules.requirement.RequirementsTraceRule"
-                     enabled="true"
-                     name="RequirementsTrace">
-               </defaultMappingPossibility>
-            </mappingElement>
-         </mappingPackage>
-            
        </mapping>
 </extension>
 
@@ -795,12 +753,7 @@
                id="propertyValues"
                name="%group.propertyValues"
                parent="extensionGroup">
-         </group>
-         <group
-               id="requirements"
-               name="%group.requirements"
-               parent="extensionGroup">
-         </group>
+         </group>         
          <property
                class="org.polarsys.capella.common.flexibility.properties.property.BooleanPropertyPreference"
                enabled="false"
@@ -962,21 +915,6 @@
                group="propertyValues"
                id="propertyValuesExport"
                name="%property.propertyValues">
-            <argument
-                  id="scope"
-                  value="capella.core.transition.system2subsystem">
-            </argument>
-            <argument
-                  id="default"
-                  value="">
-            </argument>
-         </property>
-         <property
-               class="org.polarsys.capella.transition.system2subsystem.preferences.RequirementsPreference"
-               enabled="true"
-               group="requirements"
-               id="requirementsExport"
-               name="%property.requirements">
             <argument
                   id="scope"
                   value="capella.core.transition.system2subsystem">

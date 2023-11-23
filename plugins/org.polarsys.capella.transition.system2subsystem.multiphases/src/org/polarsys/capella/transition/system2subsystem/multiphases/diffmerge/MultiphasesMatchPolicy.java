@@ -72,6 +72,7 @@ import org.polarsys.capella.core.data.pa.PhysicalFunction;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.naming.NamingConstants;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
+import org.polarsys.capella.core.transition.common.handlers.extension.TransitionExtensionManager;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 public class MultiphasesMatchPolicy implements IMatchPolicy<EObject> {
@@ -244,9 +245,6 @@ public class MultiphasesMatchPolicy implements IMatchPolicy<EObject> {
       key = new Key(c, CsPackage.Literals.BLOCK_ARCHITECTURE__OWNED_INTERFACE_PKG);
       matchIDs.put(key, key.toString());
 
-      key = new Key(c, CsPackage.Literals.BLOCK_ARCHITECTURE__OWNED_REQUIREMENT_PKGS);
-      matchIDs.put(key, key.toString());
-
       key = new Key(c, FaPackage.Literals.ABSTRACT_FUNCTIONAL_ARCHITECTURE__OWNED_FUNCTION_PKG);
       matchIDs.put(key, key.toString());
     }
@@ -305,6 +303,11 @@ public class MultiphasesMatchPolicy implements IMatchPolicy<EObject> {
   public String getMatchID(final EObject element_p, ITreeDataScope<EObject> scope_p) {
 
     String result = null;
+
+    // Test if the element has a match key provided by an external plugin
+    if (result == null) {
+      result = TransitionExtensionManager.eINSTANCE.getAdditionalMatchKey(element_p, scope_p);
+    }
 
     // Test if the element is one of the root system
     if (result == null) {

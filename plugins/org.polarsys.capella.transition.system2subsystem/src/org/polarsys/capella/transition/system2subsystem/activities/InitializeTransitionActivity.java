@@ -30,6 +30,7 @@ import org.polarsys.capella.core.model.handler.helpers.HoldingResourceHelper;
 import org.polarsys.capella.core.transition.common.constants.IOptionsConstants;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.IHandler;
+import org.polarsys.capella.core.transition.common.handlers.extension.TransitionExtensionManager;
 import org.polarsys.capella.core.transition.common.handlers.options.OptionsHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.scope.CompoundScopeFilter;
 import org.polarsys.capella.core.transition.common.handlers.scope.CompoundScopeRetriever;
@@ -46,8 +47,6 @@ import org.polarsys.capella.transition.system2subsystem.handlers.attachment.Scen
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.ExternalFunctionsScopeRetriever;
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.PropertyValuesScopeFilter;
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.PropertyValuesScopeRetriever;
-import org.polarsys.capella.transition.system2subsystem.handlers.scope.RequirementsScopeFilter;
-import org.polarsys.capella.transition.system2subsystem.handlers.scope.RequirementsScopeRetriever;
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.StatusScopeRetriever;
 import org.polarsys.capella.transition.system2subsystem.handlers.session.SubSystemSessionHandler;
 import org.polarsys.capella.transition.system2subsystem.handlers.traceability.config.TransformationConfiguration;
@@ -73,9 +72,10 @@ public class InitializeTransitionActivity
     IScopeFilter filter = PropertyValuesScopeFilter.getInstance(context);
     handler.addScopeFilter(filter, context);
 
-    filter = RequirementsScopeFilter.getInstance(context);
-    handler.addScopeFilter(filter, context);
-
+    for (IScopeFilter additionalFilter : TransitionExtensionManager.eINSTANCE
+        .getAdditionalScopeFilters(context)) {
+      handler.addScopeFilter(additionalFilter, context);
+    }
     return super.initializeScopeFilterHandlers(context, handler, activityParams);
   }
 
@@ -103,8 +103,10 @@ public class InitializeTransitionActivity
     IScopeRetriever retriever = new PropertyValuesScopeRetriever();
     handler.addScopeRetriever(retriever, context);
 
-    retriever = new RequirementsScopeRetriever();
-    handler.addScopeRetriever(retriever, context);
+    for (IScopeRetriever additionalRetriever : TransitionExtensionManager.eINSTANCE
+        .getAdditionalScopeRetrievers(context)) {
+      handler.addScopeRetriever(additionalRetriever, context);
+    }
 
     handler.addScopeRetriever(new ExternalFunctionsScopeRetriever(), context);
     handler.addScopeRetriever(new StatusScopeRetriever(), context);

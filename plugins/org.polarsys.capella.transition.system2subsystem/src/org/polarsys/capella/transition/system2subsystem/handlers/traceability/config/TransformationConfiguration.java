@@ -13,6 +13,8 @@
 package org.polarsys.capella.transition.system2subsystem.handlers.traceability.config;
 
 import java.util.Collection;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
@@ -24,6 +26,7 @@ import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
 import org.polarsys.capella.core.transition.common.constants.ISchemaConstants;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
+import org.polarsys.capella.core.transition.common.handlers.extension.TransitionExtensionManager;
 import org.polarsys.capella.core.transition.common.handlers.traceability.ITraceabilityHandler;
 import org.polarsys.capella.core.transition.common.handlers.traceability.config.ExtendedTraceabilityConfiguration;
 import org.polarsys.capella.core.transition.system.handlers.traceability.LibraryTraceabilityHandler;
@@ -96,10 +99,14 @@ public class TransformationConfiguration extends ExtendedTraceabilityConfigurati
         if (sourceChild != null) {
           addMapping(map, sourceChild, BlockArchitectureExt.getInterfacePkg(target, true), context);
         }
-        sourceChild = BlockArchitectureExt.getRequirementsPkg(source, false);
-        if (sourceChild != null) {
-          addMapping(map, sourceChild, BlockArchitectureExt.getRequirementsPkg(target, true), context);
+
+        Set<Entry<EObject, EObject>> additionalMappings = TransitionExtensionManager.eINSTANCE
+            .initializeBlockArchitecture(source, target, true);
+
+        for (Entry<EObject, EObject> additionalMapping : additionalMappings) {
+          addMapping(map, additionalMapping.getKey(), additionalMapping.getValue(), context);
         }
+
         sourceChild = BlockArchitectureExt.getAbstractCapabilityPkg(source, false);
         if (sourceChild != null) {
           addMapping(map, sourceChild, BlockArchitectureExt.getAbstractCapabilityPkg(target, true), context);
