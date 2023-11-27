@@ -36,7 +36,6 @@ import org.polarsys.kitalpha.transposer.rules.handler.business.premises.Containm
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IPremise;
 
-
 public class PhysicalComponentRule extends Component2SARule {
 
   @Override
@@ -44,29 +43,29 @@ public class PhysicalComponentRule extends Component2SARule {
     return PaPackage.Literals.PHYSICAL_COMPONENT;
   }
 
-protected void premicesContainement(EObject element, ArrayList<IPremise> needed) {
-	  
-	  ContainmentPremise<EObject> defaultPremise = createDefaultContainementPremice(element);
-	  if (defaultPremise != null) {
-		  needed.add(defaultPremise);
+  @Override
+  protected void premicesContainement(EObject element, ArrayList<IPremise> needed) {
+    ContainmentPremise<EObject> defaultPremise = createDefaultContainementPremice(element);
+    if (defaultPremise != null) {
+      needed.add(defaultPremise);
 
-		  IContext context = getCurrentContext();
-		  EObject bestContainer = CrossPhasesAttachmentHelper.getInstance(context).getRelatedComponent((Component) element, context);
-		  if (!bestContainer.equals(element) && !defaultPremise.getFirstElement().equals(bestContainer)) {
-			  IPremise currentPremise = createContainmentPremice(bestContainer);
-			  if (currentPremise != null) {
-				  needed.add(currentPremise);
-			  }
-		  }
-	  }
+      IContext context = getCurrentContext();
+      EObject bestContainer = CrossPhasesAttachmentHelper.getInstance(context).getRelatedComponent((Component) element,
+          context);
+      if (!bestContainer.equals(element) && !defaultPremise.getFirstElement().equals(bestContainer)) {
+        IPremise currentPremise = createContainmentPremice(bestContainer);
+        if (currentPremise != null) {
+          needed.add(currentPremise);
+        }
+      }
+    }
   }
-
 
   /**
    * {@inheritDoc}
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-@Override
+  @Override
   protected void premicesRelated(EObject element, ArrayList<IPremise> needed) {
     super.premicesRelated(element, needed);
     PhysicalComponent physicalElement = (PhysicalComponent) element;
@@ -87,7 +86,7 @@ protected void premicesContainement(EObject element, ArrayList<IPremise> needed)
     /*
      * Is it in selection?
      */
-	Collection<EObject> transfoSources = (Collection<EObject>) context.get(ITransitionConstants.TRANSITION_SOURCES);
+    Collection<EObject> transfoSources = (Collection<EObject>) context.get(ITransitionConstants.TRANSITION_SOURCES);
     if (transfoSources.contains(element)) {
       return Status.OK_STATUS;
     }
@@ -97,8 +96,9 @@ protected void premicesContainement(EObject element, ArrayList<IPremise> needed)
      */
     Component src = CrossPhasesAttachmentHelper.getInstance(context).getRelatedComponent(element, context);
     if (src != element) {
-      return new Status(IStatus.WARNING, Messages.Activity_Transformation, NLS.bind("Component ''{0}'' will be merged into ''{1}''", LogHelper.getInstance()
-          .getText(element), LogHelper.getInstance().getText(src)));
+      return new Status(IStatus.WARNING, Messages.Activity_Transformation,
+          NLS.bind("Component ''{0}'' will be merged into ''{1}''", LogHelper.getInstance().getText(element),
+              LogHelper.getInstance().getText(src)));
     }
 
     return super.transformRequired(source, context);
@@ -108,11 +108,12 @@ protected void premicesContainement(EObject element, ArrayList<IPremise> needed)
   protected void retrieveGoDeep(EObject source, List<EObject> result, IContext context) {
     super.retrieveGoDeep(source, result, context);
 
-    Component related = CrossPhasesAttachmentHelper.getInstance(context).getRelatedComponent((Component) source, context);
+    Component related = CrossPhasesAttachmentHelper.getInstance(context).getRelatedComponent((Component) source,
+        context);
     if (related != source) {
       result.add(related);
     }
-    
+
     if (ContextScopeHandlerHelper.getInstance(context).contains(ITransitionConstants.SOURCE_SCOPE, source, context)) {
       if (source instanceof Component) {
         Component element = (Component) source;

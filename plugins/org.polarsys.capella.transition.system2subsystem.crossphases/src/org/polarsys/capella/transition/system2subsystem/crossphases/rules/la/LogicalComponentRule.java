@@ -34,6 +34,7 @@ import org.polarsys.capella.core.transition.common.handlers.options.OptionsHandl
 import org.polarsys.capella.transition.system2subsystem.crossphases.constants.IOptionsConstants;
 import org.polarsys.capella.transition.system2subsystem.crossphases.handlers.attachment.CrossPhasesAttachmentHelper;
 import org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.Component2SARule;
+import org.polarsys.kitalpha.transposer.rules.handler.business.premises.ContainmentPremise;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IPremise;
 
@@ -45,9 +46,28 @@ public class LogicalComponentRule extends Component2SARule {
     return LaPackage.Literals.LOGICAL_COMPONENT;
   }
 
+  @Override
+  protected void premicesContainement(EObject element, ArrayList<IPremise> needed) {
+    ContainmentPremise<EObject> defaultPremise = createDefaultContainementPremice(element);
+    if (defaultPremise != null) {
+      needed.add(defaultPremise);
+
+      IContext context = getCurrentContext();
+      EObject bestContainer = CrossPhasesAttachmentHelper.getInstance(context).getRelatedComponent((Component) element,
+          context);
+      if (!bestContainer.equals(element) && !defaultPremise.getFirstElement().equals(bestContainer)) {
+        IPremise currentPremise = createContainmentPremice(bestContainer);
+        if (currentPremise != null) {
+          needed.add(currentPremise);
+        }
+      }
+    }
+  }
+
   /**
    * {@inheritDoc}
    */
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   @Override
   protected void premicesRelated(EObject element, ArrayList<IPremise> needed) {
     super.premicesRelated(element, needed);
@@ -57,10 +77,11 @@ public class LogicalComponentRule extends Component2SARule {
         IOptionsConstants.SYSTEM2SUBSYSTEM_CROSSPHASES_PREFERENCES, IOptionsConstants.COMPONENT_MERGE, IOptionsConstants.COMPONENT_MERGE__DEFAULT_VALUE)) {
       return;
     }
+    
     LogicalComponent component = (LogicalComponent) element;
-
     for (Part part : component.getRepresentingParts()) {
-      needed.addAll(createDefaultPrecedencePremices((Collection) ComponentExt.getPartAncestors(part, true), "part"));
+      Collection es = ComponentExt.getPartAncestors(part, true);
+      needed.addAll(createDefaultPrecedencePremices(es, "part"));
     }
   }
 
@@ -72,6 +93,11 @@ public class LogicalComponentRule extends Component2SARule {
     if (!OptionsHandlerHelper.getInstance(getCurrentContext()).getBooleanValue(getCurrentContext(),
         IOptionsConstants.SYSTEM2SUBSYSTEM_CROSSPHASES_PREFERENCES, IOptionsConstants.COMPONENT_MERGE, IOptionsConstants.COMPONENT_MERGE__DEFAULT_VALUE)) {
       return;
+    }
+
+    Component related = CrossPhasesAttachmentHelper.getInstance(context).getRelatedComponent((Component) source, context);
+    if (related != source) {
+      result.add(related);
     }
 
     if (ContextScopeHandlerHelper.getInstance(context).contains(ITransitionConstants.SOURCE_SCOPE, source, context)) {

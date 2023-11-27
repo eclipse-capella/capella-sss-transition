@@ -52,6 +52,8 @@ public class AllCrossPhasesTests extends BasicTestSuite {
     tests.add(new InternalExchangesTest.Exchanges());
     tests.add(new InternalExchangesTest.Ports());
     tests.add(new MergedComponentTest());
+    tests.add(new LogicalMergedComponentTest());
+    
     tests.addAll(System2SubsystemTest.testsFor(InverseFunctionalExchangeTest.class));
 
     return tests;
