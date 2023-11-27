@@ -16,9 +16,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest;
-import org.polarsys.capella.transition.system2subsystem.tests.System2SubsystemTest.Crossphase;
-
 public class MergedComponentTest extends CrossPhasesTest {
 
   /** test */
