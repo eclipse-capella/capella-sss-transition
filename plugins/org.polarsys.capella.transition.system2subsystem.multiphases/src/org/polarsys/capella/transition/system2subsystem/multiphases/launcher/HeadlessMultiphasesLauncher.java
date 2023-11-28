@@ -134,7 +134,8 @@ public class HeadlessMultiphasesLauncher {
   // here we fake a cadence invocation to initialize the transition.
   // TODO refactor to allow to be called outside cadence without the use of generic parameters..
   private IStatus initializeMultiphasesTransition(MultiphasesContext context) {
-
+    context.put(ITransitionConstants.TRANSPOSER_PURPOSE, "org.polarsys.capella.core.transition");
+    
     IStatus status = new InitializeMultiphasesTransitionActivity().run(createActivityParameters(InitializeMultiphasesTransitionActivity.ID, context));
 
     if (status.isOK()) {
