@@ -70,6 +70,7 @@ public class TransformationConfiguration extends ExtendedTraceabilityConfigurati
        * @param context
        * @param map
        */
+      @Override
       protected void initializeBlockArchitecture(BlockArchitecture source, BlockArchitecture target, IContext context,
           LevelMappingTraceability map) {
         EObject sourceChild = BlockArchitectureExt.getFunctionPkg(source, false);
@@ -95,10 +96,6 @@ public class TransformationConfiguration extends ExtendedTraceabilityConfigurati
         sourceChild = BlockArchitectureExt.getInterfacePkg(source, false);
         if (sourceChild != null) {
           addMapping(map, sourceChild, BlockArchitectureExt.getInterfacePkg(target, true), context);
-        }
-        sourceChild = BlockArchitectureExt.getRequirementsPkg(source, false);
-        if (sourceChild != null) {
-          addMapping(map, sourceChild, BlockArchitectureExt.getRequirementsPkg(target, true), context);
         }
         sourceChild = BlockArchitectureExt.getAbstractCapabilityPkg(source, false);
         if (sourceChild != null) {

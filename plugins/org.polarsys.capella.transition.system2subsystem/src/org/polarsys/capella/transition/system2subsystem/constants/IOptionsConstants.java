@@ -61,8 +61,5 @@ public class IOptionsConstants {
 
   public static final String PROPERTY_VALUES_ELEMENTS = "propertyValuesExport";
   public static final Collection<EObject> PROPERTY_VALUES_ELEMENTS_DEFAULT_VALUE = Collections.emptyList();
-  
-  public static final String REQUIREMENTS_ELEMENTS = "requirementsExport";
-  public static final Collection<EObject> REQUIREMENTS_ELEMENTS_DEFAULT_VALUE = Collections.emptyList();
 
 }
