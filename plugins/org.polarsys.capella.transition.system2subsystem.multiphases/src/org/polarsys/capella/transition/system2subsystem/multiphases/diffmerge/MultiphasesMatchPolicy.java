@@ -244,9 +244,6 @@ public class MultiphasesMatchPolicy implements IMatchPolicy<EObject> {
       key = new Key(c, CsPackage.Literals.BLOCK_ARCHITECTURE__OWNED_INTERFACE_PKG);
       matchIDs.put(key, key.toString());
 
-      key = new Key(c, CsPackage.Literals.BLOCK_ARCHITECTURE__OWNED_REQUIREMENT_PKGS);
-      matchIDs.put(key, key.toString());
-
       key = new Key(c, FaPackage.Literals.ABSTRACT_FUNCTIONAL_ARCHITECTURE__OWNED_FUNCTION_PKG);
       matchIDs.put(key, key.toString());
     }

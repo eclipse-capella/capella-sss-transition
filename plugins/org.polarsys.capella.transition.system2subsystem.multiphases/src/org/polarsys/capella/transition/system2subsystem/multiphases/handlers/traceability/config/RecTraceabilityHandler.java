@@ -101,12 +101,6 @@ public class RecTraceabilityHandler implements ITraceabilityHandler {
       map.put(sourceInterfacePkg, targetInterfacePkg);
     }
 
-    Structure sourceRequirementsPkg = BlockArchitectureExt.getRequirementsPkg(sourcePA, false);
-    Structure targetRequirementsPkg = BlockArchitectureExt.getRequirementsPkg(targetBlockArchitecture, false);
-    if ((sourceRequirementsPkg != null) && (targetRequirementsPkg != null)) {
-      map.put(sourceRequirementsPkg, targetRequirementsPkg);
-    }
-
     Structure sourceCapabilityPkg = BlockArchitectureExt.getAbstractCapabilityPkg(sourcePA, false);
     Structure targetCapabilityPkg = BlockArchitectureExt.getAbstractCapabilityPkg(targetBlockArchitecture, false);
     if ((sourceCapabilityPkg != null) && (targetCapabilityPkg != null)) {

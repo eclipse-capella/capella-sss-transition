@@ -46,8 +46,6 @@ import org.polarsys.capella.transition.system2subsystem.handlers.attachment.Scen
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.ExternalFunctionsScopeRetriever;
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.PropertyValuesScopeFilter;
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.PropertyValuesScopeRetriever;
-import org.polarsys.capella.transition.system2subsystem.handlers.scope.RequirementsScopeFilter;
-import org.polarsys.capella.transition.system2subsystem.handlers.scope.RequirementsScopeRetriever;
 import org.polarsys.capella.transition.system2subsystem.handlers.scope.StatusScopeRetriever;
 import org.polarsys.capella.transition.system2subsystem.handlers.session.SubSystemSessionHandler;
 import org.polarsys.capella.transition.system2subsystem.handlers.traceability.config.TransformationConfiguration;
@@ -72,10 +70,6 @@ public class InitializeTransitionActivity
       ActivityParameters activityParams) {
     IScopeFilter filter = PropertyValuesScopeFilter.getInstance(context);
     handler.addScopeFilter(filter, context);
-
-    filter = RequirementsScopeFilter.getInstance(context);
-    handler.addScopeFilter(filter, context);
-
     return super.initializeScopeFilterHandlers(context, handler, activityParams);
   }
 
@@ -102,10 +96,6 @@ public class InitializeTransitionActivity
       ActivityParameters activityParams) {
     IScopeRetriever retriever = new PropertyValuesScopeRetriever();
     handler.addScopeRetriever(retriever, context);
-
-    retriever = new RequirementsScopeRetriever();
-    handler.addScopeRetriever(retriever, context);
-
     handler.addScopeRetriever(new ExternalFunctionsScopeRetriever(), context);
     handler.addScopeRetriever(new StatusScopeRetriever(), context);
 
