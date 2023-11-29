@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:concern="http://www.eclipse.org/sirius/diagram/description/concern/1.1.0" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/diagram/sequence/description/2.0.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:filter="http://www.eclipse.org/sirius/diagram/description/filter/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:org.polarsys.capella.core.data.cs="http://www.polarsys.org/capella/core/cs/6.0.0" xmlns:org.polarsys.capella.core.data.ctx="http://www.polarsys.org/capella/core/ctx/6.0.0" xmlns:org.polarsys.capella.core.data.fa="http://www.polarsys.org/capella/core/fa/6.0.0" xmlns:org.polarsys.capella.core.data.interaction="http://www.polarsys.org/capella/core/interaction/6.0.0" xmlns:org.polarsys.capella.core.data.pa="http://www.polarsys.org/capella/core/pa/6.0.0" xmlns:sequence="http://www.eclipse.org/sirius/diagram/sequence/2.0.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/diagram/description/concern/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/concern http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/sequence/description/2.0.0 http://www.eclipse.org/sirius/diagram/sequence/2.0.0#//description http://www.eclipse.org/sirius/diagram/description/filter/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/filter http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
-  <viewpoint:DAnalysis uid="_dWyxkBn9Eeu78qAeOYAUDw" selectedViews="_dXWyQBn9Eeu78qAeOYAUDw _dd-XoBn9Eeu78qAeOYAUDw _dkEYkBn9Eeu78qAeOYAUDw _dlIIgBn9Eeu78qAeOYAUDw _doAdYBn9Eeu78qAeOYAUDw _dpoOABn9Eeu78qAeOYAUDw _drEYcBn9Eeu78qAeOYAUDw" version="15.0.0.202209061200">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:concern="http://www.eclipse.org/sirius/diagram/description/concern/1.1.0" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/diagram/sequence/description/2.0.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:filter="http://www.eclipse.org/sirius/diagram/description/filter/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:org.polarsys.capella.core.data.cs="http://www.polarsys.org/capella/core/cs/7.0.0" xmlns:org.polarsys.capella.core.data.ctx="http://www.polarsys.org/capella/core/ctx/7.0.0" xmlns:org.polarsys.capella.core.data.fa="http://www.polarsys.org/capella/core/fa/7.0.0" xmlns:org.polarsys.capella.core.data.interaction="http://www.polarsys.org/capella/core/interaction/7.0.0" xmlns:org.polarsys.capella.core.data.pa="http://www.polarsys.org/capella/core/pa/7.0.0" xmlns:sequence="http://www.eclipse.org/sirius/diagram/sequence/2.0.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/diagram/description/concern/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/concern http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/sequence/description/2.0.0 http://www.eclipse.org/sirius/diagram/sequence/2.0.0#//description http://www.eclipse.org/sirius/diagram/description/filter/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/filter http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis uid="_dWyxkBn9Eeu78qAeOYAUDw" selectedViews="_dXWyQBn9Eeu78qAeOYAUDw _dd-XoBn9Eeu78qAeOYAUDw _dkEYkBn9Eeu78qAeOYAUDw _dlIIgBn9Eeu78qAeOYAUDw _doAdYBn9Eeu78qAeOYAUDw _dpoOABn9Eeu78qAeOYAUDw _drEYcBn9Eeu78qAeOYAUDw" version="15.2.0.202303281325">
     <semanticResources>568503.afm</semanticResources>
     <semanticResources>568503.capella</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_dXWyQBn9Eeu78qAeOYAUDw">
@@ -8,7 +8,7 @@
     </ownedViews>
     <ownedViews xmi:type="viewpoint:DView" uid="_dd-XoBn9Eeu78qAeOYAUDw">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/physical.odesign#//@ownedViewpoints[name='Physical%20Architecture']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_jqs_oRn9Eeu78qAeOYAUDw" name="[PAB] Physical System" repPath="#_jqrKcBn9Eeu78qAeOYAUDw" changeId="6205859f-d83c-44e4-a5de-9ae1a82e7cd7">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_jqs_oRn9Eeu78qAeOYAUDw" name="[PAB] Physical System" repPath="#_jqrKcBn9Eeu78qAeOYAUDw" changeId="1701270323489">
         <eAnnotations xmi:type="description:DAnnotation" uid="_jqwC8Bn9Eeu78qAeOYAUDw" source="https://www.polarsys.org/capella/dannotation/DesactivatedFilters">
           <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_jqwC8Rn9Eeu78qAeOYAUDw" key="hide.computed.component.exchanges.filter" value="true"/>
           <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_jqwC8hn9Eeu78qAeOYAUDw" key="hide.computed.physical.links.filter" value="true"/>
@@ -22,62 +22,62 @@
     </ownedViews>
     <ownedViews xmi:type="viewpoint:DView" uid="_dlIIgBn9Eeu78qAeOYAUDw">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/common.odesign#//@ownedViewpoints[name='Common']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Uj5UIR0UEeu8bZbKRvXXdA" name="[PFCD] FunctionalChain 4" repPath="#_UjiHwB0UEeu8bZbKRvXXdA" changeId="7509173a-e416-4cb9-9572-a0cd1e370116">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Uj5UIR0UEeu8bZbKRvXXdA" name="[PFCD] FunctionalChain 4" repPath="#_UjiHwB0UEeu8bZbKRvXXdA" changeId="1701270323489">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/common.odesign#//@ownedViewpoints[name='Common']/@ownedRepresentations[name='Functional%20Chain%20Description']"/>
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionalChain" href="568503.capella#2436a10d-7ed4-4049-8840-5444ae27ccc5"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_uGjtsR0iEeusyvXDot_Pvw" name="[PFCD] FunctionalChain 6" repPath="#_uGajwB0iEeusyvXDot_Pvw" changeId="8413441c-c22d-4b02-b1a3-fb308d6caaec">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_uGjtsR0iEeusyvXDot_Pvw" name="[PFCD] FunctionalChain 6" repPath="#_uGajwB0iEeusyvXDot_Pvw" changeId="1701270323489">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/common.odesign#//@ownedViewpoints[name='Common']/@ownedRepresentations[name='Functional%20Chain%20Description']"/>
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionalChain" href="568503.capella#2491bf3e-e1fe-41e6-84bc-5a131f0b27d6"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_9piTYx0iEeusyvXDot_Pvw" name="[PFCD] FunctionalChain 8" repPath="#_9piTYB0iEeusyvXDot_Pvw" changeId="0d23fedf-9985-4bec-8afe-fba59254d3d1">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_9piTYx0iEeusyvXDot_Pvw" name="[PFCD] FunctionalChain 8" repPath="#_9piTYB0iEeusyvXDot_Pvw" changeId="1701270323489">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/common.odesign#//@ownedViewpoints[name='Common']/@ownedRepresentations[name='Functional%20Chain%20Description']"/>
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionalChain" href="568503.capella#8c560adc-d219-45f6-a7dc-b270332ee2ac"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_XZvFkR0kEeusyvXDot_Pvw" name="[PFCD] FunctionalChain 11" repPath="#_XZlUkB0kEeusyvXDot_Pvw" changeId="75ce4dc4-de35-45f4-be03-54c12a569889">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_XZvFkR0kEeusyvXDot_Pvw" name="[PFCD] FunctionalChain 11" repPath="#_XZlUkB0kEeusyvXDot_Pvw" changeId="1701270323489">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/common.odesign#//@ownedViewpoints[name='Common']/@ownedRepresentations[name='Functional%20Chain%20Description']"/>
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionalChain" href="568503.capella#06570814-3b3d-4898-8ee0-a0bd975b156c"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_lrbCgR0kEeusyvXDot_Pvw" name="[PFCD] FunctionalChain 10" repPath="#_lrabcB0kEeusyvXDot_Pvw" changeId="883241d5-dfb5-4c95-bf80-aeca4ff642e5">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_lrbCgR0kEeusyvXDot_Pvw" name="[PFCD] FunctionalChain 10" repPath="#_lrabcB0kEeusyvXDot_Pvw" changeId="1701270323489">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/common.odesign#//@ownedViewpoints[name='Common']/@ownedRepresentations[name='Functional%20Chain%20Description']"/>
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionalChain" href="568503.capella#037256e8-f75d-4f19-978e-50173cd7f8bc"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_m7RGQB3TEeuw8vLD3Cr1KQ" name="[PFCD] FunctionalChain 16" repPath="#_m7K_oB3TEeuw8vLD3Cr1KQ" changeId="44c0fc69-9f1b-4be0-bbee-6cdbc144d85d">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_m7RGQB3TEeuw8vLD3Cr1KQ" name="[PFCD] FunctionalChain 16" repPath="#_m7K_oB3TEeuw8vLD3Cr1KQ" changeId="1701270323489">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/common.odesign#//@ownedViewpoints[name='Common']/@ownedRepresentations[name='Functional%20Chain%20Description']"/>
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionalChain" href="568503.capella#68b33122-a672-48f1-802d-7269eacaa03d"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_CEc6EB3UEeuw8vLD3Cr1KQ" name="[PFCD] FunctionalChain 17" repPath="#_CEbE4B3UEeuw8vLD3Cr1KQ" changeId="fbe95e23-3906-418e-ae5a-59c33b02e69c">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_CEc6EB3UEeuw8vLD3Cr1KQ" name="[PFCD] FunctionalChain 17" repPath="#_CEbE4B3UEeuw8vLD3Cr1KQ" changeId="1701270323489">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/common.odesign#//@ownedViewpoints[name='Common']/@ownedRepresentations[name='Functional%20Chain%20Description']"/>
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionalChain" href="568503.capella#beecfd69-5202-4b28-b8dd-3b43e37c927b"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_D7rvIR6dEeuLL5t5wsTSMA" name="[PFCD] BB" repPath="#_D7qhAB6dEeuLL5t5wsTSMA" changeId="2214c5ad-91d1-41b2-ad19-2379d9972c01">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_D7rvIR6dEeuLL5t5wsTSMA" name="[PFCD] BB" repPath="#_D7qhAB6dEeuLL5t5wsTSMA" changeId="1701270323489">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/common.odesign#//@ownedViewpoints[name='Common']/@ownedRepresentations[name='Functional%20Chain%20Description']"/>
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionalChain" href="568503.capella#0e48d080-84b4-4a4b-99bc-b8b2166497d9"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_qCYHcR6fEeuLL5t5wsTSMA" name="[PFCD] B" repPath="#_qCW5UB6fEeuLL5t5wsTSMA" changeId="6394c698-2c65-4038-ad12-ae664d9a54ee">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_qCYHcR6fEeuLL5t5wsTSMA" name="[PFCD] B" repPath="#_qCW5UB6fEeuLL5t5wsTSMA" changeId="1701270323489">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/common.odesign#//@ownedViewpoints[name='Common']/@ownedRepresentations[name='Functional%20Chain%20Description']"/>
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionalChain" href="568503.capella#dad4f386-b6f9-4691-a493-5ea4cb3c8285"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_hrtFhB6hEeuLL5t5wsTSMA" name="[FS] Capability 1" repPath="#_hrpbIB6hEeuLL5t5wsTSMA" changeId="0f00ffae-de1b-4ac3-b7da-937390c00d34">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_hrtFhB6hEeuLL5t5wsTSMA" name="[FS] Capability 1" repPath="#_hrpbIB6hEeuLL5t5wsTSMA" changeId="1701270323489">
         <description xmi:type="description_2:SequenceDiagramDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/common.odesign#//@ownedViewpoints[name='Common']/@ownedRepresentations[name='Functional%20Scenario']"/>
         <target xmi:type="org.polarsys.capella.core.data.interaction:Scenario" href="568503.capella#4a6d696b-c820-4066-ab4f-b57961e01dca"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_S40_sR6kEeuLL5t5wsTSMA" name="[PFCD] BB2" repPath="#_S40YoB6kEeuLL5t5wsTSMA" changeId="2479e192-b53e-480c-b57e-67535977df93">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_S40_sR6kEeuLL5t5wsTSMA" name="[PFCD] BB2" repPath="#_S40YoB6kEeuLL5t5wsTSMA" changeId="1701270323489">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/common.odesign#//@ownedViewpoints[name='Common']/@ownedRepresentations[name='Functional%20Chain%20Description']"/>
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionalChain" href="568503.capella#58fcdb66-166f-4731-846a-fe869b2f8a83"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_mWc2AR6kEeuLL5t5wsTSMA" name="[PFCD] B2" repPath="#_mWcO8B6kEeuLL5t5wsTSMA" changeId="975e284d-495d-432e-8cf9-54b2511d827d">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_mWc2AR6kEeuLL5t5wsTSMA" name="[PFCD] B2" repPath="#_mWcO8B6kEeuLL5t5wsTSMA" changeId="1701270323489">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/common.odesign#//@ownedViewpoints[name='Common']/@ownedRepresentations[name='Functional%20Chain%20Description']"/>
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionalChain" href="568503.capella#3e2edab9-daa2-4d07-8d0f-13c47f09c367"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_1OOZMR69EeunqoMRthccYg" name="[PFCD] CC" repPath="#_1OKu0B69EeunqoMRthccYg" changeId="050aef39-bacc-4186-bccc-279533be87dd">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_1OOZMR69EeunqoMRthccYg" name="[PFCD] CC" repPath="#_1OKu0B69EeunqoMRthccYg" changeId="1701270323489">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/common.odesign#//@ownedViewpoints[name='Common']/@ownedRepresentations[name='Functional%20Chain%20Description']"/>
         <target xmi:type="org.polarsys.capella.core.data.fa:FunctionalChain" href="568503.capella#551a196b-fd63-47b2-af42-caa80c5cf23e"/>
       </ownedRepresentationDescriptors>
     </ownedViews>
     <ownedViews xmi:type="viewpoint:DView" uid="_doAdYBn9Eeu78qAeOYAUDw">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_fZj6kRn9Eeu78qAeOYAUDw" name="[SDFB] Root System Function" repPath="#_fZYUYBn9Eeu78qAeOYAUDw" changeId="ba6bd5e4-4347-4086-b294-3dd6327fc3df">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_fZj6kRn9Eeu78qAeOYAUDw" name="[SDFB] Root System Function" repPath="#_fZYUYBn9Eeu78qAeOYAUDw" changeId="1701270323489">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.polarsys.capella.core.sirius.analysis/description/context.odesign#//@ownedViewpoints[name='System%20Analysis']/@ownedRepresentations[name='System%20Data%20Flow%20Blank']"/>
         <target xmi:type="org.polarsys.capella.core.data.ctx:SystemFunction" href="568503.capella#8da22146-3b51-4ce1-ac65-6c4a7bd7d888"/>
       </ownedRepresentationDescriptors>
