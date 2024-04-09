@@ -30,3 +30,6 @@ The target element gets a new technical ID, its SID is the one of the source ele
 
 In the above figure, the ''LogicalComponent 1'' (which is the System element of targetModel) SID is equal to the SID of the ''LogicalCompenent 1'' of sourceModel (System Model).
 
+== Collaborative Mode ==
+
+Transitions cannot be performed towards a remote team model.
