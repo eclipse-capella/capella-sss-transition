@@ -10,11 +10,6 @@
  *******************************************************************************/
 target "CapellaSubsystemTransition"
 
-/* 
- * Following include directive is commented because sirius stable 7.1.0-S20230302-034329 is not available anymore
- * include "https://download.eclipse.org/capella/core/updates/releases/6.1.0/targets/capella.target-definition.targetplatform"
- */
- 
 /*
  * =======================================
  * Remove this when capella target platform gets stable versions
@@ -22,7 +17,7 @@ target "CapellaSubsystemTransition"
  */
 
 with source, requirements
-include "https://download.eclipse.org/capella/core/updates/stable/7.0.0-S20240320/targets/capella.target-definition.targetplatform"
+include "https://download.eclipse.org/capella/core/updates/releases/7.0.0/targets/capella.target-definition.targetplatform"
 
 /*
  * =======================================
@@ -30,10 +25,10 @@ include "https://download.eclipse.org/capella/core/updates/stable/7.0.0-S2024032
  * =======================================
  */
 
-location capella-7.0 "https://download.eclipse.org/capella/core/updates/stable/7.0.0-S20240320/org.polarsys.capella.rcp.site" {
+location capella-7.0 "https://download.eclipse.org/capella/core/updates/releases/7.0.0/org.polarsys.capella.rcp.site" {
 	org.polarsys.capella.rcp.feature.group
 }
 
-location capella-tests-7.0 "https://download.eclipse.org/capella/core/updates/stable/7.0.0-S20240320/org.polarsys.capella.test.site" {
+location capella-tests-7.0 "https://download.eclipse.org/capella/core/updates/releases/7.0.0/org.polarsys.capella.test.site" {
 	org.polarsys.capella.test.feature.feature.group
 }
