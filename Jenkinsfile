@@ -49,9 +49,9 @@ pipeline {
 		    			.replaceAll('/','-')		
 					
 					deployer.addonNightlyDropins("${WORKSPACE}/releng/org.polarsys.capella.transition.system2subsystem.site/target/*-dropins-*.zip", deploymentDirName)
-					deployer.addonNightlyUpdateSite("${WORKSPACE}/releng/org.polarsys.capella.transition.system2subsystem.site/target/*-updateSite-*.zip", deploymentDirName)					
-
-	       		}         
+					deployer.addonNightlyUpdateSite("${WORKSPACE}/releng/org.polarsys.capella.transition.system2subsystem.site/target/*-updateSite-*.zip", deploymentDirName)
+					deployer.addonNightlyUpdateSite("${WORKSPACE}/releng/org.polarsys.capella.transition.system2subsystem.site/target/bom.json", deploymentDirName)					
+	       		}
 	     	}
 	    }
 	    
