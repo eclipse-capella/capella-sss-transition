@@ -29,9 +29,8 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-eclipserun-plugin</artifactId>
-				<version>${tycho-version}</version>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-eclipse-plugin</artifactId>
 				<executions>
 					<execution>
 						<id>create-dropins</id>
@@ -45,6 +44,15 @@
 				<executions>
 					<execution>
 						<id>package-dropins</id>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.cyclonedx</groupId>
+				<artifactId>cyclonedx-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>create-bom</id>
 					</execution>
 				</executions>
 			</plugin>
