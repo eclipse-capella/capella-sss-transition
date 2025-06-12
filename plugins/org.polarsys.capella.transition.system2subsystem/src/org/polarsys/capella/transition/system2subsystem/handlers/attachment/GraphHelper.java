@@ -12,9 +12,10 @@
  *******************************************************************************/
 package org.polarsys.capella.transition.system2subsystem.handlers.attachment;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -31,45 +32,29 @@ public class GraphHelper {
   /**
    * From a fci, returns the list of all paths towards expected elements returned by isTheOne
    * 
-   * @param isTheOne:
-   *          a method allowing to detect if the current element is the expected one.
-   * 
-   * @param getNexts: from an element, a method retrieving the connected ones
-   * 
-   * @return all the paths from fci towards the elements returned by isTheOne. paths are containing both source fci at first of
-   *         the path and the expected one at the end.
-   */
-  public static <T> Collection<LinkedList<T>> getPathsTowards(T fci, Function<T, Boolean> isTheOne,
-      IContext context_p, Function<T, Collection<T>> getNexts) {
-    LinkedList<T> path = new LinkedList<>();
-    path.add(fci);
-    return getPathsTowards(fci, isTheOne, context_p, path, getNexts);
-  }
-
-  /**
-   * From a fci, returns the list of all paths towards expected elements returned by isTheOne
-   * 
    * @param path
    *          the current path computed.
    * @implNote at first, we add the current fci in it to allow cycle detection
    */
-  protected static <T> Collection<LinkedList<T>> getPathsTowards(T fci, Function<T, Boolean> isTheOne,
-      IContext context_p, LinkedList<T> path, Function<T, Collection<T>> getNexts) {
-    Collection<LinkedList<T>> result = new ArrayList<LinkedList<T>>();
-
-    for (T next : getNexts.apply(fci)) {
-      if (path.contains(next)) {
-        path.clear();
-      } else if (isTheOne.apply(next)) {
-        path.add(next);
-        result.add(path);
-      } else {
-        LinkedList<T> newPath = new LinkedList<>();
-        newPath.addAll(path);
-        newPath.add(next);
-        result.addAll(getPathsTowards(next, isTheOne, context_p, newPath, getNexts));
+  public static Collection<Path> getNextPathsTowards(InvolvementHierarchyGraph graph, FunctionalChainInvolvement fci, FunctionalChainInvolvement expected, IContext context) {
+    Collection<Element> nodes = getVertices(graph, fci);
+    Collection<Element> nextValids = getNextValids(graph, nodes, (n) -> getInvolvment(n).equals(expected));
+    
+    Paths paths = new Paths();
+    nextValids.stream().forEach(v -> paths.addPath(v, Path.of(v)));
+    
+    LinkedList<Element> toVisit = new LinkedList<>(getPrevious(nextValids));
+    while (!toVisit.isEmpty()) {
+      Element node = toVisit.removeFirst();
+      if (!paths.containsKey(node)) {
+        for (Element next : getNexts(Arrays.asList(node))) {
+          paths.getPaths(next).stream().forEach(path -> paths.addPath(node, Path.combine(node, path)));
+        }
+        toVisit.addAll(getPrevious(node));
       }
     }
+    
+    Collection<Path> result = nodes.stream().map(x -> paths.getPaths(x)).flatMap(x -> x.stream()).collect(Collectors.toList());
     return result;
   }
 
@@ -82,23 +67,52 @@ public class GraphHelper {
   }
   
   public static Collection<Element> getPrevious(Element e) {
-    if (e instanceof Edge) {
-      return Arrays.asList((Element)((Edge)e).getSource());
-    }
-    return (Collection)((Vertex)e).getIncomingEdges();
+    return getPrevious(Arrays.asList(e));
+  }
+  
+  public static Collection<Element> getPrevious(Collection<Element> elements) {
+    return elements.stream().map(x -> {
+      if (x instanceof Edge) {
+        return Arrays.asList((Element)((Edge)x).getSource());
+      }
+      return ((Vertex)x).getIncomingEdges();
+    }).flatMap(x -> x.stream()).collect(Collectors.toList());
   }
   
   public static Collection<Element> getNexts(Element e) {
-    if (e instanceof Edge) {
-      return Arrays.asList((Element)((Edge)e).getTarget());
-    }
-    return (Collection)((Vertex)e).getOutgoingEdges();
-  }
-  
-  public static Collection<Vertex> getVertices(InvolvementHierarchyGraph graph, FunctionalChainInvolvement fci) {
-    return graph.getVertices().keySet().stream().filter(v -> v.getFunction() == fci)
-        .map(v -> graph.getVertices().get(v)).collect(Collectors.toList());
+    return getNexts(Arrays.asList(e));
   }
 
+  public static Collection<Element> getNexts(Collection<Element> elements) {
+    return elements.stream().map(x -> {
+      if (x instanceof Edge) {
+        return Arrays.asList((Element)((Edge)x).getTarget());
+      }
+      return ((Vertex)x).getOutgoingEdges();
+    }).flatMap(x -> x.stream()).collect(Collectors.toList());
+  }
+  
+  public static Collection<Element> getVertices(InvolvementHierarchyGraph graph, FunctionalChainInvolvement fci) {
+    return graph.getVertices().keySet().stream().filter(v -> v.getFunction() == fci)
+        .map(v -> (Element) graph.getVertices().get(v)).collect(Collectors.toList());
+  }
+  
+  public static Collection<Element> getNextValids(InvolvementHierarchyGraph graph, Collection<Element> nodes, Function<Element, Boolean> isValid) {
+    Collection<Element> result = new LinkedHashSet<>();
+    LinkedList<Element> toVisit = new LinkedList<>(getNexts(nodes));
+    HashSet<Element> visited = new HashSet<>();
+    while (!toVisit.isEmpty()) {
+      Element node = toVisit.removeFirst();
+      if (!visited.contains(node)) {
+        if (isValid.apply(node)) {
+          result.add(node);
+        } else {
+          toVisit.addAll(getNexts(Arrays.asList(node)));
+        }
+        visited.add(node);
+      }
+    }
+    return result;
+  }
 
 }

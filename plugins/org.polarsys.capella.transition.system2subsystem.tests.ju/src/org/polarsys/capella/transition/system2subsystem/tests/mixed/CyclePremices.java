@@ -102,12 +102,6 @@ public class CyclePremices extends System2SubsystemTest implements Crossphase {
     assertTrue(paths.contains("LF8/FE19/LF1/FE6/LF6/FE8/LF3/FE4/LF4"));
     assertTrue(paths.contains("LF8/FE19/LF1/FE17/LF2/FE2/LF3/FE4/LF4"));
 
-    // We look for reverse paths
-    paths = pathsToString(helper.getPreviousPathsTowards(getObject(FUNCTIONAL_CHAIN_INVOLVEMENT_FUNCTION_TO_LF4),
-        getObject(FUNCTIONAL_CHAIN_INVOLVEMENT_FUNCTION_TO_LF8), context));
-    assertTrue(paths.contains("LF4/FE4/LF3/FE2/LF2/FE17/LF1/FE19/LF8"));
-    assertTrue(paths.contains("LF4/FE4/LF3/FE8/LF6/FE6/LF1/FE19/LF8"));
-
     // This chain contains cycle. We exclude it and retrieve two paths.
     paths = pathsToString(helper.getNextPathsTowards(getObject(FUNCTIONAL_CHAIN_INVOLVEMENT_FUNCTION_TO_LF19),
         getObject(FUNCTIONAL_CHAIN_INVOLVEMENT_FUNCTION_TO_LF17), context));
