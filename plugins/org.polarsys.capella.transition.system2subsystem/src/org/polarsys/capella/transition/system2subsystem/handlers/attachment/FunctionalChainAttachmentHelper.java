@@ -13,13 +13,13 @@
 package org.polarsys.capella.transition.system2subsystem.handlers.attachment;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.IStatus;
@@ -41,7 +41,6 @@ import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.FunctionalChainExt;
 import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph;
 import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph.Element;
-import org.polarsys.capella.core.model.helpers.graph.InvolvementHierarchyGraph.Vertex;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.IHandler;
 import org.polarsys.capella.core.transition.common.handlers.contextscope.ContextScopeHandlerHelper;
@@ -243,71 +242,35 @@ public class FunctionalChainAttachmentHelper implements IHandler, INotifyListene
    */
   public Collection<FunctionalChainInvolvement> getNextValid(FunctionalChainInvolvement fci, IContext context) {
     computeChains((FunctionalChain) fci.eContainer(), context);
-
-    if (fci instanceof FunctionalChainInvolvementLink) {
-      FunctionalChainInvolvement target = ((FunctionalChainInvolvementLink) fci).getTarget();
-      if (isValidElement(target, context)) {
-        return Arrays.asList(target);
-      }
-      return getNextValid(target, context);
-
-    } else if (fci instanceof FunctionalChainReference) {
+    if (fci instanceof FunctionalChainReference) {
       return Collections.emptyList();
-
-    } else {
-      Collection<FunctionalChainInvolvement> lasts = new LinkedHashSet<FunctionalChainInvolvement>();
-      for (LinkedList<FunctionalChainInvolvement> list : getNextPathsTowards(fci, null, context)) {
-        if (list.getLast() != null && list.getLast() != fci) {
-          lasts.add(list.getLast());
-        }
-      }
-      return lasts;
     }
-  }
-
-  /**
-   * For an fci, return the previous fci that are valid on all chains including this fci.
-   * 
-   * @implNote those are the lasts of the computed paths
-   */
-  public Collection<FunctionalChainInvolvement> getPreviousValid(FunctionalChainInvolvement fci, IContext context) {
-    computeChains((FunctionalChain) fci.eContainer(), context);
-
-    if (fci instanceof FunctionalChainInvolvementLink) {
-      FunctionalChainInvolvement source = ((FunctionalChainInvolvementLink) fci).getSource();
-      if (isValidElement(source, context)) {
-        return Arrays.asList(source);
-      }
-      return getPreviousValid(source, context);
-
-    } else if (fci instanceof FunctionalChainReference) {
-      return Collections.emptyList();
-
-    } else {
-      Collection<FunctionalChainInvolvement> lasts = new LinkedHashSet<FunctionalChainInvolvement>();
-      for (LinkedList<FunctionalChainInvolvement> list : getPreviousPathsTowards(fci, null, context)) {
-        if (list.getLast() != null && list.getLast() != fci) {
-          lasts.add(list.getLast());
-        }
-      }
-      return lasts;
+    
+    // For all chains using this fci, we retrieve the paths towards the next valid fcis
+    Collection<FunctionalChainInvolvement> result = new HashSet<FunctionalChainInvolvement>();
+    Function<Element, Boolean> isValid = (n) -> (FunctionalChainAttachmentHelper.getInstance(context).isValidElement(GraphHelper.getInvolvment(n), context));
+    for (InvolvementHierarchyGraph g : getGraphs(context).values()) {
+      Collection<Element> nodes = GraphHelper.getVertices(g, fci);
+      Collection<Element> nextValids = GraphHelper.getNextValids(g, nodes, isValid);
+      result.addAll(nextValids.stream().map(x -> GraphHelper.getInvolvment(x)).collect(Collectors.toList()));
     }
+    return result;
   }
 
   /**
    * From a collection of graph element paths, we retrieve a collection of FCI paths.
    */
-  public static Collection<LinkedList<FunctionalChainInvolvement>> toFCI(Collection<LinkedList<Element>> elements) {
-    return elements.stream().map(c -> toFCI(c)).collect(Collectors.toList());
+  public static Collection<LinkedList<FunctionalChainInvolvement>> toFCI(Collection<Path> elements) {
+    return elements.stream().map(FunctionalChainAttachmentHelper::toFCI).collect(Collectors.toList());
   }
 
   /**
    * For a list of graph elements, we retrieve the FCI behinds.
    */
-  public static LinkedList<FunctionalChainInvolvement> toFCI(LinkedList<Element> elements) {
-    return elements.stream().map(GraphHelper::getInvolvment).collect(Collectors.toCollection(LinkedList::new));
+  public static LinkedList<FunctionalChainInvolvement> toFCI(Path path) {
+    return path.getAll().map(GraphHelper::getInvolvment).collect(Collectors.toCollection(LinkedList::new));
   }
-
+  
   /**
    * From a fci, returns the list of all paths towards the expected one or the first valid elements, following next
    * involvements from graphs of chains using the fci
@@ -320,34 +283,9 @@ public class FunctionalChainAttachmentHelper implements IHandler, INotifyListene
     computeChains((FunctionalChain) fci.eContainer(), context);
     // For all chains using this fci, we retrieve the paths towards the next valid fcis
     Collection<LinkedList<FunctionalChainInvolvement>> allPaths = new ArrayList<LinkedList<FunctionalChainInvolvement>>();
+    
     for (InvolvementHierarchyGraph g : getGraphs(context).values()) {
-      for (Vertex v : GraphHelper.getVertices(g, fci)) { // (returns empty if the fci is not used) (we could have retrieve graphs of
-                                           // owning and all referencing chains)
-        allPaths.addAll(
-            toFCI(GraphHelper.getPathsTowards(v, n -> isTheOne(n, expected, context), context, GraphHelper::getNexts)));
-      }
-    }
-    return allPaths;
-  }
-
-  /**
-   * From a fci, returns the list of all paths towards the expected one or the first valid elements, following previous
-   * involvements from graphs of chains using the fci
-   * 
-   * @param expected:
-   *          the fci that we look paths for, or null if we look for paths towards the previous valid involvements
-   */
-  public Collection<LinkedList<FunctionalChainInvolvement>> getPreviousPathsTowards(FunctionalChainInvolvement fci,
-      FunctionalChainInvolvement expected, IContext context) {
-    computeChains((FunctionalChain) fci.eContainer(), context);
-    // For all chains using this fci, we retrieve the paths towards the previous valid fcis
-    Collection<LinkedList<FunctionalChainInvolvement>> allPaths = new ArrayList<LinkedList<FunctionalChainInvolvement>>();
-    for (InvolvementHierarchyGraph g : getGraphs(context).values()) {
-      for (Vertex v : GraphHelper.getVertices(g, fci)) { // (returns empty if the fci is not used) (we could have retrieve graphs of
-                                           // owning and all referencing chains)
-        allPaths.addAll(
-            toFCI(GraphHelper.getPathsTowards(v, n -> isTheOne(n, expected, context), context, GraphHelper::getPrevious)));
-      }
+      allPaths.addAll(toFCI(GraphHelper.getNextPathsTowards(g, fci, expected, context)));
     }
     return allPaths;
   }
