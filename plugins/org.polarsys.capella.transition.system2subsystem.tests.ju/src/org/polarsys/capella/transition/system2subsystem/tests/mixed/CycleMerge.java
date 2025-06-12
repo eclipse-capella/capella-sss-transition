@@ -70,7 +70,7 @@ public class CycleMerge extends System2SubsystemTest implements Interphase, Cros
     Collection<String> paths;
 
     // We ensure that the computed path is not too short (meaning that all PF6 have been merged to only one involvement)
-    paths = pathsToString(helper.getNextPathsTowards(getObject(FUNCTIONAL_CHAIN_INVOLVEMENT_FUNCTION_TO_PF3),
+    paths = pathsToString(helper.getShortestPathTowards(getObject(FUNCTIONAL_CHAIN_INVOLVEMENT_FUNCTION_TO_PF3),
         getObject(FUNCTIONAL_CHAIN_INVOLVEMENT_FUNCTION_TO_PF4), context));
     
     assertTrue(paths.contains("PF3/FE2/PF4/FE3/PF6/FE4/PF1/FE5/PF6/FE6/PF5/FE8/PF4/FE3/PF6/FE4/PF1/FE5/PF6/FE6/PF5/FE8/PF4"));
