@@ -203,7 +203,7 @@ public class FunctionalChainInvolvementRule
   public Collection<FunctionalChainInvolvement> listInvolvments(FunctionalChainInvolvement startFci,
       FunctionalChainInvolvement endFci, IContext context) {
     FunctionalChainAttachmentHelper helper = FunctionalChainAttachmentHelper.getInstance(context);
-    Collection<LinkedList<FunctionalChainInvolvement>> paths = helper.getNextPathsTowards(startFci, endFci, context);
+    Collection<LinkedList<FunctionalChainInvolvement>> paths = helper.getShortestPathTowards(startFci, endFci, context);
     if (paths.isEmpty()) {
       return Collections.emptyList();
     }
@@ -306,7 +306,7 @@ public class FunctionalChainInvolvementRule
                 ? targetPath.subList(0, targetPath.indexOf(firstCommon))
                 : targetPath;
             createFakeFunctionalChainInvolvementLink(startFci, endFci, involvedElement, context, architectureType,
-                (FunctionalChain) container, sHierarchy, tHierarchy);
+                  (FunctionalChain) container, sHierarchy, tHierarchy);
           }
         }
       }
@@ -382,7 +382,7 @@ public class FunctionalChainInvolvementRule
     FunctionalChain tParent = tracedOf(parent, context_p);
     Collection<FunctionalChainReference> tsH = tracedOf(sH, context_p);
     Collection<FunctionalChainReference> ttH = tracedOf(tH, context_p);
-
+    
     String id = String.format("%s_%s_%s_%s", ID_FAKE_FUNCTIONAL_CHAIN_INVOLVEMENT, idPrefix, tSrc.getSid(),
         tTgt.getSid());
     if (!sH.isEmpty()) {
