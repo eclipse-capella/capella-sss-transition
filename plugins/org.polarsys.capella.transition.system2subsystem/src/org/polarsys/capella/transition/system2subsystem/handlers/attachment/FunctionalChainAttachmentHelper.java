@@ -313,26 +313,45 @@ public class FunctionalChainAttachmentHelper implements IHandler, INotifyListene
   @Override
   public void notifyChanged(INotifyChangeEvent event, IContext context) {
     for (Collection<FunctionalChainInvolvementFunction> set : getMergeSets(context).getSets()) {
+      if (areLinked(context, set)) {
+        //Don't merge, they are already linked somehow. Doing so will create a cycle.
+        continue;
+      }
       FunctionalChainInvolvementFunction[] array = set.toArray(new FunctionalChainInvolvementFunction[0]);
       for (int i = 1; i < array.length; i++) {
-        for (EObject o : EObjectExt.getReferencers(array[i],
-            FaPackage.Literals.FUNCTIONAL_CHAIN_INVOLVEMENT_LINK__SOURCE)) {
-          ((FunctionalChainInvolvementLink) o).setSource(array[0]);
-        }
-        for (EObject o : EObjectExt.getReferencers(array[i],
-            FaPackage.Literals.FUNCTIONAL_CHAIN_INVOLVEMENT_LINK__TARGET)) {
-          ((FunctionalChainInvolvementLink) o).setTarget(array[0]);
-        }
-        for (EObject o : EObjectExt.getReferencers(array[i], FaPackage.Literals.SEQUENCE_LINK__SOURCE)) {
-          ((SequenceLink) o).setSource(array[0]);
-        }
-        for (EObject o : EObjectExt.getReferencers(array[i], FaPackage.Literals.SEQUENCE_LINK__TARGET)) {
-          ((SequenceLink) o).setTarget(array[0]);
-        }
+        mergeInvolvements(array[0], array[i]);
       }
     }
   }
 
+  private boolean areLinked(IContext context, Collection<FunctionalChainInvolvementFunction> fcis) {
+    FunctionalChain chain = (FunctionalChain) fcis.iterator().next().eContainer();
+    InvolvementHierarchyGraph graph = FunctionalChainAttachmentHelper.getInstance(context).getGraph(chain, context);
+    Collection<Element> nodes = fcis.stream().map(x -> GraphHelper.getVertices(graph, (FunctionalChainInvolvementFunction) x)).flatMap(x -> x.stream()).collect(Collectors.toList());
+    Collection<Element> nextNodes = GraphHelper.getNextValids(nodes, n -> nodes.contains(n));
+    return !nextNodes.isEmpty();
+  }
+  
+  /**
+   * Returns whether the given involvements are already linked by an involvements or if they are separated
+   */
+  private void mergeInvolvements(FunctionalChainInvolvementFunction fci1, FunctionalChainInvolvementFunction fci2) {
+    for (EObject o : EObjectExt.getReferencers(fci2,
+        FaPackage.Literals.FUNCTIONAL_CHAIN_INVOLVEMENT_LINK__SOURCE)) {
+      ((FunctionalChainInvolvementLink) o).setSource(fci1);
+    }
+    for (EObject o : EObjectExt.getReferencers(fci2,
+        FaPackage.Literals.FUNCTIONAL_CHAIN_INVOLVEMENT_LINK__TARGET)) {
+      ((FunctionalChainInvolvementLink) o).setTarget(fci1);
+    }
+    for (EObject o : EObjectExt.getReferencers(fci2, FaPackage.Literals.SEQUENCE_LINK__SOURCE)) {
+      ((SequenceLink) o).setSource(fci1);
+    }
+    for (EObject o : EObjectExt.getReferencers(fci2, FaPackage.Literals.SEQUENCE_LINK__TARGET)) {
+      ((SequenceLink) o).setTarget(fci1);
+    }
+  }
+  
   protected boolean isAlreadyCached(FunctionalChainInvolvement fci, IContext context) {
     return getValidityMap(context).get(fci) != null;
   }
