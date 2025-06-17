@@ -36,6 +36,7 @@ public class AllMixedTests extends BasicTestSuite {
 
     tests.addAll(testsFor(FakeExchange.class));
     tests.addAll(testsFor(CycleMerge.class));
+    tests.addAll(testsFor(CycleOnMerge.class));
     tests.addAll(testsFor(CyclePremices.class));
 
     tests.add(new IncrementalModeTest());
