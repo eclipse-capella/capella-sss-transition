@@ -305,8 +305,13 @@ public class FunctionalChainInvolvementRule
             Collection<FunctionalChainReference> tHierarchy = firstCommon instanceof FunctionalChainReference
                 ? targetPath.subList(0, targetPath.indexOf(firstCommon))
                 : targetPath;
-            createFakeFunctionalChainInvolvementLink(startFci, endFci, involvedElement, context, architectureType,
+
+            IStatus owningChainIsValid = TransformationHandlerHelper.getInstance(context)
+                .isOrWillBeTransformed(container, context);
+            if (owningChainIsValid.isOK()) {
+              createFakeFunctionalChainInvolvementLink(startFci, endFci, involvedElement, context, architectureType,
                   (FunctionalChain) container, sHierarchy, tHierarchy);
+            }
           }
         }
       }
