@@ -14,7 +14,7 @@ package org.polarsys.capella.transition.system2subsystem.handlers.attachment;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -38,7 +38,7 @@ public class SubSets<T> {
   public void add(T element) {
     Optional<Set<T>> set = map.stream().filter(x -> x.contains(element)).findAny();
     if (!set.isPresent()) {
-      HashSet<T> s = new HashSet<T>();
+      Set<T> s = new LinkedHashSet<T>();
       s.add(element);
       map.add(s);
     }
@@ -68,7 +68,7 @@ public class SubSets<T> {
       map.remove(containingTarget);
 
     } else {
-      HashSet<T> both = new HashSet<T>();
+      Set<T> both = new LinkedHashSet<T>();
       both.add(element1);
       both.add(element2);
       map.add(both);
