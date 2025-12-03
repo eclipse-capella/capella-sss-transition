@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2018 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2025 THALES GLOBAL SERVICES.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -14,20 +14,26 @@ package org.polarsys.capella.transition.system2subsystem.crossphases.launcher;
 
 import org.polarsys.capella.core.transition.common.activities.DifferencesComputingActivity;
 import org.polarsys.capella.core.transition.common.activities.DifferencesMergingActivity;
-import org.polarsys.capella.core.transition.common.activities.InitializeScopeActivity;
+import org.polarsys.capella.core.transition.common.activities.FinalizeTransitionActivity;
+import org.polarsys.capella.core.transition.common.activities.InitializeDiffMergeFromTransformationActivity;
+import org.polarsys.capella.core.transition.common.activities.InitializeTransformationActivity;
 import org.polarsys.capella.core.transition.common.activities.PostTransformationActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.CopyImagesActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.CopyManagementPropertiesActivity;
-import org.polarsys.capella.transition.system2subsystem.activities.FinalizeSubsystemTransitionActivity;
 import org.polarsys.capella.transition.system2subsystem.activities.RootComponentNameUpdater;
+import org.polarsys.capella.transition.system2subsystem.activities.SsbsFinalizeTransitionActivity;
+import org.polarsys.capella.transition.system2subsystem.activities.UnloadSubsystemResourcesActivity;
+import org.polarsys.capella.transition.system2subsystem.crossphases.activities.CleanDeprecatedComponentsActivity;
+import org.polarsys.capella.transition.system2subsystem.crossphases.activities.ConfirmableDifferencesMergingActivity;
 import org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeCrossPhasesTransformationActivity;
 import org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeDiffMergeActivity;
 import org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeTransitionActivity;
 import org.polarsys.capella.transition.system2subsystem.launcher.SubSystemLauncher;
-import org.polarsys.kitalpha.cadence.core.api.parameter.GenericParameter;
 import org.polarsys.kitalpha.cadence.core.api.parameter.WorkflowActivityParameter;
-import org.polarsys.kitalpha.transposer.rules.handler.api.IRulesHandler;
 
+/**
+ * Launcher for CrossPhases transformation.
+ */
 public class HeadlessCrossPhasesLauncher extends SubSystemLauncher {
 
   private final String MAPPING = "org.polarsys.capella.transition.system2subsystem.crossphases"; //$NON-NLS-1$
@@ -36,40 +42,24 @@ public class HeadlessCrossPhasesLauncher extends SubSystemLauncher {
   protected String getMapping() {
     return MAPPING;
   }
-
-  /**
-   * Activities to be loaded in the workflow element of cadence "PRE ANALYSIS"
-   * 
-   * @return the associated workflow element
-   */
+  
   @Override
-  protected WorkflowActivityParameter buildPreAnalysisActivities() {
-    WorkflowActivityParameter parameter = new WorkflowActivityParameter();
+  protected void initOverrides() {
+    super.initOverrides();
 
-    if (getTransposer() != null) {
+    // override buildInitializationActivities
+    addOverrides(org.polarsys.capella.core.transition.common.activities.InitializeTransitionActivity.ID, InitializeTransitionActivity.ID);
+    addOverrides(InitializeTransformationActivity.ID, InitializeCrossPhasesTransformationActivity.ID);
 
-      // InitializeTransitionActivity
-      parameter.addActivity(InitializeTransitionActivity.ID);
-
-      // Add Rule handler
-      GenericParameter<IRulesHandler> param2 = new GenericParameter<IRulesHandler>(
-          org.polarsys.capella.core.transition.common.activities.InitializeTransitionActivity.PARAMETER_RULE_HANDLER,
-          getTransposer().getRulesHandler(), "Transposer Rule handler"); //$NON-NLS-1$
-      parameter.addParameter(InitializeTransitionActivity.ID, param2);
-
-      // InitializeCrossPhasesTransformationActivity
-      parameter.addActivity(InitializeCrossPhasesTransformationActivity.ID);
-
-      // InitializeScopeActivity
-      parameter.addActivity(InitializeScopeActivity.ID);
-
-    }
-
-    return parameter;
+    // override buildDiffMergeActivities
+    addOverrides(InitializeDiffMergeFromTransformationActivity.ID, InitializeDiffMergeActivity.ID);
+    addOverrides(DifferencesMergingActivity.ID, ConfirmableDifferencesMergingActivity.ID);
+    
+    addOverrides(FinalizeTransitionActivity.ID, SsbsFinalizeTransitionActivity.ID);
   }
 
   /**
-   * Activities to be loaded in the workflow element of cadence "POST EXECUTION"
+   * Defines Activities to be loaded in the workflow element of cadence "Diff Merge".
    * 
    * @return the associated workflow element
    */
@@ -79,25 +69,29 @@ public class HeadlessCrossPhasesLauncher extends SubSystemLauncher {
 
     if (getTransposer() != null) {
 
-      // RootComponentNameUpdater
+      // RootComponentNameUpdater (Sys/SubSys specific)
       parameter.addActivity(getActivity(RootComponentNameUpdater.ID));
 
-      // CopyManagementPropertiesActivity
+      // CopyManagementPropertiesActivity (Sys/SubSys specific)
       parameter.addActivity(getActivity(CopyManagementPropertiesActivity.ID));
 
       // PostTransformationActivity
       parameter.addActivity(getActivity(PostTransformationActivity.ID));
 
-      // InitializeDiffMergeActivity
-      parameter.addActivity(InitializeDiffMergeActivity.ID);
+      // InitializeDiffMergeActivity (Sys/SubSys override)
+      parameter.addActivity(getActivity(InitializeDiffMergeFromTransformationActivity.ID));
 
       // DifferencesComputingActivity
-      parameter.addActivity(DifferencesComputingActivity.ID);
+      parameter.addActivity(getActivity(DifferencesComputingActivity.ID));
+      
+      // Remove deprecated components from target (components merged into the System)
+      // (Sys/SubSys specific)
+      parameter.addActivity(CleanDeprecatedComponentsActivity.ID);
 
       // DifferencesMergingActivity
-      parameter.addActivity(DifferencesMergingActivity.ID);
+      parameter.addActivity(getActivity(DifferencesMergingActivity.ID));
 
-      // Copy images to the target project
+      // Copy images to the target project (Sys/SubSys specific)
       parameter.addActivity(CopyImagesActivity.ID);
 
     }
@@ -105,14 +99,12 @@ public class HeadlessCrossPhasesLauncher extends SubSystemLauncher {
     return parameter;
   }
 
-  /**
-   * {@inheritDoc}
-   */
+
   @Override
   protected WorkflowActivityParameter buildFinalizationActivities() {
     WorkflowActivityParameter parameter = super.buildFinalizationActivities();
 
-    parameter.addActivity(FinalizeSubsystemTransitionActivity.ID);
+    parameter.addActivity(UnloadSubsystemResourcesActivity.ID);
     return parameter;
   }
 

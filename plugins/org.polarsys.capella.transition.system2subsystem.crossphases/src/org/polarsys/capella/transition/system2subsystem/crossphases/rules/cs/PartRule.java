@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2025 THALES GLOBAL SERVICES.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -14,11 +14,7 @@ package org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs;
 
 import java.util.List;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.osgi.util.NLS;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.CsPackage;
@@ -26,19 +22,20 @@ import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.ComponentExt;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
-import org.polarsys.capella.core.transition.common.constants.Messages;
 import org.polarsys.capella.core.transition.common.handlers.contextscope.ContextScopeHandlerHelper;
-import org.polarsys.capella.core.transition.common.handlers.log.LogHelper;
 import org.polarsys.capella.core.transition.common.handlers.selection.EClassSelectionContext;
 import org.polarsys.capella.core.transition.common.handlers.selection.ISelectionContext;
 import org.polarsys.capella.core.transition.common.handlers.selection.SelectionContextHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.transformation.TransformationHandlerHelper;
 import org.polarsys.capella.transition.system2subsystem.crossphases.constants.Crossphases;
-import org.polarsys.capella.transition.system2subsystem.crossphases.handlers.attachment.CrossPhasesAttachmentHelper;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 /**
- * 
+ * Rule to translate a Part from a System to a Sub-System.
+ * <p>
+ * A new part is created unless the Part belongs to the main selection. <br/>
+ * In this case, the Part of the Main System of System Architecture must be used.
+ * </p>
  */
 public class PartRule extends org.polarsys.capella.transition.system2subsystem.rules.cs.PartRule {
 
@@ -55,10 +52,6 @@ public class PartRule extends org.polarsys.capella.transition.system2subsystem.r
     return super.transformDirectElement(element, context);
   }
 
-  @Override
-  public IStatus transformRequired(EObject element, IContext context) {
-    return super.transformRequired(element, context);
-  }
 
   @Override
   protected void retrieveGoDeep(EObject source_p, List<EObject> result_p, IContext context_p) {

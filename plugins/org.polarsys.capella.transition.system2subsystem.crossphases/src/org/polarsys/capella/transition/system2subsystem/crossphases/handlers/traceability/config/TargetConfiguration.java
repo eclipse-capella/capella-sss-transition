@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2026 THALES GLOBAL SERVICES.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -21,6 +21,7 @@ import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.ctx.CtxPackage;
+import org.polarsys.capella.core.data.ctx.SystemAnalysis;
 import org.polarsys.capella.core.data.epbs.EPBSArchitecture;
 import org.polarsys.capella.core.data.information.DataPkg;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
@@ -30,13 +31,15 @@ import org.polarsys.capella.core.transition.common.handlers.traceability.ITracea
 import org.polarsys.capella.core.transition.system.handlers.traceability.ReconciliationTraceabilityHandler;
 import org.polarsys.capella.core.transition.system.helpers.ContextHelper;
 import org.polarsys.capella.transition.system2subsystem.context.SubSystemContextHelper;
+import org.polarsys.capella.transition.system2subsystem.crossphases.constants.Crossphases;
 import org.polarsys.capella.transition.system2subsystem.handlers.traceability.SIDTraceabilityHandler;
 import org.polarsys.capella.transition.system2subsystem.handlers.traceability.config.MergeTargetConfiguration;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 /**
- *
+ * Configuration identifying target elements to merge. 
  */
+
 public class TargetConfiguration extends MergeTargetConfiguration {
 
   protected class CrossPhasesTargetReconciliationTraceabilityHandler extends ReconciliationTraceabilityHandler {
@@ -188,8 +191,10 @@ public class TargetConfiguration extends MergeTargetConfiguration {
       if (handler_p instanceof SIDTraceabilityHandler) {
         //Any mapping from others phases than SystemAnalysis is useless
         BlockArchitecture architectureTarget = BlockArchitectureExt.getRootBlockArchitecture(source_p);
-        result = (architectureTarget == null) || CtxPackage.Literals.SYSTEM_ANALYSIS.isInstance(architectureTarget);
+        result = (architectureTarget == null) || architectureTarget instanceof SystemAnalysis;
       }
+      // If scope has changed, a target element may by deprecated.
+      result = result && !Crossphases.isDeprecatedTarget(source_p, context_p);
     }
 
     return result;

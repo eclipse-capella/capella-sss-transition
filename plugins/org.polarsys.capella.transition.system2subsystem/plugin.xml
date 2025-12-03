@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <!--
-  Copyright (c) 2006, 2016 THALES GLOBAL SERVICES.
+  Copyright (c) 2006, 2025 THALES GLOBAL SERVICES.
   
   This program and the accompanying materials are made available under the
   terms of the Eclipse Public License 2.0 which is available at
@@ -13,6 +13,37 @@
        Thales - initial API and implementation
 -->
 <plugin>
+
+
+  <extension
+         point="org.polarsys.kitalpha.cadence.core.activity.declaration">
+    <ActivityDeclaration
+            ActivityClass="org.polarsys.capella.transition.system2subsystem.activities.SsbsFinalizeTransitionActivity"
+            Identifier="org.polarsys.capella.transition.system2subsystem.activities.SsbsFinalizeTransitionActivity"
+            Multiple="false"
+            Name="Finalization of transition"
+            WorkflowElementIdentifier="org.polarsys.kitalpha.transposer.after.rule.execution"
+            WorkflowIdentifier="org.polarsys.kitalpha.transposer.workflow">
+      <Description>
+        This activity finalizes Transposer for Capella Transformation by saving the result.
+      </Description>
+    </ActivityDeclaration>
+  </extension>
+
+  <extension
+         point="org.polarsys.kitalpha.cadence.core.activity.declaration">
+    <ActivityDeclaration
+            ActivityClass="org.polarsys.capella.transition.system2subsystem.activities.UnloadSubsystemResourcesActivity"
+            Identifier="org.polarsys.capella.transition.system2subsystem.activities.UnloadSubsystemResourcesActivity"
+            Multiple="false"
+            Name="Finalization of transition"
+            WorkflowElementIdentifier="org.polarsys.kitalpha.transposer.after.rule.execution"
+            WorkflowIdentifier="org.polarsys.kitalpha.transposer.workflow">
+      <Description>
+        This activity unloads resources when dedicated to transformation.
+      </Description>
+    </ActivityDeclaration>
+  </extension>
 
    <extension
          id="org.polarsys.capella.transition.system2subsystem"

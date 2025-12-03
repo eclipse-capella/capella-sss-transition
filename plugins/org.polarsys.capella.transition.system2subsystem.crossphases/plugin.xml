@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <!--
-  Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
+  Copyright (c) 2006, 2025 THALES GLOBAL SERVICES.
   
   This program and the accompanying materials are made available under the
   terms of the Eclipse Public License 2.0 which is available at
@@ -13,6 +13,7 @@
        Thales - initial API and implementation
 -->
 <plugin>
+
 
   <extension
          point="org.polarsys.kitalpha.cadence.core.activity.declaration">
@@ -32,6 +33,21 @@
   <extension
          point="org.polarsys.kitalpha.cadence.core.activity.declaration">
     <ActivityDeclaration
+            ActivityClass="org.polarsys.capella.transition.system2subsystem.crossphases.activities.CleanDeprecatedComponentsActivity"
+            Identifier="org.polarsys.capella.transition.system2subsystem.crossphases.activities.CleanDeprecatedComponentsActivity"
+            Multiple="false"
+            Name="Computation of differences"
+            WorkflowElementIdentifier="org.polarsys.kitalpha.transposer.after.rule.execution"
+            WorkflowIdentifier="org.polarsys.kitalpha.transposer.workflow">
+      <Description>
+        This activity remove Deprecated Components from target System.
+      </Description>
+    </ActivityDeclaration>
+  </extension>
+  
+  <extension
+         point="org.polarsys.kitalpha.cadence.core.activity.declaration">
+    <ActivityDeclaration
             ActivityClass="org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeDiffMergeActivity"
             Identifier="org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeDiffMergeActivity"
             Multiple="false"
@@ -39,8 +55,22 @@
             WorkflowElementIdentifier="org.polarsys.kitalpha.transposer.after.rule.execution"
             WorkflowIdentifier="org.polarsys.kitalpha.transposer.workflow">
       <Description>
-        This activity initialize Transposer for Capella Transformation
-        execution.
+        This activity initialize Transposer for Capella Transformation execution.
+      </Description>
+    </ActivityDeclaration>
+  </extension>
+   
+  <extension
+         point="org.polarsys.kitalpha.cadence.core.activity.declaration">
+    <ActivityDeclaration
+            ActivityClass="org.polarsys.capella.transition.system2subsystem.crossphases.activities.ConfirmableDifferencesMergingActivity"
+            Identifier="org.polarsys.capella.transition.system2subsystem.crossphases.activities.ConfirmableDifferencesMergingActivity"
+            Multiple="false"
+            Name="Selection of differences"
+            WorkflowElementIdentifier="org.polarsys.kitalpha.transposer.after.rule.execution"
+            WorkflowIdentifier="org.polarsys.kitalpha.transposer.workflow">
+      <Description>
+        This activity merges the difference between theoretical model and existing one.
       </Description>
     </ActivityDeclaration>
   </extension>
@@ -55,7 +85,7 @@
             WorkflowElementIdentifier="org.polarsys.kitalpha.transposer.after.rule.execution"
             WorkflowIdentifier="org.polarsys.kitalpha.transposer.workflow">
       <Description>
-        This activity initialize Transposer for Capella Transformation
+        This activity initializes Transposer for Capella Transformation
         execution.
       </Description>
     </ActivityDeclaration>
