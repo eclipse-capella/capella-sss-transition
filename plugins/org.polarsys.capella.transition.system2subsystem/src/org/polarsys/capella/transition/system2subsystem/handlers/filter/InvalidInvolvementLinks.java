@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021 THALES GLOBAL SERVICES.
+ * Copyright (c) 2021, 2026 THALES GLOBAL SERVICES.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -32,26 +32,26 @@ public class InvalidInvolvementLinks extends CategoryFilter {
   }
 
   @Override
-  public boolean covers(IDifference difference) {
+  public boolean covers(IDifference<EObject> difference) {
     if (difference instanceof IElementPresence) {
-      IElementPresence presence = (IElementPresence) difference;
+      IElementPresence<EObject> presence = (IElementPresence<EObject>) difference;
       EObject source = getInvolvment(presence);
       if (source != null) {
         FunctionalChainInvolvement fci = (FunctionalChainInvolvement) source;
-        return fci.getNextFunctionalChainInvolvements().size() == 0
-            && fci.getPreviousFunctionalChainInvolvements().size() == 0;
+        return fci.getNextFunctionalChainInvolvements().isEmpty()
+            && fci.getPreviousFunctionalChainInvolvements().isEmpty();
       }
     }
     return false;
   }
 
-  private EObject getInvolvment(IElementPresence presence) {
+  private EObject getInvolvment(IElementPresence<EObject> presence) {
     Object source = presence.getElementMatch().get(Role.REFERENCE);
     if (source instanceof FunctionalChainInvolvementFunction) {
       return (EObject) source;
     }
-    IMatch match = presence.getOwnerMatch();
-    if (match.getElementPresenceDifference() != null) {
+    IMatch<EObject> match = presence.getOwnerMatch();
+    if (match != null && match.getElementPresenceDifference() != null) {
       return getInvolvment(match.getElementPresenceDifference());
     }
     return null;
