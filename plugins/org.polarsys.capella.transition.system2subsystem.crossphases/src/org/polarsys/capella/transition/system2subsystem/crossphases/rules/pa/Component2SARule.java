@@ -31,6 +31,7 @@ import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.handlers.contextscope.ContextScopeHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.transformation.TransformationHandlerHelper;
+import org.polarsys.capella.transition.system2subsystem.crossphases.constants.Crossphases;
 import org.polarsys.capella.transition.system2subsystem.crossphases.handlers.attachment.CrossPhasesAttachmentHelper;
 import org.polarsys.capella.transition.system2subsystem.rules.cs.ComponentRule;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
@@ -67,16 +68,16 @@ public class Component2SARule extends ComponentRule {
         CapellacorePackage.Literals.CAPELLA_ELEMENT__APPLIED_PROPERTY_VALUES, context_p);
   }
 
+  
+  
+  
   @Override
   protected EObject transformDirectElement(EObject element, IContext context) {
-    if (ContextScopeHandlerHelper.getInstance(context).contains(ITransitionConstants.SOURCE_SCOPE, element, context)) {
-      // Retrieve the existing architecture if any
-      EObject root = TransformationHandlerHelper.getInstance(context).getLevelElement(element, context);
-
-      BlockArchitecture target = (BlockArchitecture) TransformationHandlerHelper.getInstance(context).getBestTracedElement(root, context, CsPackage.Literals.BLOCK_ARCHITECTURE);
-      if (target instanceof SystemAnalysis) {
-        SystemAnalysis analysis = (SystemAnalysis) target;
-        return BlockArchitectureExt.getOrCreateSystem(analysis);
+    if (Crossphases.isSourceScope((Component)element, context)) {
+      
+      EObject system = Crossphases.obtainSystemAnalysisSystem(element, context);
+      if (system != null) {
+        return system;
       }
     }
 

@@ -15,53 +15,54 @@
 <plugin>
 
    
-   <extension
+  <extension
          point="org.polarsys.kitalpha.cadence.core.activity.declaration">
-      <ActivityDeclaration
+    <ActivityDeclaration
             ActivityClass="org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeTransitionActivity"
             Identifier="org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeTransitionActivity"
             Multiple="false"
             Name="InitializeTransitionActivity"
             WorkflowElementIdentifier="org.polarsys.kitalpha.transposer.before.analysis"
             WorkflowIdentifier="org.polarsys.kitalpha.transposer.workflow">
-         <Description>
-            This activity initialize transition.
-         </Description>
-      </ActivityDeclaration>
-   </extension>
+      <Description>
+        This activity initialize transition.
+      </Description>
+    </ActivityDeclaration>
+  </extension>
 
-   <extension
+  <extension
          point="org.polarsys.kitalpha.cadence.core.activity.declaration">
-      <ActivityDeclaration
+    <ActivityDeclaration
             ActivityClass="org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeDiffMergeActivity"
             Identifier="org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeDiffMergeActivity"
             Multiple="false"
             Name="Interphases Initialization of Capella DiffMerge From Scope"
             WorkflowElementIdentifier="org.polarsys.kitalpha.transposer.after.rule.execution"
             WorkflowIdentifier="org.polarsys.kitalpha.transposer.workflow">
-         <Description>
-            This activity initialize Transposer for Capella Transformation execution.
-         </Description>
-      </ActivityDeclaration>
-   </extension>
+      <Description>
+        This activity initialize Transposer for Capella Transformation
+        execution.
+      </Description>
+    </ActivityDeclaration>
+  </extension>
    
-   <extension
+  <extension
          point="org.polarsys.kitalpha.cadence.core.activity.declaration">
-      <ActivityDeclaration
+    <ActivityDeclaration
             ActivityClass="org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeCrossPhasesTransformationActivity"
             Identifier="org.polarsys.capella.transition.system2subsystem.crossphases.activities.InitializeCrossPhasesTransformationActivity"
             Multiple="false"
             Name="Computation of differences"
             WorkflowElementIdentifier="org.polarsys.kitalpha.transposer.after.rule.execution"
             WorkflowIdentifier="org.polarsys.kitalpha.transposer.workflow">
-         <Description>
-            This activity initialize Transposer for Capella Transformation execution.
-         </Description>
-      </ActivityDeclaration>
-   </extension>
-   
-   
-   
+      <Description>
+        This activity initialize Transposer for Capella Transformation
+        execution.
+      </Description>
+    </ActivityDeclaration>
+  </extension>
+
+
 <extension point="org.polarsys.kitalpha.transposer.rules.handler.mapping"
          id="org.polarsys.capella.transition.system2subsystem.crossphases"  name="CrossPhases Transition Mapping">
       <mapping
@@ -471,34 +472,26 @@
       
 </extension>
 
+  <extension point="org.polarsys.capella.common.flexibility.properties">
+    <properties id="capella.core.transition.system2subsystem.crossphases">
+      <inheritance properties="capella.core.transition.system2subsystem" />
+      <group id="components" name="%group.components" parent="defaultGroup" />
 
-   <extension
-         point="org.polarsys.capella.common.flexibility.properties">
-      <properties
-            id="capella.core.transition.system2subsystem.crossphases">
-         <inheritance properties="capella.core.transition.system2subsystem" />
-         <group
-               id="components"
-               name="%group.components"
-               parent="defaultGroup">
-         </group>
-         <property
-               class="org.polarsys.capella.common.flexibility.properties.property.BooleanPropertyPreference"
-               enabled="true"
-               group="components"
-               id="componentMerge"
-               name="%property.componentMerge">
-            <argument
-                  id="scope"
-                  value="capella.core.transition.system2subsystem.crossphases">
-            </argument>
-            <argument
-                  id="default"
-                  value="true">
-            </argument>
-         </property>
-      </properties>
-   </extension>
-   
-   
+      <property group="components" id="componentMerge" name="%property.componentMerge"
+          class="org.polarsys.capella.common.flexibility.properties.property.BooleanPropertyPreference"
+          enabled="true">
+        <argument id="scope" value="capella.core.transition.system2subsystem.crossphases" />
+        <argument id="default" value="true"/>
+      </property>
+
+      <!-- Override existing property -->
+      <property group="outputModel" id="outputModel" name="%property.outputModel"
+          class="org.polarsys.capella.transition.system2subsystem.crossphases.properties.ImpactedOutputModelPreference"
+          enabled="true" >
+        <argument id="scope" value="capella.core.transition" />
+      </property>
+    </properties>
+  </extension>
+
+
 </plugin>

@@ -33,6 +33,7 @@ import org.polarsys.capella.core.transition.common.handlers.selection.EClassSele
 import org.polarsys.capella.core.transition.common.handlers.selection.ISelectionContext;
 import org.polarsys.capella.core.transition.common.handlers.selection.SelectionContextHandlerHelper;
 import org.polarsys.capella.core.transition.common.handlers.transformation.TransformationHandlerHelper;
+import org.polarsys.capella.transition.system2subsystem.crossphases.constants.Crossphases;
 import org.polarsys.capella.transition.system2subsystem.crossphases.handlers.attachment.CrossPhasesAttachmentHelper;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
@@ -43,31 +44,19 @@ public class PartRule extends org.polarsys.capella.transition.system2subsystem.r
 
   @Override
   protected EObject transformDirectElement(EObject element, IContext context) {
-    if (element instanceof Component && BlockArchitectureExt.isRootComponent((Component) element)) {
-      ISelectionContext sContext =
-          SelectionContextHandlerHelper.getHandler(context).getSelectionContext(context, ITransitionConstants.SELECTION_CONTEXT__TRANSFORMATION);
-
-      EObject target = TransformationHandlerHelper.getInstance(context).getBestTracedElement(((Part) element).getAbstractType(), context, sContext);
-      Component tComponent = (Component) target;
-      if ((tComponent != null) && (tComponent.getRepresentingParts() != null) && (!tComponent.getRepresentingParts().isEmpty())) {
-        return tComponent.getRepresentingParts().get(0);
+    
+    if (Crossphases.isSourceScope((Part)element, context)) {
+      EObject systemPart = Crossphases.obtainSystemAnalysisSystemPart(element, context);
+      if (systemPart != null) {
+        return systemPart;
       }
     }
+    
     return super.transformDirectElement(element, context);
   }
 
   @Override
   public IStatus transformRequired(EObject element, IContext context) {
-    EClass target = TransformationHandlerHelper.getInstance(context).getTargetType(((Part) element).getAbstractType(), context);
-    Component e = (Component) ((Part) element).getAbstractType();
-
-    if (target instanceof Component && BlockArchitectureExt.isRootComponent((Component) target)) {
-      Component d = CrossPhasesAttachmentHelper.getInstance(context).getRelatedComponent(e, context);
-      if (d != e) {
-        return new Status(IStatus.WARNING, Messages.Activity_Transformation, NLS.bind("Part ''{0}'' is typed by an element transitioned to the System.",
-                LogHelper.getInstance().getText(element)));
-      }
-    }
     return super.transformRequired(element, context);
   }
 
