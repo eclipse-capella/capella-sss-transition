@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2019 THALES GLOBAL SERVICES.
+ * Copyright (c) 2006, 2025 THALES GLOBAL SERVICES.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -29,7 +29,7 @@ import org.polarsys.capella.transition.system2subsystem.handlers.traceability.co
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
 /**
- *
+ * Configuration identifying source elements to merge from the tranformation.
  */
 public class SourceConfiguration extends MergeSourceConfiguration {
 
@@ -81,6 +81,14 @@ public class SourceConfiguration extends MergeSourceConfiguration {
     }
     return architecture;
   }
+  
+//  
+//  protected class CrossPhasesSourceSIDTraceabilityHandler extends SourceSIDTraceabilityHandler {
+//    public CrossPhasesSourceSIDTraceabilityHandler(String identifier_p) {
+//      super(identifier_p);
+//    }
+//
+//  }
 
   @Override
   protected void initHandlers(IContext fContext_p) {
