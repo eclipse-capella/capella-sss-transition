@@ -14,7 +14,6 @@
 -->
 <plugin>
 
-   
   <extension
          point="org.polarsys.kitalpha.cadence.core.activity.declaration">
     <ActivityDeclaration
@@ -63,414 +62,300 @@
   </extension>
 
 
-<extension point="org.polarsys.kitalpha.transposer.rules.handler.mapping"
-         id="org.polarsys.capella.transition.system2subsystem.crossphases"  name="CrossPhases Transition Mapping">
-      <mapping
-            context="org.polarsys.capella.core.transition.common.context.TransitionContext"
-            description="A cross phases system to subsystem transition"
-            domainHelper="org.polarsys.capella.core.transition.system.domain.CapellaTransitionDomainHelper"
-            extendedMappingExtensionID="org.polarsys.capella.transition.system2subsystem"
-            mappingName="CrossPhases Transition"
-            mappingPurpose="org.polarsys.capella.core.transition">
-            
-         
-         <mappingPackage
-               name="core">
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.capellacore.Involvement"
-                  reuseExtendedElementDefaultPossibility="false"
-                  reuseExtendedElementPossibilities="false">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.interaction.ActorCapabilityInvolvementRule"
-                     enabled="true"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.interaction.ActorCapabilityInvolvementRule"
-                     name="CapabilityInvolvement">
-               </defaultMappingPossibility>
-            </mappingElement>
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.capellacore.AbstractPropertyValue"
-                  reuseExtendedElementDefaultPossibility="false"
-                  reuseExtendedElementPossibilities="false">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.core.PropertyValueRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.core.PropertyValueRule"
-                     enabled="true"
-                     name="PropertyValue">
-               </defaultMappingPossibility>
-            </mappingElement>
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.capellacore.PropertyValuePkg"
-                  reuseExtendedElementDefaultPossibility="false"
-                  reuseExtendedElementPossibilities="false">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.core.PropertyValuePkgRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.core.PropertyValuePkgRule"
-                     enabled="true"
-                     name="PropertyValuePkg">
-               </defaultMappingPossibility>
-            </mappingElement>
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.capellacore.PropertyValueGroup"
-                  reuseExtendedElementDefaultPossibility="false"
-                  reuseExtendedElementPossibilities="false">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.core.PropertyValueGroupRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.core.PropertyValueGroupRule"
-                     enabled="true"
-                     name="PropertyValueGroup">
-               </defaultMappingPossibility>
-            </mappingElement>
-         </mappingPackage>
-         
-         <mappingPackage
-               name="cs">
-               
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.cs.PhysicalLink"
-                  reuseExtendedElementDefaultPossibility="false"
-                  reuseExtendedElementPossibilities="false">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.PhysicalLinkRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.PhysicalLinkRule"
-                     enabled="true"
-                     name="PhysicalLink">
-               </defaultMappingPossibility>
-            </mappingElement>
-            
-             <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.cs.PhysicalLinkCategory"
-                  reuseExtendedElementDefaultPossibility="false"
-                  reuseExtendedElementPossibilities="false">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.PhysicalLinkCategoryRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.PhysicalLinkCategoryRule"
-                     enabled="true"
-                     name="PhysicalLinkCategory">
-               </defaultMappingPossibility>
-            </mappingElement>
-            
-            
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.cs.PhysicalPort"
-                  reuseExtendedElementDefaultPossibility="false"
-                  reuseExtendedElementPossibilities="false">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.PhysicalPortRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.PhysicalPortRule"
-                     enabled="true"
-                     name="PhysicalPort">
-               </defaultMappingPossibility>
-            </mappingElement>
-            
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.cs.AbstractDeploymentLink"
-                  reuseExtendedElementDefaultPossibility="false"
-                  reuseExtendedElementPossibilities="false">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.AbstractDeploymentLinkRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.AbstractDeploymentLinkRule"
-                     enabled="true"
-                     name="AbstractDeploymentLink">
-               </defaultMappingPossibility>
-            </mappingElement>
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.cs.BlockArchitecture"
-                  reuseExtendedElementDefaultPossibility="false"
-                  reuseExtendedElementPossibilities="false">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.BlockArchitectureRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.BlockArchitectureRule"
-                     enabled="false"
-                     name="BlockArchitecture">
-               </defaultMappingPossibility>
-            </mappingElement>
-            
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.cs.Component"
-                  reuseExtendedElementDefaultPossibility="false"
-                  reuseExtendedElementPossibilities="false">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.ComponentRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.ComponentRule"
-                     enabled="true"
-                     name="Component">
-               </defaultMappingPossibility>
-            </mappingElement>
-            
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.cs.Part"
-                  reuseExtendedElementDefaultPossibility="false"
-                  reuseExtendedElementPossibilities="false">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.PartRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.PartRule"
-                     enabled="true"
-                     name="Part">
-               </defaultMappingPossibility>
-            </mappingElement>
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.cs.InterfaceImplementation"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.InterfaceImplementationRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.InterfaceImplementationRule"
-                     enabled="true"
-                     name="InterfaceImplementation">
-               </defaultMappingPossibility>
-            </mappingElement>
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.cs.InterfaceUse"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.InterfaceUseRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.InterfaceUseRule"
-                     enabled="true"
-                     name="InterfaceUse">
-               </defaultMappingPossibility>
-            </mappingElement>
-         </mappingPackage>
-      
-         <mappingPackage
-               name="ctx">
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.ctx.SystemAnalysis"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.ctx.SystemAnalysisRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.ctx.SystemAnalysisRule"
-                     enabled="true"
-                     name="SystemAnalysis">
-               </defaultMappingPossibility>
-            </mappingElement>
-         </mappingPackage>
-         
-         <mappingPackage
-               name="epbs">
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.epbs.ConfigurationItem"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.epbs.ConfigurationItemRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.epbs.ConfigurationItemRule"
-                     enabled="true"
-                     name="ConfigurationItem">
-               </defaultMappingPossibility>
-            </mappingElement>
-         </mappingPackage>
-         
-         
-         <mappingPackage
-               name="fa">
-         
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.fa.ComponentFunctionalAllocation"
-                  reuseExtendedElementDefaultPossibility="false"
-                  reuseExtendedElementPossibilities="false">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.ComponentFunctionalAllocationRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.ComponentFunctionalAllocationRule"
-                     enabled="true"
-                     name="ComponentFunctionalAllocation">
-               </defaultMappingPossibility>
-            </mappingElement>
-         	<mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.fa.ComponentPort"
-                  reuseExtendedElementDefaultPossibility="false"
-                  reuseExtendedElementPossibilities="false">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.ComponentPortRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.ComponentPortRule"
-                     enabled="true"
-                     name="ComponentPort">
-               </defaultMappingPossibility>
-            </mappingElement>
-            
-          <mappingElement
-                domainMetaClass="org.polarsys.capella.core.data.fa.ComponentExchange"
-                reuseExtendedElementDefaultPossibility="false"
-                reuseExtendedElementPossibilities="false">
-             <defaultMappingPossibility
-                   completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.ComponentExchangeRule"
-                   incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.ComponentExchangeRule"
-                   enabled="true"
-                   name="ComponentExchange">
-             </defaultMappingPossibility>
+
+  <extension point="org.polarsys.kitalpha.transposer.rules.handler.mapping"
+    id="org.polarsys.capella.transition.system2subsystem.crossphases"
+    name="CrossPhases Transition Mapping">
+    <mapping
+      context="org.polarsys.capella.core.transition.common.context.TransitionContext"
+      description="A cross phases system to subsystem transition"
+      domainHelper="org.polarsys.capella.core.transition.system.domain.CapellaTransitionDomainHelper"
+      extendedMappingExtensionID="org.polarsys.capella.transition.system2subsystem"
+      mappingName="CrossPhases Transition"
+      mappingPurpose="org.polarsys.capella.core.transition">
+
+      <mappingPackage name="core">
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.capellacore.Involvement"
+          reuseExtendedElementDefaultPossibility="false"
+          reuseExtendedElementPossibilities="false">
+          <defaultMappingPossibility name="CapabilityInvolvement" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.interaction.ActorCapabilityInvolvementRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.interaction.ActorCapabilityInvolvementRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.capellacore.AbstractPropertyValue"
+          reuseExtendedElementDefaultPossibility="false"
+          reuseExtendedElementPossibilities="false">
+          <defaultMappingPossibility name="PropertyValue" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.core.PropertyValueRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.core.PropertyValueRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.capellacore.PropertyValuePkg"
+          reuseExtendedElementDefaultPossibility="false"
+          reuseExtendedElementPossibilities="false">
+          <defaultMappingPossibility name="PropertyValuePkg" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.core.PropertyValuePkgRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.core.PropertyValuePkgRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.capellacore.PropertyValueGroup"
+          reuseExtendedElementDefaultPossibility="false"
+          reuseExtendedElementPossibilities="false">
+          <defaultMappingPossibility name="PropertyValueGroup" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.core.PropertyValueGroupRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.core.PropertyValueGroupRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+      </mappingPackage>
+
+      <mappingPackage name="cs">
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.cs.PhysicalLink"
+          reuseExtendedElementDefaultPossibility="false"
+          reuseExtendedElementPossibilities="false">
+          <defaultMappingPossibility name="PhysicalLink" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.PhysicalLinkRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.PhysicalLinkRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.cs.PhysicalLinkCategory"
+          reuseExtendedElementDefaultPossibility="false"
+          reuseExtendedElementPossibilities="false">
+          <defaultMappingPossibility name="PhysicalLinkCategory" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.PhysicalLinkCategoryRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.PhysicalLinkCategoryRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.cs.PhysicalPort"
+          reuseExtendedElementDefaultPossibility="false"
+          reuseExtendedElementPossibilities="false">
+          <defaultMappingPossibility name="PhysicalPort" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.PhysicalPortRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.PhysicalPortRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.cs.AbstractDeploymentLink"
+          reuseExtendedElementDefaultPossibility="false"
+          reuseExtendedElementPossibilities="false">
+          <defaultMappingPossibility name="AbstractDeploymentLink" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.AbstractDeploymentLinkRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.AbstractDeploymentLinkRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.cs.BlockArchitecture"
+          reuseExtendedElementDefaultPossibility="false"
+          reuseExtendedElementPossibilities="false">
+          <defaultMappingPossibility name="BlockArchitecture" enabled="false" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.BlockArchitectureRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.BlockArchitectureRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.cs.Component"
+          reuseExtendedElementDefaultPossibility="false"
+          reuseExtendedElementPossibilities="false">
+          <defaultMappingPossibility name="Component" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.ComponentRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.ComponentRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.cs.Part"
+          reuseExtendedElementDefaultPossibility="false"
+          reuseExtendedElementPossibilities="false">
+          <defaultMappingPossibility name="Part" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.PartRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.PartRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.cs.InterfaceImplementation"
+          reuseExtendedElementDefaultPossibility="true"
+          reuseExtendedElementPossibilities="true">
+          <defaultMappingPossibility name="InterfaceImplementation" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.InterfaceImplementationRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.InterfaceImplementationRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.cs.InterfaceUse"
+          reuseExtendedElementDefaultPossibility="true"
+          reuseExtendedElementPossibilities="true">
+          <defaultMappingPossibility name="InterfaceUse" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.InterfaceUseRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.cs.InterfaceUseRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+      </mappingPackage>
+
+      <mappingPackage name="ctx">
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.ctx.SystemAnalysis"
+          reuseExtendedElementDefaultPossibility="true"
+          reuseExtendedElementPossibilities="true">
+          <defaultMappingPossibility name="SystemAnalysis" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.ctx.SystemAnalysisRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.ctx.SystemAnalysisRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+      </mappingPackage>
+
+      <mappingPackage name="epbs">
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.epbs.ConfigurationItem"
+          reuseExtendedElementDefaultPossibility="true"
+          reuseExtendedElementPossibilities="true">
+          <defaultMappingPossibility name="ConfigurationItem" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.epbs.ConfigurationItemRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.epbs.ConfigurationItemRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+      </mappingPackage>
+
+      <mappingPackage name="fa">
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.fa.ComponentFunctionalAllocation"
+          reuseExtendedElementDefaultPossibility="false"
+          reuseExtendedElementPossibilities="false">
+          <defaultMappingPossibility name="ComponentFunctionalAllocation" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.ComponentFunctionalAllocationRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.ComponentFunctionalAllocationRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.fa.ComponentPort"
+          reuseExtendedElementDefaultPossibility="false"
+          reuseExtendedElementPossibilities="false">
+          <defaultMappingPossibility name="ComponentPort" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.ComponentPortRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.ComponentPortRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.fa.ComponentExchange"
+          reuseExtendedElementDefaultPossibility="false"
+          reuseExtendedElementPossibilities="false">
+          <defaultMappingPossibility name="ComponentExchange" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.ComponentExchangeRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.ComponentExchangeRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.fa.ComponentExchangeCategory"
+          reuseExtendedElementDefaultPossibility="false"
+          reuseExtendedElementPossibilities="false">
+          <defaultMappingPossibility name="ComponentExchangeCategoryC" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.ComponentExchangeCategoryRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.ComponentExchangeCategoryRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.fa.FunctionalExchange"
+          reuseExtendedElementDefaultPossibility="true"
+          reuseExtendedElementPossibilities="true">
+          <defaultMappingPossibility name="FunctionalExchange" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.FunctionalExchangeRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.FunctionalExchangeRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+      </mappingPackage>
+
+      <mappingPackage name="information">
+        <mappingPackage name="communication">
+          <mappingElement domainMetaClass="org.polarsys.capella.core.data.information.communication.CommunicationLink"
+            reuseExtendedElementDefaultPossibility="true"
+            reuseExtendedElementPossibilities="true">
+            <defaultMappingPossibility name="CommunicationLink" enabled="true" 
+              completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.information.communication.CommunicationLinkRule"
+              incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.information.communication.CommunicationLinkRule">
+            </defaultMappingPossibility>
           </mappingElement>
-          
-          
-          <mappingElement
-                domainMetaClass="org.polarsys.capella.core.data.fa.ComponentExchangeCategory"
-                reuseExtendedElementDefaultPossibility="false"
-                reuseExtendedElementPossibilities="false">
-             <defaultMappingPossibility
-                   completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.ComponentExchangeCategoryRule"
-                   incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.ComponentExchangeCategoryRule"
-                   enabled="true"
-                   name="ComponentExchangeCategoryC">
-             </defaultMappingPossibility>
-          </mappingElement>
-          
-          <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.fa.FunctionalExchange"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.FunctionalExchangeRule"
-                     enabled="true"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.fa.FunctionalExchangeRule"
-                     name="FunctionalExchange">
-               </defaultMappingPossibility>
-            </mappingElement>
-         </mappingPackage>
-            
-         <mappingPackage
-                name="information">
-             <mappingPackage
-                   name="communication">
-                <mappingElement
-                      domainMetaClass="org.polarsys.capella.core.data.information.communication.CommunicationLink"
-                      reuseExtendedElementDefaultPossibility="true"
-                      reuseExtendedElementPossibilities="true">
-                   <defaultMappingPossibility
-                         completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.information.communication.CommunicationLinkRule"
-                         enabled="true"
-                         incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.information.communication.CommunicationLinkRule"
-                         name="CommunicationLink">
-                   </defaultMappingPossibility>
-                </mappingElement>
-             </mappingPackage>
-         </mappingPackage>
-            
-         <mappingPackage
-               name="la">
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.la.LogicalArchitecture"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalArchitectureRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalArchitectureRule"
-                     enabled="true"
-                     name="LogicalArchitecture">
-               </defaultMappingPossibility>
-            </mappingElement>
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.la.LogicalComponent"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalComponentRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalComponentRule"
-                     enabled="true"
-                     name="LogicalComponent">
-               </defaultMappingPossibility>
-            </mappingElement>
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.la.LogicalFunction"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalFunctionRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalFunctionRule"
-                     enabled="true"
-                     name="LogicalFunction">
-               </defaultMappingPossibility>
-            </mappingElement>
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.la.LogicalFunctionPkg"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalFunctionPkgRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalFunctionPkgRule"
-                     enabled="true"
-                     name="LogicalFunctionPkg">
-               </defaultMappingPossibility>
-            </mappingElement>
-          </mappingPackage>
-          
-          
-          <mappingPackage
-               name="pa">
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.pa.PhysicalArchitecture"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalArchitectureRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalArchitectureRule"
-                     enabled="true"
-                     name="PhysicalArchitecture">
-               </defaultMappingPossibility>
-            </mappingElement>
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.pa.PhysicalComponent"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalComponentRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalComponentRule"
-                     enabled="true"
-                     name="PhysicalComponent">
-               </defaultMappingPossibility>
-            </mappingElement>
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.pa.PhysicalFunction"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalFunctionRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalFunctionRule"
-                     enabled="true"
-                     name="PhysicalFunction">
-               </defaultMappingPossibility>
-            </mappingElement>
-            <mappingElement
-                  domainMetaClass="org.polarsys.capella.core.data.pa.PhysicalFunctionPkg"
-                  reuseExtendedElementDefaultPossibility="true"
-                  reuseExtendedElementPossibilities="true">
-               <defaultMappingPossibility
-                     completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalFunctionPkgRule"
-                     incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalFunctionPkgRule"
-                     enabled="true"
-                     name="PhysicalFunctionPkg">
-               </defaultMappingPossibility>
-            </mappingElement>
-         </mappingPackage>
-          <mappingPackage
-                name="interaction">
-             <mappingElement
-                   domainMetaClass="org.polarsys.capella.core.data.capellacommon.AbstractCapabilityPkg"
-                   reuseExtendedElementDefaultPossibility="true"
-                   reuseExtendedElementPossibilities="true">
-                <defaultMappingPossibility
-                      completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.interaction.AbstractCapabilityPkgRule"
-                      incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.interaction.AbstractCapabilityPkgRule"
-                      enabled="true"
-                      name="AbstractCapabilityPkg">
-                </defaultMappingPossibility>
-             </mappingElement>
-             <mappingElement
-                   domainMetaClass="org.polarsys.capella.core.data.interaction.AbstractCapability"
-                   reuseExtendedElementDefaultPossibility="true"
-                   reuseExtendedElementPossibilities="true">
-                <defaultMappingPossibility
-                      completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.interaction.AbstractCapabilityRule"
-                      incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.interaction.AbstractCapabilityRule"
-                      enabled="true"
-                      name="AbstractCapability">
-                </defaultMappingPossibility>
-             </mappingElement>
-          </mappingPackage>
-         
-      </mapping>
-      
-      
-</extension>
+        </mappingPackage>
+      </mappingPackage>
+
+      <mappingPackage name="la">
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.la.LogicalArchitecture"
+          reuseExtendedElementDefaultPossibility="true"
+          reuseExtendedElementPossibilities="true">
+          <defaultMappingPossibility name="LogicalArchitecture" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalArchitectureRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalArchitectureRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.la.LogicalComponent"
+          reuseExtendedElementDefaultPossibility="true"
+          reuseExtendedElementPossibilities="true">
+          <defaultMappingPossibility name="LogicalComponent" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalComponentRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalComponentRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.la.LogicalFunction"
+          reuseExtendedElementDefaultPossibility="true"
+          reuseExtendedElementPossibilities="true">
+          <defaultMappingPossibility name="LogicalFunction" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalFunctionRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalFunctionRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.la.LogicalFunctionPkg"
+          reuseExtendedElementDefaultPossibility="true"
+          reuseExtendedElementPossibilities="true">
+          <defaultMappingPossibility name="LogicalFunctionPkg" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalFunctionPkgRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.la.LogicalFunctionPkgRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+      </mappingPackage>
+
+      <mappingPackage name="pa">
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.pa.PhysicalArchitecture"
+          reuseExtendedElementDefaultPossibility="true"
+          reuseExtendedElementPossibilities="true">
+          <defaultMappingPossibility name="PhysicalArchitecture" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalArchitectureRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalArchitectureRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.pa.PhysicalComponent"
+          reuseExtendedElementDefaultPossibility="true"
+          reuseExtendedElementPossibilities="true">
+          <defaultMappingPossibility name="PhysicalComponent" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalComponentRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalComponentRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.pa.PhysicalFunction"
+          reuseExtendedElementDefaultPossibility="true"
+          reuseExtendedElementPossibilities="true">
+          <defaultMappingPossibility name="PhysicalFunction" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalFunctionRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalFunctionRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.pa.PhysicalFunctionPkg"
+          reuseExtendedElementDefaultPossibility="true"
+          reuseExtendedElementPossibilities="true">
+          <defaultMappingPossibility name="PhysicalFunctionPkg" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalFunctionPkgRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.pa.PhysicalFunctionPkgRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+      </mappingPackage>
+      <mappingPackage name="interaction">
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.capellacommon.AbstractCapabilityPkg"
+          reuseExtendedElementDefaultPossibility="true"
+          reuseExtendedElementPossibilities="true">
+          <defaultMappingPossibility name="AbstractCapabilityPkg" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.interaction.AbstractCapabilityPkgRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.interaction.AbstractCapabilityPkgRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+        <mappingElement domainMetaClass="org.polarsys.capella.core.data.interaction.AbstractCapability"
+          reuseExtendedElementDefaultPossibility="true"
+          reuseExtendedElementPossibilities="true">
+          <defaultMappingPossibility name="AbstractCapability" enabled="true" 
+            completeRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.interaction.AbstractCapabilityRule"
+            incompleteRule="org.polarsys.capella.transition.system2subsystem.crossphases.rules.interaction.AbstractCapabilityRule">
+          </defaultMappingPossibility>
+        </mappingElement>
+      </mappingPackage>
+
+    </mapping>
+  </extension>
 
   <extension point="org.polarsys.capella.common.flexibility.properties">
     <properties id="capella.core.transition.system2subsystem.crossphases">
