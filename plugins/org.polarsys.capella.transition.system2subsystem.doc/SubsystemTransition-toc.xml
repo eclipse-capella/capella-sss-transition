@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!--
-  Copyright (c) 2006, 2015 THALES GLOBAL SERVICES.
+  Copyright (c) 2006, 2026 THALES GLOBAL SERVICES.
   
   This program and the accompanying materials are made available under the
   terms of the Eclipse Public License 2.0 which is available at
@@ -22,9 +22,9 @@
  </topic>
  <topic label="User Manual">
  	<topic href="html/User Manual/14.1. Three kinds of transitions.html" label="Three Kinds of Transitions">
-		<topic href="html/User Manual/14.1. Three kinds of transitons.html#Scoped_Horizontal_Extraction" label="Scoped Horizontal Extraction"></topic>
-		<topic href="html/User Manual/14.1. Three kinds of transitons.html#Vertical_Transition_.28SA.29" label="Vertical Transition (SA)"></topic>
-		<topic href="html/User Manual/14.1. Three kinds of transitons.html#Vertical_Transition_.28SA-LA-PA.29" label="Vertical Transition (SA-LA-PA)"></topic>
+		<topic href="html/User Manual/14.1. Three kinds of transitions.html#Scoped_Horizontal_Extraction" label="Scoped Horizontal Extraction"></topic>
+		<topic href="html/User Manual/14.1. Three kinds of transitions.html#Vertical_Transition_.28SA.29" label="Vertical Transition (SA)"></topic>
+		<topic href="html/User Manual/14.1. Three kinds of transitions.html#Vertical_Transition_.28SA-LA-PA.29" label="Vertical Transition (SA-LA-PA)"></topic>
 	</topic>
 	<topic href="html/User Manual/14.2. Usage instructions.html" label="Transition System to Subsystem">
 		<topic href="html/User Manual/14.2. Usage instructions.html#Configuration_of_the_transition" label="Configuration of the transition"></topic>
