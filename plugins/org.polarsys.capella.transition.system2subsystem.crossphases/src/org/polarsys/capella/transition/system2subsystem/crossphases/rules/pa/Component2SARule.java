@@ -66,15 +66,12 @@ public class Component2SARule extends ComponentRule {
     CrossPhasesAttachmentHelper.getInstance(context_p).attachRelatedOfMergedElements(element_p, result_p,
         CapellacorePackage.Literals.CAPELLA_ELEMENT__APPLIED_PROPERTY_VALUES, context_p);
   }
-
-  
-  
   
   @Override
   protected EObject transformDirectElement(EObject element, IContext context) {
     if (Crossphases.isSourceScope((Component)element, context)) {
       
-      EObject system = Crossphases.obtainSystemAnalysisSystem(element, context);
+      EObject system = Crossphases.getOrCreateTracedSystem(element, context);
       if (system != null) {
         return system;
       }

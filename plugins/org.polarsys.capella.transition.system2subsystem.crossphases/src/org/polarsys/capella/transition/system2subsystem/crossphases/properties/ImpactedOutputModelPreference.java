@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 THALES GLOBAL SERVICES.
+ * Copyright (c) 2025, 2026 THALES GLOBAL SERVICES.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -32,6 +32,7 @@ import org.polarsys.capella.common.flexibility.properties.schema.IPropertyContex
 import org.polarsys.capella.core.data.capellamodeller.Project;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.ctx.SystemAnalysis;
+import org.polarsys.capella.core.model.handler.helpers.RepresentationHelper;
 import org.polarsys.capella.core.model.helpers.SystemEngineeringExt;
 import org.polarsys.capella.core.transition.common.constants.ITransitionConstants;
 import org.polarsys.capella.core.transition.common.context.TransitionContext;
@@ -90,7 +91,7 @@ public class ImpactedOutputModelPreference extends OutputModelPreference {
   }
   
   private static String toElementLabel(String id, Resource res) {
-    EObject element = res.getEObject(id);
+    EObject element = RepresentationHelper.getRepresentationDescriptorOrSemanticObject(res.getResourceSet(), id);
     if (element == null) {
       return NLS.bind(Messages.ImpactedOutputModelPreference_MissingElement, id);
     }
