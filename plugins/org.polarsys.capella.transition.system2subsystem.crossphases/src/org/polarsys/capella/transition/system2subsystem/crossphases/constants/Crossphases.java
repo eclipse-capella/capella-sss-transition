@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 THALES GLOBAL SERVICES.
+ * Copyright (c) 2025, 2026 THALES GLOBAL SERVICES.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -12,6 +12,7 @@
  *******************************************************************************/
 package org.polarsys.capella.transition.system2subsystem.crossphases.constants;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -76,7 +77,7 @@ public class Crossphases {
    * @param context of execution
    * @return a {@link SystemAnalysis}
    */
-  public static Component obtainSystemAnalysisSystem(EObject element, IContext context) {
+  public static Component getOrCreateTracedSystem(EObject element, IContext context) {
     EObject root = TransformationHandlerHelper.getInstance(context).getLevelElement(element, context);
 
     BlockArchitecture target = (BlockArchitecture) TransformationHandlerHelper.getInstance(context)
@@ -95,26 +96,24 @@ public class Crossphases {
    * @param context of execution
    * @return a {@link SystemAnalysis}
    */
-  public static Part obtainSystemAnalysisSystemPart(EObject element, IContext context) {
-    Component systemComponent = obtainSystemAnalysisSystem(element, context);
+  public static Part getOrCreateTracedSystemPart(EObject element, IContext context) {
+    Component systemComponent = getOrCreateTracedSystem(element, context);
     
     if (systemComponent == null) {
       return null;
     }
     
+    List<Part> parts = systemComponent.getRepresentingParts();
+    if (!parts.isEmpty()) {
+    return parts.get(0);
+    }
     // Cast is safe by design of BlockArchitectureExt#getOrCreateSystem
     ComponentPkg container = (ComponentPkg) systemComponent.eContainer();
-    Part result = container.getOwnedParts().stream()
-      .filter(part -> part.getAbstractType() == systemComponent)
-      .findFirst()
-      .orElse(null);
-    if (result == null) {
-      result = CsFactory.eINSTANCE.createPart();
-      result.setAbstractType(systemComponent);
-      result.setName(systemComponent.getName());
-      container.getOwnedParts().add(result);
-    }
-    return result;
+    Part part = CsFactory.eINSTANCE.createPart();
+    part.setAbstractType(systemComponent);
+    part.setName(systemComponent.getName());
+    container.getOwnedParts().add(part);
+    return part;
   }
 
   public static Set<String> getSourceScopeIds(IContext context) {

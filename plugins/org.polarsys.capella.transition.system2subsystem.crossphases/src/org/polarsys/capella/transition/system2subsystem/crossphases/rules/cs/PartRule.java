@@ -43,7 +43,7 @@ public class PartRule extends org.polarsys.capella.transition.system2subsystem.r
   protected EObject transformDirectElement(EObject element, IContext context) {
     
     if (Crossphases.isSourceScope((Part)element, context)) {
-      EObject systemPart = Crossphases.obtainSystemAnalysisSystemPart(element, context);
+      EObject systemPart = Crossphases.getOrCreateTracedSystemPart(element, context);
       if (systemPart != null) {
         return systemPart;
       }
