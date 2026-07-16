@@ -135,6 +135,18 @@
             </mappingElement>
             
             <mappingElement
+                  domainMetaClass="org.polarsys.capella.core.data.cs.InterfacePkg"
+                  reuseExtendedElementDefaultPossibility="true"
+                  reuseExtendedElementPossibilities="true">
+               <defaultMappingPossibility
+                     completeRule="org.polarsys.capella.transition.system2subsystem.rules.cs.InterfacePkgRule"
+                     incompleteRule="org.polarsys.capella.transition.system2subsystem.rules.cs.InterfacePkgRule"
+                     enabled="true"
+                     name="InterfacePkg">
+               </defaultMappingPossibility>
+            </mappingElement>
+            
+            <mappingElement
                   domainMetaClass="org.polarsys.capella.core.data.cs.Part"
                   reuseExtendedElementDefaultPossibility="true"
                   reuseExtendedElementPossibilities="true">
