@@ -41,6 +41,13 @@ public class AllCrossPhasesTests extends BasicTestSuite {
     tests.add(new FunctionAllocations());
     tests.add(new CItoSystemName());
 
+    //Run this test 5 times as the issue is random
+    tests.add(new InterfacePkgTest());
+    tests.add(new InterfacePkgTest());
+    tests.add(new InterfacePkgTest());
+    tests.add(new InterfacePkgTest());
+    tests.add(new InterfacePkgTest());
+        
     tests.add(new ComponentMerge.Test1());
     tests.add(new ComponentMerge.Test2());
     tests.add(new ComponentMerge.Test3());
