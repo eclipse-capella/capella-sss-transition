@@ -99,7 +99,7 @@ pipeline {
 		stage('Sonar') {
 			steps {
 				script {
-					sonar.runSonar("eclipse-capella_capella-sss-transition", "eclipse/capella-sss-transition", 'sonarcloud-token-sss-transition')
+					sonar.runSonar("eclipse-capella_capella-sss-transition", "eclipse/capella-sss-transition", 'sonarcloud-token-capella-sss-transition')
 				}
 			}
 		}
