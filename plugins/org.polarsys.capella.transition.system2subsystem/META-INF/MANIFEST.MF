@@ -24,16 +24,16 @@ Export-Package: org.polarsys.capella.transition.system2subsystem,
  org.polarsys.capella.transition.system2subsystem.rules.pa,
  org.polarsys.capella.transition.system2subsystem.transposer
 Require-Bundle: org.eclipse.core.runtime,
- org.polarsys.capella.core.data.gen,
- org.polarsys.capella.core.model.helpers,
- org.polarsys.capella.core.transition.system;visibility:=reexport,
- org.polarsys.capella.core.transition.system.topdown,
- org.polarsys.capella.core.model.handler,
- org.polarsys.capella.common.libraries,
- org.polarsys.capella.common.transition,
  org.polarsys.kitalpha.ad.metadata,
- org.polarsys.capella.core.sirius.ui,
- org.polarsys.capella.core.compare
+ org.polarsys.capella.common.libraries;bundle-version="7.2.0",
+ org.polarsys.capella.common.transition;bundle-version="7.2.0",
+ org.polarsys.capella.core.compare;bundle-version="7.2.0",
+ org.polarsys.capella.core.data.gen;bundle-version="7.2.0",
+ org.polarsys.capella.core.model.handler;bundle-version="7.2.0",
+ org.polarsys.capella.core.model.helpers;bundle-version="7.2.0",
+ org.polarsys.capella.core.sirius.ui;bundle-version="7.2.0",
+ org.polarsys.capella.core.transition.system;bundle-version="7.2.0";visibility:=reexport,
+ org.polarsys.capella.core.transition.system.topdown;bundle-version="7.2.0"
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Bundle-Version: 1.7.2.qualifier
