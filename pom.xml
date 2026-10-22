@@ -40,7 +40,7 @@
 		<tycho.testArgLine>-Xms256m -Xmx1024m</tycho.testArgLine>
 
 		<!-- for packaging -->
-		<platform-name>2023-03</platform-name>
+		<platform-name>2025-09</platform-name>
 		<eclipse-repo.url>http://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
 		<packagedAddonName>SubsystemTransition</packagedAddonName>
 
@@ -112,6 +112,7 @@
 							<arch>x86_64</arch>
 						</environment>
 					</environments>
+					<executionEnvironment>JavaSE-21</executionEnvironment>
 				</configuration>
 			</plugin>
 			<plugin>
