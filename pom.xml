@@ -12,168 +12,175 @@
        Thales - initial API and implementation
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <prerequisites>
-    <maven>3.0</maven>
-  </prerequisites>
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
 
-  <name>Capella Subsystem Transition</name>
-  <groupId>org.polarsys</groupId>
-  <artifactId>org.polarsys.capella.addon.transition.system2subsystem</artifactId>
-  <version>1.7.2-SNAPSHOT</version>
-  <packaging>pom</packaging>
+	<name>Capella Subsystem Transition</name>
+	<groupId>org.polarsys</groupId>
+	<artifactId>org.polarsys.capella.addon.transition.system2subsystem</artifactId>
+	<version>1.7.2-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
-  <properties>
-    <tycho-version>4.0.9</tycho-version>
-	<tycho-extras-version>4.0.9</tycho-extras-version>
-    <tycho.scmUrl>scm:git:http://git.polarsys.org/c/capella/capella-sss-transition.git</tycho.scmUrl>
-	<antrun-version>3.0.0</antrun-version>
+	<properties>
+		<tycho-version>4.0.9</tycho-version>
+		<tycho-extras-version>4.0.9</tycho-extras-version>
+		<tycho.scmUrl>
+			scm:git:http://git.polarsys.org/c/capella/capella-sss-transition.git</tycho.scmUrl>
+		<antrun-version>3.0.0</antrun-version>
 
-	<!-- for junit -->
-    <capella-product-id>org.polarsys.capella.core.platform.sirius.ui.perspective.product</capella-product-id>
-    <tycho.testArgLine>-Xms256m -Xmx1024m</tycho.testArgLine>
+		<!-- for junit -->
+		<capella-product-id>
+			org.polarsys.capella.core.platform.sirius.ui.perspective.product</capella-product-id>
+		<tycho.testArgLine>-Xms256m -Xmx1024m</tycho.testArgLine>
 
-	<!-- for packaging -->
-	<platform-name>2023-03</platform-name>
-	<eclipse-repo.url>http://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
-	<packagedAddonName>SubsystemTransition</packagedAddonName>
+		<!-- for packaging -->
+		<platform-name>2023-03</platform-name>
+		<eclipse-repo.url>http://download.eclipse.org/releases/${platform-name}</eclipse-repo.url>
+		<packagedAddonName>SubsystemTransition</packagedAddonName>
 
-  </properties>
+	</properties>
 
-  <modules>
-    <module>features</module>
-    <module>plugins</module>
-    <module>releng/org.polarsys.capella.transition.system2subsystem.site</module>
-  </modules>
+	<modules>
+		<module>features</module>
+		<module>plugins</module>
+		<module>releng/org.polarsys.capella.transition.system2subsystem.site</module>
+	</modules>
 
-  <build>
-    <sourceDirectory>src</sourceDirectory>
-    <testSourceDirectory>src</testSourceDirectory>
-    <plugins>
-      <plugin>
-	<groupId>org.eclipse.tycho</groupId>
-	<artifactId>tycho-packaging-plugin</artifactId>
-	<version>${tycho-version}</version>
-	<configuration>
-          <strictBinIncludes>false</strictBinIncludes>
-	  <sourceReferences>
-	    <generate>true</generate>
-	  </sourceReferences>
-	</configuration>
-	<dependencies>
-	  <dependency>
-	    <groupId>org.eclipse.tycho.extras</groupId>
-	    <artifactId>tycho-sourceref-jgit</artifactId>
-	    <version>${tycho-extras-version}</version>
-	  </dependency>
-	</dependencies>
-      </plugin>
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-maven-plugin</artifactId>
-        <version>${tycho-version}</version>
-        <extensions>true</extensions>
-      </plugin>
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>target-platform-configuration</artifactId>
-        <version>${tycho-version}</version>
-        <configuration>
-			<target>
-				<artifact>
-					<groupId>org.polarsys</groupId>
-					<artifactId>org.polarsys.capella.addon.transition.system2subsystem</artifactId>
-					<version>1.7.2-SNAPSHOT</version>
-					<classifier>releng/org.polarsys.capella.transition.system2subsystem.target/tp/capella.target-definition</classifier>
-				</artifact>
-			</target>
-          <environments>
-            <environment>
-              <os>win32</os>
-              <ws>win32</ws>
-              <arch>x86_64</arch>
-            </environment>
-            <environment>
-              <os>linux</os>
-              <ws>gtk</ws>
-              <arch>x86_64</arch>
-            </environment>
-            <environment>
-              <os>macosx</os>
-              <ws>cocoa</ws>
-              <arch>x86_64</arch>
-            </environment>
-          </environments>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-source-plugin</artifactId>
-        <version>${tycho-version}</version>
-        <executions>
-          <execution>
-             <id>feature-source</id>
-             <phase>package</phase>
-             <goals>
-                <goal>feature-source</goal>
-             </goals>
-             <configuration>
-                <archive>
-                  <addMavenDescriptor>false</addMavenDescriptor>
-                </archive>
-             </configuration>
-          </execution>
-          <execution>
-            <id>plugin-source</id>
-            <goals>
-              <goal>plugin-source</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <strictSrcIncludes>false</strictSrcIncludes>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-p2-plugin</artifactId>
-        <version>${tycho-version}</version>
-        <executions>
-          <!-- These two should allow us not to get "duplicate artifact" warnings during the build. -->
-          <execution>
-            <!-- Don't attach (default) metadata before the source-feature execution.-->
-            <id>default-p2-metadata-default</id>
-            <configuration>
-              <attachP2Metadata>false</attachP2Metadata>
-            </configuration>
-          </execution>
-          <execution>
-            <!-- Do attach metadata after the source-feature execution.-->
-            <id>attach-p2-metadata</id>
-            <goals>
-              <goal>p2-metadata</goal>
-            </goals>
-            <phase>package</phase>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>tycho-compiler-plugin</artifactId>
-          <version>${tycho-version}</version>
-          <configuration>
-            <encoding>UTF-8</encoding>
-            <compilerArgument>-warn:+discouraged,forbidden</compilerArgument>
-          </configuration>
-        </plugin>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<testSourceDirectory>src</testSourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<strictBinIncludes>false</strictBinIncludes>
+					<sourceReferences>
+						<generate>true</generate>
+					</sourceReferences>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-sourceref-jgit</artifactId>
+						<version>${tycho-extras-version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<target>
+						<artifact>
+							<groupId>org.polarsys</groupId>
+							<artifactId>
+								org.polarsys.capella.addon.transition.system2subsystem</artifactId>
+							<version>1.7.2-SNAPSHOT</version>
+							<classifier>
+								releng/org.polarsys.capella.transition.system2subsystem.target/tp/capella.target-definition</classifier>
+						</artifact>
+					</target>
+					<environments>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>feature-source</id>
+						<phase>package</phase>
+						<goals>
+							<goal>feature-source</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<addMavenDescriptor>false</addMavenDescriptor>
+							</archive>
+						</configuration>
+					</execution>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<strictSrcIncludes>false</strictSrcIncludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<!-- These two should allow us not to get "duplicate
+					artifact" warnings during the build. -->
+					<execution>
+						<!-- Don't attach (default) metadata before the
+						source-feature execution.-->
+						<id>default-p2-metadata-default</id>
+						<configuration>
+							<attachP2Metadata>false</attachP2Metadata>
+						</configuration>
+					</execution>
+					<execution>
+						<!-- Do attach metadata after the source-feature
+						execution.-->
+						<id>attach-p2-metadata</id>
+						<goals>
+							<goal>p2-metadata</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-compiler-plugin</artifactId>
+					<version>${tycho-version}</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+						<compilerArgument>-warn:+discouraged,forbidden</compilerArgument>
+					</configuration>
+				</plugin>
 
-		<!-- plugins only called if a descendant need them -->
+				<!-- plugins only called if a descendant need them -->
 				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-eclipse-plugin</artifactId>
@@ -188,7 +195,8 @@
 						</repositories>
 						<dependencies>
 							<dependency>
-								<artifactId>org.eclipse.equinox.p2.repository.tools</artifactId>
+								<artifactId>
+									org.eclipse.equinox.p2.repository.tools</artifactId>
 								<type>eclipse-plugin</type>
 							</dependency>
 							<dependency>
@@ -196,7 +204,8 @@
 								<type>eclipse-feature</type>
 							</dependency>
 							<dependency>
-								<artifactId>org.eclipse.equinox.p2.extras.feature</artifactId>
+								<artifactId>
+									org.eclipse.equinox.p2.extras.feature</artifactId>
 								<type>eclipse-feature</type>
 							</dependency>
 							<dependency>
@@ -216,11 +225,14 @@
 							<configuration>
 								<applicationArgs>
 									<arg>-application</arg>
-									<arg>org.eclipse.equinox.p2.repository.repo2runnable</arg>
+									<arg>
+										org.eclipse.equinox.p2.repository.repo2runnable</arg>
 									<arg>-source</arg>
-									<arg>file:${project.build.directory}/repository</arg>
+									<arg>
+										file:${project.build.directory}/repository</arg>
 									<arg>-destination</arg>
-									<arg>${project.build.directory}/${packagedAddonName}/eclipse</arg>
+									<arg>
+										${project.build.directory}/${packagedAddonName}/eclipse</arg>
 								</applicationArgs>
 								<executionEnvironment>JavaSE-17</executionEnvironment>
 							</configuration>
@@ -250,12 +262,15 @@
 											dir="${project.build.directory}/${packagedAddonName}/eclipse/features"
 											includes="**/META-INF/**" />
 									</delete>
-									
+
 									<zip
 										destfile="${project.build.directory}/${packagedAddonName}-dropins-${unqualifiedVersion}.${buildQualifier}.zip">
-										<fileset dir="${project.build.directory}">
-											<include name="${packagedAddonName}/**" />
-											<exclude name="**/org.polarsys.capella.transition.system2subsystem.tests*/**" />
+										<fileset
+											dir="${project.build.directory}">
+											<include
+												name="${packagedAddonName}/**" />
+											<exclude
+												name="**/org.polarsys.capella.transition.system2subsystem.tests*/**" />
 										</fileset>
 									</zip>
 								</target>
@@ -276,49 +291,50 @@
 								<goal>archive-repository</goal>
 							</goals>
 							<configuration>
-								<finalName>${packagedAddonName}-updateSite-${unqualifiedVersion}.${buildQualifier}</finalName>
+								<finalName>
+									${packagedAddonName}-updateSite-${unqualifiedVersion}.${buildQualifier}</finalName>
 							</configuration>
 						</execution>
 					</executions>
 				</plugin>
-			<plugin>
-				  <groupId>org.cyclonedx</groupId>
-				  <artifactId>cyclonedx-maven-plugin</artifactId>
-				  <version>2.8.1</version>
-				  <configuration>
-					  <schemaVersion>1.5</schemaVersion>
-				  </configuration>
-				  <dependencies>
-					  <dependency>
-						  <groupId>org.eclipse.tycho</groupId>
-						  <artifactId>tycho-sbom</artifactId>
-						  <version>${tycho-version}</version>
-					  </dependency>
-				  </dependencies>
-				  <executions>
-					  <execution>
-						  <id>create-bom</id>
-						  <phase>package</phase>
-						  <goals>
-							  <goal>makeBom</goal>
-						  </goals>
-					  </execution>
-				  </executions>
-			  </plugin>
+				<plugin>
+					<groupId>org.cyclonedx</groupId>
+					<artifactId>cyclonedx-maven-plugin</artifactId>
+					<version>2.8.1</version>
+					<configuration>
+						<schemaVersion>1.5</schemaVersion>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>org.eclipse.tycho</groupId>
+							<artifactId>tycho-sbom</artifactId>
+							<version>${tycho-version}</version>
+						</dependency>
+					</dependencies>
+					<executions>
+						<execution>
+							<id>create-bom</id>
+							<phase>package</phase>
+							<goals>
+								<goal>makeBom</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 
 			</plugins>
-    </pluginManagement>
-  </build>
-  <profiles>
-  	<profile>
-		<id>sign</id>
-		<activation>
-			<property>
+		</pluginManagement>
+	</build>
+	<profiles>
+		<profile>
+			<id>sign</id>
+			<activation>
+				<property>
 					<name>BUILD_SIGN</name>
 					<value>true</value>
-			</property>
-		</activation>
-		<build>
+				</property>
+			</activation>
+			<build>
 				<plugins>
 					<plugin>
 						<groupId>org.eclipse.cbi.maven.plugins</groupId>
@@ -339,7 +355,8 @@
 			<pluginRepositories>
 				<pluginRepository>
 					<id>cbi</id>
-					<url>https://repo.eclipse.org/content/repositories/cbi-releases/</url>
+					<url>
+						https://repo.eclipse.org/content/repositories/cbi-releases/</url>
 					<releases>
 						<enabled>true</enabled>
 					</releases>
@@ -349,5 +366,5 @@
 				</pluginRepository>
 			</pluginRepositories>
 		</profile>
-  </profiles>
+	</profiles>
 </project>
