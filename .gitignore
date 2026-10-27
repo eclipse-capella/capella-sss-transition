@@ -17,6 +17,7 @@ tmp/
 
 # Maven
 target
+.polyglot.*
 
 # External tool builders
 .externalToolBuilders/
